@@ -1,0 +1,25 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 476593c62de1bd94aab155820aae0e36, type: 3}
+  m_Name: World Config
+  m_EditorClassIdentifier: 
+  numberCells: 3
+  cellsSize: 1
+  sunPrefab: {fileID: 4725305102212368735, guid: 46d7e7703e1d43448a5cc83d43c6d847, type: 3}
+  randomize:
+    randomAtStart: 1
+    loop: 0
+    timeBeforeRandomize: 1
+    randomizeTimes: 30
+    animationRandomizeTime: 0.1
+    timeBetweenRandomize: 0.1
+  biomesNotBuildable: 
