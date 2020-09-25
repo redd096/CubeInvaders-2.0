@@ -12,14 +12,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 476593c62de1bd94aab155820aae0e36, type: 3}
   m_Name: World Config
   m_EditorClassIdentifier: 
-  numberCells: 3
-  cellsSize: 1
-  sunPrefab: {fileID: 4725305102212368735, guid: 46d7e7703e1d43448a5cc83d43c6d847, type: 3}
-  randomize:
+  NumberCells: 3
+  CellsSize: 1
+  SunPrefab: {fileID: 4725305102212368735, guid: 46d7e7703e1d43448a5cc83d43c6d847, type: 3}
+  Randomize:
     randomAtStart: 1
     loop: 0
     timeBeforeRandomize: 1
     randomizeTimes: 30
     animationRandomizeTime: 0.1
     timeBetweenRandomize: 0.1
-  biomesNotBuildable: 
+  BiomesNotBuildable: 

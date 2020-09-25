@@ -8,16 +8,16 @@ public struct SRandomize
     public bool loop;
     public float timeBeforeRandomize;
     public int randomizeTimes;
-    public float animationRandomizeTime;
+    public float rotationTime;
     public float timeBetweenRandomize;
 
-    public SRandomize(bool randomAtStart, bool loop, int timeBeforeRandomize, int randomizeTimes, float animationRandomizeTime, float timeBetweenRandomize)
+    public SRandomize(bool randomAtStart, bool loop, int timeBeforeRandomize, int randomizeTimes, float rotationTime, float timeBetweenRandomize)
     {
         this.randomAtStart = randomAtStart;
         this.loop = loop;
         this.timeBeforeRandomize = timeBeforeRandomize;
         this.randomizeTimes = randomizeTimes;
-        this.animationRandomizeTime = animationRandomizeTime;
+        this.rotationTime = rotationTime;
         this.timeBetweenRandomize = timeBetweenRandomize;
     }
 }
@@ -25,31 +25,32 @@ public struct SRandomize
 [CreateAssetMenu(menuName = "Cube Invaders/World Config", fileName = "World Config")]
 public class WorldConfig : ScriptableObject
 {
-    public int numberCells = 3;
-    public float cellsSize = 1;
-    public GameObject sunPrefab;
-    public SRandomize randomize = new SRandomize(true, false, 1, 30, 0.1f, 0.1f);
-    [SerializeField] EBiomes[] biomesNotBuildable = default;
+    public int NumberCells = 3;
+    public float CellsSize = 1;
+    public GameObject SunPrefab;
+    public SRandomize Randomize = new SRandomize(true, false, 1, 30, 0.1f, 0.1f);
+    public EBiomes[] BiomesNotBuildable = default;
 
 
     #region readonly vars
 
-    public float faceSize => numberCells * cellsSize;
-    public Vector3 halfCube
+    public float FaceSize => NumberCells * CellsSize;
+
+    public Vector3 HalfCube
     {
         get
         {
-            float center = (numberCells - 1) / 2 * cellsSize;
-            bool odd = numberCells % 2 != 0;
+            float center = (NumberCells - 1) / 2 * CellsSize;
+            bool odd = NumberCells % 2 != 0;
 
-            Vector3 half = new Vector3(center, center, center + halfCell);
+            Vector3 half = new Vector3(center, center, center + HalfCell);
 
             //if odd number, add half cell to every axis
-            return odd ? half : half + new Vector3(halfCell, halfCell, halfCell);
+            return odd ? half : half + new Vector3(HalfCell, HalfCell, HalfCell);
         }
     }
 
-    public float halfCell => cellsSize / 2;
+    public float HalfCell => CellsSize / 2;
 
     #endregion
 }

@@ -19,14 +19,14 @@ public enum Face
 public struct Coordinates
 {
     public Face face;
-    public int row;
-    public int column;
+    public int x;
+    public int y;
 
-    public Coordinates(Face face, int row, int column)
+    public Coordinates(Face face, int x, int y)
     {
         this.face = face;
-        this.row = row;
-        this.column = column;
+        this.x = x;
+        this.y = y;
     }
 }
 
@@ -55,12 +55,19 @@ public class World : MonoBehaviour
     [Header("Regen")]
     [SerializeField] bool regen = false;
 
+    [Header("Debug")]
+    [SerializeField] Transform cameraPlayer = default;
+    [SerializeField] int x = default, y = default;
+    [SerializeField] bool toForward = default, rotateRow = default, rotateColumn = default;
+
     [Header("Important")]
     public WorldConfig worldConfig = default;
-    [SerializeField] float rotationTime = 0.2f;
+    public float rotationTime = 0.2f;
     [SerializeField] BiomesMenu biomes = default;
 
-    Dictionary<Coordinates, Cell> cells;
+    public System.Action onEndRotation;
+
+    public Dictionary<Coordinates, Cell> Cells { get; private set; }
 
     WorldRotator worldRotator;
 
@@ -79,6 +86,33 @@ public class World : MonoBehaviour
     private void Awake()
     {
         worldRotator = new WorldRotator(this);
+
+        //create dictionary
+        Cells = new Dictionary<Coordinates, Cell>();
+        foreach(Transform child in transform)
+        {
+            Cell cell = child.GetComponent<Cell>();
+            if(cell != null)
+            {
+                Cells.Add(cell.coordinates, cell);
+            }
+        }
+    }
+
+    private void Update()
+    {
+        if (rotateRow)
+        {
+            rotateRow = false;
+            Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), toForward ? (byte)0 : (byte)1, true);
+            //RotateRow(face, y, toForward, true);
+        }
+        if (rotateColumn)
+        {
+            rotateColumn = false;
+            Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), toForward ? (byte)2 : (byte)3, true);
+            //RotateColumn(face, x, toForward, true);
+        }
     }
 
     #region regen world
@@ -108,7 +142,7 @@ public class World : MonoBehaviour
         }
 
         //then clear dictionary
-        cells = new Dictionary<Coordinates, Cell>();
+        Cells = new Dictionary<Coordinates, Cell>();
     }
 
     void CreateWorld()
@@ -118,26 +152,26 @@ public class World : MonoBehaviour
 
         //create front and back face
         CreateFrontBack(0, -90, Face.front);
-        CreateFrontBack(worldConfig.faceSize, 90, Face.back);
+        CreateFrontBack(worldConfig.FaceSize, 90, Face.back);
 
         //create right and left face
-        CreateRightLeft(worldConfig.faceSize - worldConfig.halfCell, -90, Face.right);
-        CreateRightLeft(-worldConfig.halfCell, 90, Face.left);
+        CreateRightLeft(worldConfig.FaceSize - worldConfig.HalfCell, -90, Face.right);
+        CreateRightLeft(-worldConfig.HalfCell, 90, Face.left);
 
         //create up and down face
-        CreateUpDown(worldConfig.faceSize - worldConfig.halfCell, 0, Face.up);
-        CreateUpDown(-worldConfig.halfCell, 180, Face.down);
+        CreateUpDown(worldConfig.FaceSize - worldConfig.HalfCell, 0, Face.up);
+        CreateUpDown(-worldConfig.HalfCell, 180, Face.down);
     }
 
     void InstantiateSun()
     {
         //create sun and set name, and position
-        Transform sun = Instantiate(worldConfig.sunPrefab).transform;
+        Transform sun = Instantiate(worldConfig.SunPrefab).transform;
         sun.name = "Sun";
         sun.position = transform.position;
 
         //set sun size
-        float size = worldConfig.faceSize - worldConfig.cellsSize;
+        float size = worldConfig.FaceSize - worldConfig.CellsSize;
         sun.localScale = new Vector3(size, size, size);
 
         //set parent
@@ -150,34 +184,34 @@ public class World : MonoBehaviour
 
     void CreateFrontBack(float z, float rotX, Face face)
     {
-        Vector3 distFromCenter = worldConfig.halfCube - transform.position;
+        Vector3 distFromCenter = worldConfig.HalfCube - transform.position;
 
         //create front or back face
         int xCoords = -1;
 
         if (face == Face.front)
         {
-            for (int x = 0; x < worldConfig.numberCells; x++)
+            for (int x = 0; x < worldConfig.NumberCells; x++)
             {
                 xCoords++;
 
-                for (int y = 0; y < worldConfig.numberCells; y++)
+                for (int y = 0; y < worldConfig.NumberCells; y++)
                 {
                     //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.cellsSize, y * worldConfig.cellsSize, z) - distFromCenter, new Vector3(rotX, 0, 0), face, xCoords, y);
+                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y * worldConfig.CellsSize, z) - distFromCenter, new Vector3(rotX, 0, 0), face, xCoords, y);
                 }
             }
         }
         else
         {
-            for (int x = worldConfig.numberCells - 1; x >= 0; x--)
+            for (int x = worldConfig.NumberCells - 1; x >= 0; x--)
             {
                 xCoords++;
 
-                for (int y = 0; y < worldConfig.numberCells; y++)
+                for (int y = 0; y < worldConfig.NumberCells; y++)
                 {
                     //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.cellsSize, y * worldConfig.cellsSize, z) - distFromCenter, new Vector3(rotX, 0, 0), face, xCoords, y);
+                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y * worldConfig.CellsSize, z) - distFromCenter, new Vector3(rotX, 0, 0), face, xCoords, y);
                 }
             }
         }
@@ -185,34 +219,34 @@ public class World : MonoBehaviour
 
     void CreateRightLeft(float x, float rotZ, Face face)
     {
-        Vector3 distFromCenter = worldConfig.halfCube - transform.position;
+        Vector3 distFromCenter = worldConfig.HalfCube - transform.position;
 
         //create right or left face
         int xCoords = -1;
 
         if (face == Face.right)
         {
-            for (int z = 0; z < worldConfig.numberCells; z++)
+            for (int z = 0; z < worldConfig.NumberCells; z++)
             {
                 xCoords++;
 
-                for (int y = 0; y < worldConfig.numberCells; y++)
+                for (int y = 0; y < worldConfig.NumberCells; y++)
                 {
                     //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x, y * worldConfig.cellsSize, z * worldConfig.cellsSize + worldConfig.halfCell) - distFromCenter, new Vector3(0, 0, rotZ), face, xCoords, y);
+                    CreateAndSetCell(new Vector3(x, y * worldConfig.CellsSize, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(0, 0, rotZ), face, xCoords, y);
                 }
             }
         }
         else
         {
-            for (int z = worldConfig.numberCells - 1; z >= 0; z--)
+            for (int z = worldConfig.NumberCells - 1; z >= 0; z--)
             {
                 xCoords++;
 
-                for (int y = 0; y < worldConfig.numberCells; y++)
+                for (int y = 0; y < worldConfig.NumberCells; y++)
                 {
                     //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x, y * worldConfig.cellsSize, z * worldConfig.cellsSize + worldConfig.halfCell) - distFromCenter, new Vector3(0, 0, rotZ), face, xCoords, y);
+                    CreateAndSetCell(new Vector3(x, y * worldConfig.CellsSize, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(0, 0, rotZ), face, xCoords, y);
                 }
             }
         }
@@ -220,37 +254,37 @@ public class World : MonoBehaviour
 
     void CreateUpDown(float y, float rotX, Face face)
     {
-        Vector3 distFromCenter = worldConfig.halfCube - transform.position;
+        Vector3 distFromCenter = worldConfig.HalfCube - transform.position;
 
         //create up or down face
 
         if (face == Face.up)
         {
-            for (int x = 0; x < worldConfig.numberCells; x++)
+            for (int x = 0; x < worldConfig.NumberCells; x++)
             {
                 int yCoords = -1;
 
-                for (int z = 0; z < worldConfig.numberCells; z++)
+                for (int z = 0; z < worldConfig.NumberCells; z++)
                 {
                     yCoords++;
 
                     //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.cellsSize, y, z * worldConfig.cellsSize + worldConfig.halfCell) - distFromCenter, new Vector3(rotX, 0, 0), face, x, yCoords);
+                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(rotX, 0, 0), face, x, yCoords);
                 }
             }
         }
         else
         {
-            for (int x = 0; x < worldConfig.numberCells; x++)
+            for (int x = 0; x < worldConfig.NumberCells; x++)
             {
                 int yCoords = -1;
 
-                for (int z = worldConfig.numberCells - 1; z >= 0; z--)
+                for (int z = worldConfig.NumberCells - 1; z >= 0; z--)
                 {
                     yCoords++;
 
                     //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.cellsSize, y, z * worldConfig.cellsSize + worldConfig.halfCell) - distFromCenter, new Vector3(rotX, 0, 0), face, x, yCoords);
+                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(rotX, 0, 0), face, x, yCoords);
                 }
             }
         }
@@ -267,7 +301,7 @@ public class World : MonoBehaviour
 
         //set it
         Coordinates coordinates = new Coordinates(face, x, y);
-        cells.Add(coordinates, cell);
+        Cells.Add(coordinates, cell);
         cell.coordinates = coordinates;
     }
 
@@ -279,7 +313,7 @@ public class World : MonoBehaviour
         cell.transform.eulerAngles = eulerRotation;
 
         //set scale
-        float size = worldConfig.cellsSize;
+        float size = worldConfig.CellsSize;
         cell.transform.localScale = new Vector3(size, size, size);
 
         //set parent
@@ -319,36 +353,130 @@ public class World : MonoBehaviour
     #region public API
 
     /// <summary>
+    /// Rotate the cube
+    /// </summary>
+    /// <param name="startFace">face to start from</param>
+    /// <param name="lookingFace">rotation of the camera</param>
+    /// <param name="x">column</param>
+    /// <param name="y">row</param>
+    /// <param name="rotateDirection">0 = right, 1 = left, 2 = up, 3 = down</param>
+    /// <param name="playerMove">is a player move? Or is from editor (randomize at start for example)</param>
+    public void Rotate(Face startFace, int x, int y, Face lookingFace, byte rotateDirection, bool playerMove)
+    {
+        //rotate row
+        if (rotateDirection == 0 || rotateDirection == 1)
+        {
+            bool forward = rotateDirection == 0;
+
+            if (startFace == Face.up || startFace == Face.down)
+            {
+                //if face up or face down, the inputs are differents based on the rotation of the camera
+                switch (lookingFace)
+                {
+                    case Face.front:
+                        worldRotator.RotateUpDownRow(startFace, y, forward, playerMove);
+                        break;
+                    case Face.right:
+                        if (startFace == Face.up)
+                            worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
+                        else
+                            worldRotator.RotateFrontColumn(startFace, x, !forward, playerMove);
+                        break;
+                    case Face.back:
+                        worldRotator.RotateUpDownRow(startFace, y, !forward, playerMove);
+                        break;
+                    case Face.left:
+                        if (startFace == Face.up)
+                            worldRotator.RotateFrontColumn(startFace, x, !forward, playerMove);
+                        else
+                            worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
+                        break;
+                }
+            }
+            else
+            {
+                //else just rotate row lateral faces
+                worldRotator.RotateLateralRow(y, forward, playerMove);
+            }
+        }
+        //rotate column
+        else
+        {
+            bool forward = rotateDirection == 2;
+
+            //if face up or face down, the inputs are differents based on the rotation of the camera
+            if (startFace == Face.up || startFace == Face.down)
+            {
+                switch (lookingFace)
+                {
+                    case Face.front:
+                        worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
+                        break;
+                    case Face.right:
+                        if (startFace == Face.up)
+                            worldRotator.RotateUpDownRow(startFace, y, !forward, playerMove);
+                        else
+                            worldRotator.RotateUpDownRow(startFace, y, forward, playerMove);
+                        break;
+                    case Face.back:
+                        worldRotator.RotateFrontColumn(startFace, x, !forward, playerMove);
+                        break;
+                    case Face.left:
+                        if (startFace == Face.up)
+                            worldRotator.RotateUpDownRow(startFace, y, forward, playerMove);
+                        else
+                            worldRotator.RotateUpDownRow(startFace, y, !forward, playerMove);
+                        break;
+                }
+            }
+            else
+            {
+                //else just rotate column
+                if (startFace == Face.right || startFace == Face.left)
+                {
+                    //rotate column face right or left
+                    worldRotator.RotateRightLeftColumn(startFace, x, forward, playerMove);
+                }
+                else
+                {
+                    //rotate column front faces (front, up, back, down)
+                    worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
+                }
+            }
+        }
+    }
+
+    /// <summary>
     /// Rotate row. AnimTime and canControlPlayer are only for randomize at start, doesn't need in runtime
     /// </summary>
-    public void RotateRow(Face startFace, int line, bool toRight, float animTime = 0, bool canControlPlayer = true)
+    public void RotateRow(Face startFace, int line, bool toRight, bool playerMove)
     {
         if (startFace != Face.up && startFace != Face.down)
         {
             //rotate row lateral faces
-            worldRotator.RotateLateralRow(line, toRight, animTime, canControlPlayer);
+            worldRotator.RotateLateralRow(line, toRight, playerMove);
         }
         else
         {
             //rotate row face up or face down
-            worldRotator.RotateUpDownRow(startFace, line, toRight, animTime, canControlPlayer);
+            worldRotator.RotateUpDownRow(startFace, line, toRight, playerMove);
         }
     }
 
     /// <summary>
     /// Rotate column. AnimTime and canControlPlayer are only for randomize at start, doesn't need in runtime
     /// </summary>
-    public void RotateColumn(Face startFace, int line, bool toUp, float animTime = 0, bool canControlPlayer = true)
+    public void RotateColumn(Face startFace, int line, bool toUp, bool playerMove)
     {
         if (startFace != Face.right && startFace != Face.left)
         {
             //front faces (not right or left), rotate front column
-            worldRotator.RotateFrontColumn(startFace, line, toUp, animTime, canControlPlayer);
+            worldRotator.RotateFrontColumn(startFace, line, toUp, playerMove);
         }
         else
         {
             //rotate column face right or face left
-            worldRotator.RotateRightLeftColumn(startFace, line, toUp, animTime, canControlPlayer);
+            worldRotator.RotateRightLeftColumn(startFace, line, toUp, playerMove);
         }
     }
 
