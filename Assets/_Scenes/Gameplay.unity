@@ -169,8 +169,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 2
@@ -283,8 +282,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 1
@@ -397,8 +395,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 0
@@ -511,8 +508,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 2
@@ -625,8 +621,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 2
@@ -943,8 +938,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 1
@@ -1057,8 +1051,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 0
@@ -1171,8 +1164,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 2
@@ -1285,8 +1277,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 0
@@ -1399,8 +1390,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 2
@@ -1561,8 +1551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 1
@@ -1675,8 +1664,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 1
@@ -1789,8 +1777,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 2
@@ -1998,8 +1985,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 0
@@ -2112,8 +2098,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 1
@@ -2226,8 +2211,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 0
@@ -2340,8 +2324,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 0
@@ -2419,6 +2402,8 @@ GameObject:
   - component: {fileID: 812739540}
   - component: {fileID: 812739539}
   - component: {fileID: 812739538}
+  - component: {fileID: 812739542}
+  - component: {fileID: 812739541}
   m_Layer: 0
   m_Name: GameManager
   m_TagString: Untagged
@@ -2464,6 +2449,30 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &812739541
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812739537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f7e85419a1a7ac140b366abef6eea68a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &812739542
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 812739537}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 28037b0013f5d3449974eaba8af8f634, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &872956014
 GameObject:
   m_ObjectHideFlags: 0
@@ -2510,8 +2519,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 0
@@ -2624,8 +2632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 2
@@ -2738,8 +2745,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 0
@@ -2852,8 +2858,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 0
@@ -2966,8 +2971,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 2
@@ -3080,8 +3084,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 2
@@ -3194,8 +3197,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 2
@@ -3308,8 +3310,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 2
@@ -3422,8 +3423,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 1
@@ -3536,8 +3536,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 1
@@ -3650,8 +3649,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 0
@@ -3764,8 +3762,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 2
@@ -3878,8 +3875,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 2
@@ -4181,8 +4177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 0
@@ -4295,8 +4290,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 1
@@ -4409,8 +4403,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 0
@@ -4487,6 +4480,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1388034138}
   - component: {fileID: 1388034137}
+  - component: {fileID: 1388034139}
   m_Layer: 0
   m_Name: World
   m_TagString: Untagged
@@ -4591,6 +4585,23 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1388034139
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1388034136}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a3cff8aa37e73114faa30c7cf8950bc1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  loop: 0
+  randomizeTimes: 15
+  timeBeforeRandomize: 1
+  rotationTime: 0.1
+  timeBetweenRotation: 0
 --- !u!1 &1470590987
 GameObject:
   m_ObjectHideFlags: 0
@@ -4637,8 +4648,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 1
@@ -4751,8 +4761,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 0
@@ -4865,8 +4874,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 1
@@ -4979,8 +4987,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 1
@@ -5093,8 +5100,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 2
@@ -5207,8 +5213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 1
@@ -5366,8 +5371,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 0
@@ -5480,8 +5484,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 0
@@ -5594,8 +5597,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 0
@@ -5708,8 +5710,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 1
@@ -5822,8 +5823,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 0
@@ -5936,8 +5936,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 0
@@ -6050,8 +6049,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 1
@@ -6164,8 +6162,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 0
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 0
     x: 2
@@ -6278,8 +6275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 1
@@ -6392,8 +6388,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 2
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 1
     x: 1
@@ -6506,8 +6501,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 1
@@ -6620,8 +6614,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 5
     x: 2
@@ -6734,8 +6727,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 4
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 2
     x: 2
@@ -6848,8 +6840,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 5
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 3
     x: 1
@@ -6962,8 +6953,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 3
-  turretOnThisBiome: {fileID: 0}
+  turretToCreate: {fileID: 0}
   coordinates:
     face: 4
     x: 2

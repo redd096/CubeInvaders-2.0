@@ -31,35 +31,35 @@ public static class WorldUtility
     /// <summary>
     /// Face up, right, down, left
     /// </summary>
-    public static Face FindFaceUpToRight(Face startFace, bool toRight)
+    public static EFace FindFaceUpToRight(EFace startFace, bool toRight)
     {
-        Face newFace = startFace;
+        EFace newFace = startFace;
 
         switch (startFace)
         {
-            case Face.up:
+            case EFace.up:
                 if (toRight)
-                    newFace = Face.right;
+                    newFace = EFace.right;
                 else
-                    newFace = Face.left;
+                    newFace = EFace.left;
                 break;
-            case Face.right:
+            case EFace.right:
                 if (toRight)
-                    newFace = Face.down;
+                    newFace = EFace.down;
                 else
-                    newFace = Face.up;
+                    newFace = EFace.up;
                 break;
-            case Face.down:
+            case EFace.down:
                 if (toRight)
-                    newFace = Face.left;
+                    newFace = EFace.left;
                 else
-                    newFace = Face.right;
+                    newFace = EFace.right;
                 break;
-            case Face.left:
+            case EFace.left:
                 if (toRight)
-                    newFace = Face.up;
+                    newFace = EFace.up;
                 else
-                    newFace = Face.down;
+                    newFace = EFace.down;
                 break;
         }
 
@@ -69,35 +69,35 @@ public static class WorldUtility
     /// <summary>
     /// Face front, up, back, down
     /// </summary>
-    public static Face FindFaceFrontToUp(Face startFace, bool toUp)
+    public static EFace FindFaceFrontToUp(EFace startFace, bool toUp)
     {
-        Face newFace = startFace;
+        EFace newFace = startFace;
 
         switch (startFace)
         {
-            case Face.front:
+            case EFace.front:
                 if (toUp)
-                    newFace = Face.up;
+                    newFace = EFace.up;
                 else
-                    newFace = Face.down;
+                    newFace = EFace.down;
                 break;
-            case Face.up:
+            case EFace.up:
                 if (toUp)
-                    newFace = Face.back;
+                    newFace = EFace.back;
                 else
-                    newFace = Face.front;
+                    newFace = EFace.front;
                 break;
-            case Face.back:
+            case EFace.back:
                 if (toUp)
-                    newFace = Face.down;
+                    newFace = EFace.down;
                 else
-                    newFace = Face.up;
+                    newFace = EFace.up;
                 break;
-            case Face.down:
+            case EFace.down:
                 if (toUp)
-                    newFace = Face.front;
+                    newFace = EFace.front;
                 else
-                    newFace = Face.back;
+                    newFace = EFace.back;
                 break;
         }
 
@@ -109,12 +109,12 @@ public static class WorldUtility
     /// <summary>
     /// returns what face the transform is looking at
     /// </summary>
-    public static Face SelectFace(Transform transform)
+    public static EFace SelectFace(Transform transform)
     {
         if (WorldMath.NegativeAxis(transform.eulerAngles.x) > 40)
-            return Face.up;
+            return EFace.up;
         else if (WorldMath.NegativeAxis(transform.eulerAngles.x) < -40)
-            return Face.down;
+            return EFace.down;
         else
             return LateralFace(transform);
     }
@@ -122,23 +122,23 @@ public static class WorldUtility
     /// <summary>
     /// returns one of the lateral faces
     /// </summary>
-    public static Face LateralFace(Transform transform)
+    public static EFace LateralFace(Transform transform)
     {
         if (WorldMath.NegativeAxis(transform.eulerAngles.y) <= 45 && WorldMath.NegativeAxis(transform.eulerAngles.y) > -45)
         {
-            return Face.front;
+            return EFace.front;
         }
         else if (WorldMath.NegativeAxis(transform.eulerAngles.y) <= -45 && WorldMath.NegativeAxis(transform.eulerAngles.y) > -135)
         {
-            return Face.right;
+            return EFace.right;
         }
         else if (WorldMath.NegativeAxis(transform.eulerAngles.y) <= 135 && WorldMath.NegativeAxis(transform.eulerAngles.y) > 45)
         {
-            return Face.left;
+            return EFace.left;
         }
         else// if (Math.NegativeAxis(transform.eulerAngles.y) <= -135 || Math.NegativeAxis(transform.eulerAngles.y) > 135)
         {
-            return Face.back;
+            return EFace.back;
         }
     }
 }

@@ -5,7 +5,13 @@ using UnityEngine;
 #region enum & struct
 
 [System.Serializable]
-public enum Face
+public enum ERotateDirection
+{
+    right, left, up, down
+}
+
+[System.Serializable]
+public enum EFace
 {
     front,
     right,
@@ -18,28 +24,16 @@ public enum Face
 [System.Serializable]
 public struct Coordinates
 {
-    public Face face;
+    public EFace face;
     public int x;
     public int y;
 
-    public Coordinates(Face face, int x, int y)
+    public Coordinates(EFace face, int x, int y)
     {
         this.face = face;
         this.x = x;
         this.y = y;
     }
-}
-
-[System.Serializable]
-public enum EBiomes
-{
-    Forest,
-    Canyon,
-    Volcano,
-    Sea,
-    Swamp,
-    Radar,
-    Nothing
 }
 
 [System.Serializable]
@@ -50,21 +44,24 @@ public struct BiomesMenu
 
 #endregion
 
+[AddComponentMenu("Cube Invaders/World/World")]
 public class World : MonoBehaviour
 {
     [Header("Regen")]
     [SerializeField] bool regen = false;
 
     [Header("Debug")]
+    [SerializeField] bool rotate = false;
     [SerializeField] Transform cameraPlayer = default;
     [SerializeField] int x = default, y = default;
-    [SerializeField] bool toForward = default, rotateRow = default, rotateColumn = default;
+    [SerializeField] ERotateDirection rotateDirection = default;
 
     [Header("Important")]
     public WorldConfig worldConfig = default;
     public float rotationTime = 0.2f;
     [SerializeField] BiomesMenu biomes = default;
 
+    public System.Action startGame;
     public System.Action onEndRotation;
 
     public Dictionary<Coordinates, Cell> Cells { get; private set; }
@@ -101,17 +98,10 @@ public class World : MonoBehaviour
 
     private void Update()
     {
-        if (rotateRow)
+        if (rotate)
         {
-            rotateRow = false;
-            Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), toForward ? (byte)0 : (byte)1, true);
-            //RotateRow(face, y, toForward, true);
-        }
-        if (rotateColumn)
-        {
-            rotateColumn = false;
-            Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), toForward ? (byte)2 : (byte)3, true);
-            //RotateColumn(face, x, toForward, true);
+            rotate = false;
+            Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), rotateDirection);
         }
     }
 
@@ -151,16 +141,16 @@ public class World : MonoBehaviour
         InstantiateSun();
 
         //create front and back face
-        CreateFrontBack(0, -90, Face.front);
-        CreateFrontBack(worldConfig.FaceSize, 90, Face.back);
+        CreateFrontBack(0, -90, EFace.front);
+        CreateFrontBack(worldConfig.FaceSize, 90, EFace.back);
 
         //create right and left face
-        CreateRightLeft(worldConfig.FaceSize - worldConfig.HalfCell, -90, Face.right);
-        CreateRightLeft(-worldConfig.HalfCell, 90, Face.left);
+        CreateRightLeft(worldConfig.FaceSize - worldConfig.HalfCell, -90, EFace.right);
+        CreateRightLeft(-worldConfig.HalfCell, 90, EFace.left);
 
         //create up and down face
-        CreateUpDown(worldConfig.FaceSize - worldConfig.HalfCell, 0, Face.up);
-        CreateUpDown(-worldConfig.HalfCell, 180, Face.down);
+        CreateUpDown(worldConfig.FaceSize - worldConfig.HalfCell, 0, EFace.up);
+        CreateUpDown(-worldConfig.HalfCell, 180, EFace.down);
     }
 
     void InstantiateSun()
@@ -182,14 +172,14 @@ public class World : MonoBehaviour
 
     #region create rows and columns
 
-    void CreateFrontBack(float z, float rotX, Face face)
+    void CreateFrontBack(float z, float rotX, EFace face)
     {
         Vector3 distFromCenter = worldConfig.HalfCube - transform.position;
 
         //create front or back face
         int xCoords = -1;
 
-        if (face == Face.front)
+        if (face == EFace.front)
         {
             for (int x = 0; x < worldConfig.NumberCells; x++)
             {
@@ -217,14 +207,14 @@ public class World : MonoBehaviour
         }
     }
 
-    void CreateRightLeft(float x, float rotZ, Face face)
+    void CreateRightLeft(float x, float rotZ, EFace face)
     {
         Vector3 distFromCenter = worldConfig.HalfCube - transform.position;
 
         //create right or left face
         int xCoords = -1;
 
-        if (face == Face.right)
+        if (face == EFace.right)
         {
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
@@ -252,13 +242,13 @@ public class World : MonoBehaviour
         }
     }
 
-    void CreateUpDown(float y, float rotX, Face face)
+    void CreateUpDown(float y, float rotX, EFace face)
     {
         Vector3 distFromCenter = worldConfig.HalfCube - transform.position;
 
         //create up or down face
 
-        if (face == Face.up)
+        if (face == EFace.up)
         {
             for (int x = 0; x < worldConfig.NumberCells; x++)
             {
@@ -294,7 +284,7 @@ public class World : MonoBehaviour
 
     #region create cell
 
-    void CreateAndSetCell(Vector3 position, Vector3 eulerRotation, Face face, int x, int y)
+    void CreateAndSetCell(Vector3 position, Vector3 eulerRotation, EFace face, int x, int y)
     {
         //create cell
         Cell cell = CreateCell(position, eulerRotation, face);
@@ -305,7 +295,7 @@ public class World : MonoBehaviour
         cell.coordinates = coordinates;
     }
 
-    Cell CreateCell(Vector3 position, Vector3 eulerRotation, Face face)
+    Cell CreateCell(Vector3 position, Vector3 eulerRotation, EFace face)
     {
         //create and set position and rotation
         Cell cell = InstantiateCellBasedOnFace(face);
@@ -322,22 +312,22 @@ public class World : MonoBehaviour
         return cell;
     }
 
-    Cell InstantiateCellBasedOnFace(Face face)
+    Cell InstantiateCellBasedOnFace(EFace face)
     {
         //create biome based on face
         switch (face)
         {
-            case Face.front:
+            case EFace.front:
                 return Instantiate(biomes.front);
-            case Face.right:
+            case EFace.right:
                 return Instantiate(biomes.right);
-            case Face.back:
+            case EFace.back:
                 return Instantiate(biomes.back);
-            case Face.left:
+            case EFace.left:
                 return Instantiate(biomes.left);
-            case Face.up:
+            case EFace.up:
                 return Instantiate(biomes.up);
-            case Face.down:
+            case EFace.down:
                 return Instantiate(biomes.down);
         }
 
@@ -352,132 +342,14 @@ public class World : MonoBehaviour
 
     #region public API
 
-    /// <summary>
-    /// Rotate the cube
-    /// </summary>
-    /// <param name="startFace">face to start from</param>
-    /// <param name="lookingFace">rotation of the camera</param>
-    /// <param name="x">column</param>
-    /// <param name="y">row</param>
-    /// <param name="rotateDirection">0 = right, 1 = left, 2 = up, 3 = down</param>
-    /// <param name="playerMove">is a player move? Or is from editor (randomize at start for example)</param>
-    public void Rotate(Face startFace, int x, int y, Face lookingFace, byte rotateDirection, bool playerMove)
+    void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
-        //rotate row
-        if (rotateDirection == 0 || rotateDirection == 1)
-        {
-            bool forward = rotateDirection == 0;
-
-            if (startFace == Face.up || startFace == Face.down)
-            {
-                //if face up or face down, the inputs are differents based on the rotation of the camera
-                switch (lookingFace)
-                {
-                    case Face.front:
-                        worldRotator.RotateUpDownRow(startFace, y, forward, playerMove);
-                        break;
-                    case Face.right:
-                        if (startFace == Face.up)
-                            worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
-                        else
-                            worldRotator.RotateFrontColumn(startFace, x, !forward, playerMove);
-                        break;
-                    case Face.back:
-                        worldRotator.RotateUpDownRow(startFace, y, !forward, playerMove);
-                        break;
-                    case Face.left:
-                        if (startFace == Face.up)
-                            worldRotator.RotateFrontColumn(startFace, x, !forward, playerMove);
-                        else
-                            worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
-                        break;
-                }
-            }
-            else
-            {
-                //else just rotate row lateral faces
-                worldRotator.RotateLateralRow(y, forward, playerMove);
-            }
-        }
-        //rotate column
-        else
-        {
-            bool forward = rotateDirection == 2;
-
-            //if face up or face down, the inputs are differents based on the rotation of the camera
-            if (startFace == Face.up || startFace == Face.down)
-            {
-                switch (lookingFace)
-                {
-                    case Face.front:
-                        worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
-                        break;
-                    case Face.right:
-                        if (startFace == Face.up)
-                            worldRotator.RotateUpDownRow(startFace, y, !forward, playerMove);
-                        else
-                            worldRotator.RotateUpDownRow(startFace, y, forward, playerMove);
-                        break;
-                    case Face.back:
-                        worldRotator.RotateFrontColumn(startFace, x, !forward, playerMove);
-                        break;
-                    case Face.left:
-                        if (startFace == Face.up)
-                            worldRotator.RotateUpDownRow(startFace, y, forward, playerMove);
-                        else
-                            worldRotator.RotateUpDownRow(startFace, y, !forward, playerMove);
-                        break;
-                }
-            }
-            else
-            {
-                //else just rotate column
-                if (startFace == Face.right || startFace == Face.left)
-                {
-                    //rotate column face right or left
-                    worldRotator.RotateRightLeftColumn(startFace, x, forward, playerMove);
-                }
-                else
-                {
-                    //rotate column front faces (front, up, back, down)
-                    worldRotator.RotateFrontColumn(startFace, x, forward, playerMove);
-                }
-            }
-        }
+        worldRotator.Rotate(startFace, x, y, lookingFace, rotateDirection, rotationTime, true);
     }
 
-    /// <summary>
-    /// Rotate row. AnimTime and canControlPlayer are only for randomize at start, doesn't need in runtime
-    /// </summary>
-    public void RotateRow(Face startFace, int line, bool toRight, bool playerMove)
+    public void RandomRotate(EFace startFace, int x, int y, ERotateDirection rotateDirection, float rotationSpeed)
     {
-        if (startFace != Face.up && startFace != Face.down)
-        {
-            //rotate row lateral faces
-            worldRotator.RotateLateralRow(line, toRight, playerMove);
-        }
-        else
-        {
-            //rotate row face up or face down
-            worldRotator.RotateUpDownRow(startFace, line, toRight, playerMove);
-        }
-    }
-
-    /// <summary>
-    /// Rotate column. AnimTime and canControlPlayer are only for randomize at start, doesn't need in runtime
-    /// </summary>
-    public void RotateColumn(Face startFace, int line, bool toUp, bool playerMove)
-    {
-        if (startFace != Face.right && startFace != Face.left)
-        {
-            //front faces (not right or left), rotate front column
-            worldRotator.RotateFrontColumn(startFace, line, toUp, playerMove);
-        }
-        else
-        {
-            //rotate column face right or face left
-            worldRotator.RotateRightLeftColumn(startFace, line, toUp, playerMove);
-        }
+        worldRotator.Rotate(startFace, x, y, EFace.front, rotateDirection, rotationSpeed, false);
     }
 
     #endregion
