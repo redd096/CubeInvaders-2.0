@@ -61,7 +61,7 @@ public class World : MonoBehaviour
     public float rotationTime = 0.2f;
     [SerializeField] BiomesMenu biomes = default;
 
-    public System.Action startGame;
+    public System.Action onStartGame;
     public System.Action onEndRotation;
 
     public Dictionary<Coordinates, Cell> Cells { get; private set; }
@@ -82,21 +82,17 @@ public class World : MonoBehaviour
 
     private void Awake()
     {
-        worldRotator = new WorldRotator(this);
+        GenerateReferences();
 
-        //create dictionary
-        Cells = new Dictionary<Coordinates, Cell>();
-        foreach(Transform child in transform)
+        //try randomize world
+        if(RandomizeWorld() == false)
         {
-            Cell cell = child.GetComponent<Cell>();
-            if(cell != null)
-            {
-                Cells.Add(cell.coordinates, cell);
-            }
+            //else start game after few seconds
+            Invoke("StartGame", 1);
         }
     }
 
-    private void Update()
+    void Update()
     {
         if (rotate)
         {
@@ -104,6 +100,46 @@ public class World : MonoBehaviour
             Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), rotateDirection);
         }
     }
+
+    #region private API
+
+    #region awake
+
+    void GenerateReferences()
+    {
+        //create world rotator
+        worldRotator = new WorldRotator(this);
+
+        //create dictionary
+        Cells = new Dictionary<Coordinates, Cell>();
+        foreach (Transform child in transform)
+        {
+            Cell cell = child.GetComponent<Cell>();
+            if (cell != null)
+            {
+                Cells.Add(cell.coordinates, cell);
+            }
+        }
+    }
+
+    bool RandomizeWorld()
+    {
+        //check if there is WorldRandomRotate and start it
+        WorldRandomRotate WorldRandomRotate = GetComponent<WorldRandomRotate>();
+        if (WorldRandomRotate)
+        {
+            return WorldRandomRotate.StartRandomize(this);
+        }
+
+        return false;
+    }
+
+    void StartGame()
+    {
+        onStartGame?.Invoke();
+    }
+
+    #endregion
 
     #region regen world
 
@@ -340,9 +376,11 @@ public class World : MonoBehaviour
 
     #endregion
 
+    #endregion
+
     #region public API
 
-    void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
+    public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
         worldRotator.Rotate(startFace, x, y, lookingFace, rotateDirection, rotationTime, true);
     }

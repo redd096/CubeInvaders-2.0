@@ -4,6 +4,8 @@ using UnityEngine;
 [AddComponentMenu("Cube Invaders/World/World Random Rotate")]
 public class WorldRandomRotate : MonoBehaviour
 {
+    [Tooltip("Enable randomize")]
+    [SerializeField] bool active = true;
     [Tooltip("Loop or do only N times?")]
     [SerializeField] bool loop = false;
     [Tooltip("How many times you want to randomize")]
@@ -18,16 +20,24 @@ public class WorldRandomRotate : MonoBehaviour
     World world;
 
     bool waitRotation;
+    Coroutine randomizeWorld_Coroutine;
 
-    void Start()
+    public bool StartRandomize(World world)
     {
-        //find world
-        world = GameManager.instance.world;
-        if (world == null)
-            return;
+        //do only if active
+        if (active == false)
+            return false;
+
+        //set world
+        this.world = world;
 
         //start randomize
-        StartCoroutine(RandomizeWorld());
+        if (randomizeWorld_Coroutine != null)
+            StopCoroutine(randomizeWorld_Coroutine);
+
+        randomizeWorld_Coroutine = StartCoroutine(RandomizeWorld());
+
+        return true;
     }
 
     IEnumerator RandomizeWorld()
@@ -61,7 +71,7 @@ public class WorldRandomRotate : MonoBehaviour
         }
 
         //call start game
-        world.startGame?.Invoke();
+        world.onStartGame?.Invoke();
     }
 
     void OnStartRotation()

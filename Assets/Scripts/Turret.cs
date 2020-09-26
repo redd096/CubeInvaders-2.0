@@ -15,5 +15,6 @@ public class Turret : MonoBehaviour
     void OnEndRotation()
     {
         //use World.onEndRotation to know when stop to rotate
+        GameManager.instance.world.onEndRotation -= OnEndRotation;
     }
 }
