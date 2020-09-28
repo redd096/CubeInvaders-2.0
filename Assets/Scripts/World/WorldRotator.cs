@@ -622,16 +622,6 @@ public class WorldRotator
 
     #region public API
 
-    /// <summary>
-    /// Rotate the cube
-    /// </summary>
-    /// <param name="startFace">face to start from</param>
-    /// <param name="lookingFace">rotation of the camera</param>
-    /// <param name="x">column</param>
-    /// <param name="y">row</param>
-    /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    /// <param name="rotationTime">time to do the animation</param>
-    /// <param name="playerCanSkip">player can skip the animation?</param>
     public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime, bool playerCanSkip)
     {
         //rotate row
@@ -714,40 +704,6 @@ public class WorldRotator
                     RotateFrontColumn(startFace, x, forward, rotationTime, playerCanSkip);
                 }
             }
-        }
-    }
-
-    /// <summary>
-    /// Rotate row. AnimTime and canControlPlayer are only for randomize at start, doesn't need in runtime
-    /// </summary>
-    void RotateRow(EFace startFace, int line, bool toRight, float rotationTime, bool playerCanSkip)
-    {
-        if (startFace != EFace.up && startFace != EFace.down)
-        {
-            //rotate row lateral faces
-            RotateLateralRow(line, toRight, rotationTime, playerCanSkip);
-        }
-        else
-        {
-            //rotate row face up or face down
-            RotateUpDownRow(startFace, line, toRight, rotationTime, playerCanSkip);
-        }
-    }
-
-    /// <summary>
-    /// Rotate column. AnimTime and canControlPlayer are only for randomize at start, doesn't need in runtime
-    /// </summary>
-    void RotateColumn(EFace startFace, int line, bool toUp, float rotationTime, bool playerCanSkip)
-    {
-        if (startFace != EFace.right && startFace != EFace.left)
-        {
-            //front faces (not right or left), rotate front column
-            RotateFrontColumn(startFace, line, toUp, rotationTime, playerCanSkip);
-        }
-        else
-        {
-            //rotate column face right or face left
-            RotateRightLeftColumn(startFace, line, toUp, rotationTime, playerCanSkip);
         }
     }
 

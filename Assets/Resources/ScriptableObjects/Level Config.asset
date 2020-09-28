@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 234860cf3fc17274c85c47d87e9adfb1, type: 3}
+  m_Name: Level Config
+  m_EditorClassIdentifier: 
+  Biomes:
+    front: {fileID: 3286791773440962743, guid: efc0a7a469ff05642aca49bfbaf433cf, type: 3}
+    right: {fileID: 3286791773440962743, guid: 937ad66bf12815f43887890a31f6357b, type: 3}
+    back: {fileID: 3286791773440962743, guid: b9faa5477af4d5b418445d12832ea5fd, type: 3}
+    left: {fileID: 3286791773440962743, guid: 683b521221672024397422a2e740039f, type: 3}
+    up: {fileID: 3286791773440962743, guid: 7c4d93e6082e88c46b06717012dcd186, type: 3}
+    down: {fileID: 3286791773440962743, guid: 0badfb7f94875f44d9d2fa72450d3eea, type: 3}
