@@ -5,6 +5,7 @@ using Cinemachine;
 public class PlayerState : State
 {
     protected Player player;
+    protected Transform transform;
 
     CinemachineFreeLook virtualCam;
 
@@ -12,6 +13,7 @@ public class PlayerState : State
     {
         //get references
         player = stateMachine as Player;
+        transform = player.transform;
         virtualCam = player.virtualCam;
     }
 

@@ -22,36 +22,30 @@ public class WorldConfig : ScriptableObject
         }
     }
 
-    public Vector3 HalfCubePivot2
-    {
-        get
-        {
-            float halfDist = FaceSize / 2;
-            bool odd = NumberCells % 2 != 0;
-
-            Vector3 half = new Vector3(halfDist - HalfCell, halfDist - HalfCell, halfDist - HalfCell);
-
-            //if odd number, add half cell to every axis
-            return odd ? half : half + new Vector3(HalfCell, HalfCell, HalfCell);
-
-        }
-    }
-
-    public Vector3 HalfCubePivot
-    {
-        get
-        {
-            float center = (NumberCells - 1) / 2 * CellsSize;
-            bool odd = NumberCells % 2 != 0;
-
-            Vector3 half = new Vector3(center, center, center + HalfCell);
-
-            //if odd number, add half cell to every axis
-            return odd ? half : half + new Vector3(HalfCell, HalfCell, HalfCell);
-        }
-    }
-
     public float HalfCell => CellsSize / 2;
 
+    public Vector2Int CenterCell => new Vector2Int(NumberCells / 2, NumberCells / 2);
+
     #endregion
+
+    public Vector3 PivotBasedOnFace(EFace face)
+    {
+        switch (face)
+        {
+            case EFace.front:
+                return new Vector3(HalfCell, HalfCell, 0);
+            case EFace.right:
+                return new Vector3(0, HalfCell, HalfCell);
+            case EFace.back:
+                return new Vector3(HalfCell, HalfCell, 0);
+            case EFace.left:
+                return new Vector3(0, HalfCell, HalfCell);
+            case EFace.up:
+                return new Vector3(HalfCell, 0, HalfCell);
+            case EFace.down:
+                return new Vector3(HalfCell, 0, HalfCell);
+        }
+
+        return Vector3.zero;
+    }
 }

@@ -7,6 +7,13 @@ public class UIManager : MonoBehaviour
 
     GameObject selector;
 
+    void Start()
+    {
+        //instantiate and disable selector
+        selector = Instantiate(GameManager.instance.world.worldConfig.Selector);
+        HideSelector();
+    }
+
     #region public API
 
     public void PauseMenu(bool active)
@@ -14,7 +21,7 @@ public class UIManager : MonoBehaviour
         pauseMenu.SetActive(active);
     }
 
-    public void EnableSelector(Coordinates coordinates)
+    public void ShowSelector(Coordinates coordinates)
     {
         //set size, position and active it
         float size = GameManager.instance.world.worldConfig.CellsSize;
@@ -25,7 +32,7 @@ public class UIManager : MonoBehaviour
         selector.SetActive(true);
     }
 
-    public void DisableSelector()
+    public void HideSelector()
     {
         selector.SetActive(false);
     }

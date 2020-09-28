@@ -1,4 +1,6 @@
-﻿public class PlayerWaitStartGame : PlayerState
+﻿using UnityEngine;
+
+public class PlayerWaitStartGame : PlayerState
 {
     public PlayerWaitStartGame(redd096.StateMachine stateMachine) : base(stateMachine)
     {
@@ -24,6 +26,8 @@
 
     void OnStartGame()
     {
-        player.SetState(new PlayerMove(player));
+        //go to player move, starting from center cell
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+        player.SetState(new PlayerMove(player, new Coordinates(EFace.front, centerCell.x, centerCell.y)));
     }
 }

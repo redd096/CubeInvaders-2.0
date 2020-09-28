@@ -44,12 +44,6 @@ public class World : MonoBehaviour
     [Header("Regen")]
     [SerializeField] bool regen = false;
 
-    [Header("Debug")]
-    [SerializeField] bool rotate = false;
-    [SerializeField] Transform cameraPlayer = default;
-    [SerializeField] int x = default, y = default;
-    [SerializeField] ERotateDirection rotateDirection = default;
-
     [Header("Important")]
     public WorldConfig worldConfig = default;
     public float rotationTime = 0.2f;
@@ -83,15 +77,6 @@ public class World : MonoBehaviour
         {
             //else start game after few seconds
             Invoke("StartGame", 1);
-        }
-    }
-
-    void Update()
-    {
-        if (rotate)
-        {
-            rotate = false;
-            Rotate(WorldUtility.SelectFace(cameraPlayer), x, y, WorldUtility.LateralFace(cameraPlayer), rotateDirection);
         }
     }
 
@@ -171,16 +156,13 @@ public class World : MonoBehaviour
         InstantiateSun();
 
         //create front and back face
-        CreateFrontBack(0, -90, EFace.front);
-        CreateFrontBack(worldConfig.FaceSize, 90, EFace.back);
+        CreateFrontBack();
 
         //create right and left face
-        CreateRightLeft(worldConfig.FaceSize - worldConfig.HalfCell, -90, EFace.right);
-        CreateRightLeft(-worldConfig.HalfCell, 90, EFace.left);
+        CreateRightLeft();
 
         //create up and down face
-        CreateUpDown(worldConfig.FaceSize - worldConfig.HalfCell, 0, EFace.up);
-        CreateUpDown(-worldConfig.HalfCell, 180, EFace.down);
+        CreateUpDown();
     }
 
     void InstantiateSun()
@@ -202,110 +184,41 @@ public class World : MonoBehaviour
 
     #region create rows and columns
 
-    void CreateFrontBack(float z, float rotX, EFace face)
+    void CreateFrontBack()
     {
-        Vector3 distFromCenter = worldConfig.HalfCubePivot - transform.position;
-
-        //create front or back face
-        int xCoords = -1;
-
-        if (face == EFace.front)
+        for (int x = 0; x < worldConfig.NumberCells; x++)
         {
-            for (int x = 0; x < worldConfig.NumberCells; x++)
+            for (int y = 0; y < worldConfig.NumberCells; y++)
             {
-                xCoords++;
+                CreateAndSetCell(new Vector3(-90, 0, 0), new Coordinates(EFace.front, x, y));
 
-                for (int y = 0; y < worldConfig.NumberCells; y++)
-                {
-                    //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y * worldConfig.CellsSize, z) - distFromCenter, new Vector3(rotX, 0, 0), new Coordinates(face, xCoords, y));
-                }
-            }
-        }
-        else
-        {
-            for (int x = worldConfig.NumberCells - 1; x >= 0; x--)
-            {
-                xCoords++;
-
-                for (int y = 0; y < worldConfig.NumberCells; y++)
-                {
-                    //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y * worldConfig.CellsSize, z) - distFromCenter, new Vector3(rotX, 0, 0), new Coordinates(face, xCoords, y));
-                }
+                CreateAndSetCell(new Vector3(90, 0, 0), new Coordinates(EFace.back, x, y));
             }
         }
     }
 
-    void CreateRightLeft(float x, float rotZ, EFace face)
+    void CreateRightLeft()
     {
-        Vector3 distFromCenter = worldConfig.HalfCubePivot - transform.position;
+        for (int z = 0; z < worldConfig.NumberCells; z++)
+        {
+            for (int y = 0; y < worldConfig.NumberCells; y++)
+            {
+                CreateAndSetCell(new Vector3(0, 0, -90), new Coordinates(EFace.right, z, y));
 
-        //create right or left face
-        int xCoords = -1;
+                CreateAndSetCell(new Vector3(0, 0, 90), new Coordinates(EFace.left, z, y));
+            }
+        }
+    }
 
-        if (face == EFace.right)
+    void CreateUpDown()
+    {
+        for (int x = 0; x < worldConfig.NumberCells; x++)
         {
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
-                xCoords++;
+                CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.up, x, z));
 
-                for (int y = 0; y < worldConfig.NumberCells; y++)
-                {
-                    //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x, y * worldConfig.CellsSize, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(0, 0, rotZ), new Coordinates(face, xCoords, y));
-                }
-            }
-        }
-        else
-        {
-            for (int z = worldConfig.NumberCells - 1; z >= 0; z--)
-            {
-                xCoords++;
-
-                for (int y = 0; y < worldConfig.NumberCells; y++)
-                {
-                    //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x, y * worldConfig.CellsSize, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(0, 0, rotZ), new Coordinates(face, xCoords, y));
-                }
-            }
-        }
-    }
-
-    void CreateUpDown(float y, float rotX, EFace face)
-    {
-        Vector3 distFromCenter = worldConfig.HalfCubePivot - transform.position;
-
-        //create up or down face
-
-        if (face == EFace.up)
-        {
-            for (int x = 0; x < worldConfig.NumberCells; x++)
-            {
-                int yCoords = -1;
-
-                for (int z = 0; z < worldConfig.NumberCells; z++)
-                {
-                    yCoords++;
-
-                    //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(rotX, 0, 0), new Coordinates(face, x, yCoords));
-                }
-            }
-        }
-        else
-        {
-            for (int x = 0; x < worldConfig.NumberCells; x++)
-            {
-                int yCoords = -1;
-
-                for (int z = worldConfig.NumberCells - 1; z >= 0; z--)
-                {
-                    yCoords++;
-
-                    //-dist from center to set center at Vector3.zero
-                    CreateAndSetCell(new Vector3(x * worldConfig.CellsSize, y, z * worldConfig.CellsSize + worldConfig.HalfCell) - distFromCenter, new Vector3(rotX, 0, 0), new Coordinates(face, x, yCoords));
-                }
+                CreateAndSetCell(new Vector3(180, 0, 0), new Coordinates(EFace.down, x, z));
             }
         }
     }
@@ -314,10 +227,10 @@ public class World : MonoBehaviour
 
     #region create cell
 
-    void CreateAndSetCell(Vector3 position, Vector3 eulerRotation, Coordinates coordinates)
+    void CreateAndSetCell(Vector3 eulerRotation, Coordinates coordinates)
     {
         //create cell
-        Cell cell = CreateCell(position, eulerRotation, coordinates.face);
+        Cell cell = CreateCell(CoordinatesToPosition(coordinates), eulerRotation, coordinates.face);
 
         //set it
         Cells.Add(coordinates, cell);
@@ -400,51 +313,55 @@ public class World : MonoBehaviour
     }
 
     /// <summary>
-    /// returns the position in the world of the cell at those coordinates
+    /// Returns the position in the world of the cell at these coordinates
     /// </summary>
     public Vector3 CoordinatesToPosition(Coordinates coordinates)
     {
+        //position is index * size (then one axis is 0 or FaceSize)
         Vector3 v = Vector3.zero;
-
-        Vector3 halfCubePivot_POSITIVE = transform.position + worldConfig.HalfCubePivot;                            //1, 1, 1.5f
-        Vector3 halfCubePivot_NEGATIVE = transform.position - worldConfig.HalfCubePivot;                            //-1, -1, -1.5f
-        Vector3 halfCube_POSITIVE = transform.position + worldConfig.HalfCube;
 
         switch (coordinates.face)
         {
             case EFace.front:
-                v.x = halfCubePivot_NEGATIVE.x + (coordinates.x * worldConfig.CellsSize);                           //-1, 1
-                v.y = halfCubePivot_NEGATIVE.y + (coordinates.y * worldConfig.CellsSize);                           //-1, 1
-                v.z = halfCubePivot_NEGATIVE.z;                                                                     //-1.5f
+                v.x = coordinates.x * worldConfig.CellsSize;
+                v.y = coordinates.y * worldConfig.CellsSize;
+                v.z = 0;
                 break;
             case EFace.right:
-                v.x = halfCubePivot_POSITIVE.x + worldConfig.HalfCell;                                              //1.5f
-                v.y = halfCubePivot_NEGATIVE.y + (coordinates.y * worldConfig.CellsSize);                           //-1, 1
-                v.z = halfCubePivot_NEGATIVE.z + (coordinates.x * worldConfig.CellsSize) + worldConfig.HalfCell;    //-1, 1
+                v.x = worldConfig.FaceSize;
+                v.y = coordinates.y * worldConfig.CellsSize;
+                v.z = coordinates.x * worldConfig.CellsSize;
                 break;
             case EFace.back:
-                v.x = halfCubePivot_POSITIVE.x - (coordinates.x * worldConfig.CellsSize);                           //1, -1
-                v.y = halfCubePivot_NEGATIVE.y + (coordinates.y * worldConfig.CellsSize);                           //-1, 1
-                v.z = halfCubePivot_POSITIVE.z;                                                                     //1.5f
+                //x inverse of front
+                v.x = (worldConfig.NumberCells - 1 - coordinates.x) * worldConfig.CellsSize;
+                v.y = coordinates.y * worldConfig.CellsSize;
+                v.z = worldConfig.FaceSize;
                 break;
             case EFace.left:
-                v.x = halfCubePivot_NEGATIVE.x - worldConfig.HalfCell;                                              //-1.5f
-                v.y = halfCubePivot_NEGATIVE.y + (coordinates.y * worldConfig.CellsSize);                           //-1, 1
-                v.z = halfCubePivot_POSITIVE.z - (coordinates.x * worldConfig.CellsSize) - worldConfig.HalfCell;    //1, -1
+                //z inverse of right
+                v.x = 0;
+                v.y = coordinates.y * worldConfig.CellsSize;
+                v.z = (worldConfig.NumberCells - 1 - coordinates.x) * worldConfig.CellsSize;
                 break;
             case EFace.up:
-                v.x = halfCubePivot_NEGATIVE.x + (coordinates.x * worldConfig.CellsSize);                           //-1, 1
-                v.y = halfCubePivot_POSITIVE.y + worldConfig.HalfCell;                                              //1.5f
-                v.z = halfCubePivot_NEGATIVE.z + (coordinates.y * worldConfig.CellsSize) + worldConfig.HalfCell;    //-1, 1
+                v.x = coordinates.x * worldConfig.CellsSize;
+                v.y = worldConfig.FaceSize;
+                v.z = coordinates.y * worldConfig.CellsSize;
                 break;
             case EFace.down:
-                v.x = halfCubePivot_NEGATIVE.x + (coordinates.x * worldConfig.CellsSize);                           //-1, 1
-                v.y = halfCubePivot_NEGATIVE.y - worldConfig.HalfCell;                                              //-1.5f
-                v.z = halfCubePivot_POSITIVE.z - (coordinates.y * worldConfig.CellsSize) - worldConfig.HalfCell;    //1, -1
+                //inverse of up
+                v.x = coordinates.x * worldConfig.CellsSize;
+                v.y = 0;
+                v.z = (worldConfig.NumberCells - 1 - coordinates.y) * worldConfig.CellsSize;
                 break;
         }
 
-        return v;
+        //is the angle in the lower left (front face) of the cube
+        Vector3 cubeStartPosition = transform.position - worldConfig.HalfCube;
+
+        //return start position + cell position + pivot position (cause we start from the angle of the cube, but we need the center of the cell as pivot)
+        return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
     #endregion

@@ -8,6 +8,7 @@ using Cinemachine;
 public class Player : StateMachine
 {
     [SerializeField] string currentState;
+
     [HideInInspector] public CinemachineFreeLook virtualCam;
 
     State previousState;

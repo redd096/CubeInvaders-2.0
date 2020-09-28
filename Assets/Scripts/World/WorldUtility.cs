@@ -2,6 +2,8 @@
 
 public static class WorldUtility
 {
+    #region select index
+
     /// <summary>
     /// add or subtract 1 at index, when reached limit or lesser then 0, restart
     /// </summary>
@@ -25,6 +27,88 @@ public static class WorldUtility
 
         return index;
     }
+
+    public static Vector2Int SelectCell(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
+    {
+        Vector2Int selectedCell = new Vector2Int(x, y);
+
+        //select right left
+        if (rotateDirection == ERotateDirection.right || rotateDirection == ERotateDirection.left)
+        {
+            bool forward = rotateDirection == ERotateDirection.right;
+
+            if (startFace == EFace.up || startFace == EFace.down)
+            {
+                //if face up or face down, the inputs are differents based on the rotation of the camera
+                switch (lookingFace)
+                {
+                    case EFace.front:
+                        selectedCell.x = SelectIndex(x, forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                    case EFace.right:
+                        if (startFace == EFace.up)
+                            selectedCell.y = SelectIndex(y, forward, GameManager.instance.world.worldConfig.NumberCells);
+                        else
+                            selectedCell.y = SelectIndex(y, !forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                    case EFace.back:
+                        selectedCell.x = SelectIndex(x, !forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                    case EFace.left:
+                        if (startFace == EFace.up)
+                            selectedCell.y = SelectIndex(y, !forward, GameManager.instance.world.worldConfig.NumberCells);
+                        else
+                            selectedCell.y = SelectIndex(y, forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                }
+            }
+            else
+            {
+                //else just select row lateral faces
+                selectedCell.x = SelectIndex(x, forward, GameManager.instance.world.worldConfig.NumberCells);
+            }
+        }
+        //select up down
+        else
+        {
+            bool forward = rotateDirection == ERotateDirection.up;
+
+            //if face up or face down, the inputs are differents based on the rotation of the camera
+            if (startFace == EFace.up || startFace == EFace.down)
+            {
+                switch (lookingFace)
+                {
+                    case EFace.front:
+                        selectedCell.y = SelectIndex(y, forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                    case EFace.right:
+                        if (startFace == EFace.up)
+                            selectedCell.x = SelectIndex(x, !forward, GameManager.instance.world.worldConfig.NumberCells);
+                        else
+                            selectedCell.x = SelectIndex(x, forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                    case EFace.back:
+                        selectedCell.y = SelectIndex(y, !forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                    case EFace.left:
+                        if (startFace == EFace.up)
+                            selectedCell.x = SelectIndex(x, forward, GameManager.instance.world.worldConfig.NumberCells);
+                        else
+                            selectedCell.x = SelectIndex(x, !forward, GameManager.instance.world.worldConfig.NumberCells);
+                        break;
+                }
+            }
+            else
+            {
+                //else just select column
+                selectedCell.y = SelectIndex(y, forward, GameManager.instance.world.worldConfig.NumberCells);
+            }
+        }
+
+        return selectedCell;
+    }
+
+    #endregion
 
     #region find face
 
@@ -106,6 +190,8 @@ public static class WorldUtility
 
     #endregion
 
+    #region face based on transform
+
     /// <summary>
     /// returns what face the transform is looking at
     /// </summary>
@@ -141,6 +227,8 @@ public static class WorldUtility
             return EFace.back;
         }
     }
+
+    #endregion
 }
 
 public static class WorldMath
