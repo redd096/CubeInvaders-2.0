@@ -28,9 +28,9 @@ public static class WorldUtility
         return index;
     }
 
-    public static Vector2Int SelectCell(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
+    public static Coordinates SelectCell(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
-        Vector2Int selectedCell = new Vector2Int(x, y);
+        Coordinates selectedCell = new Coordinates(startFace, x, y);
 
         //select right left
         if (rotateDirection == ERotateDirection.right || rotateDirection == ERotateDirection.left)

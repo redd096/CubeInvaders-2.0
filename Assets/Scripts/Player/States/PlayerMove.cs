@@ -1,16 +1,13 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerMove : PlayerState
 {
-    Coordinates coordinates;
-    Vector2Int selectedCell;
+    protected Coordinates coordinates;
 
     public PlayerMove(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
+        //get previous coordinates
         this.coordinates = coordinates;
-        selectedCell = new Vector2Int(coordinates.x, coordinates.y);
     }
 
     public override void Execution()
@@ -31,23 +28,22 @@ public class PlayerMove : PlayerState
 
         //if change face, reselect center cell
         if (face != coordinates.face)
-            selectedCell = GameManager.instance.world.worldConfig.CenterCell;
+            coordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
 
         //select cell
         if (!Input.GetKey(KeyCode.Mouse0))
         {
             if (Input.GetKeyDown(KeyCode.W))
-                selectedCell = WorldUtility.SelectCell(face, selectedCell.x, selectedCell.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
+                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
             else if (Input.GetKeyDown(KeyCode.S))
-                selectedCell = WorldUtility.SelectCell(face, selectedCell.x, selectedCell.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
+                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
             else if (Input.GetKeyDown(KeyCode.D))
-                selectedCell = WorldUtility.SelectCell(face, selectedCell.x, selectedCell.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
+                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
             else if (Input.GetKeyDown(KeyCode.A))
-                selectedCell = WorldUtility.SelectCell(face, selectedCell.x, selectedCell.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
+                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
         }
 
-        //show selector
-        coordinates = new Coordinates(face, selectedCell.x, selectedCell.y);
+        //save coordinates and  show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
@@ -70,7 +66,7 @@ public class PlayerMove : PlayerState
     void DoRotation(ERotateDirection rotateDirection)
     {
         //do rotation
-        GameManager.instance.world.Rotate(WorldUtility.SelectFace(transform), selectedCell.x, selectedCell.y, WorldUtility.LateralFace(transform), rotateDirection);
+        GameManager.instance.world.Rotate(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), rotateDirection);
 
         //change state
         player.SetState(new PlayerWaitRotation(player, coordinates));

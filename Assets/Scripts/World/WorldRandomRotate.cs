@@ -22,14 +22,14 @@ public class WorldRandomRotate : MonoBehaviour
     bool waitRotation;
     Coroutine randomizeWorld_Coroutine;
 
-    public bool StartRandomize(World world)
+    public bool StartRandomize()
     {
         //do only if active
         if (active == false)
             return false;
 
         //set world
-        this.world = world;
+        world = GameManager.instance.world;
 
         //start randomize
         if (randomizeWorld_Coroutine != null)
@@ -71,7 +71,7 @@ public class WorldRandomRotate : MonoBehaviour
         }
 
         //call start game
-        world.onStartGame?.Invoke();
+        GameManager.instance.levelManager.StartGame();
     }
 
     void OnStartRotation()

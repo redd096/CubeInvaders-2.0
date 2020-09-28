@@ -23,7 +23,7 @@ public class UIManager : MonoBehaviour
 
     public void ShowSelector(Coordinates coordinates)
     {
-        //set size, position and active it
+        //set size, position and active selector
         float size = GameManager.instance.world.worldConfig.CellsSize;
         selector.transform.localScale = new Vector3(size, size, size);
 
@@ -34,6 +34,7 @@ public class UIManager : MonoBehaviour
 
     public void HideSelector()
     {
+        //hide selector
         selector.SetActive(false);
     }
 

@@ -3,8 +3,9 @@
 [CreateAssetMenu(menuName = "Cube Invaders/World Config", fileName = "World Config")]
 public class WorldConfig : ScriptableObject
 {
-    [Tooltip("Number of cell for every face (for example 3x3x3 cube)")] public int NumberCells = 3;
+    [Tooltip("Number of cells for every face (for example 3x3x3 cube)")] public int NumberCells = 3;
     [Tooltip("Size of every cell in meters")] public float CellsSize = 1;
+    [Tooltip("Time to rotate (animation)")] public float RotationTime = 0.2f;
     [Tooltip("Sun prefab (center of the world)")] public GameObject SunPrefab;
     [Tooltip("Cell selector")] public GameObject Selector;
 

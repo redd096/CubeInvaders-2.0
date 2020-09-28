@@ -1,10 +1,8 @@
-﻿using redd096;
-
-public class PlayerWaitRotation : PlayerState
+﻿public class PlayerWaitRotation : PlayerState
 {
     Coordinates coordinates;
 
-    public PlayerWaitRotation(StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
+    public PlayerWaitRotation(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
         this.coordinates = coordinates;
     }
@@ -16,6 +14,7 @@ public class PlayerWaitRotation : PlayerState
         //wait end rotation
         GameManager.instance.world.onEndRotation += OnEndRotation;
 
+        //hide selector and stop movement
         GameManager.instance.uiManager.HideSelector();
         StopCinemachine();
     }
@@ -31,6 +30,9 @@ public class PlayerWaitRotation : PlayerState
     void OnEndRotation()
     {
         //wait end rotation and come back to movement
-        player.SetState(new PlayerMove(player, coordinates));
+        if (GameManager.instance.levelManager.CurrentPhase == EPhase.strategic)
+            player.SetState(new PlayerStrategic(player, coordinates));
+        else
+            player.SetState(new PlayerAssault(player, coordinates));
     }
 }

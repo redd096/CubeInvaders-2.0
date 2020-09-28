@@ -34,6 +34,13 @@ public struct Coordinates
         this.x = x;
         this.y = y;
     }
+
+    public Coordinates(EFace face, Vector2Int v)
+    {
+        this.face = face;
+        this.x = v.x;
+        this.y = v.y;
+    }
 }
 
 #endregion
@@ -46,13 +53,11 @@ public class World : MonoBehaviour
 
     [Header("Important")]
     public WorldConfig worldConfig = default;
-    public float rotationTime = 0.2f;
-    public LevelConfig levelConfig = default;
+    public BiomesConfig biomesConfig = default;
 
-    public System.Action onStartGame;
     public System.Action onEndRotation;
 
-    public Dictionary<Coordinates, Cell> Cells { get; private set; }
+    public Dictionary<Coordinates, Cell> Cells;
 
     WorldRotator worldRotator;
 
@@ -71,13 +76,6 @@ public class World : MonoBehaviour
     private void Awake()
     {
         GenerateReferences();
-
-        //try randomize world
-        if(RandomizeWorld() == false)
-        {
-            //else start game after few seconds
-            Invoke("StartGame", 1);
-        }
     }
 
     #region private API
@@ -99,23 +97,6 @@ public class World : MonoBehaviour
                 Cells.Add(cell.coordinates, cell);
             }
         }
-    }
-
-    bool RandomizeWorld()
-    {
-        //check if there is WorldRandomRotate and start it
-        WorldRandomRotate WorldRandomRotate = GetComponent<WorldRandomRotate>();
-        if (WorldRandomRotate)
-        {
-            return WorldRandomRotate.StartRandomize(this);
-        }
-
-        return false;
-    }
-
-    void StartGame()
-    {
-        onStartGame?.Invoke();
     }
 
     #endregion
@@ -190,8 +171,10 @@ public class World : MonoBehaviour
         {
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
+                //front
                 CreateAndSetCell(new Vector3(-90, 0, 0), new Coordinates(EFace.front, x, y));
 
+                //back
                 CreateAndSetCell(new Vector3(90, 0, 0), new Coordinates(EFace.back, x, y));
             }
         }
@@ -203,8 +186,10 @@ public class World : MonoBehaviour
         {
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
+                //right
                 CreateAndSetCell(new Vector3(0, 0, -90), new Coordinates(EFace.right, z, y));
 
+                //left
                 CreateAndSetCell(new Vector3(0, 0, 90), new Coordinates(EFace.left, z, y));
             }
         }
@@ -216,8 +201,10 @@ public class World : MonoBehaviour
         {
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
+                //up
                 CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.up, x, z));
 
+                //down
                 CreateAndSetCell(new Vector3(180, 0, 0), new Coordinates(EFace.down, x, z));
             }
         }
@@ -260,17 +247,17 @@ public class World : MonoBehaviour
         switch (face)
         {
             case EFace.front:
-                return Instantiate(levelConfig.Biomes.front);
+                return Instantiate(biomesConfig.front);
             case EFace.right:
-                return Instantiate(levelConfig.Biomes.right);
+                return Instantiate(biomesConfig.right);
             case EFace.back:
-                return Instantiate(levelConfig.Biomes.back);
+                return Instantiate(biomesConfig.back);
             case EFace.left:
-                return Instantiate(levelConfig.Biomes.left);
+                return Instantiate(biomesConfig.left);
             case EFace.up:
-                return Instantiate(levelConfig.Biomes.up);
+                return Instantiate(biomesConfig.up);
             case EFace.down:
-                return Instantiate(levelConfig.Biomes.down);
+                return Instantiate(biomesConfig.down);
         }
 
         return null;
@@ -296,7 +283,7 @@ public class World : MonoBehaviour
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
     public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
-        worldRotator.Rotate(startFace, x, y, lookingFace, rotateDirection, rotationTime, true);
+        worldRotator.Rotate(startFace, x, y, lookingFace, rotateDirection, worldConfig.RotationTime, true);
     }
 
     /// <summary>

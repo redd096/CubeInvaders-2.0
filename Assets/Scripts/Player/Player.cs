@@ -7,10 +7,12 @@ using Cinemachine;
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
 {
+    [Header("Debug")]
     [SerializeField] string currentState;
 
-    [HideInInspector] public CinemachineFreeLook virtualCam;
+    public CinemachineFreeLook virtualCam { get; private set; }
 
+    //used to come back from pause
     State previousState;
 
     void Start()
@@ -19,7 +21,14 @@ public class Player : StateMachine
         virtualCam = FindObjectOfType<CinemachineFreeLook>();
 
         //set state
-        SetState(new PlayerWaitStartGame(this));
+        SetState(new PlayerPause(this));
+
+        AddEvents();
+    }
+
+    void OnDestroy()
+    {
+        RemoveEvents();
     }
 
     void Update()
@@ -31,8 +40,39 @@ public class Player : StateMachine
     {
         base.SetState(stateToSet);
 
+        //for debug
         currentState = state?.ToString();
     }
+
+    #region events
+
+    void AddEvents()
+    {
+        GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
+        GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
+    }
+
+    void RemoveEvents()
+    {
+        GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
+        GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
+    }
+
+    void OnStartStrategicPhase()
+    {
+        //go to player move, starting from center cell
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+        SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell.x, centerCell.y)));
+    }
+
+    void OnStartAssaultPhase()
+    {
+        //go to player move, starting from center cell
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+        SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell.x, centerCell.y)));
+    }
+
+    #endregion
 
     #region public API
 
@@ -40,11 +80,13 @@ public class Player : StateMachine
     {
         if(pause)
         {
+            //pause
             previousState = state;
             SetState(new PlayerPause(this));
         }
         else
         {
+            //resume
             SetState(previousState);
         }
     }

@@ -7,6 +7,7 @@ public class GameManager : Singleton<GameManager>
     public UIManager uiManager { get; private set; }
     public Player player { get; private set; }
     public World world { get; private set; }
+    public LevelManager levelManager { get; private set; }
 
     protected override void SetDefaults()
     {
@@ -14,7 +15,8 @@ public class GameManager : Singleton<GameManager>
         uiManager = FindObjectOfType<UIManager>();
         player = FindObjectOfType<Player>();
         world = FindObjectOfType<World>();
-            
+        levelManager = FindObjectOfType<LevelManager>();
+        
         //if there is a player, lock mouse
         if (player)
         {

@@ -18,8 +18,8 @@ public class Cell : MonoBehaviour
 
     public void ActivateCell()
     {
-        //deve controllare se su questa cella si può costruire (o magari è radar)
-        //se questa cella effettivamente costruisce una torretta (magari è il vulcano)
+        //deve controllare se su questa cella si può costruire (o magari è radar - turretToCreate == null)
+        //se questa cella effettivamente costruisce una torretta (magari è il vulcano - nuova classe che overrida questa funzione?)
         //se questa cella è vuota (magari è già attivata / ha già su una torretta)
         //nel caso si costruisse una torretta, quale costruire
     }
