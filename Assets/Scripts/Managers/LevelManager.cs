@@ -24,6 +24,10 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
+        //hide UI and all
+        onEndStrategicPhase?.Invoke();
+        onEndAssaultPhase?.Invoke();
+
         //try randomize world
         if (RandomizeWorld() == false)
         {
@@ -72,11 +76,6 @@ public class LevelManager : MonoBehaviour
         }
     }
 
-    public void EndGame()
-    {
-        onEndGame?.Invoke();
-    }
-
     #endregion
 
     #region start
@@ -99,7 +98,12 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
-        onStartStrategicPhase?.Invoke();
+        StartStrategicPhase();
+    }
+
+    public void EndGame(bool win)
+    {
+        onEndGame?.Invoke();
     }
 
     #endregion

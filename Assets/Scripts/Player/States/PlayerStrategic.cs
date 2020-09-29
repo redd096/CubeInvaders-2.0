@@ -21,14 +21,20 @@ public class PlayerStrategic : PlayerMove
         }
 
         //keep pressed to end strategic
-        if(Input.GetKey(KeyCode.Return))
-        {
-            float timeToEnd = GameManager.instance.levelManager.levelConfig.timeToEndStrategic;
+        PressReady(Input.GetKey(KeyCode.Return));        
+    }
 
+    void PressReady(bool inputReady)
+    {
+        float timeToEnd = GameManager.instance.levelManager.levelConfig.TimeToEndStrategic;
+
+        //keep pressed to end strategic
+        if (inputReady)
+        {
             timeToEndStrategic += Time.deltaTime / timeToEnd;
 
             //check if end
-            if(timeToEndStrategic >= timeToEnd)
+            if (timeToEndStrategic >= timeToEnd)
             {
                 EndStrategic();
             }
@@ -37,6 +43,9 @@ public class PlayerStrategic : PlayerMove
         {
             timeToEndStrategic = 0;
         }
+
+        //update UI
+        GameManager.instance.uiManager.UpdateReadySlider(timeToEndStrategic / timeToEnd);
     }
 
     void EndStrategic()

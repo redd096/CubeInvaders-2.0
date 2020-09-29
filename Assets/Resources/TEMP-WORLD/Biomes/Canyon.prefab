@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1 &4725305102212368735
+--- !u!1 &8168210027532109158
 GameObject:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -8,47 +8,46 @@ GameObject:
   m_PrefabAsset: {fileID: 0}
   serializedVersion: 6
   m_Component:
-  - component: {fileID: 3600682643609318869}
-  - component: {fileID: 6759848069832137622}
-  - component: {fileID: 7634260079257654830}
-  - component: {fileID: 3460292328371435767}
-  - component: {fileID: 3286791773440962743}
+  - component: {fileID: 8795704974855479260}
+  - component: {fileID: 5602271811999535225}
+  - component: {fileID: 7663916888304018611}
+  - component: {fileID: 8508009401766008826}
   m_Layer: 0
-  m_Name: Canyon
+  m_Name: Canyon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!4 &3600682643609318869
+--- !u!4 &8795704974855479260
 Transform:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725305102212368735}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -1.8702335, y: 5.8183155, z: 1.0240288}
+  m_GameObject: {fileID: 8168210027532109158}
+  m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: -2.3503785, y: -2.3744996, z: 7.225934}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!33 &6759848069832137622
+--- !u!33 &5602271811999535225
 MeshFilter:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725305102212368735}
-  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
---- !u!23 &7634260079257654830
+  m_GameObject: {fileID: 8168210027532109158}
+  m_Mesh: {fileID: 8555779245052704665, guid: 5b9a6463e0b4ff148bea3ba2ec18a579, type: 3}
+--- !u!23 &7663916888304018611
 MeshRenderer:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725305102212368735}
+  m_GameObject: {fileID: 8168210027532109158}
   m_Enabled: 1
   m_CastShadows: 1
   m_ReceiveShadows: 1
@@ -83,34 +82,22 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!65 &3460292328371435767
-BoxCollider:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725305102212368735}
-  m_Material: {fileID: 0}
-  m_IsTrigger: 0
-  m_Enabled: 1
-  serializedVersion: 2
-  m_Size: {x: 1, y: 1, z: 1}
-  m_Center: {x: 0, y: 0, z: 0}
---- !u!114 &3286791773440962743
+--- !u!114 &8508009401766008826
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4725305102212368735}
+  m_GameObject: {fileID: 8168210027532109158}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  biome: 1
-  turretOnThisBiome: {fileID: 0}
+  toRemoveOnDead: {fileID: 0}
+  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  canRemoveTurret: 1
   coordinates:
     face: 0
-    row: 0
-    column: 0
+    x: 0
+    y: 0

@@ -41,6 +41,26 @@ public struct Coordinates
         this.x = v.x;
         this.y = v.y;
     }
+
+    public static bool operator !=(Coordinates a, Coordinates b) => a.face != b.face || a.x != b.x || a.y != b.y;
+    public static bool operator ==(Coordinates a, Coordinates b) => a.face == b.face && a.x == b.x && a.y == b.y;
+
+    public override bool Equals(object obj)
+    {
+        return obj is Coordinates coordinates &&
+               face == coordinates.face &&
+               x == coordinates.x &&
+               y == coordinates.y;
+    }
+
+    public override int GetHashCode()
+    {
+        int hashCode = 628288303;
+        hashCode = hashCode * -1521134295 + face.GetHashCode();
+        hashCode = hashCode * -1521134295 + x.GetHashCode();
+        hashCode = hashCode * -1521134295 + y.GetHashCode();
+        return hashCode;
+    }
 }
 
 #endregion
@@ -247,17 +267,17 @@ public class World : MonoBehaviour
         switch (face)
         {
             case EFace.front:
-                return Instantiate(biomesConfig.front);
+                return Instantiate(biomesConfig.Front);
             case EFace.right:
-                return Instantiate(biomesConfig.right);
+                return Instantiate(biomesConfig.Right);
             case EFace.back:
-                return Instantiate(biomesConfig.back);
+                return Instantiate(biomesConfig.Back);
             case EFace.left:
-                return Instantiate(biomesConfig.left);
+                return Instantiate(biomesConfig.Left);
             case EFace.up:
-                return Instantiate(biomesConfig.up);
+                return Instantiate(biomesConfig.Up);
             case EFace.down:
-                return Instantiate(biomesConfig.down);
+                return Instantiate(biomesConfig.Down);
         }
 
         return null;

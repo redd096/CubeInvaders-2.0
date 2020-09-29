@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234860cf3fc17274c85c47d87e9adfb1, type: 3}
   m_Name: Biomes Config
   m_EditorClassIdentifier: 
-  front: {fileID: 3286791773440962743, guid: efc0a7a469ff05642aca49bfbaf433cf, type: 3}
-  right: {fileID: 3286791773440962743, guid: 937ad66bf12815f43887890a31f6357b, type: 3}
-  back: {fileID: 3286791773440962743, guid: b9faa5477af4d5b418445d12832ea5fd, type: 3}
-  left: {fileID: 3286791773440962743, guid: 683b521221672024397422a2e740039f, type: 3}
-  up: {fileID: 3286791773440962743, guid: 7c4d93e6082e88c46b06717012dcd186, type: 3}
-  down: {fileID: 3286791773440962743, guid: 0badfb7f94875f44d9d2fa72450d3eea, type: 3}
+  Front: {fileID: 8508009401766008826, guid: 952f8e9a49c4d014488bcb2e239c9b15, type: 3}
+  Right: {fileID: -7416652133052579969, guid: b5a419f18b84db242ab0c59af5c33396, type: 3}
+  Back: {fileID: 8242997089245610343, guid: 2f46d440e057505459a7fba43f882ddb, type: 3}
+  Left: {fileID: -9078232362336359216, guid: db188ad8c7e313f41940740e8f66452a, type: 3}
+  Up: {fileID: 79332862174534657, guid: 8b325d5ddf1d83e49999f4120e7dd533, type: 3}
+  Down: {fileID: -1578095552450591064, guid: fe2114582962e434b8dc7066cad68335, type: 3}
