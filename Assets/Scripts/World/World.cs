@@ -126,15 +126,6 @@ public class World : MonoBehaviour
 
     #region regen world
 
-    void RegenWorld()
-    {
-        //remove old world
-        RemoveOldWorld();
-
-        //then create new world
-        CreateWorld();
-    }
-
     void RemoveOldWorld()
     {
         //remove every child
@@ -295,6 +286,18 @@ public class World : MonoBehaviour
     #endregion
 
     #region public API
+
+    /// <summary>
+    /// Generate the world
+    /// </summary>
+    public void RegenWorld()
+    {
+        //remove old world
+        RemoveOldWorld();
+
+        //then create new world
+        CreateWorld();
+    }
 
     /// <summary>
     /// Rotate the cube

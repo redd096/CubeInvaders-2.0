@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Cell")]
+[SelectionBase]
 public class Cell : MonoBehaviour
 {
     [Header("Important")]

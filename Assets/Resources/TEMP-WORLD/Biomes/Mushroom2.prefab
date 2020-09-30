@@ -382,7 +382,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretToCreate: {fileID: 0}
+  toRemoveOnDead: {fileID: 0}
+  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  canRemoveTurret: 1
   coordinates:
     face: 0
     x: 0

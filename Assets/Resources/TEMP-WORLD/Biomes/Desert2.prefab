@@ -1,5 +1,38 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &77107714429581671
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 769556435415324429}
+  m_Layer: 0
+  m_Name: Graphics
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &769556435415324429
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 77107714429581671}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 8303021300876230369}
+  - {fileID: 3899877360949150293}
+  - {fileID: 8291052273663490809}
+  m_Father: {fileID: 8795704974855479260}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &3642335284819665157
 GameObject:
   m_ObjectHideFlags: 0
@@ -30,7 +63,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.05, z: 0}
   m_LocalScale: {x: 0.9, y: 0.049999997, z: 0.9}
   m_Children: []
-  m_Father: {fileID: 8795704974855479260}
+  m_Father: {fileID: 769556435415324429}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &5570007313280737414
@@ -125,7 +158,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 0.049999997, z: 1}
   m_Children: []
-  m_Father: {fileID: 8795704974855479260}
+  m_Father: {fileID: 769556435415324429}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &3801280558811813584
@@ -220,7 +253,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0.06, z: 0}
   m_LocalScale: {x: 0.85, y: 0.049999997, z: 0.85}
   m_Children: []
-  m_Father: {fileID: 8795704974855479260}
+  m_Father: {fileID: 769556435415324429}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!33 &4864964181548194370
@@ -315,9 +348,7 @@ Transform:
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 8303021300876230369}
-  - {fileID: 3899877360949150293}
-  - {fileID: 8291052273663490809}
+  - {fileID: 769556435415324429}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -382,7 +413,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  turretToCreate: {fileID: 0}
+  toRemoveOnDead: {fileID: 77107714429581671}
+  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  canRemoveTurret: 1
   coordinates:
     face: 0
     x: 0
