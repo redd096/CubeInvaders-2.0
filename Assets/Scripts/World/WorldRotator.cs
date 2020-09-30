@@ -7,7 +7,7 @@ public class WorldRotator
 {
     #region variables
 
-    World world;
+    protected World world;
     Transform rotatorParent;
     Transform RotatorParent { get
         { 
@@ -106,29 +106,23 @@ public class WorldRotator
 
     #endregion
 
-    #region animations    
+    #region animations
 
-    bool SkipAnimation(bool playerCanSkip, float delta)
+    protected virtual float GetRotationTime()
     {
-        //if player can skip and pressed an input, if some time already passed, then skip animation
-        if (playerCanSkip && Input.anyKeyDown && delta > 0.1f)
+        return world.worldConfig.RotationTime;
+    }
+
+    protected virtual bool SkipAnimation(float delta)
+    {
+        //if player pressed an input, if some time already passed, then skip animation
+        if (Input.anyKeyDown && delta > 0.1f)
             return true;
 
         return false;
     }
 
-    void OnWorldRotate(List<Cell> cellsToRotate)
-    {
-        //foreach cell to rotate
-        foreach (Cell cell in cellsToRotate)
-        {
-            //if the cell isn't null, call onWorldRotate
-            if (cell)
-                cell.onWorldRotate?.Invoke();
-        }
-    }
-
-    IEnumerator AnimationRotate(List<Cell> cellsToRotate, Vector3 rotateAxis, bool forward, float rotationTime, bool playerCanSkip)
+    IEnumerator AnimationRotate(List<Cell> cellsToRotate, Vector3 rotateAxis, bool forward)
     {
         //control every selected cell
         OnWorldRotate(cellsToRotate);
@@ -143,13 +137,13 @@ public class WorldRotator
         float delta = 0;
         while (delta < 1)
         {
-            delta += Time.deltaTime / rotationTime;
+            delta += Time.deltaTime / GetRotationTime();
 
             float rotated = Mathf.Lerp(0, rotationToReach, delta);
             RotatorParent.eulerAngles = rotateAxis * rotated;
 
             //skip animation
-            if (SkipAnimation(playerCanSkip, delta)) break;
+            if (SkipAnimation(delta)) break;
 
             yield return null;
         }
@@ -167,13 +161,24 @@ public class WorldRotator
         rotatingWorld_Coroutine = null;
     }
 
+    void OnWorldRotate(List<Cell> cellsToRotate)
+    {
+        //foreach cell to rotate
+        foreach (Cell cell in cellsToRotate)
+        {
+            //if the cell isn't null, call onWorldRotate
+            if (cell)
+                cell.onWorldRotate?.Invoke();
+        }
+    }
+
     #endregion
 
     #region rotate row
 
     #region lateral
 
-    void RotateLateralRow(int line, bool toRight, float rotationTime, bool playerCanSkip)
+    void RotateLateralRow(int line, bool toRight)
     {
         //can't rotate during another rotation
         if (rotatingWorld_Coroutine != null)
@@ -186,7 +191,7 @@ public class WorldRotator
         cellsToRotate = SelectLateralRowCells(line, out cellsKeys);
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.up, !toRight, rotationTime, playerCanSkip));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.up, !toRight));
 
         //update dictionary
         UpdateDictionaryLateralRow(cellsKeys, toRight);
@@ -243,7 +248,7 @@ public class WorldRotator
 
     #region up and down
 
-    void RotateUpDownRow(EFace face, int line, bool toRight, float rotationTime, bool playerCanSkip)
+    void RotateUpDownRow(EFace face, int line, bool toRight)
     {
         //can't rotate during another rotation
         if (rotatingWorld_Coroutine != null)
@@ -266,7 +271,7 @@ public class WorldRotator
         }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, !toRight, rotationTime, playerCanSkip));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, !toRight));
 
         //update dictionary
         UpdateDictionaryUpDownRow(cellsKeys, toRight);
@@ -378,7 +383,7 @@ public class WorldRotator
 
     #region front
 
-    void RotateFrontColumn(EFace face, int line, bool toUp, float rotationTime, bool playerCanSkip)
+    void RotateFrontColumn(EFace face, int line, bool toUp)
     {
         //can't rotate during another rotation
         if (rotatingWorld_Coroutine != null)
@@ -401,7 +406,7 @@ public class WorldRotator
         }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.right, toUp, rotationTime, playerCanSkip));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.right, toUp));
 
         //update dictionary
         UpdateDictionaryFrontColumn(cellsKeys, toUp);
@@ -488,7 +493,7 @@ public class WorldRotator
 
     #region right and left
 
-    void RotateRightLeftColumn(EFace startFace, int line, bool toUp, float rotationTime, bool playerCanSkip)
+    void RotateRightLeftColumn(EFace startFace, int line, bool toUp)
     {
         //can't rotate during another rotation
         if (rotatingWorld_Coroutine != null)
@@ -511,7 +516,7 @@ public class WorldRotator
         }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, toUp, rotationTime, playerCanSkip));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, toUp));
 
         //update dictionary
         UpdateDictionaryRightLeftColumn(cellsKeys, toUp);
@@ -622,7 +627,7 @@ public class WorldRotator
 
     #region public API
 
-    public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection, float rotationTime, bool playerCanSkip)
+    public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
         //rotate row
         if (rotateDirection == ERotateDirection.right || rotateDirection == ERotateDirection.left)
@@ -635,29 +640,29 @@ public class WorldRotator
                 switch (lookingFace)
                 {
                     case EFace.front:
-                        RotateUpDownRow(startFace, y, forward, rotationTime, playerCanSkip);
+                        RotateUpDownRow(startFace, y, forward);
                         break;
                     case EFace.right:
                         if (startFace == EFace.up)
-                            RotateFrontColumn(startFace, x, forward, rotationTime, playerCanSkip);
+                            RotateFrontColumn(startFace, x, forward);
                         else
-                            RotateFrontColumn(startFace, x, !forward, rotationTime, playerCanSkip);
+                            RotateFrontColumn(startFace, x, !forward);
                         break;
                     case EFace.back:
-                        RotateUpDownRow(startFace, y, !forward, rotationTime, playerCanSkip);
+                        RotateUpDownRow(startFace, y, !forward);
                         break;
                     case EFace.left:
                         if (startFace == EFace.up)
-                            RotateFrontColumn(startFace, x, !forward, rotationTime, playerCanSkip);
+                            RotateFrontColumn(startFace, x, !forward);
                         else
-                            RotateFrontColumn(startFace, x, forward, rotationTime, playerCanSkip);
+                            RotateFrontColumn(startFace, x, forward);
                         break;
                 }
             }
             else
             {
                 //else just rotate row lateral faces
-                RotateLateralRow(y, forward, rotationTime, playerCanSkip);
+                RotateLateralRow(y, forward);
             }
         }
         //rotate column
@@ -671,22 +676,22 @@ public class WorldRotator
                 switch (lookingFace)
                 {
                     case EFace.front:
-                        RotateFrontColumn(startFace, x, forward, rotationTime, playerCanSkip);
+                        RotateFrontColumn(startFace, x, forward);
                         break;
                     case EFace.right:
                         if (startFace == EFace.up)
-                            RotateUpDownRow(startFace, y, !forward, rotationTime, playerCanSkip);
+                            RotateUpDownRow(startFace, y, !forward);
                         else
-                            RotateUpDownRow(startFace, y, forward, rotationTime, playerCanSkip);
+                            RotateUpDownRow(startFace, y, forward);
                         break;
                     case EFace.back:
-                        RotateFrontColumn(startFace, x, !forward, rotationTime, playerCanSkip);
+                        RotateFrontColumn(startFace, x, !forward);
                         break;
                     case EFace.left:
                         if (startFace == EFace.up)
-                            RotateUpDownRow(startFace, y, forward, rotationTime, playerCanSkip);
+                            RotateUpDownRow(startFace, y, forward);
                         else
-                            RotateUpDownRow(startFace, y, !forward, rotationTime, playerCanSkip);
+                            RotateUpDownRow(startFace, y, !forward);
                         break;
                 }
             }
@@ -696,12 +701,12 @@ public class WorldRotator
                 if (startFace == EFace.right || startFace == EFace.left)
                 {
                     //rotate column face right or left
-                    RotateRightLeftColumn(startFace, x, forward, rotationTime, playerCanSkip);
+                    RotateRightLeftColumn(startFace, x, forward);
                 }
                 else
                 {
                     //rotate column front faces (front, up, back, down)
-                    RotateFrontColumn(startFace, x, forward, rotationTime, playerCanSkip);
+                    RotateFrontColumn(startFace, x, forward);
                 }
             }
         }

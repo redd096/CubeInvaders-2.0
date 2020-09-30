@@ -12,6 +12,7 @@ public class LevelManager : MonoBehaviour
 {
     [Header("Important")]
     public LevelConfig levelConfig;
+    public GeneralConfig generalConfig;
 
     public System.Action onStartStrategicPhase;
     public System.Action onEndStrategicPhase;
@@ -28,8 +29,12 @@ public class LevelManager : MonoBehaviour
         onEndStrategicPhase?.Invoke();
         onEndAssaultPhase?.Invoke();
 
-        //try randomize world
-        if (RandomizeWorld() == false)
+        //check if randomize world
+        if (levelConfig.RandomizeWorldAtStart)
+        {
+            GameManager.instance.world.RandomRotate();
+        }
+        else
         {
             //else start game after few seconds
             Invoke("StartGame", 1);
@@ -74,22 +79,6 @@ public class LevelManager : MonoBehaviour
 
             Invoke("StartStrategicPhase", 1);
         }
-    }
-
-    #endregion
-
-    #region start
-
-    bool RandomizeWorld()
-    {
-        //check if there is WorldRandomRotate and start it
-        WorldRandomRotate WorldRandomRotate = GameManager.instance.world.GetComponent<WorldRandomRotate>();
-        if (WorldRandomRotate)
-        {
-            return WorldRandomRotate.StartRandomize();
-        }
-
-        return false;
     }
 
     #endregion

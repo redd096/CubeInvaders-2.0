@@ -66,7 +66,7 @@ public class PlayerMove : PlayerState
     void DoRotation(ERotateDirection rotateDirection)
     {
         //do rotation
-        GameManager.instance.world.Rotate(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), rotateDirection);
+        GameManager.instance.world.Rotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection);
 
         //change state
         player.SetState(new PlayerWaitRotation(player, coordinates));

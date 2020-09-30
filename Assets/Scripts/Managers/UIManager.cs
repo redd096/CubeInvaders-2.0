@@ -13,7 +13,7 @@ public class UIManager : MonoBehaviour
     void Start()
     {
         //instantiate and disable selector
-        selector = Instantiate(GameManager.instance.world.worldConfig.Selector);
+        selector = Instantiate(GameManager.instance.levelManager.generalConfig.Selector);
         HideSelector();
 
         AddEvents();

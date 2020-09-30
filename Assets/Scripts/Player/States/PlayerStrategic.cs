@@ -26,7 +26,7 @@ public class PlayerStrategic : PlayerMove
 
     void PressReady(bool inputReady)
     {
-        float timeToEnd = GameManager.instance.levelManager.levelConfig.TimeToEndStrategic;
+        float timeToEnd = GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
 
         //keep pressed to end strategic
         if (inputReady)

@@ -71,9 +71,12 @@ public class World : MonoBehaviour
     [Header("Regen")]
     [SerializeField] bool regen = false;
 
+    [Header("Base")]
+    public WorldConfig worldConfig;
+    public RandomWorldConfig randomWorldConfig;
+
     [Header("Important")]
-    public WorldConfig worldConfig = default;
-    public BiomesConfig biomesConfig = default;
+    public BiomesConfig biomesConfig;
 
     public System.Action onEndRotation;
 
@@ -296,27 +299,20 @@ public class World : MonoBehaviour
     /// <summary>
     /// Rotate the cube
     /// </summary>
-    /// <param name="startFace">face to start from</param>
-    /// <param name="x">column</param>
-    /// <param name="y">row</param>
+    /// <param name="coordinates">coordinates to rotate</param>
     /// <param name="lookingFace">rotation of the camera</param>
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
+    public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
     {
-        worldRotator.Rotate(startFace, x, y, lookingFace, rotateDirection, worldConfig.RotationTime, true);
+        worldRotator.Rotate(coordinates.face, coordinates.x, coordinates.y, lookingFace, rotateDirection);
     }
 
     /// <summary>
-    /// Rotate the cube
+    /// Start random rotation
     /// </summary>
-    /// <param name="startFace">face to start from</param>
-    /// <param name="x">column</param>
-    /// <param name="y">row</param>
-    /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
-    /// <param name="rotationSpeed">time to do the animation</param>
-    public void RandomRotate(EFace startFace, int x, int y, ERotateDirection rotateDirection, float rotationSpeed)
+    public void RandomRotate()
     {
-        worldRotator.Rotate(startFace, x, y, EFace.front, rotateDirection, rotationSpeed, false);
+        new WorldRandomRotator(this).StartRandomize();
     }
 
     /// <summary>
