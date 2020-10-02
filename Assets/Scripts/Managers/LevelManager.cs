@@ -23,6 +23,8 @@ public class LevelManager : MonoBehaviour
     [Header("Debug")]
     public EPhase CurrentPhase;
 
+    bool gameEnded;
+
     void Start()
     {
         //hide UI and all
@@ -87,11 +89,19 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
+        gameEnded = false;
+
         StartStrategicPhase();
     }
 
     public void EndGame(bool win)
     {
+        //do only one time
+        if (gameEnded)
+            return;
+
+        gameEnded = true;
+
         onEndGame?.Invoke();
     }
 

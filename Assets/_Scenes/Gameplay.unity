@@ -371,7 +371,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -1249,7 +1249,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -2778,7 +2778,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -3081,7 +3081,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -3565,7 +3565,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -3859,7 +3859,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -4818,7 +4818,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -5425,7 +5425,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -5719,7 +5719,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -5823,7 +5823,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -6022,7 +6022,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -6257,7 +6257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -6361,7 +6361,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -6590,7 +6590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -6694,7 +6694,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -6992,7 +6992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -7286,7 +7286,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -7902,7 +7902,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -8101,7 +8101,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -8300,7 +8300,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -9164,7 +9164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -9648,7 +9648,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -10971,7 +10971,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -11391,7 +11391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -11495,7 +11495,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -13051,7 +13051,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -13250,7 +13250,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -13354,7 +13354,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -14214,7 +14214,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1288936882}
-  m_LocalRotation: {x: -0.018189494, y: 0.000000034407073, z: 6.2595074e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: -0.000000034407073, z: -6.2595074e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -9}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -14508,7 +14508,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -15282,7 +15282,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -15790,7 +15790,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1494606104}
-  m_LocalRotation: {x: -0.018189488, y: 0.000000017203536, z: 3.1297526e-10, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189488, y: -0.000000017203536, z: -3.1297526e-10, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -15847,7 +15847,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -16505,7 +16505,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -18921,7 +18921,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -19215,7 +19215,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -19319,7 +19319,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -19993,7 +19993,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -20192,7 +20192,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -20391,7 +20391,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -20590,7 +20590,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 0
@@ -20884,7 +20884,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 3598879325851224352, guid: 713b8f65f99705045b868b5d14ad704a, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 5
@@ -21164,7 +21164,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2
@@ -21927,7 +21927,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -22773,7 +22773,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: -4765282760577705242, guid: f83a6334853721b469e47d63da5eaf06, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 3
@@ -23257,7 +23257,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 2727295697342552054, guid: 4279463c548713945a4bdc9e2a7ea862, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 1
@@ -23771,7 +23771,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 0}
-  turretToCreate: {fileID: 7961825307822006733, guid: f1310f95982aaf144b59dd6d17545390, type: 3}
+  turretToCreate: {fileID: 0}
   canRemoveTurret: 1
   coordinates:
     face: 2

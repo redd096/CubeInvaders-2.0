@@ -20,34 +20,35 @@ public class Cell : MonoBehaviour
     Turret turret;
 
     bool alive = true;
-    bool turretPlaced;
+
+    void OnDestroy()
+    {
+        //be sure to reset event
+        onWorldRotate = null;
+    }
 
     #region private API
 
     void BuildOnCell()
     {
-        if (turretPlaced)
+        //do only if there is a turret and is only a preview
+        if (turret == null || turret.IsActive)
             return;
 
-        //maybe for some problem there is not the preview, use it for instantiate
-        if (turret == null)
-            ShowPreview();
-
-        //place turret
-        turretPlaced = true;
+        //activate it
         turret.ActivateTurret(this);
     }
 
     void RemoveBuildOnCell(bool sell)
     {
-        if (turretPlaced == false)
+        //do only if there is a turret and is active (not simple preview)
+        if (turret == null || turret.IsActive == false)
             return;
 
-        //remove turret
-        turretPlaced = false;
-        if (turret != null) turret.DeactivateTurret();
+        //deactivate it
+        turret.DeactivateTurret();
 
-        if(sell)
+        if (sell)
         {
             //get resources
         }
@@ -83,8 +84,8 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void ShowPreview()
     {
-        //do only if there isn't already a turret, and if there is a turret to create
-        if (turretPlaced || turretToCreate == null)
+        //do only if there is a turret to create, and there isn't already a turret active on it
+        if (turretToCreate == null || (turret != null && turret.IsActive))
             return;
 
         //instantiate or active it
@@ -107,8 +108,8 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void HidePreview()
     {
-        //check is only a preview and there is really a preview
-        if (turretPlaced == false && turret != null)
+        //check if there is a turret and is only a preview
+        if (turret != null && turret.IsActive == false)
             turret.gameObject.SetActive(false);
     }
 
@@ -131,7 +132,7 @@ public class Cell : MonoBehaviour
             return;
 
         //if there is a already a turret, try remove it
-        if (turretPlaced)
+        if (turret != null && turret.IsActive)
         {
             if(canRemoveTurret)
                 RemoveBuildOnCell(true);

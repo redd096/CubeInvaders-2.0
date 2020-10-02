@@ -24,11 +24,11 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 3400403237236300760}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.75, z: 0}
+  m_LocalPosition: {x: 0, y: 0.5, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1208209245630950101}
-  m_RootOrder: 1
+  m_Father: {fileID: 4670676545773806367}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &4746514917765322828
 GameObject:
@@ -39,7 +39,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208209245630950101}
-  - component: {fileID: 7961825307822006733}
+  - component: {fileID: 6361867893515385460}
+  - component: {fileID: -1433196792161213359}
   m_Layer: 0
   m_Name: Forest
   m_TagString: Untagged
@@ -59,11 +60,10 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 4670676545773806367}
-  - {fileID: 7209464838116520708}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &7961825307822006733
+--- !u!114 &6361867893515385460
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -72,7 +72,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 4746514917765322828}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9305ef47058e9f345a6c7ffa79d045da, type: 3}
+  m_Script: {fileID: 11500000, guid: fdf48ecb0e8d9a2498ac75e83fba313f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   shotPrefab: {fileID: 8893353918259083524, guid: d20d680282a21c8498b53bb7639d83f3, type: 3}
@@ -81,11 +81,24 @@ MonoBehaviour:
   - {fileID: 7209464838116520708}
   ShotSpeed: 1
   TimerAutodestructionWithoutEnemy: 5
-  AreaEffectAlsoOnAutodestruction: 1
+  AreaEffectAlsoOnAutodestruction: 0
   Damage: 10
   SlowPercentage: 0
   SlowDuration: 0
   Area: 0
+--- !u!114 &-1433196792161213359
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4746514917765322828}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b9855acc4e0e7d84f90c3de70629ace4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToRotate: {fileID: 4670676545773806367}
 --- !u!1 &7880019660034878782
 GameObject:
   m_ObjectHideFlags: 0
@@ -115,7 +128,8 @@ Transform:
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 0.5, y: 1.5, z: 0.5}
-  m_Children: []
+  m_Children:
+  - {fileID: 7209464838116520708}
   m_Father: {fileID: 1208209245630950101}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}

@@ -414,7 +414,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   toRemoveOnDead: {fileID: 4221110217568197573}
-  turretToCreate: {fileID: -2258494234096883695, guid: b052c274056e411478241a02609e6cf2, type: 3}
+  turretToCreate: {fileID: -1493029456684558125, guid: b052c274056e411478241a02609e6cf2, type: 3}
   canRemoveTurret: 1
   coordinates:
     face: 0

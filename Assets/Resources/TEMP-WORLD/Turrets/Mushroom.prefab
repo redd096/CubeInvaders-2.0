@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1208209245630950101}
-  - component: {fileID: -4765282760577705242}
   m_Layer: 0
   m_Name: Mushroom
   m_TagString: Untagged
@@ -33,29 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &-4765282760577705242
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4746514917765322828}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 9305ef47058e9f345a6c7ffa79d045da, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 8893353918259083524, guid: 4f5674f765acd324a976bf648c198a22, type: 3}
-  delayShoot: 0.5
-  shotSpawns:
-  - {fileID: 2396225472698838580}
-  ShotSpeed: 1
-  TimerAutodestructionWithoutEnemy: 5
-  AreaEffectAlsoOnAutodestruction: 1
-  Damage: 10
-  SlowPercentage: 0
-  SlowDuration: 0
-  Area: 0
 --- !u!1 &5433528684104663806
 GameObject:
   m_ObjectHideFlags: 0

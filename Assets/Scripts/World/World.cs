@@ -84,7 +84,7 @@ public class World : MonoBehaviour
 
     WorldRotator worldRotator;
 
-    private void OnValidate()
+    void OnValidate()
     {
         //click regen to regenerate the world
         if(regen)
@@ -96,9 +96,15 @@ public class World : MonoBehaviour
         }
     }
 
-    private void Awake()
+    void Awake()
     {
         GenerateReferences();
+    }
+
+    void OnDestroy()
+    {
+        //be sure to reset event
+        onEndRotation = null;
     }
 
     #region private API
