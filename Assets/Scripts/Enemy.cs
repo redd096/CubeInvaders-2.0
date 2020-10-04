@@ -15,6 +15,13 @@ public class Enemy : MonoBehaviour
 
     float currentSpeed;
 
+    public Material blinkMat;
+    Material originalMat;
+
+    public float blinkTime;
+
+    Coroutine unpocomevuoi;
+
     void Update()
     {
         //move to the cell
@@ -48,6 +55,19 @@ public class Enemy : MonoBehaviour
         currentSpeed += slowEffect;
     }
 
+    //makes the enemy blink on hit
+    private IEnumerator blink()
+    {
+        originalMat = gameObject.GetComponentInChildren<Renderer>().material;
+        gameObject.GetComponentInChildren<Renderer>().material = blinkMat;
+
+        yield return new WaitForSeconds(blinkTime);
+
+        gameObject.GetComponentInChildren<Renderer>().material = originalMat;
+
+        unpocomevuoi = null;
+    }
+
     #endregion
 
     #region public API
@@ -62,6 +82,9 @@ public class Enemy : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if(unpocomevuoi == null)
+            unpocomevuoi = StartCoroutine(blink());
     }
 
     public void GetSlow(float slowPercentage, float slowDuration)
