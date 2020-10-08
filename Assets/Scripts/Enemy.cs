@@ -11,16 +11,23 @@ public class Enemy : MonoBehaviour
     [SerializeField] float speed = 1;
 
     [Header("Blink")]
-    [SerializeField] Material blinkMaterial;
-    [SerializeField] float blinkTime;
+    [SerializeField] Material blinkMaterial = default;
+    [SerializeField] float blinkTime = 0.1f;
 
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
-    float currentSpeed;
+    public System.Action<Enemy> onEnemyDeath;
 
+    //for blink
     Material originalMat;
     Coroutine blink_Coroutine;
+
+    void OnDestroy()
+    {
+        //be sure to remove event
+        onEnemyDeath = null;
+    }
 
     void Update()
     {
@@ -40,7 +47,7 @@ public class Enemy : MonoBehaviour
             cell.KillCell();
 
             //destroy this enemy
-            Destroy(gameObject);
+            Die();
         }
     }
 
@@ -52,7 +59,7 @@ public class Enemy : MonoBehaviour
         yield return new WaitForSeconds(slowDuration);
 
         //remove effect
-        currentSpeed += slowEffect;
+        speed += slowEffect;
     }
 
     IEnumerator Blink_Coroutine()
@@ -76,6 +83,15 @@ public class Enemy : MonoBehaviour
         blink_Coroutine = null;
     }
 
+    void Die()
+    {
+        //destroy this enemy
+        Destroy(gameObject);
+
+        //call event
+        onEnemyDeath?.Invoke(this);
+    }
+
     #endregion
 
     #region public API
@@ -88,7 +104,7 @@ public class Enemy : MonoBehaviour
         //check death
         if(health <= 0)
         {
-            Destroy(gameObject);
+            Die();
             return;
         }
 
@@ -104,8 +120,8 @@ public class Enemy : MonoBehaviour
             return;
 
         //slow
-        float speedToDecrease = currentSpeed / 100 * slowPercentage;
-        currentSpeed -= speedToDecrease;
+        float speedToDecrease = speed / 100 * slowPercentage;
+        speed -= speedToDecrease;
 
         //start slow timer
         StartCoroutine(SlowTimer(speedToDecrease, slowDuration));
@@ -114,7 +130,7 @@ public class Enemy : MonoBehaviour
     public void GetDamageFromShield()
     {
         //instant death
-        Destroy(gameObject);
+        Die();
     }
 
     #endregion

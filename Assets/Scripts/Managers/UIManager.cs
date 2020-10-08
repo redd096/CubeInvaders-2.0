@@ -4,7 +4,12 @@ using UnityEngine.UI;
 [AddComponentMenu("Cube Invaders/Manager/UI Manager")]
 public class UIManager : MonoBehaviour
 {
+    [Header("General")]
     [SerializeField] GameObject pauseMenu = default;
+    [SerializeField] GameObject endMenu = default;
+    [SerializeField] Text endText = default;
+
+    [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
     [SerializeField] Slider readySlider = default;
 
@@ -16,6 +21,10 @@ public class UIManager : MonoBehaviour
         selector = Instantiate(GameManager.instance.levelManager.generalConfig.Selector);
         HideSelector();
 
+        //hide end menu
+        EndMenu(false);
+
+        //add events
         AddEvents();
     }
 
@@ -30,12 +39,14 @@ public class UIManager : MonoBehaviour
     {
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
         GameManager.instance.levelManager.onEndStrategicPhase += OnEndStrategicPhase;
+        GameManager.instance.levelManager.onEndGame += OnEndGame;
     }
 
     void RemoveEvents()
     {
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
         GameManager.instance.levelManager.onEndStrategicPhase -= OnEndStrategicPhase;
+        GameManager.instance.levelManager.onEndGame -= OnEndGame;
     }
 
     void OnStartStrategicPhase()
@@ -50,6 +61,13 @@ public class UIManager : MonoBehaviour
         strategicCanvas.SetActive(false);
     }
 
+    void OnEndGame(bool win)
+    {
+        //show end menu
+        string text = win ? GameManager.instance.levelManager.WinText : GameManager.instance.levelManager.LoseText;
+        EndMenu(true, text);
+    }
+
     #endregion
 
     #region public API
@@ -59,6 +77,14 @@ public class UIManager : MonoBehaviour
     public void PauseMenu(bool active)
     {
         pauseMenu.SetActive(active);
+    }
+
+    public void EndMenu(bool active, string text = "")
+    {
+        endMenu.SetActive(active);
+
+        //set text
+        endText.text = text;
     }
 
     #endregion

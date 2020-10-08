@@ -10,7 +10,7 @@ public class Player : StateMachine
     [Header("Debug")]
     [SerializeField] string currentState;
 
-    public CinemachineFreeLook virtualCam { get; private set; }
+    public CinemachineFreeLook VirtualCam { get; private set; }
 
     //used to come back from pause
     State previousState;
@@ -18,7 +18,7 @@ public class Player : StateMachine
     void Start()
     {
         //get references
-        virtualCam = FindObjectOfType<CinemachineFreeLook>();
+        VirtualCam = FindObjectOfType<CinemachineFreeLook>();
 
         //set state
         SetState(new PlayerPause(this));
@@ -50,16 +50,22 @@ public class Player : StateMachine
     {
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndGame += OnEndGame;
     }
 
     void RemoveEvents()
     {
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndGame -= OnEndGame;
     }
 
     void OnStartStrategicPhase()
     {
+        //do only if game is not ended
+        if (GameManager.instance.levelManager.GameEnded)
+            return;
+
         //go to player move, starting from center cell
         Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
         SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
@@ -67,9 +73,20 @@ public class Player : StateMachine
 
     void OnStartAssaultPhase()
     {
+        //do only if game is not ended
+        if (GameManager.instance.levelManager.GameEnded)
+            return;
+
         //go to player move, starting from center cell
         Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
         SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell)));
+    }
+
+    void OnEndGame(bool win)
+    {
+        //set pause state and show mouse
+        SetState(new PlayerPause(this));
+        Utility.LockMouse(CursorLockMode.None);
     }
 
     #endregion

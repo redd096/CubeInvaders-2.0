@@ -14,7 +14,7 @@ public class PlayerState : State
         //get references
         player = stateMachine as Player;
         transform = player.transform;
-        virtualCam = player.virtualCam;
+        virtualCam = player.VirtualCam;
     }
 
     //public override void AwakeState(StateMachine stateMachine)

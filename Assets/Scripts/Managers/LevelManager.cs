@@ -14,16 +14,20 @@ public class LevelManager : MonoBehaviour
     public LevelConfig levelConfig;
     public GeneralConfig generalConfig;
 
+    [Header("EndGame")]
+    public string WinText = "YOU WON!!";
+    public string LoseText = "YOU LOST...";
+
     public System.Action onStartStrategicPhase;
     public System.Action onEndStrategicPhase;
     public System.Action onStartAssaultPhase;
     public System.Action onEndAssaultPhase;
-    public System.Action onEndGame;
+    public System.Action<bool> onEndGame;
 
     [Header("Debug")]
     public EPhase CurrentPhase;
 
-    bool gameEnded;
+    public bool GameEnded { get; private set; }
 
     void Start()
     {
@@ -89,20 +93,22 @@ public class LevelManager : MonoBehaviour
 
     public void StartGame()
     {
-        gameEnded = false;
+        GameEnded = false;
 
+        //start in strategic
         StartStrategicPhase();
     }
 
     public void EndGame(bool win)
     {
         //do only one time
-        if (gameEnded)
+        if (GameEnded)
             return;
 
-        gameEnded = true;
+        GameEnded = true;
 
-        onEndGame?.Invoke();
+        //call event
+        onEndGame?.Invoke(win);
     }
 
     #endregion
