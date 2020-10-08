@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 8893353918259083524}
   - component: {fileID: 6964731478834896721}
   m_Layer: 0
-  m_Name: Shot
+  m_Name: CanyonShot
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -140,6 +140,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 27ded080cdf90a742ba54e4703b30251, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  shotSpeed: 10
+  timerAutodestructionWithoutEnemy: 5
+  areaEffectAlsoOnAutodestruction: 0
+  damage: 500
+  slowPercentage: 0
+  slowDuration: 0
+  area: 7.5
 --- !u!54 &6964731478834896721
 Rigidbody:
   m_ObjectHideFlags: 0

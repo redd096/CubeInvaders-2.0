@@ -79,13 +79,6 @@ MonoBehaviour:
   delayShoot: 0.5
   shotSpawns:
   - {fileID: 4468026939541229221}
-  ShotSpeed: 1
-  TimerAutodestructionWithoutEnemy: 5
-  AreaEffectAlsoOnAutodestruction: 0
-  Damage: 10
-  SlowPercentage: 0
-  SlowDuration: 0
-  Area: 0
 --- !u!114 &2490400192163390366
 MonoBehaviour:
   m_ObjectHideFlags: 0

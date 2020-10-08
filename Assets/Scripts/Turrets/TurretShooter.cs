@@ -18,7 +18,7 @@ public class TurretShooter : Turret
     public System.Action onShoot;
     public Enemy EnemyToAttack { get; private set; }
 
-    bool canShoot = true;
+    bool canShoot = false;
     float timeToShoot;
     int indexSpawn;
     Pooling<TurretShot> shots = new Pooling<TurretShot>();
@@ -26,6 +26,8 @@ public class TurretShooter : Turret
     Coroutine canShootAgain_Coroutine;
 
     #endregion
+
+    int rotationCounter = 0;
 
     void Update()
     {
@@ -94,7 +96,19 @@ public class TurretShooter : Turret
         base.OnEndRotation();
 
         //start coroutine to shoot again
+        rotationCounter++;
+
+        if(rotationCounter >=  4)
+        {
+            canShoot = true;
+
+            StartCoroutine(Zerizzati());
+        }
+        
         canShootAgain_Coroutine = StartCoroutine(CanShootAgain());
+
+        Debug.Log("Rotazioni = " + rotationCounter);
+
     }
 
     IEnumerator CanShootAgain()
@@ -102,8 +116,15 @@ public class TurretShooter : Turret
         //wait, then can shoot again
         yield return new WaitForSeconds(0.2f);
 
-        canShoot = true;
+        canShoot = false;
     }
 
+    IEnumerator Zerizzati()
+    {
+        //wait, then can shoot again
+        yield return new WaitForSeconds(0.2f);
+
+        rotationCounter = 0;
+    }
     #endregion
 }
