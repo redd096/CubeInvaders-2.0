@@ -79,6 +79,9 @@ public class PlayerPlaceTurret : PlayerState
     {
         //place turret
         GameManager.instance.world.Cells[coordinates].Interact();
+
+        //exit from place turret
+        StopPlaceTurret();
     }
 
     void StopPlaceTurret()
