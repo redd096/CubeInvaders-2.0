@@ -1,153 +1,234 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using System.Linq;
 
+[AddComponentMenu("Cube Invaders/Turret/Turret Shield")]
+[SelectionBase]
 public class TurretShield : Turret
 {
     [Header("Important")]
-    [SerializeField] Shield shieldPrefab = default;
+    [SerializeField] Shield shield = default;
 
-    public System.Action<TurretShield> onTurretExitQueue;
+    static System.Action<EFace> onTurretExitQueue;
+    static Dictionary<EFace, List<TurretShield>> shieldsQueue = new Dictionary<EFace, List<TurretShield>>();
 
-    Shield shield;
+    bool shieldIsBroken { get { return shield.CurrentHealth <= 0; } }
 
-    List<TurretShield> shieldsQueue = new List<TurretShield>();
+    bool isRotating;
 
     /*
-     * nel check se attivare lo scudo o mettersi in coda, manca il controllo se lo scudo è ancora integro
-     * quando si passa alla prossima wave, manca un modo per sapere chi si deve attivare e come fare dev'essere la coda
-     * 
     V quando viene istanziata si crea lo scudo
+    V e si resetta (ancora la torretta è una preview, non è attiva)
 
-    V quando viene attivata check se deve attivare lo scudo
-    V altrimenti si mette in coda
+    V quando si attiva, si aggiunge alla coda
+    V e si prova ad attivare lo scudo
 
-    V quando ruota, disattiva lo scudo
-    - ed esce dalla coda
+    V quando si disattiva, resetta lo scudo nel caso si riattivasse la torretta
+    V e si toglie dalla coda
+
+    V a fine ondata, ricarica la vita dello scudo
+    V prova ad attivarlo (nel caso si fosse rotto)
+
+    V quando ruota, si setta che sta ruotando, per non fargli checkare l'evento OnTurretExitQueue
+    V disattiva lo scudo
+    V ed esce dalla coda
     
-    V quando finisce di ruotare, nuovo check se attivare lo scudo
-    V altrimenti si mette in una nuova coda
+    V quando finisce di ruotare, si mette nella nuova coda
+    V check se il primo della coda può attivare lo scudo, altrimenti lo rimpiazziamo
+    V check se attivare lo scudo
+    V e si resetta che la torretta non sta più ruotando, quindi controlla se qualcuno esce dalla coda
 
-    - quando una torretta esce dalla coda, check se attivare lo scudo
+    V quando una torretta esce dalla coda, check se attivare lo scudo
+    V il check va fatto solo se non stiamo ruotando (questa torretta è uscita dalla coda)
+    V il check va fatto solo se siamo attivi (questa torretta è uscita quando è stata venduta)
 
-    - quando viene distrutto lo scudo, esce dalla coda
-    - lo scudo non potrà più essere utilizzato per questa wave
-
-    - quando passa alla prossima wave, resetta la vita dello scudo
-    - check se è la prima che si deve attivare
-    - altrimenti scoprare in quale punto della queue deve andare
-
-    V quando la torretta viene venduta o distrutta, deve disattivare lo scudo
-    - ed uscire dalla queue
-
-    //old
-    - se c'è un'altra scudo attiva, ci si aggiunge alla sua lista
-    - se non c'è, diventa questa quella attiva e se ce n'era una firstToActivateAtNextWave, viene declassata
-    -
-    - quando ruota, disattiva lo scudo e si elimina dalla lista della scudo attiva
-    - se è questa la scudo attiva, attiva la prossima e pulisce la lista. Se ci sono altre torrette, ma non possono attivarsi, la prima viene promossa a firstToActivateAtNextWave
-    - se questa era la firstToActivateAtNextWave, ora non lo è più + controlla se ce n'è un'altra e promuove lei
-    -
-    - quando finisce di ruotare, se può attivarsi controlla se c'è una torretta attiva
-    - se c'è si aggiunge alla sua lista
-    - se non c'è, si attiva questa e controlla tutte le torrette che ci sono su sta faccia. Se c'è firstToActivateAtNextWave, viene declassata
-    - se invece non può attivarsi
-    - se ci sono altre torrette non fa niente, altrimenti diventa firstToActivateAtNextWave
-    -
-    - quando viene distrutto lo scudo, attiva la prossima della lista e pulisce la lista
-    - se questa era l'ultima attiva, diventa firstToActivateAtNextWave
-    - infine si disabilita, non potrà attivare lo scudo per questa wave
-    -
-    - quando passa alla prossima wave, resetta la vita di tutti gli scudi
-    - se è firstToActivateAtNextWave, ricrea la lista delle next
-    - e a tutte le altre, gli setta la current active + le riabilita che potranno riattivare lo scudo
-    - infine si attiva - quindi si abilita anche a sé stessa e si rimuove firstToActivateAtNextWave
-    -
-    - quando la torretta viene venduta:
-    - se era quella attiva, attiva la prossima della lista o se non ce ne sono, controlla se ce n'è una da far diventare firstToActivateAtNextWave
-    - se era in lista per attivarsi, si rimuove dalla lista del currentActive
-    - se era la firstToActivateAtNextWave, controlla se lo può diventare un'altra, altrimenti nada
+    V quando viene distrutto lo scudo, viene spostato in fondo alla coda
+    V disattiva lo scudo
+    V lo scudo non potrà più essere utilizzato per questa wave (by default for current health <= 0)
     */
 
     void Start()
     {
-        //set reference and parent
-        shield = Instantiate(shieldPrefab, transform);
-        shield.name = "Shield";
+        //create shield
+        InstantiateShield();
 
-        //reset health and set event
-        shield.ResetHealth();
-        shield.onShieldDestroyed += OnShieldDestroyed;
-
-        //deactive it
-        shield.gameObject.SetActive(false);
+        //set events
+        AddEvents();
     }
+
+    private void OnDestroy()
+    {
+        //remove events
+        RemoveEvents();
+    }
+
+    #region private API
+
+    #region override
 
     public override void ActivateTurret(Cell cellOwner)
     {
         base.ActivateTurret(cellOwner);
 
-        //activate shield
-        if (CheckActivateShield())
-            shield.ActivateShield(CellOwner.coordinates);
+        //add to queue
+        AddToQueue();
+
+        //try activate shield
+        TryActivateShield();
     }
 
     public override void DeactivateTurret()
     {
         base.DeactivateTurret();
 
-        //remove shield
-        shield.gameObject.SetActive(false);
+        //reset shield for when this turret will be reactivate
+        shield.ResetShield();
+
+        //remove from queue
+        RemoveFromQueue(CellOwner.coordinates);
     }
 
-    protected override void OnWorldRotate()
+    protected override void OnWorldRotate(Coordinates coordinates)
     {
-        base.OnWorldRotate();
+        base.OnWorldRotate(coordinates);
 
-        //remove shield
-        shield.gameObject.SetActive(false);
+        //set isRotating
+        isRotating = true;
+
+        //deactivate the shield and remove from queue
+        shield.DeactivateShield();
+        RemoveFromQueue(coordinates);
     }
 
     protected override void OnEndRotation()
     {
         base.OnEndRotation();
 
-        //reactivate shield
-        if (CheckActivateShield())
-            shield.ActivateShield(CellOwner.coordinates);
-    }
+        //add to queue and try to replace the first in the queue
+        AddToQueue();
+        TryReplaceFirstInQueue();
 
-    #region private API
+        //try activate the shield
+        TryActivateShield();
 
-    #region events
-
-    void OnShieldDestroyed()
-    {
-
-    }
-
-    void OnTurretExitQueue(TurretShield turretShield)
-    {
-        //remove turretShield from queue
-        shieldsQueue.Remove(turretShield);
+        //set isRotating
+        isRotating = false;
     }
 
     #endregion
 
+    #region events
+
+    void AddEvents()
+    {
+        GameManager.instance.levelManager.onEndAssaultPhase += OnEndAssaultPhase;
+        TurretShield.onTurretExitQueue += OnTurretExitQueue;
+        shield.onShieldDestroyed += OnShieldDestroyed;
+    }
+
+    void RemoveEvents()
+    {
+        GameManager.instance.levelManager.onEndAssaultPhase -= OnEndAssaultPhase;
+        TurretShield.onTurretExitQueue -= OnTurretExitQueue;
+        shield.onShieldDestroyed -= OnShieldDestroyed;
+    }
+
+    void OnEndAssaultPhase()
+    {
+        //regen health
+        shield.RegenHealth();
+
+        //try activate shield (if shield was broken)
+        TryActivateShield();
+    }
+
+    void OnTurretExitQueue(EFace face)
+    {
+        //don't check if is not active (is only a preview) or is rotating
+        if (IsActive == false || isRotating)
+            return;
+
+        //if a turret quit from this face queue
+        if (face == CellOwner.coordinates.face)
+        {
+            //try activate the shield
+            TryActivateShield();
+        }
+    }
+
+    void OnShieldDestroyed()
+    {
+        //move to the end of the queue
+        RemoveFromQueue(CellOwner.coordinates);
+        AddToQueue();
+
+        //deactivate shield
+        shield.DeactivateShield();
+    }
+
+    #endregion
+
+    #region queue
+
+    void AddToQueue()
+    {
+        //create queue if necessary
+        if (shieldsQueue.ContainsKey(CellOwner.coordinates.face) == false)
+        {
+            shieldsQueue.Add(CellOwner.coordinates.face, new List<TurretShield>());
+        }
+
+        //add to queue
+        shieldsQueue[CellOwner.coordinates.face].Add(this);
+    }
+
+    void RemoveFromQueue(Coordinates coordinates)
+    {
+        //remove from queue
+        shieldsQueue[coordinates.face].Remove(this);
+
+        //call event
+        onTurretExitQueue?.Invoke(coordinates.face);
+    }
+
+    void TryReplaceFirstInQueue()
+    {
+        //can replace only if shield is not broken
+        if (shieldIsBroken)
+            return;
+
+        //if the first in the queue has a broken shield
+        if (shieldsQueue[CellOwner.coordinates.face][0].shieldIsBroken)
+        {
+            //replace first place in queue
+            shieldsQueue[CellOwner.coordinates.face].Insert(0, this);
+        }
+    }
+
+    #endregion
+
+    #region general
+
+    void InstantiateShield()
+    {
+        //reset shield
+        shield.ResetShield();
+    }
+
+    void TryActivateShield()
+    {
+        //check if can activate, and active it
+        if (CheckActivateShield())
+            shield.ActivateShield(CellOwner.coordinates);
+    }
+
     bool CheckActivateShield()
     {
-        //get turrets active on this face
-        shieldsQueue = FindObjectsOfType<TurretShield>().Where(
-            x => x.IsActive
-            && x.CellOwner.coordinates.face == CellOwner.coordinates.face).ToList();
-
-        //set event on every turret
-        shieldsQueue.ForEach(x => x.onTurretExitQueue += OnTurretExitQueue);
-
-        //if there is no queue, can activate
-        return shieldsQueue.Count <= 0;
+        //if the shield is not broken and is the first in the queue
+        return shieldIsBroken == false && shieldsQueue[CellOwner.coordinates.face][0] == this;
     }
+
+    #endregion
 
     #endregion
 }

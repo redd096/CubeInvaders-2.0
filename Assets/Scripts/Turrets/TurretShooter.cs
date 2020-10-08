@@ -4,7 +4,7 @@ using UnityEngine;
 using redd096;
 using System.Linq;
 
-[AddComponentMenu("Cube Invaders/Turret Shooter")]
+[AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
 public class TurretShooter : Turret
 {
     #region variables
@@ -29,7 +29,7 @@ public class TurretShooter : Turret
 
     void Update()
     {
-        //do only if can shoot
+        //do only if can shoot and is active (not preview)
         if (canShoot == false || IsActive == false)
             return;
 
@@ -40,6 +40,7 @@ public class TurretShooter : Turret
 
     void TryAttack()
     {
+        //find enemy
         EnemyToAttack = FindEnemy();
 
         //if aiming an enemy and is time to shoot
@@ -77,9 +78,9 @@ public class TurretShooter : Turret
 
     #region on world rotate
 
-    protected override void OnWorldRotate()
+    protected override void OnWorldRotate(Coordinates coordinates)
     {
-        base.OnWorldRotate();
+        base.OnWorldRotate(coordinates);
 
         //stop shooting on world rotate
         if (canShootAgain_Coroutine != null)

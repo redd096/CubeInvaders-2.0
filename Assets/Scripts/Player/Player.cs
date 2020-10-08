@@ -62,14 +62,14 @@ public class Player : StateMachine
     {
         //go to player move, starting from center cell
         Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
-        SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell.x, centerCell.y)));
+        SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
     }
 
     void OnStartAssaultPhase()
     {
         //go to player move, starting from center cell
         Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
-        SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell.x, centerCell.y)));
+        SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell)));
     }
 
     #endregion

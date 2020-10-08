@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Cube Invaders/Turret Graphics/Turret Shooter Graphics")]
 public class TurretShooterGraphics : MonoBehaviour
 {
     [Header("Important")]

@@ -30,7 +30,7 @@ public class Enemy : MonoBehaviour
         transform.position += direction.normalized * speed * Time.deltaTime;
     }
 
-    private void OnTriggerEnter(Collider other)
+    void OnTriggerEnter(Collider other)
     {
         //check hit cell
         Cell cell = other.GetComponentInParent<Cell>();
@@ -99,6 +99,12 @@ public class Enemy : MonoBehaviour
 
         //start slow timer
         StartCoroutine(SlowTimer(speedToDecrease, slowDuration));
+    }
+
+    public void GetDamageFromShield()
+    {
+        //instant death
+        Destroy(gameObject);
     }
 
     #endregion

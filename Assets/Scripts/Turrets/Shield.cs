@@ -2,18 +2,28 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[AddComponentMenu("Cube Invaders/Turret Component/Shield")]
+[SelectionBase]
 public class Shield : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] int health = 1;
-    [Tooltip("Distance from cell")] [SerializeField] float distanceShield = 1;
 
     [Header("Graphics")]
     [Tooltip("Time for spawn animation")] [SerializeField] float timeSpawn = 1;
+    [Tooltip("Time for despawn animation")] [SerializeField] float timeDespawn = 0.5f;
 
     public System.Action onShieldDestroyed;
+    public int CurrentHealth { get; private set; }
 
-    int currentHealth;
+    Coroutine spawnShield_Coroutine;
+    float distanceFromWorld;
+
+    void Start()
+    {
+        //set distance from world using y local position in the prefab
+        distanceFromWorld = transform.localPosition.y;
+    }
 
     void OnTriggerEnter(Collider other)
     {
@@ -21,8 +31,7 @@ public class Shield : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy)
         {
-            //TODO
-            //kill enemy
+            enemy.GetDamageFromShield();
             ShieldGetDamage();
         }
     }
@@ -31,29 +40,85 @@ public class Shield : MonoBehaviour
 
     void ShieldGetDamage()
     {
-        currentHealth--;
+        CurrentHealth--;
 
         //if dead, shield destroyed
-        if(currentHealth <= 0)
+        if(CurrentHealth <= 0)
         {
             onShieldDestroyed?.Invoke();
         }
+    }
+
+    IEnumerator SpawnShield_Coroutine(Vector3 finalSize, bool isSpawning)
+    {
+        float time = isSpawning ? timeSpawn : timeDespawn;
+
+        //animation spawn
+        float delta = 0;
+        while(delta < 1)
+        {
+            delta += Time.deltaTime / time;
+
+            transform.localScale = Vector3.Lerp(transform.localScale, finalSize, delta);
+
+            yield return null;
+        }
+
+        //final size
+        transform.localScale = finalSize;
     }
 
     #endregion
 
     #region public API
 
-    public void ResetHealth()
+    public void RegenHealth()
     {
-        //reset health
-        currentHealth = health;
+        //regen health
+        CurrentHealth = health;
+    }
+
+    public void ResetShield()
+    {
+        //reset shield at start
+
+        //be sure there is no coroutine running
+        if (spawnShield_Coroutine != null)
+            StopCoroutine(spawnShield_Coroutine);
+
+        //reset size and health
+        transform.localScale = Vector3.zero;
+        RegenHealth();
     }
 
     public void ActivateShield(Coordinates coordinates)
     {
-        //TODO
-        //activate, same size of the face and turret rotation -> position of the cell + distance
+        if (spawnShield_Coroutine != null)
+            StopCoroutine(spawnShield_Coroutine);
+
+        //set position
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+        transform.position = GameManager.instance.world.CoordinatesToPosition(new Coordinates(coordinates.face, centerCell), distanceFromWorld);
+
+        //get final scale
+        float faceSize = GameManager.instance.world.worldConfig.FaceSize;
+        float cellSize = GameManager.instance.world.worldConfig.CellsSize;
+        Vector3 finalScale = new Vector3(faceSize, faceSize, cellSize);
+
+        //start spawn
+        spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, true));
+    }
+
+    public void DeactivateShield()
+    {
+        if (spawnShield_Coroutine != null)
+            StopCoroutine(spawnShield_Coroutine);
+
+        //get finale scale
+        Vector3 finalScale = Vector3.zero;
+
+        //start despawn
+        spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, false));
     }
 
     #endregion

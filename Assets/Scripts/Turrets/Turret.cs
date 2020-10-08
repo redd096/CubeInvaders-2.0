@@ -10,7 +10,7 @@ public class Turret : MonoBehaviour
 
     #region on world rotate
 
-    protected virtual void OnWorldRotate()
+    protected virtual void OnWorldRotate(Coordinates coordinates)
     {
         //use cellOwner.onWorldRotate to know when start to rotate
         GameManager.instance.world.onEndRotation += OnEndRotation;

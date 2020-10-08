@@ -33,7 +33,18 @@ public class WorldRotator
 
     #region private API
 
-    #region cell and coordinates
+    #region general
+
+    void OnWorldRotate(List<Cell> cellsToRotate)
+    {
+        //foreach cell to rotate
+        foreach (Cell cell in cellsToRotate)
+        {
+            //if the cell isn't null, call onWorldRotate
+            if (cell)
+                cell.onWorldRotate?.Invoke(cell.coordinates);
+        }
+    }
 
     void SetCoordinates(Cell oldCell, Coordinates newCoords)
     {
@@ -124,9 +135,6 @@ public class WorldRotator
 
     IEnumerator AnimationRotate(List<Cell> cellsToRotate, Vector3 rotateAxis, bool forward)
     {
-        //control every selected cell
-        OnWorldRotate(cellsToRotate);
-
         //set parent
         cellsToRotate.SetParent(RotatorParent);
 
@@ -161,17 +169,6 @@ public class WorldRotator
         rotatingWorld_Coroutine = null;
     }
 
-    void OnWorldRotate(List<Cell> cellsToRotate)
-    {
-        //foreach cell to rotate
-        foreach (Cell cell in cellsToRotate)
-        {
-            //if the cell isn't null, call onWorldRotate
-            if (cell)
-                cell.onWorldRotate?.Invoke();
-        }
-    }
-
     #endregion
 
     #region rotate row
@@ -189,6 +186,9 @@ public class WorldRotator
 
         //rotate line
         cellsToRotate = SelectLateralRowCells(line, out cellsKeys);
+
+        //call event
+        OnWorldRotate(cellsToRotate);
 
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.up, !toRight));
@@ -269,6 +269,9 @@ public class WorldRotator
             //in the down face is inverse
             toRight = !toRight;
         }
+
+        //call event
+        OnWorldRotate(cellsToRotate);
 
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, !toRight));
@@ -405,6 +408,9 @@ public class WorldRotator
             toUp = !toUp;
         }
 
+        //call event
+        OnWorldRotate(cellsToRotate);
+
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.right, toUp));
 
@@ -514,6 +520,9 @@ public class WorldRotator
             //in the left is inverse
             toUp = !toUp;
         }
+
+        //call event
+        OnWorldRotate(cellsToRotate);
 
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, toUp));

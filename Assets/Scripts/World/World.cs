@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEditor;
 
 #region enum & struct
 
@@ -93,6 +94,16 @@ public class World : MonoBehaviour
 
             //start regen
             RegenWorld();
+
+            Undo.RegisterFullObjectHierarchyUndo(gameObject, "Regen World");
+            //foreach(Transform child in transform)
+            //{
+            //    Undo.RecordObject(child, "Regen World");
+            //}
+
+            //set scene dirty
+            //using UnityEditor.SceneManagement;
+            //EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
         }
     }
 
@@ -326,10 +337,11 @@ public class World : MonoBehaviour
 
     /// <summary>
     /// Returns the position in the world of the cell at these coordinates
+    /// <param name="distanceFromWorld">distance from the cell position</param>
     /// </summary>
-    public Vector3 CoordinatesToPosition(Coordinates coordinates)
+    public Vector3 CoordinatesToPosition(Coordinates coordinates, float distanceFromWorld = 0)
     {
-        //position is index * size (then one axis is 0 or FaceSize)
+        //position is index * size (then one axis is -distanceFromWorld or FaceSize + distanceFromWorld)
         Vector3 v = Vector3.zero;
 
         switch (coordinates.face)
@@ -337,10 +349,10 @@ public class World : MonoBehaviour
             case EFace.front:
                 v.x = coordinates.x * worldConfig.CellsSize;
                 v.y = coordinates.y * worldConfig.CellsSize;
-                v.z = 0;
+                v.z = -distanceFromWorld;
                 break;
             case EFace.right:
-                v.x = worldConfig.FaceSize;
+                v.x = worldConfig.FaceSize + distanceFromWorld;
                 v.y = coordinates.y * worldConfig.CellsSize;
                 v.z = coordinates.x * worldConfig.CellsSize;
                 break;
@@ -348,23 +360,23 @@ public class World : MonoBehaviour
                 //x inverse of front
                 v.x = (worldConfig.NumberCells - 1 - coordinates.x) * worldConfig.CellsSize;
                 v.y = coordinates.y * worldConfig.CellsSize;
-                v.z = worldConfig.FaceSize;
+                v.z = worldConfig.FaceSize + distanceFromWorld;
                 break;
             case EFace.left:
                 //z inverse of right
-                v.x = 0;
+                v.x = -distanceFromWorld;
                 v.y = coordinates.y * worldConfig.CellsSize;
                 v.z = (worldConfig.NumberCells - 1 - coordinates.x) * worldConfig.CellsSize;
                 break;
             case EFace.up:
                 v.x = coordinates.x * worldConfig.CellsSize;
-                v.y = worldConfig.FaceSize;
+                v.y = worldConfig.FaceSize + distanceFromWorld;
                 v.z = coordinates.y * worldConfig.CellsSize;
                 break;
             case EFace.down:
-                //inverse of up
+                //z inverse of up
                 v.x = coordinates.x * worldConfig.CellsSize;
-                v.y = 0;
+                v.y = -distanceFromWorld;
                 v.z = (worldConfig.NumberCells - 1 - coordinates.y) * worldConfig.CellsSize;
                 break;
         }

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/Cell")]
+[AddComponentMenu("Cube Invaders/World/Cell")]
 [SelectionBase]
 public class Cell : MonoBehaviour
 {
@@ -15,7 +15,7 @@ public class Cell : MonoBehaviour
     public Coordinates coordinates;
 
     //used from turret to know when is rotating
-    public System.Action onWorldRotate;
+    public System.Action<Coordinates> onWorldRotate;
 
     Turret turret;
 
