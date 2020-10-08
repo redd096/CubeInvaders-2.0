@@ -10,17 +10,17 @@ public class Enemy : MonoBehaviour
     [SerializeField] float health = 100;
     [SerializeField] float speed = 1;
 
+    [Header("Blink")]
+    [SerializeField] Material blinkMaterial;
+    [SerializeField] float blinkTime;
+
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
     float currentSpeed;
 
-    public Material blinkMat;
     Material originalMat;
-
-    public float blinkTime;
-
-    Coroutine unpocomevuoi;
+    Coroutine blink_Coroutine;
 
     void Update()
     {
@@ -55,17 +55,25 @@ public class Enemy : MonoBehaviour
         currentSpeed += slowEffect;
     }
 
-    //makes the enemy blink on hit
-    private IEnumerator blink()
+    IEnumerator Blink_Coroutine()
     {
-        originalMat = gameObject.GetComponentInChildren<Renderer>().material;
-        gameObject.GetComponentInChildren<Renderer>().material = blinkMat;
+        Renderer renderer = GetComponentInChildren<Renderer>();
 
+        //change material
+        if (originalMat == null)
+        {
+            originalMat = renderer.material;
+            renderer.material = blinkMaterial;
+        }
+
+        //wait
         yield return new WaitForSeconds(blinkTime);
 
-        gameObject.GetComponentInChildren<Renderer>().material = originalMat;
+        //back to original material
+        renderer.material = originalMat;
+        originalMat = null;
 
-        unpocomevuoi = null;
+        blink_Coroutine = null;
     }
 
     #endregion
@@ -81,10 +89,12 @@ public class Enemy : MonoBehaviour
         if(health <= 0)
         {
             Destroy(gameObject);
+            return;
         }
 
-        if(unpocomevuoi == null)
-            unpocomevuoi = StartCoroutine(blink());
+        //blink on hit
+        if(blink_Coroutine == null)
+            blink_Coroutine = StartCoroutine(Blink_Coroutine());
     }
 
     public void GetSlow(float slowPercentage, float slowDuration)
