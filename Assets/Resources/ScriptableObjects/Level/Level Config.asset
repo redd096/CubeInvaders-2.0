@@ -17,5 +17,4 @@ MonoBehaviour:
   TimeBetweenSpawns: 3
   distanceFromWorld: 30
   Waves:
-  - EnemiesPrefabs:
-    - {fileID: 1382525976840169474, guid: 0bd3e831b835c964484c03a737528120, type: 3}
+  - EnemiesPrefabs: []

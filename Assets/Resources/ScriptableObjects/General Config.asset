@@ -13,4 +13,4 @@ MonoBehaviour:
   m_Name: General Config
   m_EditorClassIdentifier: 
   TimeToEndStrategic: 1.5
-  Selector: {fileID: 6782631817268732968, guid: 711e04e399fc2f442b63c9a95be848dc, type: 3}
+  Selector: {fileID: 0}
