@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3443789238870497622}
   - component: {fileID: 1287264650639363639}
   - component: {fileID: 5806588297726999783}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 7740408178758582812}
   - component: {fileID: 4966094155397540841}
   - component: {fileID: 1578320096848760454}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 177080942895146348}
   - component: {fileID: 5585507232209656852}
   - component: {fileID: 2888406086687888547}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3941095658113080621}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: -9078232362336359216}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Mushroom2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

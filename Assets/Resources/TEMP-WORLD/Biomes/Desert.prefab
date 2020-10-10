@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: -7416652133052579969}
-  m_Layer: 0
-  m_Name: Desert2
+  m_Layer: 9
+  m_Name: Desert
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

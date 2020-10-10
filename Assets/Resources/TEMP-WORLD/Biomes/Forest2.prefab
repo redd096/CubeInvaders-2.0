@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 2615477782442515905}
   - component: {fileID: 3971315965991949229}
   - component: {fileID: 5159125745563332399}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 168290621071177922}
   - component: {fileID: 2771760098039621139}
   - component: {fileID: 226084045364212403}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -199,7 +199,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1167045834786816492}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 7015401152294024079}
   - component: {fileID: 4149001099426956397}
   - component: {fileID: 4384993794980313344}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: 8242997089245610343}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Forest2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

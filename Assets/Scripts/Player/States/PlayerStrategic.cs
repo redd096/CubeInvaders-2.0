@@ -10,6 +10,30 @@ public class PlayerStrategic : PlayerMove
     {
     }
 
+#if UNITY_ANDROID
+
+    public override void Execution()
+    {
+        base.Execution();
+
+        //if is moving (not rotating) and release touch
+        if(isMoving && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        {
+            //if released on the same cell already selected
+            if(selectedCell == TrySelectCell())
+            {
+                //enter in "place turret" state
+                player.SetState(new PlayerPlaceTurret(player, selectedCell.coordinates));
+            }
+        }
+
+        //keep pressed to end strategic
+        //TODO
+        //PressReady(Input.GetKey(KeyCode.Return));
+    }
+
+#else
+
     public override void Execution()
     {
         base.Execution();
@@ -47,6 +71,8 @@ public class PlayerStrategic : PlayerMove
         //update UI
         GameManager.instance.uiManager.UpdateReadySlider(timeToEndStrategic / timeToEnd);
     }
+
+#endif
 
     void EndStrategic()
     {

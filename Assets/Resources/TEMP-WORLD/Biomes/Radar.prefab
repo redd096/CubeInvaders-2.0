@@ -12,8 +12,8 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: 79332862174534657}
-  m_Layer: 0
-  m_Name: Radar2
+  m_Layer: 9
+  m_Name: Radar
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -94,7 +94,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ede9bafe2dbe0cd4bae80d100ac1abce, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  toRemoveOnDead: {fileID: 0}
   turretToCreate: {fileID: 0}
+  canRemoveTurret: 1
   coordinates:
     face: 0
     x: 0

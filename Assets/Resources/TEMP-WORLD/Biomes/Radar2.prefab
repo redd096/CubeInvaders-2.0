@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 6552547794069828736}
   - component: {fileID: 4328209780747797493}
   - component: {fileID: 4470703328795093640}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -107,7 +107,7 @@ GameObject:
   - component: {fileID: 2041096535793492656}
   - component: {fileID: 50715923236066569}
   - component: {fileID: 817045328458947677}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -202,7 +202,7 @@ GameObject:
   - component: {fileID: 1725392798880733855}
   - component: {fileID: 2945805352663542468}
   - component: {fileID: 5692557119981544599}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -294,7 +294,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1560436844977298694}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: 79332862174534657}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Radar2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

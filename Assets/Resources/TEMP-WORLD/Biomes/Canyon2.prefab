@@ -12,7 +12,7 @@ GameObject:
   - component: {fileID: 3686521660158674431}
   - component: {fileID: 2610729882414056303}
   - component: {fileID: 1704048732584949053}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -104,7 +104,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1789225633441607401}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 6226891634928088576}
   - component: {fileID: 4922489137090135643}
   - component: {fileID: 3383129328379700379}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 3559355710619916219}
   - component: {fileID: 7145203915148694840}
   - component: {fileID: 84597812072496402}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: 8508009401766008826}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Canyon2
   m_TagString: Untagged
   m_Icon: {fileID: 0}

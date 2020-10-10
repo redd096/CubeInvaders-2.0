@@ -9,7 +9,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 769556435415324429}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Graphics
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -45,7 +45,7 @@ GameObject:
   - component: {fileID: 5570007313280737414}
   - component: {fileID: 2851703264340820815}
   - component: {fileID: 2566633608688627278}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -140,7 +140,7 @@ GameObject:
   - component: {fileID: 3801280558811813584}
   - component: {fileID: 1623526268179748109}
   - component: {fileID: 3515153127022424314}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -235,7 +235,7 @@ GameObject:
   - component: {fileID: 4864964181548194370}
   - component: {fileID: 3516316038365162972}
   - component: {fileID: 6738612209421349410}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Cube (2)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -330,7 +330,7 @@ GameObject:
   - component: {fileID: 5602271811999535225}
   - component: {fileID: 7663916888304018611}
   - component: {fileID: -7416652133052579969}
-  m_Layer: 0
+  m_Layer: 9
   m_Name: Desert2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
