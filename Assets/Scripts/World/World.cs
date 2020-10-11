@@ -248,19 +248,21 @@ public class World : MonoBehaviour
     void CreateAndSetCell(Vector3 eulerRotation, Coordinates coordinates)
     {
         //create cell
-        Cell cell = CreateCell(CoordinatesToPosition(coordinates), eulerRotation, coordinates.face);
+        Cell cell = CreateCell(coordinates, eulerRotation);
 
         //set it
         Cells.Add(coordinates, cell);
         cell.coordinates = coordinates;
+        cell.SelectModel(worldConfig.NumberCells);
     }
 
-    Cell CreateCell(Vector3 position, Vector3 eulerRotation, EFace face)
+    Cell CreateCell(Coordinates coordinates, Vector3 eulerRotation)
     {
         //create and set position and rotation
-        Cell cell = InstantiateCellBasedOnFace(face);
-        cell.transform.position = position;
+        Cell cell = InstantiateCellBasedOnFace(coordinates.face);
+        cell.transform.position = CoordinatesToPosition(coordinates);
         cell.transform.eulerAngles = eulerRotation;
+        cell.transform.Rotate(LocalEulerBasedOnCoordinates(coordinates), Space.Self);
 
         //set scale
         float size = worldConfig.CellsSize;
@@ -292,6 +294,52 @@ public class World : MonoBehaviour
         }
 
         return null;
+    }
+
+    Vector3 LocalEulerBasedOnCoordinates(Coordinates coordinates)
+    {
+        //left
+        if(coordinates.x <= 0)
+        {
+            //down
+            if(coordinates.y <= 0)
+            {
+                return Vector3.zero;
+            }
+            //center or up
+            else
+            {
+                return new Vector3(0, 90, 0);
+            }
+        }
+        //right
+        else if(coordinates.x >= worldConfig.NumberCells -1)
+        {
+            //up
+            if (coordinates.y >= worldConfig.NumberCells -1)
+            {
+                return new Vector3(0, 180, 0);
+            }
+            //center or down
+            else
+            {
+                return new Vector3(0, -90, 0);
+            }
+        }
+        //center
+        else
+        {
+            //up
+            if(coordinates.y >= worldConfig.NumberCells -1)
+            {
+                return new Vector3(0, 180, 0);
+            }
+            //center or down
+            else
+            {
+                return Vector3.zero;
+            }
+        }
     }
 
     #endregion

@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234860cf3fc17274c85c47d87e9adfb1, type: 3}
   m_Name: Biomes Config
   m_EditorClassIdentifier: 
-  Front: {fileID: 0}
-  Right: {fileID: 0}
-  Back: {fileID: 0}
-  Left: {fileID: 0}
-  Up: {fileID: 0}
-  Down: {fileID: 0}
+  Front: {fileID: 3340454757329508567, guid: 1ed377c1540e77e4f944c7bd711b0323, type: 3}
+  Right: {fileID: 179475922206449696, guid: 90a89e1b36748b744a23b3c50878fc66, type: 3}
+  Back: {fileID: 3624580038642359399, guid: 3258fb61eaae44f4fb056b4c226dbbb2, type: 3}
+  Left: {fileID: 8815433439015941780, guid: 8adc48bb91ab6a446a51f5d1b84ad6ea, type: 3}
+  Up: {fileID: 553523354377111068, guid: 024935d5f9cea1b4fbe87d429fc196ed, type: 3}
+  Down: {fileID: 327083256608315165, guid: b5804b3b4b36e2243b978d0870fc9604, type: 3}

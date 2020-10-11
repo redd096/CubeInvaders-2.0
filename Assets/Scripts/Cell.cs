@@ -11,6 +11,11 @@ public class Cell : MonoBehaviour
     [SerializeField] Turret turretToCreate = default;
     [SerializeField] bool canRemoveTurret = true;
 
+    [Header("Cell Models")]
+    [SerializeField] GameObject center = default;
+    [SerializeField] GameObject side = default;
+    [SerializeField] GameObject angle = default;
+
     [Header("Debug")]
     public Coordinates coordinates;
 
@@ -78,6 +83,70 @@ public class Cell : MonoBehaviour
     #endregion
 
     #region public API
+
+    public void SelectModel(int numberCells)
+    {
+        //left
+        if(coordinates.x <= 0)
+        {
+            //down or up
+            if(coordinates.y <= 0 || coordinates.y >= numberCells -1)
+            {
+                angle.SetActive(true);
+
+                center.SetActive(false);
+                side.SetActive(false);
+            }
+            //else is side
+            else
+            {
+                side.SetActive(true);
+
+                center.SetActive(false);
+                angle.SetActive(false);
+            }
+        }
+        //right
+        else if(coordinates.x >= numberCells -1)
+        {
+            //down or up
+            if (coordinates.y <= 0 || coordinates.y >= numberCells - 1)
+            {
+                angle.SetActive(true);
+
+                center.SetActive(false);
+                side.SetActive(false);
+            }
+            //else is side
+            else
+            {
+                side.SetActive(true);
+
+                center.SetActive(false);
+                angle.SetActive(false);
+            }
+        }
+        //center column
+        else
+        {
+            //down or up is side
+            if (coordinates.y <= 0 || coordinates.y >= numberCells - 1)
+            {
+                side.SetActive(true);
+
+                center.SetActive(false);
+                angle.SetActive(false);
+            }
+            //else is center
+            else
+            {
+                center.SetActive(true);
+
+                side.SetActive(false);
+                angle.SetActive(false);
+            }
+        }
+    }
 
     /// <summary>
     /// Show turret without activate it

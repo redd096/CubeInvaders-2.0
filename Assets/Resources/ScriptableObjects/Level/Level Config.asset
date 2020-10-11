@@ -17,4 +17,24 @@ MonoBehaviour:
   TimeBetweenSpawns: 3
   distanceFromWorld: 30
   Waves:
-  - EnemiesPrefabs: []
+  - EnemiesPrefabs:
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
