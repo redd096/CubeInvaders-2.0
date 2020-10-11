@@ -95,7 +95,9 @@ public class World : MonoBehaviour
             //start regen
             RegenWorld();
 
+#if UNITY_EDITOR
             Undo.RegisterFullObjectHierarchyUndo(gameObject, "Regen World");
+#endif
             //foreach(Transform child in transform)
             //{
             //    Undo.RecordObject(child, "Regen World");
