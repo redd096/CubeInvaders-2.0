@@ -5,6 +5,7 @@ using redd096;
 using System.Linq;
 
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
+[SelectionBase]
 public class TurretShooter : Turret
 {
     #region variables

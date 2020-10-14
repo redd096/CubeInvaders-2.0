@@ -16,7 +16,8 @@ MonoBehaviour:
   delayShoot: 0.5
   shotSpawns:
   - {fileID: 2084581570054128934}
-  max: 4
+  rotationCounter: 0
+  numberRotation: 4
 --- !u!1001 &5623002573002463558
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -88,7 +89,8 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
 --- !u!1 &72476877271296173 stripped
 GameObject:

@@ -3,15 +3,16 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Turret/Turret Spring")]
-
+[SelectionBase]
 public class TurretSpring : TurretShooter
 {
-    [SerializeField] int rotationCounter;
-    [SerializeField] int max;
+    [SerializeField] int rotationCounter = 0;
+    [SerializeField] int numberRotation = 0;
 
     protected override void Update()
     {
-        if (rotationCounter >= max)
+        //if reached number of rotation, can try attack
+        if (rotationCounter >= numberRotation)
         {
             base.Update();
         }
@@ -21,14 +22,16 @@ public class TurretSpring : TurretShooter
     {
         base.Attack();
 
+        //reset counter
         rotationCounter = 0;
     }
 
     protected override void OnEndRotation()
     {
-        rotationCounter++;
-
         base.OnEndRotation();
+
+        //increase counter
+        rotationCounter++;
     }
 }
 
