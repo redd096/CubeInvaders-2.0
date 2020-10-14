@@ -6,7 +6,7 @@ using UnityEngine;
 [SelectionBase]
 public class TurretSpring : TurretShooter
 {
-    [SerializeField] int rotationCounter = 0;
+    int rotationCounter = 0;
     [SerializeField] int numberRotation = 0;
 
     protected override void Update()
