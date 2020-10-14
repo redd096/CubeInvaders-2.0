@@ -75,13 +75,6 @@ public class PlayerState : State
 
     protected virtual void StopCinemachine()
     {
-        virtualCam.m_XAxis.m_InputAxisName = "";
-        virtualCam.m_YAxis.m_InputAxisName = "";
-
-        virtualCam.m_XAxis.m_MaxSpeed = 0;
-        virtualCam.m_YAxis.m_MaxSpeed = 0;
-
-        virtualCam.m_XAxis.m_InputAxisValue = 0;
-        virtualCam.m_YAxis.m_InputAxisValue = 0;
+        virtualCam.enabled = false;
     }
 }
