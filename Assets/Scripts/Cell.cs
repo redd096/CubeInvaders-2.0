@@ -67,8 +67,7 @@ public class Cell : MonoBehaviour
         RemoveBuildOnCell(false);
 
         //remove biome
-        if(toRemoveOnDead)
-            toRemoveOnDead.SetActive(false);
+        ActiveRemoveOnDead(false);
     }
 
     void RecreateCell()
@@ -76,8 +75,15 @@ public class Cell : MonoBehaviour
         alive = true;
 
         //recreate biome
-        if(toRemoveOnDead)
-            toRemoveOnDead.SetActive(true);
+        ActiveRemoveOnDead(true);
+    }
+
+    void ActiveRemoveOnDead(bool active)
+    {
+        //enable or disable every renderer
+        Renderer[] renderers = toRemoveOnDead.GetComponentsInChildren<Renderer>();
+        foreach (Renderer r in renderers)
+            r.enabled = active;
     }
 
     #endregion
