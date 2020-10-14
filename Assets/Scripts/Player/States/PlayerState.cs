@@ -53,6 +53,10 @@ public class PlayerState : State
 
     protected void CinemachineMovement(string axisX, string axisY)
     {
+        //re-enable cinemachine
+        if(virtualCam.enabled == false)
+            virtualCam.enabled = true;
+
         //set axis
         virtualCam.m_XAxis.m_InputAxisName = axisX;
         virtualCam.m_YAxis.m_InputAxisName = axisY;
@@ -75,6 +79,7 @@ public class PlayerState : State
 
     protected virtual void StopCinemachine()
     {
+        //disable cinemachine
         virtualCam.enabled = false;
     }
 }
