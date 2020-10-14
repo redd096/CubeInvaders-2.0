@@ -39,7 +39,17 @@ public class Enemy : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //check hit cell
+        //check hit shield
+        Shield shield = other.GetComponentInParent<Shield>();
+        if (shield)
+        {
+            //destroy this enemy
+            Die();
+
+            return;
+        }
+
+        //else check hit cell
         Cell cell = other.GetComponentInParent<Cell>();
         if(cell)
         {
