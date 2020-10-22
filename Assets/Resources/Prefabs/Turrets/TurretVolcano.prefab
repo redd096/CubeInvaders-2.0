@@ -10,14 +10,14 @@ PrefabInstance:
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: shotPrefab
       value: 
-      objectReference: {fileID: 6942024394601423785, guid: 007b236eecb091f4ea1fc498d60f4f67, type: 3}
+      objectReference: {fileID: 7698348057516290628, guid: 1478c8ec8124d05499561ff10341a586, type: 3}
     - target: {fileID: 804803118712387519, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 40475a27ac85dde46b7f6a7d9787952e, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
-      value: Base Turret Variant
+      value: TurretVolcano
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalPosition.x

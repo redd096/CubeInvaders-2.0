@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: shotPrefab
       value: 
-      objectReference: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
+      objectReference: {fileID: 4905811305150014882, guid: b66b5981de2887a48a97194b9a21b523, type: 3}
     - target: {fileID: 804803118712387519, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 

@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   NumberCells: 3
   CellsSize: 1
-  SunPrefab: {fileID: 396283055202577943, guid: cfc64a20a61cce042b29b64ce072d3c1, type: 3}
+  SunPrefab: {fileID: 6093936735711567481, guid: 0741582b4066a8144872d2df52b1eabf, type: 3}
   RotationTime: 0.2

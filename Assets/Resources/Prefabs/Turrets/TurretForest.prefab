@@ -12,11 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8a0dd8772de044ea3a961baf35c01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  shotPrefab: {fileID: 6942024394601423785, guid: 76a95295373b2e24fa8d852447702c17, type: 3}
+  shotPrefab: {fileID: 8880211004750479159, guid: 410adeb66753fd045a060e9f4c4e652f, type: 3}
   delayShoot: 0.5
   shotSpawns:
   - {fileID: 2084581570054128934}
-  rotationCounter: 0
   numberRotation: 4
 --- !u!1001 &5623002573002463558
 PrefabInstance:
