@@ -226,22 +226,22 @@ public class Cell : MonoBehaviour
     /// <summary>
     /// Kill the cell or lose the game
     /// </summary>
-    public void KillCell()
+    public void KillCell(bool canEndGame = true)
     {
         //do nothing if invincible
         if (isInvincible)
             return;
 
-        //destroy cell or lose game
-        if(alive)
+        //destroy cell or lose game (lose game only if canEndGame is true)
+        if (alive)
         {
             DestroyCell();
 
             //if only one life, call function again to kill definitively
             if (onlyOneLife)
-                KillCell();
+                KillCell(canEndGame);
         }
-        else
+        else if(canEndGame)
         {
             GameManager.instance.levelManager.EndGame(false);
         }
