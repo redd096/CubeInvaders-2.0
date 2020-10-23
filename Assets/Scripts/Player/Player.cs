@@ -7,6 +7,10 @@ using Cinemachine;
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
 {
+    [Header("Player")]
+    public float speedX = 300;
+    public float speedY = 2;
+
     [Header("Debug")]
     [SerializeField] string currentState;
 

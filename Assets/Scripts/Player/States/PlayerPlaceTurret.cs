@@ -26,6 +26,73 @@ public class PlayerPlaceTurret : PlayerState
         GameManager.instance.world.Cells[coordinates].HidePreview();
     }
 
+#if UNITY_ANDROID
+
+    public override void Execution()
+    {
+        base.Execution();
+
+        //on touch
+        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
+        {
+            //try select a cell
+            Cell selectedCell = TrySelectCell();
+
+            //if not selected anything, exit from this state
+            if(selectedCell == null)
+            {
+                StopPlaceTurret();
+                return;
+            }
+            else
+            {
+                //if selected same cell, place turret
+                if(selectedCell.coordinates == coordinates)
+                {
+                    PlaceTurret();
+                }
+                //if selected another cell, change preview
+                else
+                {
+                    //hide old preview and show new one
+                    GameManager.instance.world.Cells[coordinates].HidePreview();
+                    GameManager.instance.world.Cells[selectedCell.coordinates].ShowPreview();
+
+                    //save new coordinates
+                    coordinates = selectedCell.coordinates;
+                }
+            }
+        }
+
+        //exit from preview
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            StopPlaceTurret();
+        }
+    }
+
+    Cell TrySelectCell()
+    {
+        //check if hit world
+        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
+        RaycastHit hit;
+        float distance = 100;
+        int layer = redd096.CreateLayer.LayerOnly("World");
+
+        //if hit world, select cell
+        if (Physics.Raycast(ray, out hit, distance, layer, QueryTriggerInteraction.Collide))
+        {
+            return hit.transform.GetComponentInParent<Cell>();
+        }
+        //else remove cell selected
+        else
+        {
+            return null;
+        }
+    }
+
+#else
+
     public override void Execution()
     {
         base.Execution();
@@ -74,6 +141,8 @@ public class PlayerPlaceTurret : PlayerState
         //save coordinates and  show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);
     }
+
+#endif
 
     void PlaceTurret()
     {

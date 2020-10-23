@@ -5,6 +5,7 @@ using redd096;
 using System.Linq;
 
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
+[SelectionBase]
 public class TurretShooter : Turret
 {
     #region variables
@@ -27,7 +28,7 @@ public class TurretShooter : Turret
 
     #endregion
 
-    void Update()
+    protected virtual void Update()
     {
         //do only if can shoot and is active (not preview)
         if (canShoot == false || IsActive == false)
@@ -59,7 +60,7 @@ public class TurretShooter : Turret
         return enemies.FindNearest(transform.position);
     }
 
-    void Attack()
+    protected virtual void Attack()
     {
         //create shot (pool, position, rotation, scale, init)
         TurretShot shot = shots.Instantiate(shotPrefab, shotSpawns[indexSpawn].position, shotSpawns[indexSpawn].rotation);
