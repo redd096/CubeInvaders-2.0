@@ -6,6 +6,10 @@ using UnityEngine;
 [SelectionBase]
 public class Cell : MonoBehaviour
 {
+    [Header("Modifier")]
+    [SerializeField] bool isInvincible = false;
+    [SerializeField] bool onlyOneLife = false;
+
     [Header("Important")]
     [SerializeField] GameObject toRemoveOnDead = default;
     [SerializeField] BuildableObject turretToCreate = default;
@@ -224,10 +228,18 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void KillCell()
     {
+        //do nothing if invincible
+        if (isInvincible)
+            return;
+
         //destroy cell or lose game
         if(alive)
         {
             DestroyCell();
+
+            //if only one life, call function again to kill definitively
+            if (onlyOneLife)
+                KillCell();
         }
         else
         {
