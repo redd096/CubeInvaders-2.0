@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6275221717352900228}
   - component: {fileID: 794604672175333039}
   - component: {fileID: 6442466081667169990}
+  - component: {fileID: 5249965146689806368}
   m_Layer: 0
   m_Name: T_Prefab
   m_TagString: Untagged
@@ -63,12 +64,24 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 100
   speed: 1
-  blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
-  blinkTime: 0.1
   coordinatesToAttack:
     face: 0
     x: 0
     y: 0
+--- !u!114 &5249965146689806368
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5077381001037040962}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a4d30862abc21c04c9fa3d5243a159d2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
+  blinkTime: 0.1
 --- !u!1 &5406879094655771750
 GameObject:
   m_ObjectHideFlags: 0

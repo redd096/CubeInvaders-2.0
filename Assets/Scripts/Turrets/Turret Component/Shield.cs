@@ -31,7 +31,6 @@ public class Shield : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy)
         {
-            enemy.GetDamageFromShield();
             ShieldGetDamage();
         }
     }

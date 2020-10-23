@@ -28,7 +28,7 @@ public class Cell : MonoBehaviour
 
     public BuildableObject turret { get; private set; }
 
-    bool alive = true;
+    public bool IsAlive { get; private set; } = true;
 
     void OnDestroy()
     {
@@ -65,7 +65,7 @@ public class Cell : MonoBehaviour
 
     void DestroyCell()
     {
-        alive = false;
+        IsAlive = false;
 
         //remove turret
         RemoveBuildOnCell(false);
@@ -76,7 +76,7 @@ public class Cell : MonoBehaviour
 
     void RecreateCell()
     {
-        alive = true;
+        IsAlive = true;
 
         //recreate biome
         ActiveRemoveOnDead(true);
@@ -198,7 +198,7 @@ public class Cell : MonoBehaviour
     public void Interact()
     {
         //if dead, try recreate cell
-        if(alive == false)
+        if(IsAlive == false)
         {
             if (GameManager.instance.levelManager.levelConfig.CanRecreateCell)
                 RecreateCell();
@@ -233,7 +233,7 @@ public class Cell : MonoBehaviour
             return;
 
         //destroy cell or lose game (lose game only if canEndGame is true)
-        if (alive)
+        if (IsAlive)
         {
             DestroyCell();
 

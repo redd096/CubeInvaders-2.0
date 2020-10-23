@@ -43,20 +43,10 @@ public class Generator : BuildableObject
 
     void CheckTurretsAround(bool activate)
     {
-        Vector2Int[] directions = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
-
-        //foreach direction
-        foreach (Vector2Int direction in directions)
+        //foreach cell around
+        foreach(Cell cell in GameManager.instance.world.GetCellsAround(CellOwner.coordinates))
         {
-            //if there is a cell and is != null
-            if (GameManager.instance.world.Cells.ContainsKey(CellOwner.coordinates + direction))
-            {
-                Cell cell = GameManager.instance.world.Cells[CellOwner.coordinates + direction];
-                if (cell != null)
-                {
-                    ActivateDeactivate(cell, activate);
-                }
-            }
+            ActivateDeactivate(cell, activate);
         }
     }
 

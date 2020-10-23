@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using redd096;
 
+[AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
 {
     [SerializeField] int currentWave = -1;

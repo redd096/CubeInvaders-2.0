@@ -440,5 +440,28 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
+    public Cell[] GetCellsAround(Coordinates coordinates)
+    {
+        List<Cell> cellsAround = new List<Cell>();
+        Vector2Int[] directions = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
+
+        //foreach direction
+        foreach (Vector2Int direction in directions)
+        {
+            //if there is a cell and is != null
+            if (GameManager.instance.world.Cells.ContainsKey(coordinates + direction))
+            {
+                Cell cell = GameManager.instance.world.Cells[coordinates + direction];
+                if (cell != null)
+                {
+                    //add to the list
+                    cellsAround.Add(cell);
+                }
+            }
+        }
+
+        return cellsAround.ToArray();
+    }
+
     #endregion
 }

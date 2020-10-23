@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 234860cf3fc17274c85c47d87e9adfb1, type: 3}
   m_Name: Only One Biome Invincible
   m_EditorClassIdentifier: 
-  Front: {fileID: 0}
-  Right: {fileID: 0}
-  Back: {fileID: 0}
-  Left: {fileID: 0}
-  Up: {fileID: 0}
-  Down: {fileID: 0}
+  Front: {fileID: 2591874897708383846, guid: aeb4057848fc16d4dbefdd0c2ad86d45, type: 3}
+  Right: {fileID: 4345371316559743906, guid: 2501beb8a456aec4ba6ec838770656b7, type: 3}
+  Back: {fileID: 2376054875643102220, guid: d7087925cae221a49860f8465616f4e9, type: 3}
+  Left: {fileID: 4145916800343331446, guid: da1b3c8ae475f954dbfb4e50f21f0761, type: 3}
+  Up: {fileID: 4523705146514746641, guid: eda904f482b447249b825ff1fb83af5e, type: 3}
+  Down: {fileID: 6586341367523918504, guid: af5497529afd6de48b5adb4baed68cec, type: 3}
