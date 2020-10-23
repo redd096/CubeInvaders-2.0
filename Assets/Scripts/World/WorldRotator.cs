@@ -163,10 +163,10 @@ public class WorldRotator
         cellsToRotate.SetParent(world.transform);
         RotatorParent.rotation = Quaternion.identity;
 
+        rotatingWorld_Coroutine = null;
+
         //call end rotation
         world.onEndRotation?.Invoke();
-
-        rotatingWorld_Coroutine = null;
     }
 
     #endregion
