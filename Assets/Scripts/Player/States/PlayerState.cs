@@ -62,11 +62,9 @@ public class PlayerState : State
         virtualCam.m_YAxis.m_InputAxisName = axisY;
 
         //set speed
-        float maxSpeedX = 300;
-        float maxSpeedY = 2;
         bool invertY = false;
-        float speedX = Time.timeScale > 1 ? maxSpeedX / Time.timeScale : maxSpeedX;
-        float speedY = Time.timeScale > 1 ? maxSpeedY / Time.timeScale : maxSpeedY;
+        float speedX = Time.timeScale > 1 ? player.speedX / Time.timeScale : player.speedX;
+        float speedY = Time.timeScale > 1 ? player.speedY / Time.timeScale : player.speedY;
 
         virtualCam.m_XAxis.m_MaxSpeed = speedX;
         virtualCam.m_YAxis.m_MaxSpeed = speedY;
