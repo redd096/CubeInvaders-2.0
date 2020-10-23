@@ -14,7 +14,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanRecreateCell: 0
   RandomizeWorldAtStart: 1
-  numberRotations: 2
+  NumberRotations: 2
+  TurretsNeedGenerator: 0
   TimeBetweenSpawns: 3
   distanceFromWorld: 30
   Waves:

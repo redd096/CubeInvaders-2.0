@@ -39,7 +39,7 @@
         nRotations++;
 
         //if must to do other rotations, do it
-        if(nRotations < GameManager.instance.levelManager.levelConfig.numberRotations)
+        if(nRotations < GameManager.instance.levelManager.levelConfig.NumberRotations)
         {
             GameManager.instance.world.Rotate(coordinates, lookingFace, rotateDirection);
         }

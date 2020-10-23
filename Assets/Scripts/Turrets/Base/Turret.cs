@@ -25,7 +25,7 @@ public class Turret : BuildableObject
 
     bool NeedGenerator()
     {
-        return GameManager.instance.levelManager.levelConfig.turretsNeedGenerator && needGenerator > 0;
+        return GameManager.instance.levelManager.levelConfig.TurretsNeedGenerator && needGenerator > 0;
     }
 
     int CheckGeneratorsAround()

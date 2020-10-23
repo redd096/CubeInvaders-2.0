@@ -14,8 +14,8 @@ public class LevelConfig : ScriptableObject
     [Tooltip("Randomize world at start")] public bool RandomizeWorldAtStart = true;
 
     [Header("Modifier")]
-    [Tooltip("How many rotations at time")] [Min(1)] public int numberRotations = 1;
-    [Tooltip("Turret need generator to activate")] public bool turretsNeedGenerator = false;
+    [Tooltip("How many rotations at time")] [Min(1)] public int NumberRotations = 1;
+    [Tooltip("Turret need generator to activate")] public bool TurretsNeedGenerator = false;
 
     [Header("Wave")]
     public float TimeBetweenSpawns = 3;
