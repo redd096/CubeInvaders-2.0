@@ -5,25 +5,33 @@ using UnityEngine;
 public class Turret : BuildableObject
 {
     [Header("Turret Modifier")]
-    [SerializeField] bool needGenerator = true;
+    [SerializeField] int needGenerator = 1;
 
     public override void TryActivateTurret()
     {
-        //if doesn't need generator or there is a generator around, activate it
-        if (GameManager.instance.levelManager.levelConfig.turretsNeedGenerator == false || needGenerator == false || CheckGeneratorAround())
+        //if doesn't need generator or there are enough generators around, activate it
+        if (NeedGenerator() == false || CheckGeneratorsAround() >= needGenerator)
             base.TryActivateTurret();
     }
 
     public override void TryDeactivateTurret()
     {
-        //if need generator and there is no generator around, deactive it
-        if(GameManager.instance.levelManager.levelConfig.turretsNeedGenerator && needGenerator && CheckGeneratorAround() == false)
+        //if need generator and there is no enough generators around, deactive it
+        if(NeedGenerator() && CheckGeneratorsAround() < needGenerator)
             base.TryDeactivateTurret();
     }
 
-    bool CheckGeneratorAround()
+    #region generator
+
+    bool NeedGenerator()
+    {
+        return GameManager.instance.levelManager.levelConfig.turretsNeedGenerator && needGenerator > 0;
+    }
+
+    int CheckGeneratorsAround()
     {
         Vector2Int[] directions = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
+        int generatorsOnThisFace = 0;
 
         //foreach direction
         foreach(Vector2Int direction in directions)
@@ -36,11 +44,13 @@ public class Turret : BuildableObject
                 {
                     //if there is a turret, is a generator and is active
                     if (cell.turret != null && cell.turret is Generator && cell.turret.IsActive)
-                        return true;
+                        generatorsOnThisFace++;
                 }
             }
         }
 
-        return false;
+        return generatorsOnThisFace;
     }
+
+    #endregion
 }
