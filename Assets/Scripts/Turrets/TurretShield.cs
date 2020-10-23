@@ -66,9 +66,9 @@ public class TurretShield : Turret
 
     #region override
 
-    public override void ActivateTurret(Cell cellOwner)
+    protected override void ActivateTurret()
     {
-        base.ActivateTurret(cellOwner);
+        base.ActivateTurret();
 
         //add to queue
         AddToQueue();
@@ -77,7 +77,7 @@ public class TurretShield : Turret
         TryActivateShield();
     }
 
-    public override void DeactivateTurret()
+    protected override void DeactivateTurret()
     {
         base.DeactivateTurret();
 
@@ -184,11 +184,14 @@ public class TurretShield : Turret
 
     void RemoveFromQueue(Coordinates coordinates)
     {
-        //remove from queue
-        shieldsQueue[coordinates.face].Remove(this);
+        if (shieldsQueue.ContainsKey(coordinates.face))
+        {
+            //remove from queue
+            shieldsQueue[coordinates.face].Remove(this);
 
-        //call event
-        onTurretExitQueue?.Invoke(coordinates.face);
+            //call event
+            onTurretExitQueue?.Invoke(coordinates.face);
+        }
     }
 
     void TryReplaceFirstInQueue()

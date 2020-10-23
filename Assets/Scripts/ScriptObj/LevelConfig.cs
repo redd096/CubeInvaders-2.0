@@ -15,6 +15,7 @@ public class LevelConfig : ScriptableObject
 
     [Header("Modifier")]
     [Tooltip("How many rotations at time")] [Min(1)] public int numberRotations = 1;
+    [Tooltip("Turret need generator to activate")] public bool turretsNeedGenerator = false;
 
     [Header("Wave")]
     public float TimeBetweenSpawns = 3;

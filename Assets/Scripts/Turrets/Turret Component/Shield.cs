@@ -114,7 +114,7 @@ public class Shield : MonoBehaviour
         if (spawnShield_Coroutine != null)
             StopCoroutine(spawnShield_Coroutine);
 
-        //get finale scale
+        //get final scale
         Vector3 finalScale = Vector3.zero;
 
         //start despawn

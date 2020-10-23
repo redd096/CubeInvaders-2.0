@@ -43,6 +43,8 @@ public struct Coordinates
         this.y = v.y;
     }
 
+    public static Coordinates operator +(Coordinates a, Vector2Int b) => new Coordinates(a.face, a.x + b.x, a.y + b.y);
+
     public static bool operator !=(Coordinates a, Coordinates b) => a.face != b.face || a.x != b.x || a.y != b.y;
     public static bool operator ==(Coordinates a, Coordinates b) => a.face == b.face && a.x == b.x && a.y == b.y;
 

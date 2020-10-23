@@ -8,7 +8,7 @@ public class Cell : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] GameObject toRemoveOnDead = default;
-    [SerializeField] Turret turretToCreate = default;
+    [SerializeField] BuildableObject turretToCreate = default;
     [SerializeField] bool canRemoveTurret = true;
 
     [Header("Cell Models")]
@@ -22,7 +22,7 @@ public class Cell : MonoBehaviour
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
 
-    Turret turret;
+    public BuildableObject turret { get; private set; }
 
     bool alive = true;
 
@@ -37,25 +37,25 @@ public class Cell : MonoBehaviour
     void BuildOnCell()
     {
         //do only if there is a turret and is only a preview
-        if (turret == null || turret.IsActive)
-            return;
-
-        //activate it
-        turret.ActivateTurret(this);
+        if (turret && turret.IsPreview)
+        {
+            //build it
+            turret.BuildTurret(this);
+        }
     }
 
     void RemoveBuildOnCell(bool sell)
     {
-        //do only if there is a turret and is active (not simple preview)
-        if (turret == null || turret.IsActive == false)
-            return;
-
-        //deactivate it
-        turret.DeactivateTurret();
-
-        if (sell)
+        //do only if there is a turret and is not a preview
+        if (turret && turret.IsPreview == false)
         {
-            //get resources
+            //remove it
+            turret.RemoveTurret();
+
+            if (sell)
+            {
+                //get resources
+            }
         }
     }
 
@@ -159,11 +159,11 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void ShowPreview()
     {
-        //do only if there is a turret to create, and there isn't already a turret active on it
-        if (turretToCreate == null || (turret != null && turret.IsActive))
+        //do only if there is a turret to create, and there isn't already a turret builded on it
+        if (turretToCreate == null || (turret != null && turret.IsPreview == false))
             return;
 
-        //instantiate or active it
+        //instantiate or build it
         if (turret == null)
             turret = Instantiate(turretToCreate);
         else
@@ -184,7 +184,7 @@ public class Cell : MonoBehaviour
     public void HidePreview()
     {
         //check if there is a turret and is only a preview
-        if (turret != null && turret.IsActive == false)
+        if (turret != null && turret.IsPreview)
             turret.gameObject.SetActive(false);
     }
 
@@ -207,7 +207,7 @@ public class Cell : MonoBehaviour
             return;
 
         //if there is a already a turret, try remove it
-        if (turret != null && turret.IsActive)
+        if (turret != null && turret.IsPreview == false)
         {
             if(canRemoveTurret)
                 RemoveBuildOnCell(true);
