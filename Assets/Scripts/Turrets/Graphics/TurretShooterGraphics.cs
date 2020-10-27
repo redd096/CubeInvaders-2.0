@@ -1,56 +1,48 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Turret Graphics/Turret Shooter Graphics")]
-public class TurretShooterGraphics : MonoBehaviour
+public class TurretShooterGraphics : BuildableGraphics
 {
-    [Header("Important")]
-    [SerializeField] Transform objectToRotate = default;
-
     TurretShooter turretShooter;
 
-    void Start()
+    protected override void Start()
     {
-        //get turret shooter
-        turretShooter = GetComponent<TurretShooter>();
+        base.Start();
 
-        //set event for OnShoot
-        turretShooter.onShoot += OnShoot;
+        //get logic component as turret shooter
+        turretShooter = buildableObject as TurretShooter;
+
+        AddEvents();
     }
 
     void OnDestroy()
     {
-        //remove event for OnShoot
+        RemoveEvents();
+    }
+
+    protected override Enemy GetEnemy()
+    {
+        //get enemy from logic component
+        return turretShooter.EnemyToAttack;
+    }
+
+    #region events
+
+    void AddEvents()
+    {
+        turretShooter.onShoot += OnShoot;
+    }
+
+    void RemoveEvents()
+    {
         turretShooter.onShoot -= OnShoot;
-    }
-
-    void Update()
-    {
-        //if is active, animate it
-        if(turretShooter.IsActive)
-            Animation();
-    }
-
-    void Animation()
-    {
-        //need model for animation - and an enemy to attack
-        if (objectToRotate == null) return;
-
-        //find up direction (from model to enemy)
-        Vector3 upDirection;
-        if (turretShooter.EnemyToAttack)
-            upDirection = (turretShooter.EnemyToAttack.transform.position - objectToRotate.position).normalized;
-        else
-            upDirection = turretShooter.CellOwner.transform.up;
-
-        //get new rotation
-        Quaternion upRotation = Quaternion.FromToRotation(objectToRotate.up, upDirection) * objectToRotate.rotation;
-        objectToRotate.rotation = upRotation;
     }
 
     void OnShoot()
     {
         //animation on shoot
     }
+
+    #endregion
+
 }
