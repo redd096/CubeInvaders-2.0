@@ -49,28 +49,6 @@ public class BuildableGraphics : MonoBehaviour
         SetRotation(forwardDirection);
     }
 
-    void LookAtEnemyOld()
-    {
-        //need model for animation
-        if (objectToRotate == null)
-            return;
-
-        //find up direction (from model to enemy)
-        Vector3 upDirection;
-        if (GetEnemy() && buildableObject.IsActive)
-        {
-            upDirection = (GetEnemy().transform.position - objectToRotate.position).normalized;
-        }
-        //else normal position
-        else
-        {
-            upDirection = buildableObject.CellOwner.transform.up;
-        }
-
-        //set new rotation
-        SetRotation(upDirection);
-    }
-
     void SetRotation(Vector3 forwardDirection)
     {
         //set new rotation

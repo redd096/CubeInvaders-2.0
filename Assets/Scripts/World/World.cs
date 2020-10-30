@@ -238,13 +238,14 @@ public class World : MonoBehaviour
     {
         for (int x = 0; x < worldConfig.NumberCells; x++)
         {
+            //rotate 180 y axis just to look same direction (when rotate on local z axis - RotateAngleOrSide)
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
                 //up
-                CreateAndSetCell(new Vector3(-90, 0, 0), new Coordinates(EFace.up, x, z));
+                CreateAndSetCell(new Vector3(-90, 180, 0), new Coordinates(EFace.up, x, z));
 
                 //down
-                CreateAndSetCell(new Vector3(90, 0, 0), new Coordinates(EFace.down, x, z));
+                CreateAndSetCell(new Vector3(90, 180, 0), new Coordinates(EFace.down, x, z));
             }
         }
     }
@@ -270,7 +271,7 @@ public class World : MonoBehaviour
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
         cell.transform.position = CoordinatesToPosition(coordinates);
         cell.transform.eulerAngles = eulerRotation;
-        //cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
+        cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
 
         //set scale
         float size = worldConfig.CellsSize;
@@ -307,42 +308,42 @@ public class World : MonoBehaviour
     Vector3 RotateAngleOrSide(Coordinates coordinates)
     {
         //left
-        if(coordinates.x <= 0)
+        if (coordinates.x <= 0)
         {
             //down
-            if(coordinates.y <= 0)
+            if (coordinates.y <= 0)
             {
-                return Vector3.zero;
+                return new Vector3(0, 0, 180);
             }
             //center or up
             else
             {
-                return new Vector3(0, 90, 0);
+                return new Vector3(0, 0, -90);
             }
         }
         //right
-        else if(coordinates.x >= worldConfig.NumberCells -1)
+        else if (coordinates.x >= worldConfig.NumberCells - 1)
         {
             //up
-            if (coordinates.y >= worldConfig.NumberCells -1)
+            if (coordinates.y >= worldConfig.NumberCells - 1)
             {
-                return new Vector3(0, 180, 0);
+                return Vector3.zero;
             }
             //center or down
             else
             {
-                return new Vector3(0, -90, 0);
+                return new Vector3(0, 0, 90);
             }
         }
         //center
         else
         {
-            //up
-            if(coordinates.y >= worldConfig.NumberCells -1)
+            //down
+            if (coordinates.y <= 0)
             {
-                return new Vector3(0, 180, 0);
+                return new Vector3(0, 0, 180);
             }
-            //center or down
+            //center or up
             else
             {
                 return Vector3.zero;
