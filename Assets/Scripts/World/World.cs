@@ -71,6 +71,8 @@ public struct Coordinates
 [AddComponentMenu("Cube Invaders/World/World")]
 public class World : MonoBehaviour
 {
+    #region variables
+
     [Header("Regen")]
     [SerializeField] bool regen = false;
 
@@ -86,6 +88,8 @@ public class World : MonoBehaviour
     public Dictionary<Coordinates, Cell> Cells;
 
     WorldRotator worldRotator;
+
+    #endregion
 
     void OnValidate()
     {
@@ -207,10 +211,10 @@ public class World : MonoBehaviour
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
                 //front
-                CreateAndSetCell(new Vector3(-90, 0, 0), new Coordinates(EFace.front, x, y));
+                CreateAndSetCell(new Vector3(0, 180, 0), new Coordinates(EFace.front, x, y));
 
                 //back
-                CreateAndSetCell(new Vector3(90, 0, 0), new Coordinates(EFace.back, x, y));
+                CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.back, x, y));
             }
         }
     }
@@ -222,10 +226,10 @@ public class World : MonoBehaviour
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
                 //right
-                CreateAndSetCell(new Vector3(0, 0, -90), new Coordinates(EFace.right, z, y));
+                CreateAndSetCell(new Vector3(0, 90, 0), new Coordinates(EFace.right, z, y));
 
                 //left
-                CreateAndSetCell(new Vector3(0, 0, 90), new Coordinates(EFace.left, z, y));
+                CreateAndSetCell(new Vector3(0, -90, 0), new Coordinates(EFace.left, z, y));
             }
         }
     }
@@ -237,10 +241,10 @@ public class World : MonoBehaviour
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
                 //up
-                CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.up, x, z));
+                CreateAndSetCell(new Vector3(-90, 0, 0), new Coordinates(EFace.up, x, z));
 
                 //down
-                CreateAndSetCell(new Vector3(180, 0, 0), new Coordinates(EFace.down, x, z));
+                CreateAndSetCell(new Vector3(90, 0, 0), new Coordinates(EFace.down, x, z));
             }
         }
     }
@@ -266,7 +270,7 @@ public class World : MonoBehaviour
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
         cell.transform.position = CoordinatesToPosition(coordinates);
         cell.transform.eulerAngles = eulerRotation;
-        cell.transform.Rotate(LocalEulerBasedOnCoordinates(coordinates), Space.Self);
+        //cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
 
         //set scale
         float size = worldConfig.CellsSize;
@@ -300,7 +304,7 @@ public class World : MonoBehaviour
         return null;
     }
 
-    Vector3 LocalEulerBasedOnCoordinates(Coordinates coordinates)
+    Vector3 RotateAngleOrSide(Coordinates coordinates)
     {
         //left
         if(coordinates.x <= 0)

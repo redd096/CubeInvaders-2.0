@@ -19,7 +19,7 @@ public class BuildableGraphics : MonoBehaviour
         if (buildableObject.IsPreview)
             return;
 
-        Animation();
+        LookAtEnemy();
     }
 
     protected virtual Enemy GetEnemy()
@@ -27,10 +27,32 @@ public class BuildableGraphics : MonoBehaviour
         return null;
     }
 
-    void Animation()
+    void LookAtEnemy()
     {
         //need model for animation
         if (objectToRotate == null) 
+            return;
+
+        //find forward direction (from model to enemy)
+        Vector3 forwardDirection;
+        if (GetEnemy() && buildableObject.IsActive)
+        {
+            forwardDirection = (GetEnemy().transform.position - objectToRotate.position).normalized;
+        }
+        //else normal position
+        else
+        {
+            forwardDirection = buildableObject.CellOwner.transform.forward;
+        }
+
+        //set new rotation
+        SetRotation(forwardDirection);
+    }
+
+    void LookAtEnemyOld()
+    {
+        //need model for animation
+        if (objectToRotate == null)
             return;
 
         //find up direction (from model to enemy)
@@ -49,10 +71,10 @@ public class BuildableGraphics : MonoBehaviour
         SetRotation(upDirection);
     }
 
-    void SetRotation(Vector3 upDirection)
+    void SetRotation(Vector3 forwardDirection)
     {
         //set new rotation
-        Quaternion upRotation = Quaternion.FromToRotation(objectToRotate.up, upDirection) * objectToRotate.rotation;
-        objectToRotate.rotation = upRotation;
+        Quaternion forwardRotation = Quaternion.FromToRotation(objectToRotate.forward, forwardDirection) * objectToRotate.rotation;
+        objectToRotate.rotation = forwardRotation;
     }
 }
