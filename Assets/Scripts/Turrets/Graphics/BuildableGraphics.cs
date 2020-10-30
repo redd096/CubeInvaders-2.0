@@ -42,7 +42,7 @@ public class BuildableGraphics : MonoBehaviour
         //else normal position
         else
         {
-            forwardDirection = buildableObject.CellOwner.transform.forward;
+            forwardDirection = transform.forward;
         }
 
         //set new rotation
