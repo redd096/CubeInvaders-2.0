@@ -117,6 +117,9 @@ public class TurretShot : MonoBehaviour
     {
         coordinatesToDefend = owner.CellOwner.coordinates;
         this.enemyToAttack = enemyToAttack;
+
+        //reset timer
+        timerAutodestruction = 0;
     }
 
     #endregion
