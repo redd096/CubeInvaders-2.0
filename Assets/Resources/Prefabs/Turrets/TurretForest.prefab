@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7d8a0dd8772de044ea3a961baf35c01a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  needGenerator: 1
   shotPrefab: {fileID: 8880211004750479159, guid: 410adeb66753fd045a060e9f4c4e652f, type: 3}
   delayShoot: 0.5
   shotSpawns:
@@ -43,34 +44,6 @@ PrefabInstance:
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretForest
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_RootOrder

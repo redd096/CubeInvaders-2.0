@@ -41,39 +41,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4974996485060731970, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4974996485060731970, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0.5
       objectReference: {fileID: 0}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretVolcano
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_RootOrder
