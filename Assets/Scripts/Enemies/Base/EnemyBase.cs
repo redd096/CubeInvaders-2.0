@@ -10,12 +10,19 @@ public class EnemyBase : MonoBehaviour
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
-    void Update()
+    Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
+    void FixedUpdate()
     {
         //move to the cell
         Vector3 direction = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack) - transform.position;
 
-        transform.position += direction.normalized * speed * Time.deltaTime;
+        rb.velocity = direction.normalized * speed;
     }
 
     protected virtual void OnTriggerEnter(Collider other)

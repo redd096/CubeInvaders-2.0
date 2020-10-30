@@ -25,31 +25,41 @@ public class TurretShot : MonoBehaviour
 
     float timerAutodestruction;
 
+    Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void Update()
+    {
+        //look at enemy
+        if (enemyToAttack)
+        {
+            transform.LookAt(enemyToAttack.transform);
+        }
+
+        //and check if is time to auto destruction
+        TryAutoDestruction();
+    }
+
+    void FixedUpdate()
     {
         //direction to enemy or forward
         Vector3 direction = Vector3.zero;
 
-        if(enemyToAttack != null)
+        if (enemyToAttack != null)
         {
             direction = enemyToAttack.transform.position - transform.position;
-
-            //look at enemy
-            transform.LookAt(enemyToAttack.transform);
         }
         else
         {
             direction = transform.forward;
-
-            //update timer
-            timerAutodestruction += Time.deltaTime;
         }
 
         //move
-        transform.position += direction.normalized * shotSpeed * Time.deltaTime;
-
-        //and check if is time to auto destruction
-        TryAutoDestruction();
+        rb.velocity = direction.normalized * shotSpeed;
     }
 
     void OnTriggerEnter(Collider other)
@@ -70,6 +80,12 @@ public class TurretShot : MonoBehaviour
 
     void TryAutoDestruction()
     {
+        //update timer
+        if (enemyToAttack == null)
+        {
+            timerAutodestruction += Time.deltaTime;
+        }
+
         //check timer
         if (timerAutodestruction >= timerAutodestructionWithoutEnemy)
         {
