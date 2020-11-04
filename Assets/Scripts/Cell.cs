@@ -25,6 +25,8 @@ public class Cell : MonoBehaviour
 
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
+    public System.Action onCellDeath;
+    public System.Action onCellRess;
 
     public BuildableObject turret { get; private set; }
 
@@ -66,6 +68,7 @@ public class Cell : MonoBehaviour
     void DestroyCell()
     {
         IsAlive = false;
+        onCellDeath?.Invoke();
 
         //remove turret
         RemoveBuildOnCell(false);
@@ -77,6 +80,7 @@ public class Cell : MonoBehaviour
     void RecreateCell()
     {
         IsAlive = true;
+        onCellRess?.Invoke();
 
         //recreate biome
         ActiveRemoveOnDead(true);

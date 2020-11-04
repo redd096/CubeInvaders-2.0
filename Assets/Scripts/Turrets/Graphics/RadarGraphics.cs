@@ -25,7 +25,10 @@ public class RadarGraphics : BuildableGraphics
     {
         base.Update();
 
-        ColorRadar();
+        if (buildableObject.IsActive)
+        {
+            ColorRadar();
+        }
     }
 
     protected override Enemy GetEnemy()

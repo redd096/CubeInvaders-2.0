@@ -31,10 +31,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        //hide UI and all
-        onEndStrategicPhase?.Invoke();
-        onEndAssaultPhase?.Invoke();
-
         //check if randomize world
         if (levelConfig.RandomizeWorldAtStart)
         {

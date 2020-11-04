@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/Bomb On Face")]
+[AddComponentMenu("Cube Invaders/Bomb On Face/Bomb On Face")]
 public class BombOnFace : MonoBehaviour
 {
     [Header("Important")]
@@ -17,28 +17,51 @@ public class BombOnFace : MonoBehaviour
     Coroutine timer_Coroutine;
     bool isExploded;
 
+    public System.Action onStartTimer;
+    public float TimeBeforeCanRotate => timeBeforeCanRotate;
+
     void Start()
     {
         //Set parent to follow cell rotation
         transform.SetParent(cellOwner.transform);
-        cellOwner.onWorldRotate += OnWorldRotate;
 
-        //set event to start
-        GameManager.instance.levelManager.onStartStrategicPhase += OnStartGame;
+        AddEvents();
     }
 
     void OnDestroy()
     {
-        cellOwner.onWorldRotate -= OnWorldRotate;
+        RemoveEvents();
     }
 
-    void OnStartGame()
-    {
-        GameManager.instance.levelManager.onStartStrategicPhase -= OnStartGame;
+    #region events
 
+    void AddEvents()
+    {
+        cellOwner.onWorldRotate += OnWorldRotate;
+        GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndAssaultPhase += OnEndAssaultPhase;
+    }
+
+    void RemoveEvents()
+    {
+        cellOwner.onWorldRotate -= OnWorldRotate;
+        GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndAssaultPhase -= OnEndAssaultPhase;
+    }
+
+    void OnStartAssaultPhase()
+    {
         //now can start timer
         canStartTimer = true;
     }
+
+    void OnEndAssaultPhase()
+    {
+        //now timer is deactivate
+        canStartTimer = false;
+    }
+
+    #endregion
 
     #region on world rotate
 
@@ -46,7 +69,7 @@ public class BombOnFace : MonoBehaviour
     {
         GameManager.instance.world.onEndRotation += OnEndRotation;
 
-        //if timer was going, explode
+        //if timer was going, explode (a variable, to make explosion when finish rotation)
         if (timer_Coroutine != null && canStartTimer)
         {
             isExploded = true;
@@ -77,6 +100,9 @@ public class BombOnFace : MonoBehaviour
 
     IEnumerator Timer_Coroutine()
     {
+        //call event
+        onStartTimer?.Invoke();
+
         //wait, then stop timer
         yield return new WaitForSeconds(timeBeforeCanRotate);
 

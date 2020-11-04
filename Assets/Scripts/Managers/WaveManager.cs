@@ -7,7 +7,7 @@ using redd096;
 public class WaveManager : MonoBehaviour
 {
     public WaveConfig waveConfig;
-    [SerializeField] int currentWave = -1;
+    public int currentWave = 0;
 
     List<Enemy> enemies = new List<Enemy>();
     Coroutine wave_coroutine;
@@ -29,21 +29,20 @@ public class WaveManager : MonoBehaviour
     void AddEvents()
     {
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
-        GameManager.instance.levelManager.onEndStrategicPhase += OnEndStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndAssaultPhase += OnEndAssaultPhase;
     }
 
     void RemoveEvents()
     {
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
-        GameManager.instance.levelManager.onEndStrategicPhase -= OnEndStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndAssaultPhase -= OnEndAssaultPhase;
     }
 
     void OnStartStrategicPhase()
     {
-        //wave +1
-        currentWave++;
+        //remove all enemies
         ClearEnemies();
 
         //if there aren't other waves
@@ -51,38 +50,10 @@ public class WaveManager : MonoBehaviour
         {
             //win
             GameManager.instance.levelManager.EndGame(true);
-        }
-    }
-
-    void OnEndStrategicPhase()
-    {
-        //do only if there are waves
-        if (currentWave < 0 || currentWave >= waveConfig.Waves.Length)
             return;
-
-        //foreach enemy in this wave
-        WaveStruct wave = waveConfig.Waves[currentWave];
-        foreach(Enemy enemyPrefab in wave.EnemiesPrefabs)
-        {
-            //instantiate and set parent but deactivate
-            Enemy enemy = Instantiate(enemyPrefab, transform);
-            enemy.gameObject.SetActive(false);
-
-            //save in the list and add to the event
-            enemies.Add(enemy);
-            enemy.onEnemyDeath += OnEnemyDeath;
         }
 
-        //update level config and biomes config
-        if (GameManager.instance.levelManager.levelConfig != wave.LevelConfig)
-        {
-            GameManager.instance.levelManager.levelConfig = wave.LevelConfig;
-        }
-        if(GameManager.instance.world.biomesConfig != wave.BiomesConfig)
-        {
-            GameManager.instance.world.biomesConfig = wave.BiomesConfig;
-            GameManager.instance.world.RegenWorld();
-        }
+        CreateWave();
     }
 
     void OnStartAssaultPhase()
@@ -92,6 +63,12 @@ public class WaveManager : MonoBehaviour
             StopCoroutine(wave_coroutine);
 
         wave_coroutine = StartCoroutine(Wave_Coroutine());
+    }
+
+    void OnEndAssaultPhase()
+    {
+        //wave +1
+        currentWave++;
     }
 
     void OnEnemyDeath(Enemy enemy)
@@ -108,6 +85,8 @@ public class WaveManager : MonoBehaviour
 
     #endregion
 
+    #region private API
+
     void ClearEnemies()
     {
         //remove every child
@@ -118,6 +97,32 @@ public class WaveManager : MonoBehaviour
 
         //clear list
         enemies.Clear();
+    }
+
+    void CreateWave()
+    {
+        //do only if there are waves
+        if (this.currentWave < 0 || this.currentWave >= waveConfig.Waves.Length)
+            return;
+
+        //current wave
+        WaveStruct wave = waveConfig.Waves[this.currentWave];
+
+        //update level config and biomes config
+        GameManager.instance.UpdateLevel(wave.LevelConfig);
+        GameManager.instance.UpdateLevel(wave.BiomesConfig);
+
+        //foreach enemy in this wave
+        foreach (Enemy enemyPrefab in wave.EnemiesPrefabs)
+        {
+            //instantiate and set parent but deactivate
+            Enemy enemy = Instantiate(enemyPrefab, transform);
+            enemy.gameObject.SetActive(false);
+
+            //save in the list and add to the event
+            enemies.Add(enemy);
+            enemy.onEnemyDeath += OnEnemyDeath;
+        }
     }
 
     IEnumerator Wave_Coroutine()
@@ -146,4 +151,6 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(waveConfig.TimeBetweenSpawns);
         }
     }
+
+    #endregion
 }
