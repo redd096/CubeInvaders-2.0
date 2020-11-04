@@ -6,6 +6,7 @@ using redd096;
 [AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
 {
+    public WaveConfig waveConfig;
     [SerializeField] int currentWave = -1;
 
     List<Enemy> enemies = new List<Enemy>();
@@ -27,25 +28,16 @@ public class WaveManager : MonoBehaviour
 
     void AddEvents()
     {
-        GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
         GameManager.instance.levelManager.onEndStrategicPhase += OnEndStrategicPhase;
+        GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
     }
 
     void RemoveEvents()
     {
-        GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
         GameManager.instance.levelManager.onEndStrategicPhase -= OnEndStrategicPhase;
-    }
-
-    void OnStartAssaultPhase()
-    {
-        //start wave
-        if (wave_coroutine != null)
-            StopCoroutine(wave_coroutine);
-
-        wave_coroutine = StartCoroutine(Wave_Coroutine());
+        GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
     }
 
     void OnStartStrategicPhase()
@@ -55,7 +47,7 @@ public class WaveManager : MonoBehaviour
         ClearEnemies();
 
         //if there aren't other waves
-        if(GameManager.instance.levelManager.levelConfig.Waves == null || currentWave >= GameManager.instance.levelManager.levelConfig.Waves.Length)
+        if(waveConfig.Waves == null || currentWave >= waveConfig.Waves.Length)
         {
             //win
             GameManager.instance.levelManager.EndGame(true);
@@ -65,11 +57,11 @@ public class WaveManager : MonoBehaviour
     void OnEndStrategicPhase()
     {
         //do only if there are waves
-        if (currentWave < 0 || currentWave >= GameManager.instance.levelManager.levelConfig.Waves.Length)
+        if (currentWave < 0 || currentWave >= waveConfig.Waves.Length)
             return;
 
         //foreach enemy in this wave
-        WaveStruct wave = GameManager.instance.levelManager.levelConfig.Waves[currentWave];
+        WaveStruct wave = waveConfig.Waves[currentWave];
         foreach(Enemy enemyPrefab in wave.EnemiesPrefabs)
         {
             //instantiate and set parent but deactivate
@@ -80,6 +72,26 @@ public class WaveManager : MonoBehaviour
             enemies.Add(enemy);
             enemy.onEnemyDeath += OnEnemyDeath;
         }
+
+        //update level config and biomes config
+        if (GameManager.instance.levelManager.levelConfig != wave.LevelConfig)
+        {
+            GameManager.instance.levelManager.levelConfig = wave.LevelConfig;
+        }
+        if(GameManager.instance.world.biomesConfig != wave.BiomesConfig)
+        {
+            GameManager.instance.world.biomesConfig = wave.BiomesConfig;
+            GameManager.instance.world.RegenWorld();
+        }
+    }
+
+    void OnStartAssaultPhase()
+    {
+        //start wave
+        if (wave_coroutine != null)
+            StopCoroutine(wave_coroutine);
+
+        wave_coroutine = StartCoroutine(Wave_Coroutine());
     }
 
     void OnEnemyDeath(Enemy enemy)
@@ -123,7 +135,7 @@ public class WaveManager : MonoBehaviour
             Coordinates coordinatesToAttack = new Coordinates(face, x, y);
 
             //set enemy position
-            float distanceFromWorld = GameManager.instance.levelManager.levelConfig.distanceFromWorld;
+            float distanceFromWorld = waveConfig.distanceFromWorld;
             enemy.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, distanceFromWorld);
 
             //set enemy destination and activate
@@ -131,7 +143,7 @@ public class WaveManager : MonoBehaviour
             enemy.gameObject.SetActive(true);
 
             //wait for next enemy
-            yield return new WaitForSeconds(GameManager.instance.levelManager.levelConfig.TimeBetweenSpawns);
+            yield return new WaitForSeconds(waveConfig.TimeBetweenSpawns);
         }
     }
 }

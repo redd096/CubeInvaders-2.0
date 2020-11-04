@@ -1,11 +1,5 @@
 ﻿using UnityEngine;
 
-[System.Serializable]
-public struct WaveStruct
-{
-    public Enemy[] EnemiesPrefabs;
-}
-
 [CreateAssetMenu(menuName = "Cube Invaders/Level/Level Config", fileName = "Level Config")]
 public class LevelConfig : ScriptableObject
 {
@@ -16,9 +10,4 @@ public class LevelConfig : ScriptableObject
     [Header("Modifier")]
     [Tooltip("How many rotations at time")] [Min(1)] public int NumberRotations = 1;
     [Tooltip("Turret need generator to activate")] public bool TurretsNeedGenerator = false;
-
-    [Header("Wave")]
-    public float TimeBetweenSpawns = 3;
-    public float distanceFromWorld = 30;
-    public WaveStruct[] Waves;
 }

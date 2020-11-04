@@ -9,19 +9,13 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6702f62fea6fbb45a422719be9be64b, type: 3}
+  m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
   m_Name: Wave Poison
   m_EditorClassIdentifier: 
-  CanRecreateCell: 0
-  RandomizeWorldAtStart: 1
-  NumberRotations: 1
-  TurretsNeedGenerator: 0
   TimeBetweenSpawns: 20
   distanceFromWorld: 30
   Waves:
-  - EnemiesPrefabs:
-    - {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-    - {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-    - {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-    - {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
+    BiomesConfig: {fileID: 11400000, guid: f13b618cc74a05d499428d4336f9a7a2, type: 2}
+    EnemiesPrefabs:
     - {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
