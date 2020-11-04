@@ -62,7 +62,7 @@ public class GameManager : Singleton<GameManager>
     public void SetWave(int wave)
     {
         //end wave
-        instance.levelManager.EndAssaultPhase();
+        instance.levelManager.EndAssaultPhase(true);
 
         //set wave
         instance.waveManager.currentWave = wave;
