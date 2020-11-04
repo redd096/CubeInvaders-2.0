@@ -9,7 +9,7 @@ public class WaveManager : MonoBehaviour
     public WaveConfig waveConfig;
     public int currentWave = 0;
 
-    List<Enemy> enemies = new List<Enemy>();
+    int enemiesToEndWave;
     Coroutine wave_coroutine;
 
     void Start()
@@ -77,11 +77,10 @@ public class WaveManager : MonoBehaviour
 
     void OnEnemyDeath(Enemy enemy)
     {
-        //remove from the list
-        enemies.Remove(enemy);
+        enemiesToEndWave--;
 
         //if there are no other enemies, end assault phase
-        if(enemies.Count <= 0)
+        if(enemiesToEndWave <= 0)
         {
             GameManager.instance.levelManager.EndAssaultPhase();
         }
@@ -98,45 +97,34 @@ public class WaveManager : MonoBehaviour
         {
             Destroy(child.gameObject);
         }
-
-        //clear list
-        enemies.Clear();
     }
 
     void CreateWave()
     {
         //do only if there are waves
-        if (this.currentWave < 0 || this.currentWave >= waveConfig.Waves.Length)
+        if (currentWave < 0 || currentWave >= waveConfig.Waves.Length)
             return;
 
         //current wave
-        WaveStruct wave = waveConfig.Waves[this.currentWave];
+        WaveStruct wave = waveConfig.Waves[currentWave];
 
         //update level config and biomes config
         GameManager.instance.UpdateLevel(wave.LevelConfig);
         GameManager.instance.UpdateLevel(wave.BiomesConfig);
-
-        //foreach enemy in this wave
-        foreach (Enemy enemyPrefab in wave.EnemiesPrefabs)
-        {
-            //instantiate and set parent but deactivate
-            Enemy enemy = Instantiate(enemyPrefab, transform);
-            enemy.gameObject.SetActive(false);
-
-            //save in the list and add to the event
-            enemies.Add(enemy);
-            enemy.onEnemyDeath += OnEnemyDeath;
-        }
     }
 
     IEnumerator Wave_Coroutine()
     {
-        //create a copy, so we can touch the original without affect the wave coroutine
-        Enemy[] enemiesThisWave = enemies.CreateCopy().ToArray();
+        //set enemies number
+        enemiesToEndWave = waveConfig.Waves[currentWave].EnemiesPrefabs.Length;
 
         //for every enemy
-        foreach(Enemy enemy in enemiesThisWave)
+        foreach (Enemy enemyPrefab in waveConfig.Waves[currentWave].EnemiesPrefabs)
         {
+            //instantiate and set parent and event
+            Enemy enemy = Instantiate(enemyPrefab, transform);
+            enemy.onEnemyDeath += OnEnemyDeath;
+
             //randomize coordinates to attack
             EFace face = (EFace)Random.Range(0, 6);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
