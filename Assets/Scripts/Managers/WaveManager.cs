@@ -69,6 +69,10 @@ public class WaveManager : MonoBehaviour
     {
         //wave +1
         currentWave++;
+
+        //stop coroutine if still running
+        if (wave_coroutine != null)
+            StopCoroutine(wave_coroutine);
     }
 
     void OnEnemyDeath(Enemy enemy)
