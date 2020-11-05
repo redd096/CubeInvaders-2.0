@@ -40,6 +40,10 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 5a3a2f3923f9f7a4394b2e050ec2d6c4, type: 2}
+    - target: {fileID: 4974996485060731970, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretRadar 1

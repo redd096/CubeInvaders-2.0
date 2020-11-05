@@ -7,47 +7,6 @@ public class Radar : BuildableObject
 {
     public Enemy EnemyToAttack { get; private set; }
 
-    void Start()
-    {
-        //set builded at start (to set cell owner and set is not a preview)
-        BuildTurret(GetComponentInParent<Cell>());
-
-        AddEvents();
-    }
-
-    void OnDestroy()
-    {
-        RemoveEvents();
-    }
-
-    #region events
-
-    void AddEvents()
-    {
-        CellOwner.onCellDeath += OnCellDeath;
-        CellOwner.onCellRess += OnCellRess;
-    }
-
-    void RemoveEvents()
-    {
-        CellOwner.onCellDeath -= OnCellDeath;
-        CellOwner.onCellRess -= OnCellRess;
-    }
-
-    void OnCellDeath()
-    {
-        //deactive on cell death
-        DeactivateTurret();
-    }
-
-    void OnCellRess()
-    {
-        //reactive on cell ress
-        ActivateTurret();
-    }
-
-    #endregion
-
     void Update()
     {
         //if active, find enemy

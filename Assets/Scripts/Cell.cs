@@ -13,6 +13,7 @@ public class Cell : MonoBehaviour
     [Header("Important")]
     [SerializeField] GameObject toRemoveOnDead = default;
     [SerializeField] BuildableObject turretToCreate = default;
+    [SerializeField] bool buildTurretAtStart = false;
     [SerializeField] bool canRemoveTurret = true;
 
     [Header("Cell Models")]
@@ -25,12 +26,16 @@ public class Cell : MonoBehaviour
 
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
-    public System.Action onCellDeath;
-    public System.Action onCellRess;
 
     public BuildableObject turret { get; private set; }
 
     public bool IsAlive { get; private set; } = true;
+
+    void Awake()
+    {
+        //if build at start, build turret 
+        BuildAtStart();
+    }
 
     void OnDestroy()
     {
@@ -39,6 +44,16 @@ public class Cell : MonoBehaviour
     }
 
     #region private API
+
+    void BuildAtStart()
+    {
+        //if build at start, build turret 
+        if (buildTurretAtStart)
+        {
+            ShowPreview();
+            BuildOnCell();
+        }
+    }
 
     void BuildOnCell()
     {
@@ -68,7 +83,6 @@ public class Cell : MonoBehaviour
     void DestroyCell()
     {
         IsAlive = false;
-        onCellDeath?.Invoke();
 
         //remove turret
         RemoveBuildOnCell(false);
@@ -80,10 +94,12 @@ public class Cell : MonoBehaviour
     void RecreateCell()
     {
         IsAlive = true;
-        onCellRess?.Invoke();
 
         //recreate biome
         ActiveRemoveOnDead(true);
+
+        //if was builded at start, rebuild turret 
+        BuildAtStart();
     }
 
     void ActiveRemoveOnDead(bool active)
@@ -171,18 +187,15 @@ public class Cell : MonoBehaviour
         if (turretToCreate == null || (turret != null && turret.IsPreview == false))
             return;
 
-        //instantiate or build it
+        //instantiate (with parent) or build it
         if (turret == null)
-            turret = Instantiate(turretToCreate);
+            turret = Instantiate(turretToCreate, transform);
         else
             turret.gameObject.SetActive(true);
 
-        //set position and rotation 
-        turret.transform.position = transform.position;
-        turret.transform.rotation = transform.rotation;
-
-        //set child of cell and set size
-        turret.transform.SetParent(transform);
+        //set position, rotation and size
+        turret.transform.localPosition = Vector3.zero;
+        turret.transform.localRotation = Quaternion.identity;
         turret.transform.localScale = Vector3.one;
     }
 
@@ -214,7 +227,7 @@ public class Cell : MonoBehaviour
         if (turretToCreate == null)
             return;
 
-        //if there is a already a turret, try remove it
+        //if there is already a turret, try remove it
         if (turret != null && turret.IsPreview == false)
         {
             if(canRemoveTurret)
