@@ -22,7 +22,7 @@ public class Shield : MonoBehaviour
     void Start()
     {
         //set distance from world using y local position in the prefab
-        distanceFromWorld = transform.localPosition.y;
+        distanceFromWorld = transform.localPosition.z;
     }
 
     void OnTriggerEnter(Collider other)
