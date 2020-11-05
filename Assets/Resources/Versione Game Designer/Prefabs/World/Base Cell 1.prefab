@@ -364,8 +364,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInvincible: 0
   onlyOneLife: 0
-  toRemoveOnDead: {fileID: 5317235374433741502}
+  toRemoveOnDead: {fileID: 480172397415699823}
   turretToCreate: {fileID: 0}
+  buildTurretAtStart: 0
   canRemoveTurret: 1
   center: {fileID: 5059648704907266853}
   side: {fileID: 4640798383401689328}
