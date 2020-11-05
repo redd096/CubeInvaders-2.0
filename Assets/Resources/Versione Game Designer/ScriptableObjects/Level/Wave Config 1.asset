@@ -23,9 +23,11 @@ MonoBehaviour:
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-  - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
+  - LevelConfig: {fileID: 11400000, guid: a488e1f38f58ad24b85e6c24fcea40c6, type: 2}
     BiomesConfig: {fileID: 11400000, guid: f13b618cc74a05d499428d4336f9a7a2, type: 2}
     EnemiesPrefabs:
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -33,5 +35,7 @@ MonoBehaviour:
     BiomesConfig: {fileID: 11400000, guid: f13b618cc74a05d499428d4336f9a7a2, type: 2}
     EnemiesPrefabs:
     - {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
