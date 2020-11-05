@@ -36,7 +36,7 @@ public class TurretShooter : Turret
         TryAttack();
     }
 
-    void OnDisable()
+    public override void RemoveTurret()
     {
         //if coroutine is running when we disable this turret, 
         //stop coroutine and set immediatly that can shoot, for when we will reactivate it
@@ -44,6 +44,8 @@ public class TurretShooter : Turret
             StopCoroutine(canShootAgain_Coroutine);
 
         canShoot = true;
+
+        base.RemoveTurret();
     }
 
     #region try attack

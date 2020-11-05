@@ -66,7 +66,7 @@ public class BuildableObject : MonoBehaviour
         TryActivateTurret();
     }
 
-    public void RemoveTurret()
+    public virtual void RemoveTurret()
     {
         IsPreview = true;
 
