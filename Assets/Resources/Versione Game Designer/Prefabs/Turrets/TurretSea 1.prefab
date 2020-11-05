@@ -11,6 +11,10 @@ PrefabInstance:
       propertyPath: shotPrefab
       value: 
       objectReference: {fileID: 5243771673589054028, guid: 8410a1da557f48949a812d29924e02af, type: 3}
+    - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: delayShoot
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 804803118712387519, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
