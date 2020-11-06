@@ -12,12 +12,12 @@ public class EnemyBase : MonoBehaviour
 
     Rigidbody rb;
 
-    void Awake()
+    protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
     }
 
-    void FixedUpdate()
+    protected virtual void FixedUpdate()
     {
         //move to the cell
         Vector3 direction = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack) - transform.position;
