@@ -72,7 +72,7 @@ public class TurretShot : MonoBehaviour
             ApplyEffect(enemy);
 
             //destroy shot after hit
-            DestroyShot(true);
+            DestroyShot(enemy);
         }
     }
 
@@ -90,28 +90,29 @@ public class TurretShot : MonoBehaviour
         if (timerAutodestruction >= timerAutodestructionWithoutEnemy)
         {
             //autodestruction
-            DestroyShot(false);
+            DestroyShot(null);
         }
     }
 
-    void DestroyShot(bool hitEnemy)
+    void DestroyShot(Enemy hitEnemy)
     {
         //if hit enemy, or can do area effect also on autodestruction
         if(hitEnemy || areaEffectAlsoOnAutodestruction)
         {
             //do area effect
-            AreaEffect();
+            AreaEffect(hitEnemy);
         }
 
         //destroy this
         redd096.Pooling.Destroy(gameObject);
     }
 
-    void AreaEffect()
+    void AreaEffect(Enemy hitEnemy)
     {
         //find enemies on the same face, inside the area effect
         FindObjectsOfType<Enemy>().Where(
-            x => x.coordinatesToAttack.face == coordinatesToDefend.face 
+            x => x != hitEnemy 
+            && x.coordinatesToAttack.face == coordinatesToDefend.face 
             && Vector3.Distance(x.transform.position, transform.position) < area).ToList()
             
             //apply effect on every enemy
