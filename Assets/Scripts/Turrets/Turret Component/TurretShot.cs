@@ -25,31 +25,41 @@ public class TurretShot : MonoBehaviour
 
     float timerAutodestruction;
 
+    Rigidbody rb;
+
+    void Awake()
+    {
+        rb = GetComponent<Rigidbody>();
+    }
+
     void Update()
+    {
+        //look at enemy
+        if (enemyToAttack)
+        {
+            transform.LookAt(enemyToAttack.transform);
+        }
+
+        //and check if is time to auto destruction
+        TryAutoDestruction();
+    }
+
+    void FixedUpdate()
     {
         //direction to enemy or forward
         Vector3 direction = Vector3.zero;
 
-        if(enemyToAttack != null)
+        if (enemyToAttack != null)
         {
             direction = enemyToAttack.transform.position - transform.position;
-
-            //look at enemy
-            transform.LookAt(enemyToAttack.transform);
         }
         else
         {
             direction = transform.forward;
-
-            //update timer
-            timerAutodestruction += Time.deltaTime;
         }
 
         //move
-        transform.position += direction.normalized * shotSpeed * Time.deltaTime;
-
-        //and check if is time to auto destruction
-        TryAutoDestruction();
+        rb.velocity = direction.normalized * shotSpeed;
     }
 
     void OnTriggerEnter(Collider other)
@@ -62,7 +72,7 @@ public class TurretShot : MonoBehaviour
             ApplyEffect(enemy);
 
             //destroy shot after hit
-            DestroyShot(true);
+            DestroyShot(enemy);
         }
     }
 
@@ -70,32 +80,39 @@ public class TurretShot : MonoBehaviour
 
     void TryAutoDestruction()
     {
+        //update timer
+        if (enemyToAttack == null)
+        {
+            timerAutodestruction += Time.deltaTime;
+        }
+
         //check timer
         if (timerAutodestruction >= timerAutodestructionWithoutEnemy)
         {
             //autodestruction
-            DestroyShot(false);
+            DestroyShot(null);
         }
     }
 
-    void DestroyShot(bool hitEnemy)
+    void DestroyShot(Enemy hitEnemy)
     {
         //if hit enemy, or can do area effect also on autodestruction
         if(hitEnemy || areaEffectAlsoOnAutodestruction)
         {
             //do area effect
-            AreaEffect();
+            AreaEffect(hitEnemy);
         }
 
         //destroy this
         redd096.Pooling.Destroy(gameObject);
     }
 
-    void AreaEffect()
+    void AreaEffect(Enemy hitEnemy)
     {
         //find enemies on the same face, inside the area effect
         FindObjectsOfType<Enemy>().Where(
-            x => x.coordinatesToAttack.face == coordinatesToDefend.face 
+            x => x != hitEnemy 
+            && x.coordinatesToAttack.face == coordinatesToDefend.face 
             && Vector3.Distance(x.transform.position, transform.position) < area).ToList()
             
             //apply effect on every enemy
@@ -117,6 +134,9 @@ public class TurretShot : MonoBehaviour
     {
         coordinatesToDefend = owner.CellOwner.coordinates;
         this.enemyToAttack = enemyToAttack;
+
+        //reset timer
+        timerAutodestruction = 0;
     }
 
     #endregion

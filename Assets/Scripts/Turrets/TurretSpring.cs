@@ -3,11 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Turret/Turret Spring")]
-[SelectionBase]
 public class TurretSpring : TurretShooter
 {
-    int rotationCounter = 0;
     [SerializeField] int numberRotation = 0;
+
+    int rotationCounter = 0;
 
     protected override void Update()
     {

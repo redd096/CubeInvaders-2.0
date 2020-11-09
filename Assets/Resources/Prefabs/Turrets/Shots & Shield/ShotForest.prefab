@@ -146,6 +146,14 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
+      propertyPath: damage
+      value: 0.9
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
+      propertyPath: shotSpeed
+      value: 15
+      objectReference: {fileID: 0}
     - target: {fileID: 7794059173458503746, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
       propertyPath: m_Name
       value: ShotForest

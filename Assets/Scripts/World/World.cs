@@ -43,6 +43,8 @@ public struct Coordinates
         this.y = v.y;
     }
 
+    public static Coordinates operator +(Coordinates a, Vector2Int b) => new Coordinates(a.face, a.x + b.x, a.y + b.y);
+
     public static bool operator !=(Coordinates a, Coordinates b) => a.face != b.face || a.x != b.x || a.y != b.y;
     public static bool operator ==(Coordinates a, Coordinates b) => a.face == b.face && a.x == b.x && a.y == b.y;
 
@@ -69,6 +71,8 @@ public struct Coordinates
 [AddComponentMenu("Cube Invaders/World/World")]
 public class World : MonoBehaviour
 {
+    #region variables
+
     [Header("Regen")]
     [SerializeField] bool regen = false;
 
@@ -84,6 +88,8 @@ public class World : MonoBehaviour
     public Dictionary<Coordinates, Cell> Cells;
 
     WorldRotator worldRotator;
+
+    #endregion
 
     void OnValidate()
     {
@@ -205,10 +211,10 @@ public class World : MonoBehaviour
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
                 //front
-                CreateAndSetCell(new Vector3(-90, 0, 0), new Coordinates(EFace.front, x, y));
+                CreateAndSetCell(new Vector3(0, 180, 0), new Coordinates(EFace.front, x, y));
 
                 //back
-                CreateAndSetCell(new Vector3(90, 0, 0), new Coordinates(EFace.back, x, y));
+                CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.back, x, y));
             }
         }
     }
@@ -220,10 +226,10 @@ public class World : MonoBehaviour
             for (int y = 0; y < worldConfig.NumberCells; y++)
             {
                 //right
-                CreateAndSetCell(new Vector3(0, 0, -90), new Coordinates(EFace.right, z, y));
+                CreateAndSetCell(new Vector3(0, 90, 0), new Coordinates(EFace.right, z, y));
 
                 //left
-                CreateAndSetCell(new Vector3(0, 0, 90), new Coordinates(EFace.left, z, y));
+                CreateAndSetCell(new Vector3(0, -90, 0), new Coordinates(EFace.left, z, y));
             }
         }
     }
@@ -232,13 +238,14 @@ public class World : MonoBehaviour
     {
         for (int x = 0; x < worldConfig.NumberCells; x++)
         {
+            //rotate 180 y axis just to look same direction (when rotate on local z axis - RotateAngleOrSide)
             for (int z = 0; z < worldConfig.NumberCells; z++)
             {
                 //up
-                CreateAndSetCell(new Vector3(0, 0, 0), new Coordinates(EFace.up, x, z));
+                CreateAndSetCell(new Vector3(-90, 180, 0), new Coordinates(EFace.up, x, z));
 
                 //down
-                CreateAndSetCell(new Vector3(180, 0, 0), new Coordinates(EFace.down, x, z));
+                CreateAndSetCell(new Vector3(90, 180, 0), new Coordinates(EFace.down, x, z));
             }
         }
     }
@@ -264,7 +271,7 @@ public class World : MonoBehaviour
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
         cell.transform.position = CoordinatesToPosition(coordinates);
         cell.transform.eulerAngles = eulerRotation;
-        cell.transform.Rotate(LocalEulerBasedOnCoordinates(coordinates), Space.Self);
+        cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
 
         //set scale
         float size = worldConfig.CellsSize;
@@ -298,45 +305,45 @@ public class World : MonoBehaviour
         return null;
     }
 
-    Vector3 LocalEulerBasedOnCoordinates(Coordinates coordinates)
+    Vector3 RotateAngleOrSide(Coordinates coordinates)
     {
         //left
-        if(coordinates.x <= 0)
+        if (coordinates.x <= 0)
         {
             //down
-            if(coordinates.y <= 0)
+            if (coordinates.y <= 0)
             {
-                return Vector3.zero;
+                return new Vector3(0, 0, 180);
             }
             //center or up
             else
             {
-                return new Vector3(0, 90, 0);
+                return new Vector3(0, 0, -90);
             }
         }
         //right
-        else if(coordinates.x >= worldConfig.NumberCells -1)
+        else if (coordinates.x >= worldConfig.NumberCells - 1)
         {
             //up
-            if (coordinates.y >= worldConfig.NumberCells -1)
+            if (coordinates.y >= worldConfig.NumberCells - 1)
             {
-                return new Vector3(0, 180, 0);
+                return Vector3.zero;
             }
             //center or down
             else
             {
-                return new Vector3(0, -90, 0);
+                return new Vector3(0, 0, 90);
             }
         }
         //center
         else
         {
-            //up
-            if(coordinates.y >= worldConfig.NumberCells -1)
+            //down
+            if (coordinates.y <= 0)
             {
-                return new Vector3(0, 180, 0);
+                return new Vector3(0, 0, 180);
             }
-            //center or down
+            //center or up
             else
             {
                 return Vector3.zero;
@@ -436,6 +443,29 @@ public class World : MonoBehaviour
 
         //return start position + cell position + pivot position (cause we start from the angle of the cube, but we need the center of the cell as pivot)
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
+    }
+
+    public Cell[] GetCellsAround(Coordinates coordinates)
+    {
+        List<Cell> cellsAround = new List<Cell>();
+        Vector2Int[] directions = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
+
+        //foreach direction
+        foreach (Vector2Int direction in directions)
+        {
+            //if there is a cell and is != null
+            if (GameManager.instance.world.Cells.ContainsKey(coordinates + direction))
+            {
+                Cell cell = GameManager.instance.world.Cells[coordinates + direction];
+                if (cell != null)
+                {
+                    //add to the list
+                    cellsAround.Add(cell);
+                }
+            }
+        }
+
+        return cellsAround.ToArray();
     }
 
     #endregion

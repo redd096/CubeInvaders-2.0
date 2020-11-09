@@ -70,6 +70,6 @@ PrefabInstance:
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: turretToCreate
       value: 
-      objectReference: {fileID: 7095863657488387331, guid: 3a1438781118a0d4eb6e7744015339cf, type: 3}
+      objectReference: {fileID: 431599070057614544, guid: a8837a518e1271f4e96e5d8b9c33a032, type: 3}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}

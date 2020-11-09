@@ -5,7 +5,6 @@ using redd096;
 using System.Linq;
 
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
-[SelectionBase]
 public class TurretShooter : Turret
 {
     #region variables
@@ -30,11 +29,23 @@ public class TurretShooter : Turret
 
     protected virtual void Update()
     {
-        //do only if can shoot and is active (not preview)
+        //do only if can shoot and is active
         if (canShoot == false || IsActive == false)
             return;
 
         TryAttack();
+    }
+
+    public override void RemoveTurret()
+    {
+        //if coroutine is running when we disable this turret, 
+        //stop coroutine and set immediatly that can shoot, for when we will reactivate it
+        if (canShootAgain_Coroutine != null)
+            StopCoroutine(canShootAgain_Coroutine);
+
+        canShoot = true;
+
+        base.RemoveTurret();
     }
 
     #region try attack

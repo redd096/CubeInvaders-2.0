@@ -8,6 +8,7 @@ public class GameManager : Singleton<GameManager>
     public Player player { get; private set; }
     public World world { get; private set; }
     public LevelManager levelManager { get; private set; }
+    public WaveManager waveManager { get; private set; }
 
     protected override void SetDefaults()
     {
@@ -16,6 +17,7 @@ public class GameManager : Singleton<GameManager>
         player = FindObjectOfType<Player>();
         world = FindObjectOfType<World>();
         levelManager = FindObjectOfType<LevelManager>();
+        waveManager = FindObjectOfType<WaveManager>();
         
         //if there is a player, lock mouse
         if (player)
@@ -35,4 +37,36 @@ public class GameManager : Singleton<GameManager>
                 SceneLoader.instance.PauseGame();
         }
     }
+
+    #region public API
+
+    public void UpdateLevel(BiomesConfig biomesConfig)
+    { 
+        //update biomes config and regen world
+        if (instance.world.biomesConfig != biomesConfig)
+        {
+            instance.world.biomesConfig = biomesConfig;
+            instance.world.RegenWorld();
+        }
+    }
+
+    public void UpdateLevel(LevelConfig levelConfig)
+    {
+        //update level config
+        if (instance.levelManager.levelConfig != levelConfig)
+        {
+            instance.levelManager.levelConfig = levelConfig;
+        }
+    }
+
+    public void SetWave(int wave)
+    {
+        //end wave
+        instance.levelManager.EndAssaultPhase(true);
+
+        //set wave
+        instance.waveManager.currentWave = wave;
+    }
+
+    #endregion
 }

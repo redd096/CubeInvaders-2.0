@@ -3,9 +3,11 @@ using System.Collections.Generic;
 using UnityEngine;
 using redd096;
 
+[AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
 {
-    [SerializeField] int currentWave = -1;
+    public WaveConfig waveConfig;
+    public int currentWave = 0;
 
     List<Enemy> enemies = new List<Enemy>();
     Coroutine wave_coroutine;
@@ -26,16 +28,32 @@ public class WaveManager : MonoBehaviour
 
     void AddEvents()
     {
-        GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
-        GameManager.instance.levelManager.onEndStrategicPhase += OnEndStrategicPhase;
+        GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndAssaultPhase += OnEndAssaultPhase;
     }
 
     void RemoveEvents()
     {
-        GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
-        GameManager.instance.levelManager.onEndStrategicPhase -= OnEndStrategicPhase;
+        GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
+        GameManager.instance.levelManager.onEndAssaultPhase -= OnEndAssaultPhase;
+    }
+
+    void OnStartStrategicPhase()
+    {
+        //remove all enemies
+        ClearEnemies();
+
+        //if there aren't other waves
+        if(waveConfig.Waves == null || currentWave >= waveConfig.Waves.Length)
+        {
+            //win
+            GameManager.instance.levelManager.EndGame(true);
+            return;
+        }
+
+        CreateWave();
     }
 
     void OnStartAssaultPhase()
@@ -47,38 +65,14 @@ public class WaveManager : MonoBehaviour
         wave_coroutine = StartCoroutine(Wave_Coroutine());
     }
 
-    void OnStartStrategicPhase()
+    void OnEndAssaultPhase()
     {
         //wave +1
         currentWave++;
-        ClearEnemies();
 
-        //if there aren't other waves
-        if(GameManager.instance.levelManager.levelConfig.Waves == null || currentWave >= GameManager.instance.levelManager.levelConfig.Waves.Length)
-        {
-            //win
-            GameManager.instance.levelManager.EndGame(true);
-        }
-    }
-
-    void OnEndStrategicPhase()
-    {
-        //do only if there are waves
-        if (currentWave < 0 || currentWave >= GameManager.instance.levelManager.levelConfig.Waves.Length)
-            return;
-
-        //foreach enemy in this wave
-        WaveStruct wave = GameManager.instance.levelManager.levelConfig.Waves[currentWave];
-        foreach(Enemy enemyPrefab in wave.EnemiesPrefabs)
-        {
-            //instantiate and set parent but deactivate
-            Enemy enemy = Instantiate(enemyPrefab, transform);
-            enemy.gameObject.SetActive(false);
-
-            //save in the list and add to the event
-            enemies.Add(enemy);
-            enemy.onEnemyDeath += OnEnemyDeath;
-        }
+        //stop coroutine if still running
+        if (wave_coroutine != null)
+            StopCoroutine(wave_coroutine);
     }
 
     void OnEnemyDeath(Enemy enemy)
@@ -95,6 +89,8 @@ public class WaveManager : MonoBehaviour
 
     #endregion
 
+    #region private API
+
     void ClearEnemies()
     {
         //remove every child
@@ -105,6 +101,32 @@ public class WaveManager : MonoBehaviour
 
         //clear list
         enemies.Clear();
+    }
+
+    void CreateWave()
+    {
+        //do only if there are waves
+        if (this.currentWave < 0 || this.currentWave >= waveConfig.Waves.Length)
+            return;
+
+        //current wave
+        WaveStruct wave = waveConfig.Waves[this.currentWave];
+
+        //update level config and biomes config
+        GameManager.instance.UpdateLevel(wave.LevelConfig);
+        GameManager.instance.UpdateLevel(wave.BiomesConfig);
+
+        //foreach enemy in this wave
+        foreach (Enemy enemyPrefab in wave.EnemiesPrefabs)
+        {
+            //instantiate and set parent but deactivate
+            Enemy enemy = Instantiate(enemyPrefab, transform);
+            enemy.gameObject.SetActive(false);
+
+            //save in the list and add to the event
+            enemies.Add(enemy);
+            enemy.onEnemyDeath += OnEnemyDeath;
+        }
     }
 
     IEnumerator Wave_Coroutine()
@@ -122,7 +144,7 @@ public class WaveManager : MonoBehaviour
             Coordinates coordinatesToAttack = new Coordinates(face, x, y);
 
             //set enemy position
-            float distanceFromWorld = GameManager.instance.levelManager.levelConfig.distanceFromWorld;
+            float distanceFromWorld = waveConfig.distanceFromWorld;
             enemy.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, distanceFromWorld);
 
             //set enemy destination and activate
@@ -130,7 +152,9 @@ public class WaveManager : MonoBehaviour
             enemy.gameObject.SetActive(true);
 
             //wait for next enemy
-            yield return new WaitForSeconds(GameManager.instance.levelManager.levelConfig.TimeBetweenSpawns);
+            yield return new WaitForSeconds(waveConfig.TimeBetweenSpawns);
         }
     }
+
+    #endregion
 }

@@ -21,8 +21,10 @@ public class UIManager : MonoBehaviour
         selector = Instantiate(GameManager.instance.levelManager.generalConfig.Selector);
         HideSelector();
 
-        //hide end menu
+        //hide menus and strategic canvas
+        PauseMenu(false);
         EndMenu(false);
+        strategicCanvas.SetActive(false);
 
         //add events
         AddEvents();

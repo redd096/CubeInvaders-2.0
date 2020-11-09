@@ -31,10 +31,6 @@ public class LevelManager : MonoBehaviour
 
     void Start()
     {
-        //hide UI and all
-        onEndStrategicPhase?.Invoke();
-        onEndAssaultPhase?.Invoke();
-
         //check if randomize world
         if (levelConfig.RandomizeWorldAtStart)
         {
@@ -56,9 +52,9 @@ public class LevelManager : MonoBehaviour
         CurrentPhase = EPhase.strategic;
     }
 
-    public void EndStrategicPhase()
+    public void EndStrategicPhase(bool force = false)
     {
-        if (CurrentPhase == EPhase.strategic)
+        if (force || CurrentPhase == EPhase.strategic)
         {
             CurrentPhase = EPhase.waiting;
 
@@ -75,9 +71,9 @@ public class LevelManager : MonoBehaviour
         CurrentPhase = EPhase.assault;
     }
 
-    public void EndAssaultPhase()
+    public void EndAssaultPhase(bool force = false)
     {
-        if (CurrentPhase == EPhase.assault)
+        if (force || CurrentPhase == EPhase.assault)
         {
             CurrentPhase = EPhase.waiting;
 

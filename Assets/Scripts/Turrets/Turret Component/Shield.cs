@@ -22,7 +22,7 @@ public class Shield : MonoBehaviour
     void Start()
     {
         //set distance from world using y local position in the prefab
-        distanceFromWorld = transform.localPosition.y;
+        distanceFromWorld = transform.localPosition.z;
     }
 
     void OnTriggerEnter(Collider other)
@@ -31,7 +31,6 @@ public class Shield : MonoBehaviour
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy)
         {
-            enemy.GetDamageFromShield();
             ShieldGetDamage();
         }
     }
@@ -114,7 +113,7 @@ public class Shield : MonoBehaviour
         if (spawnShield_Coroutine != null)
             StopCoroutine(spawnShield_Coroutine);
 
-        //get finale scale
+        //get final scale
         Vector3 finalScale = Vector3.zero;
 
         //start despawn

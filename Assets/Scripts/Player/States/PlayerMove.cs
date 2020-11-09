@@ -184,7 +184,7 @@ public class PlayerMove : PlayerState
         GameManager.instance.world.Rotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection);
 
         //change state
-        player.SetState(new PlayerWaitRotation(player, coordinates));
+        player.SetState(new PlayerWaitRotation(player, coordinates, WorldUtility.LateralFace(transform), rotateDirection));
     }
 
 }
