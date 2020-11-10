@@ -445,6 +445,27 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
+    public Vector3 RotateTowardsFace(Vector3 current, EFace face)
+    {
+        switch (face)
+        {
+            case EFace.front:
+                return current;
+            case EFace.right:
+                return new Vector3(-current.z, current.y, current.x);
+            case EFace.back:
+                return new Vector3(-current.x, current.y, -current.z);
+            case EFace.left:
+                return new Vector3(current.z, current.y, -current.x);
+            case EFace.up:
+                return new Vector3(current.x, -current.z, current.y);
+            case EFace.down:
+                return new Vector3(current.x, current.z, -current.y);
+        }
+
+        return current;
+    }
+
     public Cell[] GetCellsAround(Coordinates coordinates)
     {
         List<Cell> cellsAround = new List<Cell>();

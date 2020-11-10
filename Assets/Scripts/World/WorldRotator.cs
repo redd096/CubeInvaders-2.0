@@ -98,9 +98,13 @@ public class WorldRotator
 
     void SelectCell(Coordinates coordinates, ref List<Cell> cellsToRotate, ref List<Coordinates> cellsKeys)
     {
-        //add cell and coordinates
-        cellsToRotate.Add(world.Cells[coordinates]);
-        cellsKeys.Add(coordinates);
+        //only if not already in the lists
+        if (!cellsKeys.Contains(coordinates))
+        {
+            //add cell and coordinates
+            cellsToRotate.Add(world.Cells[coordinates]);
+            cellsKeys.Add(coordinates);
+        }
     }
 
     void SelectAllFaceCells(EFace face, ref List<Cell> cellsToRotate, ref List<Coordinates> cellsKeys)
