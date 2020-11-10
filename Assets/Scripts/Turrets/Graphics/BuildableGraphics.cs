@@ -21,7 +21,7 @@ public class BuildableGraphics : MonoBehaviour
             return;
 
         if (baseToRotate)
-            TwoAxis_LookAtEnemy();
+            LookAtEnemy_TwoAxis();
         else
             LookAtEnemy();
     }
@@ -31,128 +31,82 @@ public class BuildableGraphics : MonoBehaviour
         return null;
     }
 
-    #region two axis
-
-    void TwoAxis_LookAtEnemy()
-    {
-        //need model for animation
-        if (objectToRotate == null)
-            return;
-
-        //find forward direction (from model to enemy)
-        Vector3 forwardBase;
-        if (GetEnemy() && buildableObject.IsActive)
-        {
-            //get enemy position, but z axis is the same of the base
-            Vector3 enemyBasePosition = GetEnemy().transform.position;
-            SetZAt(enemyBasePosition, GetEnemy().coordinatesToAttack.face, baseToRotate.position);
-
-            forwardBase = (enemyBasePosition - baseToRotate.position).normalized;
-
-            Vector3 enemyObjectPosition = GetEnemy().transform.position;
-
-        }
-        //else normal position
-        else
-        {
-            forwardBase = transform.forward;
-        }
-
-        //set new rotation
-        TwoAxis_SetRotation(forwardBase);
-    }
-
-    void TwoAxis_SetRotation(Vector3 forwardDirection)
-    {
-        //già questo sta dando un problema, non gira solo su un asse come volevo .-.
-
-        //set new rotation
-        Quaternion forwardRotation = Quaternion.FromToRotation(baseToRotate.forward, forwardDirection) * baseToRotate.rotation;
-        //baseToRotate.rotation = forwardRotation;
-        baseToRotate.rotation = Quaternion.LookRotation(forwardDirection);
-    }
-
-    Vector3 SetZAt(Vector3 vector, EFace face, Vector3 value)
-    {
-        switch (face)
-        {
-            case EFace.front:
-                vector.z = value.z;
-                break;
-            case EFace.right:
-                vector.x = value.x;
-                break;
-            case EFace.back:
-                vector.z = value.z;
-                break;
-            case EFace.left:
-                vector.x = value.x;
-                break;
-            case EFace.up:
-                vector.y = value.y;
-                break;
-            case EFace.down:
-                vector.y = value.y;
-                break;
-        }
-
-        return vector;
-    }
-
-    Vector3 SetXAt(Vector3 vector, EFace face, Vector3 value)
-    {
-        //nasce un problema, non so dove dovrei girare la torretta
-
-        switch (face)
-        {
-            case EFace.front:
-                break;
-            case EFace.right:
-                break;
-            case EFace.back:
-                break;
-            case EFace.left:
-                break;
-            case EFace.up:
-                break;
-            case EFace.down:
-                break;
-        }
-
-        return vector;
-    }
-
-    #endregion
-
-    #region all axis
+    #region look at enemy
 
     void LookAtEnemy()
     {
-        //need model for animation
-        if (objectToRotate == null) 
-            return;
-
         //find forward direction (from model to enemy)
         Vector3 forwardDirection;
         if (GetEnemy() && buildableObject.IsActive)
         {
             forwardDirection = (GetEnemy().transform.position - objectToRotate.position).normalized;
         }
-        //else normal position
+        //else normal forward
         else
         {
             forwardDirection = transform.forward;
         }
 
         //set new rotation
-        SetRotation(forwardDirection);
+        SetRotation(objectToRotate, forwardDirection);
     }
 
-    void SetRotation(Vector3 forwardDirection)
+    void LookAtEnemy_TwoAxis()
     {
+        //if active and there is an enemy, rotate towards enemy
+        if (buildableObject.IsActive && GetEnemy())
+        {
+            RotateOnAxis(baseToRotate, GetEnemy().transform.position, transform.forward, baseToRotate.up);
+            RotateOnAxis(objectToRotate, GetEnemy().transform.position, baseToRotate.right, objectToRotate.right);
+        }
+        //else look normal forward
+        else
+        {
+            SetRotation(baseToRotate, -transform.up);
+            SetRotation(objectToRotate, transform.forward);
+        }
+    }
+
+    #endregion
+
+    #region rotate transform
+
+    void RotateOnAxis(Transform transformToRotate, Vector3 forwardPosition, Vector3 planeAxis, Vector3 rotateAxis)
+    {
+        if (transformToRotate == null)
+            return;
+
+        //project enemy and object position on same plane, then calculate direction
+        Vector3 enemyPosition = Vector3.ProjectOnPlane(forwardPosition, planeAxis);
+        Vector3 transformPosition = Vector3.ProjectOnPlane(transformToRotate.position, planeAxis);
+        Vector3 direction = (enemyPosition - transformPosition).normalized;
+
+        //calculate angle (if angle is 0, stop rotation)
+        float angle = Vector3.Angle(direction, transformToRotate.forward);
+        if (angle == Mathf.Epsilon)
+            return;
+
+        //get rotation on axis 
+        Quaternion rotation = Quaternion.AngleAxis(angle, rotateAxis) * transformToRotate.rotation;
+
+        //if angle is greater, then angle must be negative
+        if (Vector3.Angle(direction, rotation * Vector3.forward) > angle)
+        {
+            rotation = Quaternion.AngleAxis(-angle, rotateAxis) * transformToRotate.rotation;
+        }
+
+        //set rotation
+        transformToRotate.rotation = rotation;
+    }
+
+    void SetRotation(Transform transformToRotate, Vector3 forwardDirection)
+    {
+        if (transformToRotate == null)
+            return;
+
         //set new rotation
-        Quaternion forwardRotation = Quaternion.FromToRotation(objectToRotate.forward, forwardDirection) * objectToRotate.rotation;
-        objectToRotate.rotation = forwardRotation;
+        Quaternion forwardRotation = Quaternion.FromToRotation(transformToRotate.forward, forwardDirection) * transformToRotate.rotation;
+        transformToRotate.rotation = forwardRotation;
     }
 
     #endregion
