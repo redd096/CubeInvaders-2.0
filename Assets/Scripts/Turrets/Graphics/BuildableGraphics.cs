@@ -56,8 +56,8 @@ public class BuildableGraphics : MonoBehaviour
         //if active and there is an enemy, rotate towards enemy
         if (buildableObject.IsActive && GetEnemy())
         {
-            RotateOnAxis(baseToRotate, GetEnemy().transform.position, transform.forward, baseToRotate.up);
-            RotateOnAxis(objectToRotate, GetEnemy().transform.position, baseToRotate.right, objectToRotate.right);
+            RotateOnAxis(baseToRotate, transform.forward, baseToRotate.up);
+            RotateOnAxis(objectToRotate, baseToRotate.right, objectToRotate.right);
         }
         //else look normal forward
         else
@@ -71,13 +71,13 @@ public class BuildableGraphics : MonoBehaviour
 
     #region rotate transform
 
-    void RotateOnAxis(Transform transformToRotate, Vector3 forwardPosition, Vector3 planeAxis, Vector3 rotateAxis)
+    void RotateOnAxis(Transform transformToRotate, Vector3 planeAxis, Vector3 rotateAxis)
     {
         if (transformToRotate == null)
             return;
 
         //project enemy and object position on same plane, then calculate direction
-        Vector3 enemyPosition = Vector3.ProjectOnPlane(forwardPosition, planeAxis);
+        Vector3 enemyPosition = Vector3.ProjectOnPlane(GetEnemy().transform.position, planeAxis);
         Vector3 transformPosition = Vector3.ProjectOnPlane(transformToRotate.position, planeAxis);
         Vector3 direction = (enemyPosition - transformPosition).normalized;
 
