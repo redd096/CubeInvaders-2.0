@@ -10,7 +10,7 @@ PrefabInstance:
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: shotPrefab
       value: 
-      objectReference: {fileID: 6942024394601423785, guid: 76a95295373b2e24fa8d852447702c17, type: 3}
+      objectReference: {fileID: 8880211004750479159, guid: 410adeb66753fd045a060e9f4c4e652f, type: 3}
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -27,6 +27,10 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: baseToRotate
+      value: 
+      objectReference: {fileID: 793293231129885956}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretForest
@@ -49,3 +53,8 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+--- !u!4 &793293231129885956 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 4974996485060731970, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 5623002573002463558}
+  m_PrefabAsset: {fileID: 0}
