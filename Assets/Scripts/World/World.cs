@@ -381,7 +381,18 @@ public class World : MonoBehaviour
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
     public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
     {
-        worldRotator.Rotate(coordinates.face, coordinates.x, coordinates.y, lookingFace, rotateDirection);
+        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+    }
+
+    /// <summary>
+    /// Rotate the cube
+    /// </summary>
+    /// <param name="coordinates">coordinates to rotate</param>
+    /// <param name="lookingFace">rotation of the camera</param>
+    /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
+    public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    {
+        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
     }
 
     /// <summary>
@@ -445,27 +456,6 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
-    public Vector3 RotateTowardsFace(Vector3 current, EFace face)
-    {
-        switch (face)
-        {
-            case EFace.front:
-                return current;
-            case EFace.right:
-                return new Vector3(-current.z, current.y, current.x);
-            case EFace.back:
-                return new Vector3(-current.x, current.y, -current.z);
-            case EFace.left:
-                return new Vector3(current.z, current.y, -current.x);
-            case EFace.up:
-                return new Vector3(current.x, -current.z, current.y);
-            case EFace.down:
-                return new Vector3(current.x, current.z, -current.y);
-        }
-
-        return current;
-    }
-
     public Cell[] GetCellsAround(Coordinates coordinates)
     {
         List<Cell> cellsAround = new List<Cell>();
@@ -475,9 +465,9 @@ public class World : MonoBehaviour
         foreach (Vector2Int direction in directions)
         {
             //if there is a cell and is != null
-            if (GameManager.instance.world.Cells.ContainsKey(coordinates + direction))
+            if (Cells.ContainsKey(coordinates + direction))
             {
-                Cell cell = GameManager.instance.world.Cells[coordinates + direction];
+                Cell cell = Cells[coordinates + direction];
                 if (cell != null)
                 {
                     //add to the list

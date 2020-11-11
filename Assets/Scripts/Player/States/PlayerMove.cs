@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
 
 public class PlayerMove : PlayerState
 {
@@ -180,11 +181,51 @@ public class PlayerMove : PlayerState
 
     void DoRotation(ERotateDirection rotateDirection)
     {
-        //do rotation
-        GameManager.instance.world.Rotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection);
+        //if selector is greater, rotate more cells
+        if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
+        {
+            List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);
+            coordinatesToRotate.Add(coordinates);
+            GameManager.instance.world.Rotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection);
+        }
+        //else rotate only this cell
+        else
+        {
+            GameManager.instance.world.Rotate(coordinates, WorldUtility.LateralFace(transform), rotateDirection);
+        }
 
         //change state
         player.SetState(new PlayerWaitRotation(player, coordinates, WorldUtility.LateralFace(transform), rotateDirection));
     }
 
+    List<Coordinates> RotateMoreCells(ERotateDirection rotateDirection)
+    {
+        int selectorSize = GameManager.instance.levelManager.levelConfig.SelectorSize;
+
+        //check if get cells on x or y
+        bool useX = rotateDirection == ERotateDirection.up || rotateDirection == ERotateDirection.down;
+        int value = useX ? coordinates.x : coordinates.y;
+
+        //check if there are enough cells to the right (useX) or up (!useX)
+        bool increase = value + selectorSize - 1 < GameManager.instance.world.worldConfig.NumberCells;
+
+        //min (next after our cell) and max (until selector size)
+        //or min (from selector cell) and max (next after our cell)
+        int min = increase ? value + 1 : value - (selectorSize - 1);
+        int max = increase ? value + selectorSize : value;
+
+        //increase or decrease
+        List<Coordinates> coordinatesToRotate = new List<Coordinates>();
+        for (int i = min; i < max; i++)
+        {
+            //get coordinates using x or y
+            Coordinates coords = useX ? new Coordinates(coordinates.face, i, coordinates.y) : new Coordinates(coordinates.face, coordinates.x, i);
+
+            //if there is a cell, add it
+            if (GameManager.instance.world.Cells.ContainsKey(coords))
+                coordinatesToRotate.Add(coords);
+        }
+
+        return coordinatesToRotate;
+    }
 }

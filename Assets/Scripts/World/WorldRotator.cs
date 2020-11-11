@@ -22,6 +22,9 @@ public class WorldRotator
             return rotatorParent;
         } }
 
+    Coordinates[] coordinatesToRotate;
+    List<Cell> cellsToRotate = new List<Cell>();
+    List<Coordinates> cellsKeys = new List<Coordinates>();
     Coroutine rotatingWorld_Coroutine;
 
     #endregion
@@ -35,7 +38,7 @@ public class WorldRotator
 
     #region general
 
-    void OnWorldRotate(List<Cell> cellsToRotate)
+    void OnWorldRotate()
     {
         //foreach cell to rotate
         foreach (Cell cell in cellsToRotate)
@@ -48,55 +51,36 @@ public class WorldRotator
 
     void SetCoordinates(Cell oldCell, Coordinates newCoords)
     {
-        //set new cell (in dictionary and inside the object)
+        //set new cell in dictionary
         world.Cells[newCoords] = oldCell;
+
+        //and update coordinates in game object
         world.Cells[newCoords].coordinates = newCoords;
     }
 
-    Coordinates UpdateCoordinatesCompleteFace(Coordinates coords, bool forward)
+    Coordinates UpdateCoordinatesCompleteFace(Coordinates coordinates, bool forward)
     {
-        Coordinates newCoords = coords;
-
         if (forward)
         {
             //rotate the face, so change coordinates x and y, but not the face
 
-            Vector2Int v = Vector2Math.InverseEqual(coords.x, coords.y, world.worldConfig.NumberCells);
-            newCoords.x = v.x;
-            newCoords.y = v.y;
+            Vector2Int v = Vector2Math.InverseEqual(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
+            coordinates.x = v.x;
+            coordinates.y = v.y;
         }
         else
         {
             //rotate the face, so change coordinates x and y, but not the face
 
-            Vector2Int v = Vector2Math.EqualInverse(coords.x, coords.y, world.worldConfig.NumberCells);
-            newCoords.x = v.x;
-            newCoords.y = v.y;
+            Vector2Int v = Vector2Math.EqualInverse(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
+            coordinates.x = v.x;
+            coordinates.y = v.y;
         }
 
-        return newCoords;
+        return coordinates;
     }
 
-    void SelectAllFace(int line, EFace face1, EFace face2, ref List<Cell> cellsToRotate, ref List<Coordinates> cellsKeys)
-    {
-        //select all face 1 or 2
-        if (line <= 0 || line >= world.worldConfig.NumberCells - 1)
-        {
-            if (world.worldConfig.NumberCells > 1)
-            {
-                EFace face = line <= 0 ? face1 : face2;
-                SelectAllFaceCells(face, ref cellsToRotate, ref cellsKeys);
-            }
-            else
-            {
-                //if only one cell, then select both faces
-                SelectAllFaceCells(face1, ref cellsToRotate, ref cellsKeys);
-                SelectAllFaceCells(face2, ref cellsToRotate, ref cellsKeys);
-            }
-        }
-    }
-
-    void SelectCell(Coordinates coordinates, ref List<Cell> cellsToRotate, ref List<Coordinates> cellsKeys)
+    void SelectCell(Coordinates coordinates)
     {
         //only if not already in the lists
         if (!cellsKeys.Contains(coordinates))
@@ -107,14 +91,33 @@ public class WorldRotator
         }
     }
 
-    void SelectAllFaceCells(EFace face, ref List<Cell> cellsToRotate, ref List<Coordinates> cellsKeys)
+    void SelectAllFace(int line, EFace face1, EFace face2)
+    {
+        //select all face 1 or all face 2
+        if (line <= 0 || line >= world.worldConfig.NumberCells - 1)
+        {
+            if (world.worldConfig.NumberCells > 1)
+            {
+                EFace face = line <= 0 ? face1 : face2;
+                SelectAllFaceCells(face);
+            }
+            else
+            {
+                //if only one cell, then select both faces
+                SelectAllFaceCells(face1);
+                SelectAllFaceCells(face2);
+            }
+        }
+    }
+
+    void SelectAllFaceCells(EFace face)
     {
         //add cell and coordinates for every row and column on this face
         for (int x = 0; x < world.worldConfig.NumberCells; x++)
         {
             for (int y = 0; y < world.worldConfig.NumberCells; y++)
             {
-                SelectCell(new Coordinates(face, x, y), ref cellsToRotate, ref cellsKeys);
+                SelectCell(new Coordinates(face, x, y));
             }
         }
     }
@@ -137,8 +140,11 @@ public class WorldRotator
         return false;
     }
 
-    IEnumerator AnimationRotate(List<Cell> cellsToRotate, Vector3 rotateAxis, bool forward)
+    IEnumerator AnimationRotate(Vector3 rotateAxis, bool forward)
     {
+        //call event on world rotate
+        OnWorldRotate();
+
         //set parent
         cellsToRotate.SetParent(RotatorParent);
 
@@ -179,72 +185,63 @@ public class WorldRotator
 
     #region lateral
 
-    void RotateLateralRow(int line, bool toRight)
+    void RotateLateralRow(bool toRight)
     {
-        //can't rotate during another rotation
-        if (rotatingWorld_Coroutine != null)
-            return;
+        //foreach coordinate, use y to select
+        foreach (Coordinates coordinates in coordinatesToRotate)
+        {
+            int y = coordinates.y;
 
-        List<Cell> cellsToRotate;
-        List<Coordinates> cellsKeys;
-
-        //rotate line
-        cellsToRotate = SelectLateralRowCells(line, out cellsKeys);
-
-        //call event
-        OnWorldRotate(cellsToRotate);
+            //rotate y
+            SelectLateralRowCells(y);
+        }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.up, !toRight));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.up, !toRight));
 
         //update dictionary
-        UpdateDictionaryLateralRow(cellsKeys, toRight);
+        UpdateDictionaryLateralRow(toRight);
     }
 
-    List<Cell> SelectLateralRowCells(int line, out List<Coordinates> cellsKeys)
+    void SelectLateralRowCells(int y)
     {
-        List<Cell> cellsToRotate = new List<Cell>();
-        cellsKeys = new List<Coordinates>();
-
-        //select line in every lateral face
+        //select y in every lateral face
         for (int faceIndex = 0; faceIndex < 4; faceIndex++)
         {
             for (int x = 0; x < world.worldConfig.NumberCells; x++)
             {
-                SelectCell(new Coordinates((EFace)faceIndex, x, line), ref cellsToRotate, ref cellsKeys);
+                SelectCell(new Coordinates((EFace)faceIndex, x, y));
             }
         }
 
         //select all face down or up
-        SelectAllFace(line, EFace.down, EFace.up, ref cellsToRotate, ref cellsKeys);
-
-        return cellsToRotate;
+        SelectAllFace(y, EFace.down, EFace.up);
     }
 
-    void UpdateDictionaryLateralRow(List<Coordinates> cellsKeys, bool toRight)
+    void UpdateDictionaryLateralRow(bool toRight)
     {
         Dictionary<Coordinates, Cell> oldCells = world.Cells.CreateCopy();
 
-        foreach (Coordinates coords in cellsKeys)
+        foreach (Coordinates previousCoords in cellsKeys)
         {
-            Coordinates newCoords = coords;
+            Coordinates newCoords = previousCoords;
 
-            if (coords.face != EFace.up && coords.face != EFace.down)
+            if (previousCoords.face != EFace.up && previousCoords.face != EFace.down)
             {
                 //get coords same position but next or prev face
-                newCoords.face = (EFace)WorldUtility.SelectIndex((int)coords.face, toRight, 4);
+                newCoords.face = (EFace)WorldUtility.SelectIndex((int)previousCoords.face, toRight, 4);
 
                 //face: front -> right   //right -> back   //back -> left   //left -> front
             }
             else
             {
                 //rotate the row, so change coordinates x and y, but not the face
-                bool rotateToRight = coords.face == EFace.up ? toRight : !toRight;
-                newCoords = UpdateCoordinatesCompleteFace(coords, rotateToRight);
+                bool rotateToRight = previousCoords.face == EFace.up ? toRight : !toRight;
+                newCoords = UpdateCoordinatesCompleteFace(previousCoords, rotateToRight);
             }
 
             //set new coordinates
-            SetCoordinates(oldCells[coords], newCoords);
+            SetCoordinates(oldCells[previousCoords], newCoords);
         }
     }
 
@@ -252,134 +249,119 @@ public class WorldRotator
 
     #region up and down
 
-    void RotateUpDownRow(EFace face, int line, bool toRight)
+    void RotateUpDownRow(EFace face, bool toRight)
     {
-        //can't rotate during another rotation
-        if (rotatingWorld_Coroutine != null)
-            return;
-
-        List<Cell> cellsToRotate;
-        List<Coordinates> cellsKeys;
-
-        //rotate line. Down face is the inverse
-        if (face == EFace.up)
+        //foreach coordinate, use y to select
+        foreach (Coordinates coordinates in coordinatesToRotate)
         {
-            cellsToRotate = SelectUpDownRowCells(line, out cellsKeys);
-        }
-        else
-        {
-            cellsToRotate = SelectUpDownRowCells(WorldMath.InverseN(line, world.worldConfig.NumberCells), out cellsKeys);
+            int y = coordinates.y;
 
-            //in the down face is inverse
-            toRight = !toRight;
-        }
+            //rotate y. Down face is the inverse
+            if (face == EFace.up)
+            {
+                SelectUpDownRowCells(y);
+            }
+            else
+            {
+                SelectUpDownRowCells(WorldMath.InverseN(y, world.worldConfig.NumberCells));
 
-        //call event
-        OnWorldRotate(cellsToRotate);
+                //in the down face is inverse
+                toRight = !toRight;
+            }
+        }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, !toRight));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, !toRight));
 
         //update dictionary
-        UpdateDictionaryUpDownRow(cellsKeys, toRight);
+        UpdateDictionaryUpDownRow(toRight);
     }
 
-    List<Cell> SelectUpDownRowCells(int line, out List<Coordinates> cellsKeys)
+    void SelectUpDownRowCells(int y)
     {
-        List<Cell> cellsToRotate = new List<Cell>();
-        cellsKeys = new List<Coordinates>();
-
-        //select line in up, right, down, left face
+        //select y in up, right, down, left face
         for (int faceIndex = 0; faceIndex < 4; faceIndex++)
         {
             //set f equal to faceIndex, but instead of front and back, use up and down
-            EFace f = (EFace)faceIndex;
+            EFace face = (EFace)faceIndex;
 
-            if ((EFace)faceIndex == EFace.front) f = EFace.up;
-            if ((EFace)faceIndex == EFace.back) f = EFace.down;
+            if ((EFace)faceIndex == EFace.front) face = EFace.up;
+            if ((EFace)faceIndex == EFace.back) face = EFace.down;
 
             for (int x = 0; x < world.worldConfig.NumberCells; x++)
             {
-                Coordinates coordinates = new Coordinates();
-
-                switch (f)
+                switch (face)
                 {
                     case EFace.up:
                         //up select the row
-                        coordinates = new Coordinates(f, x, line);
+                        SelectCell(new Coordinates(face, x, y));
                         break;
                     case EFace.down:
                         //down select the row but inverse of up
-                        coordinates = new Coordinates(f, x, WorldMath.InverseN(line, world.worldConfig.NumberCells));
+                        SelectCell(new Coordinates(face, x, WorldMath.InverseN(y, world.worldConfig.NumberCells)));
                         break;
                     case EFace.right:
                         //right select the column instead of row
-                        coordinates = new Coordinates(f, line, x);
+                        SelectCell(new Coordinates(face, y, x));
                         break;
                     case EFace.left:
                         //left select the column instead of row
                         //but if you are rotating the first row, this is the last column, if you are rotating the last row, this is the first column
-                        coordinates = new Coordinates(f, WorldMath.InverseN(line, world.worldConfig.NumberCells), x);
+                        SelectCell(new Coordinates(face, WorldMath.InverseN(y, world.worldConfig.NumberCells), x));
                         break;
                 }
-
-                SelectCell(coordinates, ref cellsToRotate, ref cellsKeys);
             }
         }
 
         //select all face front or back
-        SelectAllFace(line, EFace.front, EFace.back, ref cellsToRotate, ref cellsKeys);
-
-        return cellsToRotate;
+        SelectAllFace(y, EFace.front, EFace.back);
     }
 
-    void UpdateDictionaryUpDownRow(List<Coordinates> cellsKeys, bool toRight)
+    void UpdateDictionaryUpDownRow(bool toRight)
     {
         Dictionary<Coordinates, Cell> oldCells = world.Cells.CreateCopy();
 
-        foreach (Coordinates coords in cellsKeys)
+        foreach (Coordinates previousCoords in cellsKeys)
         {
-            Coordinates newCoords = coords;
+            Coordinates newCoords = previousCoords;
             
-            if(coords.face != EFace.front && coords.face != EFace.back)
+            if(previousCoords.face != EFace.front && previousCoords.face != EFace.back)
             {
                 //change face and also coordinates
-                newCoords = CoordsToRight(coords, toRight);
+                newCoords = CoordsToRight(previousCoords, toRight);
             }
             else
             {
                 //rotate the row, so change coordinates x and y, but not the face
-                bool rotateToRight = coords.face == EFace.back ? toRight : !toRight;
-                newCoords = UpdateCoordinatesCompleteFace(coords, rotateToRight);
+                bool rotateToRight = previousCoords.face == EFace.back ? toRight : !toRight;
+                newCoords = UpdateCoordinatesCompleteFace(previousCoords, rotateToRight);
             }
 
             //set new coordinates
-            SetCoordinates(oldCells[coords], newCoords);
+            SetCoordinates(oldCells[previousCoords], newCoords);
         }
     }
 
-    Coordinates CoordsToRight(Coordinates coords, bool toRight)
+    Coordinates CoordsToRight(Coordinates coordinates, bool toRight)
     {
-        Coordinates newCoords = coords;
-
         //calculate new face
-        newCoords.face = WorldUtility.FindFaceUpToRight(coords.face, toRight);
+        coordinates.face = WorldUtility.FindFaceUpToRight(coordinates.face, toRight);
 
         //get coordinates x,y of face to the right or to the left
         if (toRight)
         {
-            Vector2Int v = Vector2Math.EqualInverse(coords.x, coords.y, world.worldConfig.NumberCells);
-            newCoords.x = v.x;
-            newCoords.y = v.y;
+            Vector2Int v = Vector2Math.EqualInverse(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
+            coordinates.x = v.x;
+            coordinates.y = v.y;
         }
         else
         {
-            Vector2Int v = Vector2Math.InverseEqual(coords.x, coords.y, world.worldConfig.NumberCells);
-            newCoords.x = v.x;
-            newCoords.y = v.y;
+            Vector2Int v = Vector2Math.InverseEqual(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
+            coordinates.x = v.x;
+            coordinates.y = v.y;
         }
 
-        return newCoords;
+        return coordinates;
     }
 
     #endregion
@@ -390,108 +372,96 @@ public class WorldRotator
 
     #region front
 
-    void RotateFrontColumn(EFace face, int line, bool toUp)
+    void RotateFrontColumn(EFace face, bool toUp)
     {
-        //can't rotate during another rotation
-        if (rotatingWorld_Coroutine != null)
-            return;
-
-        List<Cell> cellsToRotate;
-        List<Coordinates> cellsKeys;
-
-        //rotate line. Back face is the inverse
-        if (face != EFace.back)
+        //foreach coordinate, use x to select
+        foreach (Coordinates coordinates in coordinatesToRotate)
         {
-            cellsToRotate = SelectFrontColumnCells(line, out cellsKeys);
-        }
-        else
-        {
-            cellsToRotate = SelectFrontColumnCells(WorldMath.InverseN(line, world.worldConfig.NumberCells), out cellsKeys);
+            int x = coordinates.x;
 
-            //in the back face is inverse
-            toUp = !toUp;
-        }
+            //rotate x. Back face is the inverse
+            if (face != EFace.back)
+            {
+                SelectFrontColumnCells(x);
+            }
+            else
+            {
+                SelectFrontColumnCells(WorldMath.InverseN(x, world.worldConfig.NumberCells));
 
-        //call event
-        OnWorldRotate(cellsToRotate);
+                //in the back face is inverse
+                toUp = !toUp;
+            }
+        }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.right, toUp));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.right, toUp));
 
         //update dictionary
-        UpdateDictionaryFrontColumn(cellsKeys, toUp);
+        UpdateDictionaryFrontColumn(toUp);
     }
 
-    List<Cell> SelectFrontColumnCells(int line, out List<Coordinates> cellsKeys)
-    {
-        List<Cell> cellsToRotate = new List<Cell>();
-        cellsKeys = new List<Coordinates>();
-        
-        //select line in every front face
+    void SelectFrontColumnCells(int x)
+    {        
+        //select x in every front face
         for (int faceIndex = 0; faceIndex < 4; faceIndex++)
         {
             //set f equal to faceIndex, but instead of right and left, use up and down
-            EFace f = (EFace)faceIndex;
+            EFace face = (EFace)faceIndex;
 
-            if ((EFace)faceIndex == EFace.right) f = EFace.up;
-            if ((EFace)faceIndex == EFace.left) f = EFace.down;
+            if ((EFace)faceIndex == EFace.right) face = EFace.up;
+            if ((EFace)faceIndex == EFace.left) face = EFace.down;
 
             for (int y = 0; y < world.worldConfig.NumberCells; y++)
             {
-                //set l equal to line
-                int l = line;
-
+                //line is equal to x
                 //but when is face back is the inverse of the other faces, so column 0 is 2, column 1 is 1, column 2 is 0
-                if (f == EFace.back)
-                    l = WorldMath.InverseN(line, world.worldConfig.NumberCells);
+                int line = face != EFace.back ? x : WorldMath.InverseN(x, world.worldConfig.NumberCells);
 
-                SelectCell(new Coordinates(f, l, y), ref cellsToRotate, ref cellsKeys);
+                SelectCell(new Coordinates(face, line, y));
             }
         }
 
         //select all face right or left
-        SelectAllFace(line, EFace.left, EFace.right, ref cellsToRotate, ref cellsKeys);
-
-        return cellsToRotate;
+        SelectAllFace(x, EFace.left, EFace.right);
     }
 
-    void UpdateDictionaryFrontColumn(List<Coordinates> cellsKeys, bool toUp)
+    void UpdateDictionaryFrontColumn(bool toUp)
     {
         Dictionary<Coordinates, Cell> oldCells = world.Cells.CreateCopy();
 
-        foreach (Coordinates coords in cellsKeys)
+        foreach (Coordinates previousCoords in cellsKeys)
         {
-            Coordinates newCoords = coords;
+            Coordinates newCoords = previousCoords;
 
-            if (coords.face != EFace.right && coords.face != EFace.left)
+            if (previousCoords.face != EFace.right && previousCoords.face != EFace.left)
             {
                 //change face and coordinates
-                newCoords = CoordsFrontColumn(coords, toUp);
+                newCoords = CoordsFrontColumn(previousCoords, toUp);
             }
             else
             {
                 //rotate the column, so change coordinates x and y, but not the face
-                bool rotateToUp = coords.face == EFace.left ? toUp : !toUp;
-                newCoords = UpdateCoordinatesCompleteFace(coords, rotateToUp);
+                bool rotateToUp = previousCoords.face == EFace.left ? toUp : !toUp;
+                newCoords = UpdateCoordinatesCompleteFace(previousCoords, rotateToUp);
             }
 
             //set new coordinates
-            SetCoordinates(oldCells[coords], newCoords);
+            SetCoordinates(oldCells[previousCoords], newCoords);
         }
     }
 
-    Coordinates CoordsFrontColumn(Coordinates coords, bool toUp)
+    Coordinates CoordsFrontColumn(Coordinates coordinates, bool toUp)
     {
-        Coordinates newCoords = coords;
+        Coordinates newCoords = coordinates;
 
         //calculate new face
-        newCoords.face = WorldUtility.FindFaceFrontToUp(coords.face, toUp);
+        newCoords.face = WorldUtility.FindFaceFrontToUp(coordinates.face, toUp);
 
         //get coordinates x,y of face to the top or to the down
-        if (coords.face == EFace.back || newCoords.face == EFace.back)
+        if (coordinates.face == EFace.back || newCoords.face == EFace.back)
         {
             //if the prev face or next face is Face.back, then you Self_InverseInverse
-            Vector2Int v = Vector2Math.Self_InverseInverse(coords.x, coords.y, world.worldConfig.NumberCells);
+            Vector2Int v = Vector2Math.Self_InverseInverse(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
             newCoords.x = v.x;
             newCoords.y = v.y;
         }
@@ -503,133 +473,118 @@ public class WorldRotator
 
     #region right and left
 
-    void RotateRightLeftColumn(EFace startFace, int line, bool toUp)
+    void RotateRightLeftColumn(EFace startFace, bool toUp)
     {
-        //can't rotate during another rotation
-        if (rotatingWorld_Coroutine != null)
-            return;
-
-        List<Cell> cellsToRotate;
-        List<Coordinates> cellsKeys;
-
-        //right face. Left face is the inverse
-        if (startFace == EFace.right)
+        //foreach coordinate, use x to select
+        foreach (Coordinates coordinates in coordinatesToRotate)
         {
-            cellsToRotate = SelectRightLeftColumnCells(line, out cellsKeys);
-        }
-        else
-        {
-            cellsToRotate = SelectRightLeftColumnCells(WorldMath.InverseN(line, world.worldConfig.NumberCells), out cellsKeys);
+            int x = coordinates.x;
 
-            //in the left is inverse
-            toUp = !toUp;
-        }
+            //right face. Left face is the inverse
+            if (startFace == EFace.right)
+            {
+                SelectRightLeftColumnCells(x);
+            }
+            else
+            {
+                SelectRightLeftColumnCells(WorldMath.InverseN(x, world.worldConfig.NumberCells));
 
-        //call event
-        OnWorldRotate(cellsToRotate);
+                //in the left is inverse
+                toUp = !toUp;
+            }
+        }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(cellsToRotate, Vector3.forward, toUp));
+        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, toUp));
 
         //update dictionary
-        UpdateDictionaryRightLeftColumn(cellsKeys, toUp);
+        UpdateDictionaryRightLeftColumn(toUp);
     }
 
-    List<Cell> SelectRightLeftColumnCells(int line, out List<Coordinates> cellsKeys)
+    void SelectRightLeftColumnCells(int x)
     {
-        List<Cell> cellsToRotate = new List<Cell>();
-        cellsKeys = new List<Coordinates>();
-
         //select line in up, right, down, left face
         for (int faceIndex = 0; faceIndex < 4; faceIndex++)
         {
             //set f equal to faceIndex, but instead of front and back, use up and down
-            EFace f = (EFace)faceIndex;
+            EFace face = (EFace)faceIndex;
 
-            if ((EFace)faceIndex == EFace.front) f = EFace.up;
-            if ((EFace)faceIndex == EFace.back) f = EFace.down;
+            if ((EFace)faceIndex == EFace.front) face = EFace.up;
+            if ((EFace)faceIndex == EFace.back) face = EFace.down;
 
             for (int y = 0; y < world.worldConfig.NumberCells; y++)
             {
-                Coordinates coordinates = new Coordinates();
-
-                switch (f)
+                switch (face)
                 {
                     case EFace.right:
                         //select column
-                        coordinates = new Coordinates(f, line, y);
+                        SelectCell(new Coordinates(face, x, y));
                         break;
                     case EFace.left:
                         //left select the column, but inverse (when select 0 is the last, when select last is the 0)
-                        coordinates = new Coordinates(f, WorldMath.InverseN(line, world.worldConfig.NumberCells), y);
+                        SelectCell(new Coordinates(face, WorldMath.InverseN(x, world.worldConfig.NumberCells), y));
                         break;
                     case EFace.up:
                         //up select the row instead of column
-                        coordinates = new Coordinates(f, y, line);
+                        SelectCell(new Coordinates(face, y, x));
                         break;
                     case EFace.down:
                         //down is inverse of up
-                        coordinates = new Coordinates(f, y, WorldMath.InverseN(line, world.worldConfig.NumberCells));
+                        SelectCell(new Coordinates(face, y, WorldMath.InverseN(x, world.worldConfig.NumberCells)));
                         break;
                 }
-
-                SelectCell(coordinates, ref cellsToRotate, ref cellsKeys);
             }
         }
 
         //select all face front or back
-        SelectAllFace(line, EFace.front, EFace.back, ref cellsToRotate, ref cellsKeys);
-
-        return cellsToRotate;
+        SelectAllFace(x, EFace.front, EFace.back);
     }
 
-    void UpdateDictionaryRightLeftColumn(List<Coordinates> cellsKeys, bool toUp)
+    void UpdateDictionaryRightLeftColumn(bool toUp)
     {
         Dictionary<Coordinates, Cell> oldCells = world.Cells.CreateCopy();
 
-        foreach (Coordinates coords in cellsKeys)
+        foreach (Coordinates previousCoords in cellsKeys)
         {
-            Coordinates newCoords = coords;
+            Coordinates newCoords = previousCoords;
 
-            if (coords.face != EFace.front && coords.face != EFace.back)
+            if (previousCoords.face != EFace.front && previousCoords.face != EFace.back)
             {
                 //change face, and in back face also coordinates
-                newCoords = CoordsRightLeftColumn(coords, toUp);
+                newCoords = CoordsRightLeftColumn(previousCoords, toUp);
             }
             else
             {
                 //rotate the column, so change coordinates x and y, but not the face
-                bool rotateToUp = coords.face == EFace.front ? toUp : !toUp;
-                newCoords = UpdateCoordinatesCompleteFace(coords, rotateToUp);
+                bool rotateToUp = previousCoords.face == EFace.front ? toUp : !toUp;
+                newCoords = UpdateCoordinatesCompleteFace(previousCoords, rotateToUp);
             }
 
             //set new coordinates
-            SetCoordinates(oldCells[coords], newCoords);
+            SetCoordinates(oldCells[previousCoords], newCoords);
         }
     }
 
-    Coordinates CoordsRightLeftColumn(Coordinates coords, bool toUp)
+    Coordinates CoordsRightLeftColumn(Coordinates coordinates, bool toUp)
     {
-        Coordinates newCoords = coords;
-
         //calculate new face -> work the inverse, so we use !toUp
-        newCoords.face = WorldUtility.FindFaceUpToRight(coords.face, !toUp);
+        coordinates.face = WorldUtility.FindFaceUpToRight(coordinates.face, !toUp);
 
         //get coordinates x,y of face to the top or face to the bottom
         if (toUp)
         {
-            Vector2Int v = Vector2Math.InverseEqual(coords.x, coords.y, world.worldConfig.NumberCells);
-            newCoords.x = v.x;
-            newCoords.y = v.y;
+            Vector2Int v = Vector2Math.InverseEqual(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
+            coordinates.x = v.x;
+            coordinates.y = v.y;
         }
         else
         {
-            Vector2Int v = Vector2Math.EqualInverse(coords.x, coords.y, world.worldConfig.NumberCells);
-            newCoords.x = v.x;
-            newCoords.y = v.y;
+            Vector2Int v = Vector2Math.EqualInverse(coordinates.x, coordinates.y, world.worldConfig.NumberCells);
+            coordinates.x = v.x;
+            coordinates.y = v.y;
         }
 
-        return newCoords;
+        return coordinates;
     }
 
     #endregion
@@ -640,8 +595,25 @@ public class WorldRotator
 
     #region public API
 
-    public void Rotate(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
+    public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
     {
+        Rotate(new Coordinates[1] { coordinates }, lookingFace, rotateDirection);
+    }
+
+    public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    {
+        //can't rotate during another rotation
+        if (rotatingWorld_Coroutine != null)
+            return;
+
+        //set variables
+        coordinatesToRotate = coordinates;
+        cellsToRotate.Clear();
+        cellsKeys.Clear();
+
+        //every coordinates can be only on the same face
+        EFace startFace = coordinates[0].face;
+
         //rotate row
         if (rotateDirection == ERotateDirection.right || rotateDirection == ERotateDirection.left)
         {
@@ -653,29 +625,29 @@ public class WorldRotator
                 switch (lookingFace)
                 {
                     case EFace.front:
-                        RotateUpDownRow(startFace, y, forward);
+                        RotateUpDownRow(startFace, forward);
                         break;
                     case EFace.right:
                         if (startFace == EFace.up)
-                            RotateFrontColumn(startFace, x, forward);
+                            RotateFrontColumn(startFace, forward);
                         else
-                            RotateFrontColumn(startFace, x, !forward);
+                            RotateFrontColumn(startFace, !forward);
                         break;
                     case EFace.back:
-                        RotateUpDownRow(startFace, y, !forward);
+                        RotateUpDownRow(startFace, !forward);
                         break;
                     case EFace.left:
                         if (startFace == EFace.up)
-                            RotateFrontColumn(startFace, x, !forward);
+                            RotateFrontColumn(startFace, !forward);
                         else
-                            RotateFrontColumn(startFace, x, forward);
+                            RotateFrontColumn(startFace, forward);
                         break;
                 }
             }
             else
             {
                 //else just rotate row lateral faces
-                RotateLateralRow(y, forward);
+                RotateLateralRow(forward);
             }
         }
         //rotate column
@@ -689,22 +661,22 @@ public class WorldRotator
                 switch (lookingFace)
                 {
                     case EFace.front:
-                        RotateFrontColumn(startFace, x, forward);
+                        RotateFrontColumn(startFace, forward);
                         break;
                     case EFace.right:
                         if (startFace == EFace.up)
-                            RotateUpDownRow(startFace, y, !forward);
+                            RotateUpDownRow(startFace, !forward);
                         else
-                            RotateUpDownRow(startFace, y, forward);
+                            RotateUpDownRow(startFace, forward);
                         break;
                     case EFace.back:
-                        RotateFrontColumn(startFace, x, !forward);
+                        RotateFrontColumn(startFace, !forward);
                         break;
                     case EFace.left:
                         if (startFace == EFace.up)
-                            RotateUpDownRow(startFace, y, forward);
+                            RotateUpDownRow(startFace, forward);
                         else
-                            RotateUpDownRow(startFace, y, !forward);
+                            RotateUpDownRow(startFace, !forward);
                         break;
                 }
             }
@@ -714,12 +686,12 @@ public class WorldRotator
                 if (startFace == EFace.right || startFace == EFace.left)
                 {
                     //rotate column face right or left
-                    RotateRightLeftColumn(startFace, x, forward);
+                    RotateRightLeftColumn(startFace, forward);
                 }
                 else
                 {
                     //rotate column front faces (front, up, back, down)
-                    RotateFrontColumn(startFace, x, forward);
+                    RotateFrontColumn(startFace, forward);
                 }
             }
         }

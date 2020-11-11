@@ -169,7 +169,7 @@ public class UIManager : MonoBehaviour
         }
 
         //rotate movement to the face
-        movement = GameManager.instance.world.RotateTowardsFace(movement, coordinates.face);
+        movement = WorldUtility.RotateTowardsFace(movement, coordinates.face);
 
         //return movement
         return movement;
