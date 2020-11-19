@@ -7,6 +7,7 @@ public class EnemyPoison : Enemy
 {
     [Header("Poison")]
     [SerializeField] float timerPoison = 5;
+    [SerializeField] int limitSpread = 1;
 
     protected override void OnTriggerEnter(Collider other)
     {
@@ -25,7 +26,7 @@ public class EnemyPoison : Enemy
             Cell cell = other.GetComponentInParent<Cell>();
 
             //poison cell instead of kill it
-            cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison);
+            cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
 
             //destroy this enemy
             Die(true);
