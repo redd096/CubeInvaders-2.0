@@ -26,8 +26,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1442216781821788293}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0.5}
-  m_LocalScale: {x: 0.5, y: 0.5, z: 1.5}
+  m_LocalPosition: {x: -0, y: 0, z: 0.14}
+  m_LocalScale: {x: 0.5, y: 0.5, z: 0.8}
   m_Children:
   - {fileID: 5973181481010093152}
   m_Father: {fileID: 7588032764715299075}
@@ -106,8 +106,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1527367510736923788}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 1}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0.6}
+  m_LocalScale: {x: 0.65, y: 0.65, z: 0.65}
   m_Children:
   - {fileID: 199419520702417871}
   m_Father: {fileID: 7720483847729232750}
@@ -139,13 +139,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1866069839626578286}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.5, z: -0.35}
-  m_LocalScale: {x: 0.8, y: 0.5, z: 0.2}
+  m_LocalRotation: {x: 0.7071068, y: 0, z: 0, w: 0.7071068}
+  m_LocalPosition: {x: 0, y: -0.85, z: -0.0105}
+  m_LocalScale: {x: 0.8, y: 0.7547714, z: 0.20000045}
   m_Children: []
   m_Father: {fileID: 199419520702417871}
   m_RootOrder: 0
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
 --- !u!33 &775983886701742420
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -235,8 +235,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2060889943753701343}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.325, y: -0.5, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: -0.325, y: -0.5, z: -0.0105}
+  m_LocalScale: {x: 0.15000023, y: 0.5, z: 0.7547714}
   m_Children: []
   m_Father: {fileID: 199419520702417871}
   m_RootOrder: 1
@@ -361,8 +361,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2975882636861161906}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0.325, y: -0.5, z: 0}
-  m_LocalScale: {x: 0.15, y: 0.5, z: 0.5}
+  m_LocalPosition: {x: 0.325, y: -0.5, z: -0.0105}
+  m_LocalScale: {x: 0.15000023, y: 0.5, z: 0.7547714}
   m_Children: []
   m_Father: {fileID: 199419520702417871}
   m_RootOrder: 2
@@ -475,6 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needGenerator: 1
+  timeBeforeDestroy: 5
   shotPrefab: {fileID: 0}
   delayShoot: 0.5
   shotSpawns:

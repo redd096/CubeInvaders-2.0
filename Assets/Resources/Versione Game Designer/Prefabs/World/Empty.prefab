@@ -90,7 +90,7 @@ PrefabInstance:
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: toRemoveOnDead
       value: 
-      objectReference: {fileID: 2096779371398766326}
+      objectReference: {fileID: 2707496466705409017}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!4 &5998751246704088522 stripped
@@ -167,11 +167,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e85e7e8c3dcd55f48bf8ebf3c4492f51, type: 3}
---- !u!1 &2096779371398766326 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e85e7e8c3dcd55f48bf8ebf3c4492f51, type: 3}
-  m_PrefabInstance: {fileID: 1285822134724731815}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2977895718722002600
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -231,9 +226,22 @@ PrefabInstance:
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 66c1eeb5a7d0ab440bfdfa86b8c4c9dd, type: 2}
+    - target: {fileID: 4263557382559058715, guid: eae7eb3db243c614795ae61f5bff0595, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5707533968264401428, guid: eae7eb3db243c614795ae61f5bff0595, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 3d0f1a7e5389b2f41ac4495628059e26, type: 2}
+    - target: {fileID: 5707533968264401428, guid: eae7eb3db243c614795ae61f5bff0595, type: 3}
+      propertyPath: m_CastShadows
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eae7eb3db243c614795ae61f5bff0595, type: 3}
+--- !u!1 &2707496466705409017 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: eae7eb3db243c614795ae61f5bff0595, type: 3}
+  m_PrefabInstance: {fileID: 2977895718722002600}
+  m_PrefabAsset: {fileID: 0}
