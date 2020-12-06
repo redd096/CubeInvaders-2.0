@@ -1,12 +1,14 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
 public class Turret : BuildableObject
 {
     [Header("Turret Modifier")]
-    [SerializeField] int needGenerator = 1;
-    [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [SerializeField] float timeBeforeDestroy = 5;
+    [Tooltip("Number of generators necessary to activate (0 = no generator)")] [Min(0)] [SerializeField] int needGenerator = 1;
+    [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [Min(0)] [SerializeField] float timeBeforeDestroy = 5;
+    [Tooltip("Limit of turrets of this type on same face, if exceed explode turrets (0 = no limits)")] [Min(0)] [SerializeField] int limitOfTurretsOnSameFace = 1;
 
     public override void TryActivateTurret()
     {
@@ -22,12 +24,23 @@ public class Turret : BuildableObject
             base.TryDeactivateTurret();
     }
 
+    protected override void OnEndRotation()
+    {
+        base.OnEndRotation();
+
+        //check if there are other turrets on same face
+        CheckTurretsOnSameFace();
+    }
+
     public override void BuildTurret(Cell cellOwner)
     {
         base.BuildTurret(cellOwner);
 
         //init timer to destroy turret
         InitTimer();
+
+        //check if there are other turrets on same face
+        CheckTurretsOnSameFace();
     }
 
     public override void RemoveTurret()
@@ -81,6 +94,31 @@ public class Turret : BuildableObject
         if(destroyTurretWhenNoMove != null)
         {
             destroyTurretWhenNoMove.RemoveTimer();
+        }
+    }
+
+    #endregion
+
+    #region no turrets on same face
+
+    void CheckTurretsOnSameFace()
+    {
+        //if level config has turrets on same face and limits greater than 0
+        if(GameManager.instance.levelManager.levelConfig.NoTurretsOnSameFace && limitOfTurretsOnSameFace > 0)
+        {
+            BuildableObject prefab = CellOwner.TurretToCreate;
+
+            //find turrets on this face, with same type (check turret to create of cell owner)
+            Turret[] turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face && x.CellOwner != null && x.CellOwner.TurretToCreate == prefab).ToArray();
+
+            //if exceed limit, remove every turret
+            if(turrets.Length > limitOfTurretsOnSameFace)
+            {
+                foreach(Turret t in turrets)
+                {
+                    t.RemoveTurret();
+                }
+            }
         }
     }
 

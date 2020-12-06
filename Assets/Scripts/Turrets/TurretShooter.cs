@@ -107,7 +107,8 @@ public class TurretShooter : Turret
         base.OnEndRotation();
 
         //start coroutine to shoot again
-        canShootAgain_Coroutine = StartCoroutine(CanShootAgain());
+        if(IsActive)
+            canShootAgain_Coroutine = StartCoroutine(CanShootAgain());
     }
 
     IEnumerator CanShootAgain()
