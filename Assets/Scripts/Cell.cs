@@ -27,8 +27,6 @@ public class Cell : MonoBehaviour
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
 
-    public BuildableObject TurretToCreate => turretToCreate;
-
     public BuildableObject turret { get; private set; }
 
     public bool IsAlive { get; private set; } = true;

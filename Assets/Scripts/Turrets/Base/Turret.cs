@@ -8,7 +8,6 @@ public class Turret : BuildableObject
     [Header("Turret Modifier")]
     [Tooltip("Number of generators necessary to activate (0 = no generator)")] [Min(0)] [SerializeField] int needGenerator = 1;
     [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [Min(0)] [SerializeField] float timeBeforeDestroy = 5;
-    [Tooltip("Limit of turrets of this type on same face, if exceed explode turrets (0 = no limits)")] [Min(0)] [SerializeField] int limitOfTurretsOnSameFace = 1;
 
     public override void TryActivateTurret()
     {
@@ -103,16 +102,14 @@ public class Turret : BuildableObject
 
     void CheckTurretsOnSameFace()
     {
-        //if level config has turrets on same face and limits greater than 0
-        if(GameManager.instance.levelManager.levelConfig.NoTurretsOnSameFace && limitOfTurretsOnSameFace > 0)
+        //if level config has limit of turrets on same face
+        if(GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace > 0)
         {
-            BuildableObject prefab = CellOwner.TurretToCreate;
-
-            //find turrets on this face, with same type (check turret to create of cell owner)
-            Turret[] turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face && x.CellOwner != null && x.CellOwner.TurretToCreate == prefab).ToArray();
+            //find turrets on this face
+            Turret[] turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face).ToArray();
 
             //if exceed limit, remove every turret
-            if(turrets.Length > limitOfTurretsOnSameFace)
+            if (turrets.Length > GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
             {
                 foreach(Turret t in turrets)
                 {

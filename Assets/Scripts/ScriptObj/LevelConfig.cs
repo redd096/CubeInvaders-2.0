@@ -12,5 +12,5 @@ public class LevelConfig : ScriptableObject
     [Tooltip("Turret need generator to activate")] public bool TurretsNeedGenerator = false;
     [Tooltip("Size of the selector, to select one cell or more")] [Min(1)] public int SelectorSize = 1;
     [Tooltip("Destroy turret after few seconds that player doesn't move it")] public bool DestroyTurretWhenNoMove = false;
-    [Tooltip("If you put more turret of same type on same face, they explode")] public bool NoTurretsOnSameFace = false;
+    [Tooltip("Limit of turrets on same face, if exceed explode turrets (0 = no limits)")] [Min(0)] public int LimitOfTurretsOnSameFace = 0;
 }
