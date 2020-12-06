@@ -60,8 +60,8 @@ public class RadarGraphics : BuildableGraphics
 
     void SetColorFlick()
     {
-        //get flick speed based on enemy distance
-        float enemyDistance = Vector3.Distance(buildableObject.CellOwner.transform.position, GetEnemy().transform.position);
+        //get flick speed based on enemy distance to its coordinates to attack
+        float enemyDistance = Vector3.Distance(GameManager.instance.world.CoordinatesToPosition(GetEnemy().coordinatesToAttack), GetEnemy().transform.position);
         float distanceFrom0To1 = 1 - (enemyDistance / GameManager.instance.waveManager.waveConfig.distanceFromWorld);       //distance from 0 to 1
         float flickSpeed = Mathf.Lerp(minFlick, maxFlick, distanceFrom0To1);                                                //speed from minFlick to maxFlick
 
@@ -73,6 +73,7 @@ public class RadarGraphics : BuildableGraphics
 
         SetColor(color, flick);
     }
+
     void SetColor(Color color, float delta)
     {
         Renderer[] renderers = objectToFlick.GetComponentsInChildren<Renderer>();

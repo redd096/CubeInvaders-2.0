@@ -54,7 +54,7 @@ public class BuildableObject : MonoBehaviour
 
     #region public API
 
-    public void BuildTurret(Cell cellOwner)
+    public virtual void BuildTurret(Cell cellOwner)
     {
         IsPreview = false;
 

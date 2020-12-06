@@ -6,6 +6,7 @@ public class Turret : BuildableObject
 {
     [Header("Turret Modifier")]
     [SerializeField] int needGenerator = 1;
+    [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [SerializeField] float timeBeforeDestroy = 5;
 
     public override void TryActivateTurret()
     {
@@ -19,6 +20,22 @@ public class Turret : BuildableObject
         //if need generator and there is no enough generators around, deactive it
         if(NeedGenerator() && CheckGeneratorsAround() < needGenerator)
             base.TryDeactivateTurret();
+    }
+
+    public override void BuildTurret(Cell cellOwner)
+    {
+        base.BuildTurret(cellOwner);
+
+        //init timer to destroy turret
+        InitTimer();
+    }
+
+    public override void RemoveTurret()
+    {
+        base.RemoveTurret();
+
+        //remove timer to destroy turret
+        RemoveTimer();
     }
 
     #region generator
@@ -41,6 +58,30 @@ public class Turret : BuildableObject
         }
 
         return generatorsOnThisFace;
+    }
+
+    #endregion
+
+    #region timer before destroy
+
+    DestroyTurretWhenNoMove destroyTurretWhenNoMove = new DestroyTurretWhenNoMove();
+
+    void InitTimer()
+    {
+        //if level config has timer true and if timer greater than 0, start timer
+        if (GameManager.instance.levelManager.levelConfig.DestroyTurretWhenNoMove && timeBeforeDestroy > 0)
+        {
+            destroyTurretWhenNoMove.InitTimer(this, timeBeforeDestroy);
+        }
+    }
+
+    void RemoveTimer()
+    {
+        //if there is a timer, stop it
+        if(destroyTurretWhenNoMove != null)
+        {
+            destroyTurretWhenNoMove.RemoveTimer();
+        }
     }
 
     #endregion
