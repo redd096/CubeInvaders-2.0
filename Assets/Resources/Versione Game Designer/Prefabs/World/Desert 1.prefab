@@ -141,12 +141,81 @@ PrefabInstance:
       propertyPath: m_Name
       value: Cell_Yellow_V2
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: e0aea0d3d7ae8ed46a8c69405ee3cb9e, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: e0aea0d3d7ae8ed46a8c69405ee3cb9e, type: 3}
---- !u!1 &1118513933966169990 stripped
+--- !u!1001 &4145337753535278780
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 2252720888554004490}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0.025
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.7071068
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_RootOrder
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 90
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -3821688404899868330, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 66c1eeb5a7d0ab440bfdfa86b8c4c9dd, type: 2}
+    - target: {fileID: 919132149155446097, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_Name
+      value: Cell_Yellow_V3
+      objectReference: {fileID: 0}
+    - target: {fileID: 4263557382559058715, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 66c1eeb5a7d0ab440bfdfa86b8c4c9dd, type: 2}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+--- !u!1 &5763324820649044354 stripped
 GameObject:
-  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e0aea0d3d7ae8ed46a8c69405ee3cb9e, type: 3}
-  m_PrefabInstance: {fileID: 235501847738968791}
+  m_CorrespondingSourceObject: {fileID: 8537773600433112894, guid: 676b4d3e7422235439fd887d83bd949a, type: 3}
+  m_PrefabInstance: {fileID: 4145337753535278780}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &6638163518096590875
 PrefabInstance:
@@ -246,7 +315,7 @@ PrefabInstance:
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: toRemoveOnDead
       value: 
-      objectReference: {fileID: 1118513933966169990}
+      objectReference: {fileID: 5763324820649044354}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!4 &2252720888554004490 stripped
