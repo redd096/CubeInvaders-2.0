@@ -494,6 +494,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 7588032764715299075}
   baseToRotate: {fileID: 199419520702417871}
+  objectToColor: {fileID: 5819092610900529499}
+  colorTimeBeforeDestroy: {r: 1, g: 0, b: 0, a: 1}
 --- !u!1 &8306145957279766509
 GameObject:
   m_ObjectHideFlags: 0

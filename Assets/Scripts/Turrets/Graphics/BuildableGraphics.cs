@@ -8,7 +8,7 @@ public class BuildableGraphics : MonoBehaviour
 
     protected BuildableObject buildableObject;
 
-    protected virtual void Start()
+    protected virtual void Awake()
     {
         //set logic component
         buildableObject = GetComponent<BuildableObject>();
@@ -35,6 +35,10 @@ public class BuildableGraphics : MonoBehaviour
 
     void LookAtEnemy()
     {
+        //do only if there is something to rotate
+        if (objectToRotate == null)
+            return;
+
         //find forward direction (from model to enemy)
         Vector3 forwardDirection;
         if (GetEnemy() && buildableObject.IsActive)

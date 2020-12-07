@@ -16,9 +16,9 @@ public class RadarGraphics : BuildableGraphics
 
     Radar radar;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         //get logic component as radar
         radar = buildableObject as Radar;

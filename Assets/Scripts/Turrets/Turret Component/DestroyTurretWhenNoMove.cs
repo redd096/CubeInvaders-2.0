@@ -6,7 +6,7 @@ public class DestroyTurretWhenNoMove
     Turret turret;
     float timeBeforeDestroy;
 
-    Coroutine timerBeforeDestroy;
+    Coroutine timerBeforeDestroy_coroutine;
 
     //on build turret, init this script (init timer)
 
@@ -29,9 +29,9 @@ public class DestroyTurretWhenNoMove
     public void RemoveTimer()
     {
         //stop timer
-        if (turret && timerBeforeDestroy != null)
+        if (turret && timerBeforeDestroy_coroutine != null)
         {
-            turret.StopCoroutine(timerBeforeDestroy);
+            turret.StopCoroutine(timerBeforeDestroy_coroutine);
         }
 
         //remove events
@@ -67,7 +67,7 @@ public class DestroyTurretWhenNoMove
     void OnWorldRotate(Coordinates coordinates)
     {
         //if timer is started (so in assault phase)
-        if (timerBeforeDestroy != null)
+        if (timerBeforeDestroy_coroutine != null)
         {
             //stop
             StopTimer();
@@ -92,24 +92,35 @@ public class DestroyTurretWhenNoMove
         //start timer
         if (turret)
         {
-            timerBeforeDestroy = turret.StartCoroutine(TimerBeforeDestroy());
+            timerBeforeDestroy_coroutine = turret.StartCoroutine(TimerBeforeDestroy_Coroutine());
         }
     }
 
     void StopTimer()
     {
         //stop timer
-        if (turret && timerBeforeDestroy != null)
+        if (turret && timerBeforeDestroy_coroutine != null)
         {
-            turret.StopCoroutine(timerBeforeDestroy);
-            timerBeforeDestroy = null;
+            turret.StopCoroutine(timerBeforeDestroy_coroutine);
+            timerBeforeDestroy_coroutine = null;
         }
     }
 
-    IEnumerator TimerBeforeDestroy()
+    IEnumerator TimerBeforeDestroy_Coroutine()
     {
-        //wait
-        yield return new WaitForSeconds(timeBeforeDestroy);
+        float timer = Time.time + timeBeforeDestroy;
+
+        //wait and update timer
+        while (Time.time < timer)
+        {
+            if (turret)
+            {
+                float timeRemaining = timer - Time.time;
+                turret.updateTimeBeforeDestroy?.Invoke(1 - (timeRemaining / timeBeforeDestroy));  //from 0 to 1
+            }
+
+            yield return null;
+        }
 
         //than remove turret
         if (turret)

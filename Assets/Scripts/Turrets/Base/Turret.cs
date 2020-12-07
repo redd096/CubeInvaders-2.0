@@ -9,6 +9,8 @@ public class Turret : BuildableObject
     [Tooltip("Number of generators necessary to activate (0 = no generator)")] [Min(0)] [SerializeField] int needGenerator = 1;
     [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [Min(0)] [SerializeField] float timeBeforeDestroy = 5;
 
+    public System.Action<float> updateTimeBeforeDestroy;
+
     public override void TryActivateTurret()
     {
         //if doesn't need generator or there are enough generators around, activate it
