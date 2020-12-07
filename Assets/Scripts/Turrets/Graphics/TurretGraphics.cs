@@ -125,6 +125,7 @@ public class TurretGraphics : BuildableGraphics
                 positions.Add(t.GetComponent<TurretGraphics>().linePosition.position);
 
             //set positions
+            line[face].positionCount = positions.Count;
             line[face].SetPositions(positions.ToArray());
         }
     }
