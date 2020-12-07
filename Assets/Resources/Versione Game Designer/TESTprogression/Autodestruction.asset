@@ -18,3 +18,4 @@ MonoBehaviour:
   TurretsNeedGenerator: 0
   SelectorSize: 1
   DestroyTurretWhenNoMove: 1
+  LimitOfTurretsOnSameFace: 0
