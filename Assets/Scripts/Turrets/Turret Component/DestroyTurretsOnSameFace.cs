@@ -60,6 +60,7 @@ public class DestroyTurretsOnSameFace
         if (turret)
         {
             turret.RemoveTurret();
+            turret.stopTimerTurretsOnSameFace?.Invoke(turret.CellOwner.coordinates.face);                   //EVENT stop timer
         }
     }
 }

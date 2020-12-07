@@ -16,6 +16,7 @@ public class TurretGraphics : BuildableGraphics
     [Header("No Turrets On Same Face - Turret Modifier")]
     [SerializeField] LineRenderer linePrefab = default;
     [SerializeField] Color colorNoTurretsOnSameFace = Color.red;
+    [SerializeField] Transform linePosition = default;
 
     static Dictionary<EFace, LineRenderer> line = new Dictionary<EFace, LineRenderer>();
 
@@ -107,19 +108,25 @@ public class TurretGraphics : BuildableGraphics
 
     void SetLineColor(float delta)
     {
-        //set color of the line renderer on this face
-        line[turret.CellOwner.coordinates.face].material.color = Color.Lerp(linePrefab.material.color, colorNoTurretsOnSameFace, delta);
+        if (line.ContainsKey(turret.CellOwner.coordinates.face))
+        {
+            //set color of the line renderer on this face
+            line[turret.CellOwner.coordinates.face].material.color = Color.Lerp(linePrefab.sharedMaterial.color, colorNoTurretsOnSameFace, delta);
+        }
     }
 
     void SetPositions(EFace face, List<Turret> turrets)
     {
-        //get position of every turret
-        List<Vector3> positions = new List<Vector3>();
-        foreach (Turret t in turrets)
-            positions.Add(t.transform.position);
+        if (line.ContainsKey(face))
+        {
+            //get position of every turret
+            List<Vector3> positions = new List<Vector3>();
+            foreach (Turret t in turrets)
+                positions.Add(t.GetComponent<TurretGraphics>().linePosition.position);
 
-        //set positions
-        line[face].SetPositions(positions.ToArray());
+            //set positions
+            line[face].SetPositions(positions.ToArray());
+        }
     }
 
     public void DestroyLine(EFace face)

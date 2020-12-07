@@ -112,6 +112,10 @@ public class Turret : BuildableObject
 
     void CheckPreviousFace()
     {
+        //if no key, then there is no timer to stop or update
+        if (turretsOnFace.ContainsKey(previousFace) == false)
+            return;
+
         //if not exceed limit (-1 because this turret is not anymore on this face)
         if (turretsOnFace[previousFace].Count - 1 <= GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
         {
