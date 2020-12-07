@@ -475,7 +475,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needGenerator: 1
-  timeBeforeDestroy: 5
+  timeBeforeDestroy: 10
   shotPrefab: {fileID: 0}
   delayShoot: 0.5
   shotSpawns:
