@@ -9,9 +9,15 @@ public class TurretGraphics : BuildableGraphics
 
     [Header("Time Before Destroy - Turret Modifier")]
     [SerializeField] Transform objectToColor = default;
-    [SerializeField] Color colorTimeBeforeDestroy = default;
+    [SerializeField] Color colorTimeBeforeDestroy = Color.red;
 
     Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
+
+    [Header("No Turrets On Same Face - Turret Modifier")]
+    [SerializeField] LineRenderer linePrefab = default;
+    [SerializeField] Color colorNoTurretsOnSameFace = Color.red;
+
+    static Dictionary<EFace, LineRenderer> line = new Dictionary<EFace, LineRenderer>();
 
     protected override void Awake()
     {
@@ -38,21 +44,27 @@ public class TurretGraphics : BuildableGraphics
 
     protected virtual void AddEvents()
     {
-        turret.updateTimeBeforeDestroy += UpdateTimeBeforeDestroy;
+        turret.updateTimeBeforeDestroy += SetColor;
+
+        turret.startTimerTurretsOnSameFace += CreateLine;
+        turret.updateFeedbackTurretsOnSameFace += SetLineColor;
+        turret.updateNumberOfTurretsOnSameFace += SetPositions;
+        turret.stopTimerTurretsOnSameFace += DestroyLine;
     }
 
     protected virtual void RemoveEvents()
     {
-        turret.updateTimeBeforeDestroy -= UpdateTimeBeforeDestroy;
-    }
+        turret.updateTimeBeforeDestroy -= SetColor;
 
-    void UpdateTimeBeforeDestroy(float value)
-    {
-        //set color foreach renderer based on value from 0 to 1
-        SetColor(value);
+        turret.startTimerTurretsOnSameFace -= CreateLine;
+        turret.updateFeedbackTurretsOnSameFace -= SetLineColor;
+        turret.updateNumberOfTurretsOnSameFace -= SetPositions;
+        turret.stopTimerTurretsOnSameFace -= DestroyLine;
     }
 
     #endregion
+
+    #region timer before destroy
 
     void SetNormalColor()
     {
@@ -68,9 +80,56 @@ public class TurretGraphics : BuildableGraphics
     void SetColor(float delta)
     {
         //foreach renderer in dictionary, update color
-        foreach(Renderer renderer in normalColors.Keys)
+        foreach (Renderer renderer in normalColors.Keys)
         {
             renderer.material.color = Color.Lerp(normalColors[renderer], colorTimeBeforeDestroy, delta);
         }
     }
+
+    #endregion
+
+    #region no turrets on same face
+
+    void CreateLine(List<Turret> turrets)
+    {
+        EFace face = turret.CellOwner.coordinates.face;
+
+        //instantiate line prefab if null and save normal color
+        if (line.ContainsKey(face) == false)
+        {
+            line.Add(face, Instantiate(linePrefab));
+        }
+
+        //set positions and active
+        SetPositions(face, turrets);
+        line[face].gameObject.SetActive(true);
+    }
+
+    void SetLineColor(float delta)
+    {
+        //set color of the line renderer on this face
+        line[turret.CellOwner.coordinates.face].material.color = Color.Lerp(linePrefab.material.color, colorNoTurretsOnSameFace, delta);
+    }
+
+    void SetPositions(EFace face, List<Turret> turrets)
+    {
+        //get position of every turret
+        List<Vector3> positions = new List<Vector3>();
+        foreach (Turret t in turrets)
+            positions.Add(t.transform.position);
+
+        //set positions
+        line[face].SetPositions(positions.ToArray());
+    }
+
+    public void DestroyLine(EFace face)
+    {
+        //deactive line
+        if (line.ContainsKey(face))
+        {
+            line[face].gameObject.SetActive(false);
+        }
+    }
+
+    #endregion
 }

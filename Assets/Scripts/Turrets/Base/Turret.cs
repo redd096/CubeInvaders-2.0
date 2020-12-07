@@ -9,8 +9,6 @@ public class Turret : BuildableObject
     [Tooltip("Number of generators necessary to activate (0 = no generator)")] [Min(0)] [SerializeField] int needGenerator = 1;
     [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [Min(0)] [SerializeField] float timeBeforeDestroy = 5;
 
-    public System.Action<float> updateTimeBeforeDestroy;
-
     public override void TryActivateTurret()
     {
         //if doesn't need generator or there are enough generators around, activate it
@@ -29,26 +27,33 @@ public class Turret : BuildableObject
     {
         base.OnEndRotation();
 
-        //check if there are other turrets on same face
-        CheckTurretsOnSameFace();
+        //if there is a list, check if stop timer on previous face
+        if(turretsOnFace.Count > 0)
+            CheckPreviousFace();
+
+        //if there is a limit of turrets on same face, check if there are other turrets on new face
+        if (GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace > 0)
+            CheckTurretsOnSameFace();
     }
 
     public override void BuildTurret(Cell cellOwner)
     {
         base.BuildTurret(cellOwner);
 
-        //init timer to destroy turret
-        InitTimer();
+        //if destroy turret when no move and time greater than 0, init timer to destroy turret
+        if (GameManager.instance.levelManager.levelConfig.DestroyTurretWhenNoMove && timeBeforeDestroy > 0)
+            InitTimer();
 
-        //check if there are other turrets on same face
-        CheckTurretsOnSameFace();
+        //if there is a limit of turrets on same face, check if there are other turrets on same face
+        if (GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace > 0)
+            CheckTurretsOnSameFace();
     }
 
     public override void RemoveTurret()
     {
         base.RemoveTurret();
 
-        //remove timer to destroy turret
+        //be sure to remove timer to destroy turret if no move
         RemoveTimer();
     }
 
@@ -80,44 +85,108 @@ public class Turret : BuildableObject
 
     DestroyTurretWhenNoMove destroyTurretWhenNoMove = new DestroyTurretWhenNoMove();
 
+    public System.Action<float> updateTimeBeforeDestroy;
+
     void InitTimer()
     {
-        //if level config has timer true and if timer greater than 0, start timer
-        if (GameManager.instance.levelManager.levelConfig.DestroyTurretWhenNoMove && timeBeforeDestroy > 0)
-        {
-            destroyTurretWhenNoMove.InitTimer(this, timeBeforeDestroy);
-        }
+        destroyTurretWhenNoMove.InitTimer(this, timeBeforeDestroy);
     }
 
     void RemoveTimer()
     {
-        //if there is a timer, stop it
-        if(destroyTurretWhenNoMove != null)
-        {
-            destroyTurretWhenNoMove.RemoveTimer();
-        }
+        destroyTurretWhenNoMove.RemoveTimer();
     }
 
     #endregion
 
     #region no turrets on same face
 
+    DestroyTurretsOnSameFace destroyTurretsOnSameFace = new DestroyTurretsOnSameFace();
+    static Dictionary<EFace, List<Turret>> turretsOnFace = new Dictionary<EFace, List<Turret>>();
+    EFace previousFace;
+
+    public System.Action<List<Turret>> startTimerTurretsOnSameFace;
+    public System.Action<float> updateFeedbackTurretsOnSameFace;
+    public System.Action<EFace, List<Turret>> updateNumberOfTurretsOnSameFace;
+    public System.Action<EFace> stopTimerTurretsOnSameFace;
+
+    void CheckPreviousFace()
+    {
+        //if not exceed limit (-1 because this turret is not anymore on this face)
+        if (turretsOnFace[previousFace].Count - 1 <= GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
+        {
+            //foreach turret in the list, stop timer
+            foreach(Turret t in turretsOnFace[previousFace])
+            {
+                t.destroyTurretsOnSameFace.StopTimer();
+            }
+
+            //remove turrets from the list
+            turretsOnFace[previousFace].Clear();
+
+            //EVENT stop timer
+            stopTimerTurretsOnSameFace?.Invoke(previousFace);
+        }
+        //if still exceed the limit, don't stop timer for others turrets
+        else
+        {
+            //but stop timer for this turret and remove from the list
+            destroyTurretsOnSameFace.StopTimer();
+            RemoveFromTurretsOnFace();
+
+            //EVENT update positions
+            updateNumberOfTurretsOnSameFace?.Invoke(previousFace, turretsOnFace[previousFace]);
+        }
+    }
+
     void CheckTurretsOnSameFace()
     {
-        //if level config has limit of turrets on same face
-        if(GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace > 0)
-        {
-            //find turrets on this face
-            Turret[] turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face).ToArray();
+        //save previous face
+        previousFace = CellOwner.coordinates.face;
 
-            //if exceed limit, remove every turret
-            if (turrets.Length > GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
+        //find turrets on this face
+        Turret[] turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face).ToArray();
+
+        //if exceed limit
+        if (turrets.Length > GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
+        {
+            //if there are already timers running on this face, restart all
+            if(turretsOnFace.ContainsKey(CellOwner.coordinates.face) && turretsOnFace[CellOwner.coordinates.face].Count > 0)
             {
-                foreach(Turret t in turrets)
-                {
-                    t.RemoveTurret();
-                }
+                turretsOnFace[CellOwner.coordinates.face].Clear();
             }
+
+            //foreach turret, add to static list and start timer(or restart if already running)
+            foreach (Turret t in turrets)
+            {
+                AddToTurretsOnFace(t);
+                t.destroyTurretsOnSameFace.StartTimer(t, GameManager.instance.levelManager.levelConfig.TimeBeforeDestroyTurretsOnSameFace);
+            }
+
+            //EVENT start timer (or restart)
+            startTimerTurretsOnSameFace?.Invoke(turretsOnFace[CellOwner.coordinates.face]);
+        }
+    }
+
+    void AddToTurretsOnFace(Turret turret)
+    {
+        //create key if necessary
+        if (turretsOnFace.ContainsKey(CellOwner.coordinates.face) == false)
+        {
+            turretsOnFace.Add(CellOwner.coordinates.face, new List<Turret>());
+        }
+
+        //add to list
+        turretsOnFace[CellOwner.coordinates.face].Add(turret);
+    }
+
+    void RemoveFromTurretsOnFace()
+    {
+        //if in the dictionary
+        if (turretsOnFace.ContainsKey(previousFace))
+        {
+            //remove from the list
+            turretsOnFace[previousFace].Remove(this);
         }
     }
 
