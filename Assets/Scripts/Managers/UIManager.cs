@@ -85,6 +85,10 @@ public class UIManager : MonoBehaviour
 
     public void EndMenu(bool active, string text = "")
     {
+        //if active, be sure pause menu is deactivated
+        if (active)
+            PauseMenu(false);
+
         endMenu.SetActive(active);
 
         //set text
