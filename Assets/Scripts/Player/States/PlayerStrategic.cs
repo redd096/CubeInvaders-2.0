@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 public class PlayerStrategic : PlayerMove
 {
@@ -10,69 +8,86 @@ public class PlayerStrategic : PlayerMove
     {
     }
 
-#if UNITY_ANDROID
-
     public override void Execution()
     {
         base.Execution();
 
-        //if is moving (not rotating) and release touch
-        if(isMoving && Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Ended)
+        //if no click, reset slider
+        if(timeToEndStrategic <= 0)
         {
-            //if released on the same cell already selected
-            if(selectedCell == TrySelectCell())
-            {
-                //enter in "place turret" state
-                player.SetState(new PlayerPlaceTurret(player, selectedCell.coordinates));
-            }
+            GameManager.instance.uiManager.UpdateReadySlider(0);
+            return;
         }
 
-        //keep pressed to end strategic
-        //TODO
-        //PressReady(Input.GetKey(KeyCode.Return));
-    }
-
-#else
-
-    public override void Execution()
-    {
-        base.Execution();
-
-        //enter in "place turret" state
-        if(Input.GetKeyDown(KeyCode.Space))
+        //else check if end
+        if (Time.time > timeToEndStrategic)
         {
-            player.SetState(new PlayerPlaceTurret(player, coordinates));
+            EndStrategic();
         }
 
-        //keep pressed to end strategic
-        PressReady(Input.GetKey(KeyCode.Return));        
-    }
-
-    void PressReady(bool inputReady)
-    {
+        //and update UI
+        float remainingTime = timeToEndStrategic - Time.time;
         float timeToEnd = GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
 
-        //keep pressed to end strategic
-        if (inputReady)
-        {
-            timeToEndStrategic += Time.deltaTime / timeToEnd;
-
-            //check if end
-            if (timeToEndStrategic >= timeToEnd)
-            {
-                EndStrategic();
-            }
-        }
-        else
-        {
-            timeToEndStrategic = 0;
-        }
-
-        //update UI
-        GameManager.instance.uiManager.UpdateReadySlider(timeToEndStrategic / timeToEnd);
+        GameManager.instance.uiManager.UpdateReadySlider(1 - (remainingTime / timeToEnd));
     }
 
-#endif
+    #region inputs
+
+    bool pressedOnBuildTurret;
+
+    protected override void AddInputs()
+    {
+        base.AddInputs();
+
+        //add inputs
+        controls.Gameplay.BuildTurret.started += ctx => PressedOnBuildTurret();
+        controls.Gameplay.BuildTurret.canceled += ctx => OnBuildTurret();
+        controls.Gameplay.FinishStrategicPhase.started += ctx => OnPressReady();
+        controls.Gameplay.FinishStrategicPhase.canceled += ctx => OnReleaseReady();
+    }
+
+    protected override void RemoveInputs()
+    {
+        base.RemoveInputs();
+
+        //remove inputs
+        controls.Gameplay.BuildTurret.started -= ctx => PressedOnBuildTurret();
+        controls.Gameplay.BuildTurret.canceled -= ctx => OnBuildTurret();
+        controls.Gameplay.FinishStrategicPhase.started -= ctx => OnPressReady();
+        controls.Gameplay.FinishStrategicPhase.canceled -= ctx => OnReleaseReady();
+    }
+
+    void PressedOnBuildTurret()
+    {
+        pressedOnBuildTurret = true;
+    }
+
+    void OnBuildTurret()
+    {
+        //do only if pressed input
+        if (pressedOnBuildTurret == false)
+            return;
+
+        pressedOnBuildTurret = false;
+
+        //enter in "place turret" state
+        player.SetState(new PlayerPlaceTurret(player, coordinates));
+    }
+
+    void OnPressReady()
+    {
+        //set timer
+        timeToEndStrategic = Time.time + GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
+    }
+
+    void OnReleaseReady()
+    {
+        //reset timer
+        timeToEndStrategic = 0;
+    }
+
+    #endregion
 
     void EndStrategic()
     {
