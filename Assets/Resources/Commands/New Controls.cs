@@ -125,7 +125,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/delta"",
                     ""interactions"": """",
                     ""processors"": ""InvertVector2(invertY=false)"",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Move Camera"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -169,7 +169,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -180,7 +180,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -191,7 +191,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -202,7 +202,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -224,7 +224,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -235,7 +235,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -246,7 +246,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -257,7 +257,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -279,7 +279,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Build Turret"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -301,7 +301,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/space"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Confirm Turret"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -323,7 +323,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Deny Turret"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -345,7 +345,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Mouse>/leftButton"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Keep Pressed To Rotate"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -389,7 +389,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/w"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -400,7 +400,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/s"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -411,7 +411,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/a"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -422,7 +422,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/d"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -444,7 +444,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/upArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -455,7 +455,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/downArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -466,7 +466,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/leftArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -477,7 +477,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/rightArrow"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": true
@@ -499,7 +499,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/e"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Finish Strategic Phase"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -521,7 +521,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Pause Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -554,7 +554,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/escape"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Resume Button"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -565,7 +565,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""path"": ""<Keyboard>/anyKey"",
                     ""interactions"": """",
                     ""processors"": """",
-                    ""groups"": ""Keyboard&Mouse"",
+                    ""groups"": ""KeyboardAndMouse"",
                     ""action"": ""Skip Animation"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
@@ -586,8 +586,8 @@ public class @NewControls : IInputActionCollection, IDisposable
             ]
         },
         {
-            ""name"": ""Keyboard&Mouse"",
-            ""bindingGroup"": ""Keyboard&Mouse"",
+            ""name"": ""KeyboardAndMouse"",
+            ""bindingGroup"": ""KeyboardAndMouse"",
             ""devices"": [
                 {
                     ""devicePath"": ""<Keyboard>"",
@@ -783,13 +783,13 @@ public class @NewControls : IInputActionCollection, IDisposable
             return asset.controlSchemes[m_GamepadSchemeIndex];
         }
     }
-    private int m_KeyboardMouseSchemeIndex = -1;
-    public InputControlScheme KeyboardMouseScheme
+    private int m_KeyboardAndMouseSchemeIndex = -1;
+    public InputControlScheme KeyboardAndMouseScheme
     {
         get
         {
-            if (m_KeyboardMouseSchemeIndex == -1) m_KeyboardMouseSchemeIndex = asset.FindControlSchemeIndex("Keyboard&Mouse");
-            return asset.controlSchemes[m_KeyboardMouseSchemeIndex];
+            if (m_KeyboardAndMouseSchemeIndex == -1) m_KeyboardAndMouseSchemeIndex = asset.FindControlSchemeIndex("KeyboardAndMouse");
+            return asset.controlSchemes[m_KeyboardAndMouseSchemeIndex];
         }
     }
     public interface IGameplayActions

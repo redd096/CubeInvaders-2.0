@@ -112,7 +112,7 @@
                     "path": "<Mouse>/delta",
                     "interactions": "",
                     "processors": "InvertVector2(invertY=false)",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Move Camera",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -156,7 +156,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -167,7 +167,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -178,7 +178,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -189,7 +189,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -211,7 +211,7 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -222,7 +222,7 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -233,7 +233,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -244,7 +244,7 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Select Cell",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -266,7 +266,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Build Turret",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -288,7 +288,7 @@
                     "path": "<Keyboard>/space",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Confirm Turret",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -310,7 +310,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Deny Turret",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -332,7 +332,7 @@
                     "path": "<Mouse>/leftButton",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Keep Pressed To Rotate",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -376,7 +376,7 @@
                     "path": "<Keyboard>/w",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -387,7 +387,7 @@
                     "path": "<Keyboard>/s",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -398,7 +398,7 @@
                     "path": "<Keyboard>/a",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -409,7 +409,7 @@
                     "path": "<Keyboard>/d",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -431,7 +431,7 @@
                     "path": "<Keyboard>/upArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -442,7 +442,7 @@
                     "path": "<Keyboard>/downArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -453,7 +453,7 @@
                     "path": "<Keyboard>/leftArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -464,7 +464,7 @@
                     "path": "<Keyboard>/rightArrow",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Rotate Cube",
                     "isComposite": false,
                     "isPartOfComposite": true
@@ -486,7 +486,7 @@
                     "path": "<Keyboard>/e",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Finish Strategic Phase",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -508,7 +508,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Pause Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -541,7 +541,7 @@
                     "path": "<Keyboard>/escape",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Resume Button",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -552,7 +552,7 @@
                     "path": "<Keyboard>/anyKey",
                     "interactions": "",
                     "processors": "",
-                    "groups": "Keyboard&Mouse",
+                    "groups": "KeyboardAndMouse",
                     "action": "Skip Animation",
                     "isComposite": false,
                     "isPartOfComposite": false
@@ -573,8 +573,8 @@
             ]
         },
         {
-            "name": "Keyboard&Mouse",
-            "bindingGroup": "Keyboard&Mouse",
+            "name": "KeyboardAndMouse",
+            "bindingGroup": "KeyboardAndMouse",
             "devices": [
                 {
                     "devicePath": "<Keyboard>",
