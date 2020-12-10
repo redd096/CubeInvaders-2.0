@@ -2,6 +2,7 @@
 
 public class PlayerStrategic : PlayerMove
 {
+    bool keepingPressedEndStrategic;
     float timeToEndStrategic;
 
     public PlayerStrategic(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine, coordinates)
@@ -12,24 +13,22 @@ public class PlayerStrategic : PlayerMove
     {
         base.Execution();
 
-        //if no click, reset slider
-        if(timeToEndStrategic <= 0)
-        {
-            GameManager.instance.uiManager.UpdateReadySlider(0);
-            return;
-        }
-
-        //else check if end
-        if (Time.time > timeToEndStrategic)
-        {
-            EndStrategic();
-        }
-
-        //and update UI
-        float remainingTime = timeToEndStrategic - Time.time;
         float timeToEnd = GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
 
-        GameManager.instance.uiManager.UpdateReadySlider(1 - (remainingTime / timeToEnd));
+        //if keeping pressed, update slider
+        if (keepingPressedEndStrategic)
+        {
+            timeToEndStrategic += Time.deltaTime;
+
+            //check if end
+            if (timeToEndStrategic >= timeToEnd)
+            {
+                EndStrategic();
+            }
+        }
+
+        //update UI
+        GameManager.instance.uiManager.UpdateReadySlider(timeToEndStrategic / timeToEnd);
     }
 
     #region inputs
@@ -77,13 +76,14 @@ public class PlayerStrategic : PlayerMove
 
     void OnPressReady()
     {
-        //set timer
-        timeToEndStrategic = Time.time + GameManager.instance.levelManager.generalConfig.TimeToEndStrategic;
+        keepingPressedEndStrategic = true;
     }
 
     void OnReleaseReady()
     {
-        //reset timer
+        keepingPressedEndStrategic = false;
+
+        //reset slider
         timeToEndStrategic = 0;
     }
 
