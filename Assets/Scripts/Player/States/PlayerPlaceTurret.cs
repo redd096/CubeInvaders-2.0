@@ -98,7 +98,6 @@ public class PlayerPlaceTurret : PlayerState
     void PressedSelectCell()
     {
         pressedSelectCell = true;
-        Debug.Log("pressed select cell");
     }
 
     void SelectCell(Vector2 movement)
