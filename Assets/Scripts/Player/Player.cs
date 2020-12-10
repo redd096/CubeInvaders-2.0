@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using redd096;
 using Cinemachine;
 
@@ -10,28 +8,33 @@ public class Player : StateMachine
     [Header("Player")]
     public float speedX = 300;
     public float speedY = 2;
+    public bool invertY = false;
 
     [Header("Debug")]
     [SerializeField] string currentState;
 
     public CinemachineFreeLook VirtualCam { get; private set; }
+    public NewControls Controls { get; private set; }
 
     //used to come back from pause
     State previousState;
 
     void Start()
     {
-        //get references
+        //get virtual cam and player controls
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
+        Controls = new NewControls();
 
         //set state
         SetState(new PlayerPause(this));
 
+        AddInputs();
         AddEvents();
     }
 
     void OnDestroy()
     {
+        RemoveInputs();
         RemoveEvents();
     }
 
@@ -47,6 +50,64 @@ public class Player : StateMachine
         //for debug
         currentState = state?.ToString();
     }
+
+    #region inputs (pause and resume)
+
+    void AddInputs()
+    {
+        Controls.Enable();
+        Controls.Gameplay.PauseButton.started += ctx => PauseGame();
+        Controls.Gameplay.PauseButton.canceled += ctx => ResetAlreadyPaused();
+        Controls.Gameplay.ResumeButton.started += ctx => ResumeGame();
+        Controls.Gameplay.ResumeButton.canceled += ctx => ResetAlreadyPaused();
+    }
+
+    void RemoveInputs()
+    {
+        Controls.Disable();
+        Controls.Gameplay.PauseButton.started -= ctx => PauseGame();
+        Controls.Gameplay.PauseButton.canceled -= ctx => ResetAlreadyPaused();
+        Controls.Gameplay.ResumeButton.started -= ctx => ResumeGame();
+        Controls.Gameplay.ResumeButton.canceled -= ctx => ResetAlreadyPaused();
+    }
+
+    //used because pause and resume are called at same frame. Like this we wait when release button
+    bool alreadyPressed;
+
+    void PauseGame()
+    {
+        //do only if not already pressed button
+        if (alreadyPressed)
+            return;
+
+        //if not ended game && game is running
+        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0)
+        {
+            SceneLoader.instance.PauseGame();
+            alreadyPressed = true;
+        }
+    }
+
+    void ResumeGame()
+    {
+        //do only if not already pressed button
+        if (alreadyPressed)
+            return;
+
+        //if not ended game && game is paused
+        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0)
+        {
+            SceneLoader.instance.ResumeGame();
+            alreadyPressed = true;
+        }
+    }
+
+    void ResetAlreadyPaused()
+    {
+        alreadyPressed = false;
+    }
+
+    #endregion
 
     #region events
 
