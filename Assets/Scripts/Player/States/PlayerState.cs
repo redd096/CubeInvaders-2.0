@@ -56,6 +56,7 @@ public class PlayerState : State
     protected virtual void AddInputs()
     {
         //add events
+
         Debug.Log(this.ToString());
     }
 
