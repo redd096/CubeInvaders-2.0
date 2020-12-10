@@ -5,187 +5,120 @@ public class PlayerMove : PlayerState
 {
     protected Coordinates coordinates;
 
+    bool keepingPressedToRotate;
+
     public PlayerMove(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
         //get previous coordinates
         this.coordinates = coordinates;
     }
 
-#if UNITY_ANDROID
-
-    protected bool isMoving;
-    protected Cell selectedCell;
-
-    public override void Execution()
+    public override void Enter()
     {
-        base.Execution();
+        base.Enter();
 
-        //do only if there are touch
-        if (Input.touchCount <= 0)
-            return;
-
-        switch (Input.GetTouch(0).phase)
-        {
-            case TouchPhase.Began:
-                //on touch, check if select world or nope
-                isMoving = true;
-                selectedCell = TrySelectCell();
-                break;
-            case TouchPhase.Moved:
-                //on move, check if rotate world or move camera
-                MoveTouch();
-                break;
-            //case TouchPhase.Stationary:
-            //    break;
-            //case TouchPhase.Ended:
-            //    break;
-            //case TouchPhase.Canceled:
-            //    break;
-            //default:
-            //    break;
-        }
-    }
-
-    #region private API
-
-    protected Cell TrySelectCell()
-    {
-        //check if hit world
-        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        RaycastHit hit;
-        float distance = 100;
-        int layer = redd096.CreateLayer.LayerOnly("World");
-
-        //if hit world, select cell
-        if (Physics.Raycast(ray, out hit, distance, layer, QueryTriggerInteraction.Collide))
-        {
-            return hit.transform.GetComponentInParent<Cell>();
-        }
-        //else remove cell selected
-        else
-        {
-            return null;
-        }
-    }
-
-    void MoveTouch()
-    {
-        //if stopped moving, can't do anything until retouch
-        if (isMoving == false)
-            return;
-
-        //try rotate if hitted the world
-        if(selectedCell)
-        {
-            TryRotate();
-        }
-        //else move camera
-        else
-        {
-            Vector2 deltaPosition = Input.GetTouch(0).deltaPosition;
-            CinemachineMovement(deltaPosition.x, deltaPosition.y);
-        }
-    }
-
-    void TryRotate()
-    {
-        Vector2 deltaPosition = Input.GetTouch(0).deltaPosition;
-
-        if(deltaPosition.x > 0)
-        {
-            DoRotation(ERotateDirection.right);
-        }
-        else if(deltaPosition.x < 0)
-        {
-            DoRotation(ERotateDirection.left);
-        }
-        else if(deltaPosition.y > 0)
-        {
-            DoRotation(ERotateDirection.up);
-        }
-        else if(deltaPosition.y < 0)
-        {
-            DoRotation(ERotateDirection.down);
-        }
-        else
-        {
-            return;
-        }
-
-        //stop moving if do rotation
-        isMoving = false;
-    }
-
-    #endregion
-
-#else
-
-    public override void Execution()
-    {
-        base.Execution();
-
-        //movement
-        CinemachineMovement("Mouse X", "Mouse Y");
-
-        SelectCell();
-
-        Rotate();
-    }
-
-    #region private API
-
-    void SelectCell()
-    {
-        EFace face = WorldUtility.SelectFace(transform);
-
-        //if change face, reselect center cell
-        if (face != coordinates.face)
-            coordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
-
-        //select cell
-        if (!Input.GetKey(KeyCode.Mouse0))
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
-            else if (Input.GetKeyDown(KeyCode.S))
-                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
-            else if (Input.GetKeyDown(KeyCode.D))
-                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
-            else if (Input.GetKeyDown(KeyCode.A))
-                coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
-        }
-
-        //save coordinates and  show selector
+        //show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
-    void Rotate()
+    #region inputs
+
+    protected override void AddInputs()
     {
-        //rotate
-        if (Input.GetKey(KeyCode.Mouse0))
+        base.AddInputs();
+
+        controls.Gameplay.MoveCamera.performed += ctx => MoveCamera(ctx.ReadValue<Vector2>());
+        controls.Gameplay.KeepPressedToRotate.started += ctx => PressedInputToRotate();
+        controls.Gameplay.KeepPressedToRotate.canceled += ctx => ReleasedInputToRotate();
+        controls.Gameplay.SelectCell.performed += ctx => SelectCell(ctx.ReadValue<Vector2>());
+        controls.Gameplay.RotateCube.performed += ctx => RotateCube(ctx.ReadValue<Vector2>());
+    }
+
+    protected override void RemoveInputs()
+    {
+        base.RemoveInputs();
+
+        controls.Gameplay.MoveCamera.performed -= ctx => MoveCamera(ctx.ReadValue<Vector2>());
+        controls.Gameplay.KeepPressedToRotate.started -= ctx => PressedInputToRotate();
+        controls.Gameplay.KeepPressedToRotate.canceled -= ctx => ReleasedInputToRotate();
+        controls.Gameplay.SelectCell.performed -= ctx => SelectCell(ctx.ReadValue<Vector2>());
+        controls.Gameplay.RotateCube.performed -= ctx => RotateCube(ctx.ReadValue<Vector2>());
+    }
+
+    void MoveCamera(Vector2 movement)
+    {
+        CinemachineMovement(movement);
+
+        //if change face, reselect center cell and move selector
+        EFace face = WorldUtility.SelectFace(transform);
+
+        if (face != coordinates.face)
         {
-            if (Input.GetKeyDown(KeyCode.W))
-                DoRotation(ERotateDirection.up);
-            else if (Input.GetKeyDown(KeyCode.S))
-                DoRotation(ERotateDirection.down);
-            else if (Input.GetKeyDown(KeyCode.D))
-                DoRotation(ERotateDirection.right);
-            else if (Input.GetKeyDown(KeyCode.A))
-                DoRotation(ERotateDirection.left);
+            coordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
+            GameManager.instance.uiManager.ShowSelector(coordinates);
         }
     }
 
-    #endregion
+    void PressedInputToRotate()
+    {
+        keepingPressedToRotate = true;
+    }
 
-#endif
+    void ReleasedInputToRotate()
+    {
+        keepingPressedToRotate = false;
+    }
+
+    void SelectCell(Vector2 movement)
+    {
+        //do nothing if keeping pressed
+        if (keepingPressedToRotate)
+            return;
+
+        Debug.Log("select cell");
+        EFace face = WorldUtility.SelectFace(transform);
+
+        //select cell
+        if (movement.y > 0)
+            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
+        else if (movement.y < 0)
+            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
+        else if (movement.x > 0)
+            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
+        else if (movement.x < 0)
+            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
+
+        //save coordinates and show selector
+        GameManager.instance.uiManager.ShowSelector(coordinates);
+    }
+
+    void RotateCube(Vector2 movement)
+    {
+        //do nothing if not keeping pressed
+        if (keepingPressedToRotate == false)
+            return;
+
+        Debug.Log("rotate cube");
+
+        if (movement.y > 0)
+            DoRotation(ERotateDirection.up);
+        else if (movement.y < 0)
+            DoRotation(ERotateDirection.down);
+        else if (movement.x > 0)
+            DoRotation(ERotateDirection.right);
+        else if (movement.x < 0)
+            DoRotation(ERotateDirection.left);
+    }
+
+    #endregion
 
     void DoRotation(ERotateDirection rotateDirection)
     {
         //if selector is greater, rotate more cells
         if (GameManager.instance.levelManager.levelConfig.SelectorSize > 1)
         {
-            List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);
-            coordinatesToRotate.Add(coordinates);
+            List<Coordinates> coordinatesToRotate = RotateMoreCells(rotateDirection);   //get list of coordinates to rotate
+            coordinatesToRotate.Add(coordinates);                                       //add our coordinates
             GameManager.instance.world.Rotate(coordinatesToRotate.ToArray(), WorldUtility.LateralFace(transform), rotateDirection);
         }
         //else rotate only this cell
