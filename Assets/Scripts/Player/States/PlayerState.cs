@@ -1,83 +1,68 @@
 ﻿using UnityEngine;
 using redd096;
-using Cinemachine;
 
 public class PlayerState : State
 {
     protected Player player;
+    protected NewControls controls;
     protected Transform transform;
 
-    CinemachineFreeLook virtualCam;
+    Cinemachine.CinemachineFreeLook virtualCam;
 
     public PlayerState(StateMachine stateMachine) : base(stateMachine)
     {
         //get references
         player = stateMachine as Player;
+        controls = player.Controls;
         transform = player.transform;
         virtualCam = player.VirtualCam;
     }
 
-    //public override void AwakeState(StateMachine stateMachine)
-    //{
-    //    base.AwakeState(stateMachine);
-    //
-    //    //get references
-    //    player = stateMachine as Player;
-    //    transform = player.transform;
-    //    rb = transform.GetComponent<Rigidbody>();
-    //}
-
-#if UNITY_ANDROID
-
-    protected void CinemachineMovement(float axisX, float axisY)
+    protected void CinemachineMovement(Vector2 movement)
     {
-        //set axis
-        virtualCam.m_XAxis.m_InputAxisValue = axisX;
-        virtualCam.m_YAxis.m_InputAxisValue = axisY;
+        //normalize the vector (we need only direction)
+        //movement.Normalize();
 
-        //set speed
-        float maxSpeedX = 200;
-        float maxSpeedY = 2;
-        bool invertY = false;
-        float speedX = Time.timeScale > 1 ? maxSpeedX / Time.timeScale : maxSpeedX;
-        float speedY = Time.timeScale > 1 ? maxSpeedY / Time.timeScale : maxSpeedY;
+        //set invert y for y axis
+        movement.y = player.invertY ? -movement.y : movement.y;
 
-        virtualCam.m_XAxis.m_MaxSpeed = speedX;
-        virtualCam.m_YAxis.m_MaxSpeed = speedY;
-
-        //set invert y
-        virtualCam.m_YAxis.m_InvertInput = invertY;
+        //set axis value
+        virtualCam.m_XAxis.Value += movement.x * player.speedX * Time.deltaTime;
+        virtualCam.m_YAxis.Value += movement.y * player.speedY * Time.deltaTime;
     }
-
-#else
-
-    protected void CinemachineMovement(string axisX, string axisY)
-    {
-        //re-enable cinemachine
-        if(virtualCam.enabled == false)
-            virtualCam.enabled = true;
-
-        //set axis
-        virtualCam.m_XAxis.m_InputAxisName = axisX;
-        virtualCam.m_YAxis.m_InputAxisName = axisY;
-
-        //set speed
-        bool invertY = false;
-        float speedX = Time.timeScale > 1 ? player.speedX / Time.timeScale : player.speedX;
-        float speedY = Time.timeScale > 1 ? player.speedY / Time.timeScale : player.speedY;
-
-        virtualCam.m_XAxis.m_MaxSpeed = speedX;
-        virtualCam.m_YAxis.m_MaxSpeed = speedY;
-
-        //set invert y
-        virtualCam.m_YAxis.m_InvertInput = invertY;
-    }
-
-#endif
 
     protected virtual void StopCinemachine()
     {
-        //disable cinemachine
-        virtualCam.enabled = false;
+        //be sure to not move cinemachine (y axis is a fixed value)
+        virtualCam.m_XAxis.Value = 0;
     }
+
+    #region inputs
+
+    public override void Enter()
+    {
+        base.Enter();
+
+        AddInputs();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        RemoveInputs();
+    }
+
+    protected virtual void AddInputs()
+    {
+        //add events
+        Debug.Log(this.ToString());
+    }
+
+    protected virtual void RemoveInputs()
+    {
+        //remove events
+    }
+
+    #endregion
 }
