@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerStrategic : PlayerMove
 {
@@ -40,10 +41,10 @@ public class PlayerStrategic : PlayerMove
         base.AddInputs();
 
         //add inputs
-        controls.Gameplay.BuildTurret.started += ctx => PressedOnBuildTurret();
-        controls.Gameplay.BuildTurret.canceled += ctx => OnBuildTurret();
-        controls.Gameplay.FinishStrategicPhase.started += ctx => OnPressReady();
-        controls.Gameplay.FinishStrategicPhase.canceled += ctx => OnReleaseReady();
+        controls.Gameplay.BuildTurret.started += PressedOnBuildTurret;
+        controls.Gameplay.BuildTurret.canceled += OnBuildTurret;
+        controls.Gameplay.FinishStrategicPhase.started += OnPressReady;
+        controls.Gameplay.FinishStrategicPhase.canceled += OnReleaseReady;
     }
 
     protected override void RemoveInputs()
@@ -51,35 +52,33 @@ public class PlayerStrategic : PlayerMove
         base.RemoveInputs();
 
         //remove inputs
-        controls.Gameplay.BuildTurret.started -= ctx => PressedOnBuildTurret();
-        controls.Gameplay.BuildTurret.canceled -= ctx => OnBuildTurret();
-        controls.Gameplay.FinishStrategicPhase.started -= ctx => OnPressReady();
-        controls.Gameplay.FinishStrategicPhase.canceled -= ctx => OnReleaseReady();
+        controls.Gameplay.BuildTurret.started -= PressedOnBuildTurret;
+        controls.Gameplay.BuildTurret.canceled -= OnBuildTurret;
+        controls.Gameplay.FinishStrategicPhase.started -= OnPressReady;
+        controls.Gameplay.FinishStrategicPhase.canceled -= OnReleaseReady;
     }
 
-    void PressedOnBuildTurret()
+    void PressedOnBuildTurret(InputAction.CallbackContext ctx)
     {
         pressedOnBuildTurret = true;
     }
 
-    void OnBuildTurret()
+    void OnBuildTurret(InputAction.CallbackContext ctx)
     {
-        //do only if pressed input
-        if (pressedOnBuildTurret == false)
+        //do only on click
+        if (CheckClick(ref pressedOnBuildTurret) == false)
             return;
-
-        pressedOnBuildTurret = false;
 
         //enter in "place turret" state
         player.SetState(new PlayerPlaceTurret(player, coordinates));
     }
 
-    void OnPressReady()
+    void OnPressReady(InputAction.CallbackContext ctx)
     {
         keepingPressedEndStrategic = true;
     }
 
-    void OnReleaseReady()
+    void OnReleaseReady(InputAction.CallbackContext ctx)
     {
         keepingPressedEndStrategic = false;
 

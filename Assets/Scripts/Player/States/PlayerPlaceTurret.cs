@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerPlaceTurret : PlayerState
 {
@@ -36,40 +37,37 @@ public class PlayerPlaceTurret : PlayerState
     {
         base.AddInputs();
 
-        controls.Gameplay.ConfirmTurret.started += ctx => PressedPlaceTurret();
-        controls.Gameplay.ConfirmTurret.canceled += ctx => PlaceTurret();
-        controls.Gameplay.DenyTurret.started += ctx => PressedStopPlaceTurret();
-        controls.Gameplay.DenyTurret.canceled += ctx => StopPlaceTurret();
-        controls.Gameplay.SelectCell.started += ctx => PressedSelectCell();
-        controls.Gameplay.SelectCell.canceled += ctx => SelectCell(ctx.ReadValue<Vector2>());
+        controls.Gameplay.ConfirmTurret.started += PressedPlaceTurret;
+        controls.Gameplay.ConfirmTurret.canceled += PlaceTurret;
+        controls.Gameplay.DenyTurret.started += PressedStopPlaceTurret;
+        controls.Gameplay.DenyTurret.canceled += StopPlaceTurret;
+        controls.Gameplay.SelectCell.started += PressedSelectCell;
+        controls.Gameplay.SelectCell.performed += SelectCell;
     }
 
     protected override void RemoveInputs()
     {
         base.RemoveInputs();
 
-        controls.Gameplay.ConfirmTurret.started -= ctx => PressedPlaceTurret();
-        controls.Gameplay.ConfirmTurret.canceled -= ctx => PlaceTurret();
-        controls.Gameplay.DenyTurret.started -= ctx => PressedStopPlaceTurret();
-        controls.Gameplay.DenyTurret.canceled -= ctx => StopPlaceTurret();
-        controls.Gameplay.SelectCell.started -= ctx => PressedSelectCell();
-        controls.Gameplay.SelectCell.canceled -= ctx => SelectCell(ctx.ReadValue<Vector2>());
+        controls.Gameplay.ConfirmTurret.started -= PressedPlaceTurret;
+        controls.Gameplay.ConfirmTurret.canceled -= PlaceTurret;
+        controls.Gameplay.DenyTurret.started -= PressedStopPlaceTurret;
+        controls.Gameplay.DenyTurret.canceled -= StopPlaceTurret;
+        controls.Gameplay.SelectCell.started -= PressedSelectCell;
+        controls.Gameplay.SelectCell.performed -= SelectCell;
     }
 
-    void PressedPlaceTurret()
+    void PressedPlaceTurret(InputAction.CallbackContext ctx)
     {
         pressedPlaceTurret = true;
     }
 
-    void PlaceTurret()
+    void PlaceTurret(InputAction.CallbackContext ctx)
     {
-        //do only if pressed input
-        if (pressedPlaceTurret == false)
+        //do only on click
+        if (CheckClick(ref pressedPlaceTurret) == false)
             return;
 
-        pressedPlaceTurret = false;
-
-        Debug.Log("confirm turret");
         //place turret
         GameManager.instance.world.Cells[coordinates].Interact();
 
@@ -77,38 +75,33 @@ public class PlayerPlaceTurret : PlayerState
         player.SetState(new PlayerStrategic(player, coordinates));
     }
 
-    void PressedStopPlaceTurret()
+    void PressedStopPlaceTurret(InputAction.CallbackContext ctx)
     {
         pressedStopPlaceTurret = true;
     }
 
-    void StopPlaceTurret()
+    void StopPlaceTurret(InputAction.CallbackContext ctx)
     {
-        //do only if pressed input
-        if (pressedStopPlaceTurret == false)
+        //do only on click
+        if (CheckClick(ref pressedStopPlaceTurret) == false)
             return;
 
-        pressedStopPlaceTurret = false;
-
-        Debug.Log("deny turret");
         //back to strategic state
         player.SetState(new PlayerStrategic(player, coordinates));
     }
 
-    void PressedSelectCell()
+    void PressedSelectCell(InputAction.CallbackContext ctx)
     {
         pressedSelectCell = true;
     }
 
-    void SelectCell(Vector2 movement)
+    void SelectCell(InputAction.CallbackContext ctx)
     {
-        //do only if pressed input
-        if (pressedSelectCell == false)
+        //do only on click
+        if (CheckClick(ref pressedSelectCell) == false)
             return;
 
-        pressedSelectCell = false;
-
-        Debug.Log("Place Turret Select Cell");
+        Vector2 movement = ctx.ReadValue<Vector2>();
 
         //save previous coordinates
         Coordinates previousCoordinates = coordinates;

@@ -23,7 +23,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""e8108198-7494-4f84-93e8-38212912acb7"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
@@ -31,7 +31,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""fdf70380-251b-489e-aa36-36735ca5c329"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
@@ -39,7 +39,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""type"": ""Value"",
                     ""id"": ""2fba47cb-7338-4f85-9879-e92a0a11d236"",
                     ""expectedControlType"": ""Vector2"",
-                    ""processors"": ""NormalizeVector2"",
+                    ""processors"": """",
                     ""interactions"": """"
                 },
                 {
@@ -135,7 +135,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""id"": ""44d17102-d8a3-400a-9d43-e1ce5e503014"",
                     ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertY=false)"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,
@@ -355,7 +355,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""id"": ""7ba40110-ac4f-4253-aebe-b6cf5cf6cd49"",
                     ""path"": ""<Gamepad>/dpad"",
                     ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertY=false)"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,

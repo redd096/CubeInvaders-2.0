@@ -21,7 +21,8 @@ public class PlayerState : State
     protected void CinemachineMovement(Vector2 movement)
     {
         //normalize the vector (we need only direction)
-        //movement.Normalize();
+        movement.Normalize();
+        Debug.Log("input: " + player.GetComponent<UnityEngine.InputSystem.PlayerInput>().currentControlScheme + " and normalized: " + movement);
 
         //set invert y for y axis
         movement.y = player.invertY ? -movement.y : movement.y;
@@ -35,6 +36,19 @@ public class PlayerState : State
     {
         //be sure to not move cinemachine (y axis is a fixed value)
         virtualCam.m_XAxis.Value = 0;
+    }
+
+    protected bool CheckClick(ref bool pressedInput)
+    {
+        //if pressed input, set to released and return true
+        if (pressedInput)
+        {
+            pressedInput = false;
+            return true;
+        }
+
+        //else return false
+        return false;
     }
 
     #region inputs
@@ -56,8 +70,6 @@ public class PlayerState : State
     protected virtual void AddInputs()
     {
         //add events
-
-        Debug.Log(this.ToString());
     }
 
     protected virtual void RemoveInputs()

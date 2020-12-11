@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using redd096;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
@@ -53,28 +54,28 @@ public class Player : StateMachine
 
     #region inputs (pause and resume)
 
+    //used because pause and resume are called at same frame. Like this we wait when release button
+    bool alreadyPressed;
+
     void AddInputs()
     {
         Controls.Enable();
-        Controls.Gameplay.PauseButton.started += ctx => PauseGame();
-        Controls.Gameplay.PauseButton.canceled += ctx => ResetAlreadyPaused();
-        Controls.Gameplay.ResumeButton.started += ctx => ResumeGame();
-        Controls.Gameplay.ResumeButton.canceled += ctx => ResetAlreadyPaused();
+        Controls.Gameplay.PauseButton.started += PauseGame;
+        Controls.Gameplay.PauseButton.canceled += ResetAlreadyPaused;
+        Controls.Gameplay.ResumeButton.started += ResumeGame;
+        Controls.Gameplay.ResumeButton.canceled += ResetAlreadyPaused;
     }
 
     void RemoveInputs()
     {
         Controls.Disable();
-        Controls.Gameplay.PauseButton.started -= ctx => PauseGame();
-        Controls.Gameplay.PauseButton.canceled -= ctx => ResetAlreadyPaused();
-        Controls.Gameplay.ResumeButton.started -= ctx => ResumeGame();
-        Controls.Gameplay.ResumeButton.canceled -= ctx => ResetAlreadyPaused();
+        Controls.Gameplay.PauseButton.started -= PauseGame;
+        Controls.Gameplay.PauseButton.canceled -= ResetAlreadyPaused;
+        Controls.Gameplay.ResumeButton.started -= ResumeGame;
+        Controls.Gameplay.ResumeButton.canceled -= ResetAlreadyPaused;
     }
 
-    //used because pause and resume are called at same frame. Like this we wait when release button
-    bool alreadyPressed;
-
-    void PauseGame()
+    void PauseGame(InputAction.CallbackContext ctx)
     {
         //do only if not already pressed button
         if (alreadyPressed)
@@ -88,7 +89,7 @@ public class Player : StateMachine
         }
     }
 
-    void ResumeGame()
+    void ResumeGame(InputAction.CallbackContext ctx)
     {
         //do only if not already pressed button
         if (alreadyPressed)
@@ -102,7 +103,7 @@ public class Player : StateMachine
         }
     }
 
-    void ResetAlreadyPaused()
+    void ResetAlreadyPaused(InputAction.CallbackContext ctx)
     {
         alreadyPressed = false;
     }
