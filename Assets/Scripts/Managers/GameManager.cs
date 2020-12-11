@@ -18,12 +18,6 @@ public class GameManager : Singleton<GameManager>
         world = FindObjectOfType<World>();
         levelManager = FindObjectOfType<LevelManager>();
         waveManager = FindObjectOfType<WaveManager>();
-        
-        //if there is a player, lock mouse
-        if (player)
-        {
-            FindObjectOfType<SceneLoader>().ResumeGame();
-        }
     }
 
     #region public API

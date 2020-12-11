@@ -26,8 +26,9 @@ public class Player : StateMachine
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
         Controls = new NewControls();
 
-        //set state
+        //set state and lock mouse
         SetState(new PlayerPause(this));
+        Utility.LockMouse(CursorLockMode.Locked);
 
         AddInputs();
         AddEvents();
