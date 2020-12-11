@@ -126,6 +126,12 @@ public class PlayerMove : PlayerState
 
     #endregion
 
+    void DoSelectionCell(ERotateDirection direction)
+    {
+        //update coordinates
+        coordinates = WorldUtility.SelectCell(WorldUtility.SelectFace(transform), coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), direction);
+    }
+
     void DoRotation(ERotateDirection rotateDirection)
     {
         //if selector is greater, rotate more cells

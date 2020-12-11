@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using redd096;
+using UnityEngine.InputSystem;
 
 public class WorldRotator
 {
@@ -27,15 +28,11 @@ public class WorldRotator
     List<Coordinates> cellsKeys = new List<Coordinates>();
     Coroutine rotatingWorld_Coroutine;
 
-    NewControls controls;
-
     #endregion
 
     public WorldRotator(World world)
     {
         this.world = world;
-        controls = new NewControls();
-        controls.Enable();
     }
 
     #region private API
@@ -138,11 +135,11 @@ public class WorldRotator
     protected virtual bool SkipAnimation(float delta)
     {
         //if player pressed input to skip, if some time already passed, then skip animation
-        //if (controls.Gameplay.SkipAnimation.phase == UnityEngine.InputSystem.InputActionPhase.Started && delta > 0.1f)
-        //{
-        //    Debug.Log("skip animation");
-        //    return true;
-        //}
+        if (Keyboard.current.anyKey.wasPressedThisFrame && delta > 0.1f)
+        {
+            Debug.Log("skip animation");
+            return true;
+        }
 
         return false;
     }
