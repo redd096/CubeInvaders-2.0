@@ -1,11 +1,10 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
+using UnityEngine.InputSystem;
 
 public class PlayerMove : PlayerState
 {
     protected Coordinates coordinates;
-
-    bool keepingPressedToRotate;
 
     public PlayerMove(redd096.StateMachine stateMachine, Coordinates coordinates) : base(stateMachine)
     {
@@ -21,32 +20,47 @@ public class PlayerMove : PlayerState
         GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
+    public override void Execution()
+    {
+        base.Execution();
+
+        //if moving mouse or analog, move camera
+        if(controls.Gameplay.MoveCamera.phase == InputActionPhase.Started)
+        {
+            MoveCamera(controls.Gameplay.MoveCamera.ReadValue<Vector2>());
+        }
+    }
+
     #region inputs
+
+    bool pressedSelectCell;
+    bool pressedRotateCube;
 
     protected override void AddInputs()
     {
         base.AddInputs();
 
-        controls.Gameplay.MoveCamera.performed += ctx => MoveCamera(ctx.ReadValue<Vector2>());
-        controls.Gameplay.KeepPressedToRotate.started += ctx => PressedInputToRotate();
-        controls.Gameplay.KeepPressedToRotate.canceled += ctx => ReleasedInputToRotate();
-        controls.Gameplay.SelectCell.performed += ctx => SelectCell(ctx.ReadValue<Vector2>());
-        controls.Gameplay.RotateCube.performed += ctx => RotateCube(ctx.ReadValue<Vector2>());
+        controls.Gameplay.SelectCell.started += PressedSelectCell;
+        controls.Gameplay.SelectCell.performed += SelectCell;
+        controls.Gameplay.RotateCube.started += PressedRotateCube;
+        controls.Gameplay.RotateCube.performed += RotateCube;
     }
 
     protected override void RemoveInputs()
     {
         base.RemoveInputs();
 
-        controls.Gameplay.MoveCamera.performed -= ctx => MoveCamera(ctx.ReadValue<Vector2>());
-        controls.Gameplay.KeepPressedToRotate.started -= ctx => PressedInputToRotate();
-        controls.Gameplay.KeepPressedToRotate.canceled -= ctx => ReleasedInputToRotate();
-        controls.Gameplay.SelectCell.performed -= ctx => SelectCell(ctx.ReadValue<Vector2>());
-        controls.Gameplay.RotateCube.performed -= ctx => RotateCube(ctx.ReadValue<Vector2>());
+        controls.Gameplay.SelectCell.started -= PressedSelectCell;
+        controls.Gameplay.SelectCell.performed -= SelectCell;
+        controls.Gameplay.RotateCube.started -= PressedRotateCube;
+        controls.Gameplay.RotateCube.performed -= RotateCube;
     }
 
     void MoveCamera(Vector2 movement)
-    {
+    {        
+        Debug.Log("input: " + player.GetComponent<PlayerInput>().currentControlScheme + " and movement: " + movement);
+
+        //move cinemachine
         CinemachineMovement(movement);
 
         //if change face, reselect center cell and move selector
@@ -59,46 +73,46 @@ public class PlayerMove : PlayerState
         }
     }
 
-    void PressedInputToRotate()
+    void PressedSelectCell(InputAction.CallbackContext ctx)
     {
-        keepingPressedToRotate = true;
+        pressedSelectCell = true;
     }
 
-    void ReleasedInputToRotate()
+    void SelectCell(InputAction.CallbackContext ctx)
     {
-        keepingPressedToRotate = false;
-    }
-
-    void SelectCell(Vector2 movement)
-    {
-        //do nothing if keeping pressed
-        if (keepingPressedToRotate)
+        //do nothing if keeping pressed, or if not clicked
+        if (controls.Gameplay.KeepPressedToRotate.phase == InputActionPhase.Started || CheckClick(ref pressedSelectCell) == false)
             return;
 
-        Debug.Log("select cell");
-        EFace face = WorldUtility.SelectFace(transform);
+        Vector2 movement = ctx.ReadValue<Vector2>();
+        Debug.Log("select cell: " + movement);
 
         //select cell
         if (movement.y > 0)
-            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
+            DoSelectionCell(ERotateDirection.up);
         else if (movement.y < 0)
-            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
+            DoSelectionCell(ERotateDirection.down);
         else if (movement.x > 0)
-            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
+            DoSelectionCell(ERotateDirection.right);
         else if (movement.x < 0)
-            coordinates = WorldUtility.SelectCell(face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
+            DoSelectionCell(ERotateDirection.left);
 
         //save coordinates and show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
-    void RotateCube(Vector2 movement)
+    void PressedRotateCube(InputAction.CallbackContext ctx)
     {
-        //do nothing if not keeping pressed
-        if (keepingPressedToRotate == false)
+        pressedRotateCube = true;
+    }
+
+    void RotateCube(InputAction.CallbackContext ctx)
+    {
+        //do nothing if NOT keeping pressed, or if not clicked
+        if (controls.Gameplay.KeepPressedToRotate.phase != InputActionPhase.Started || CheckClick(ref pressedRotateCube) == false)
             return;
 
-        Debug.Log("rotate cube");
+        Vector2 movement = ctx.ReadValue<Vector2>();
 
         if (movement.y > 0)
             DoRotation(ERotateDirection.up);
