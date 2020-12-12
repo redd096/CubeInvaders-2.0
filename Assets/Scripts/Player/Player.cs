@@ -82,6 +82,10 @@ public class Player : StateMachine
         if (alreadyPressed)
             return;
 
+        //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
+        if (state.GetType() == typeof(PlayerPlaceTurret) && Controls.Gameplay.PauseButton.activeControl.name == "escape")
+            return;
+
         //if not ended game && game is running
         if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0)
         {
