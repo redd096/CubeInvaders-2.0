@@ -31,6 +31,8 @@ public class Cell : MonoBehaviour
 
     public bool IsAlive { get; private set; } = true;
 
+    public BuildableObject TurretToCreate => turretToCreate;
+
     void Awake()
     {
         //if build at start, build turret 

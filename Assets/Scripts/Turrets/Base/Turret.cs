@@ -161,8 +161,19 @@ public class Turret : BuildableObject
         //save previous face
         previousFace = CellOwner.coordinates.face;
 
-        //find turrets on this face
-        Turret[] turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face).ToArray();
+        
+        Turret[] turrets;
+
+        //find turrets on this face of same type (check if same prefab)
+        if (GameManager.instance.levelManager.levelConfig.OnlyIfSameType)
+        {
+            turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face && x.CellOwner.TurretToCreate == CellOwner.TurretToCreate).ToArray();
+        }
+        //else find every turrets on this face, without check type
+        else
+        {
+            turrets = FindObjectsOfType<Turret>().Where(x => x.CellOwner.coordinates.face == CellOwner.coordinates.face).ToArray();
+        }
 
         //if exceed limit
         if (turrets.Length > GameManager.instance.levelManager.levelConfig.LimitOfTurretsOnSameFace)
