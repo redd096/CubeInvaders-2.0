@@ -9,9 +9,12 @@ public class LevelConfig : ScriptableObject
 
     [Header("Modifier")]
     [Tooltip("How many rotations at time")] [Min(1)] public int NumberRotations = 1;
-    [Tooltip("Turret need generator to activate")] public bool TurretsNeedGenerator = false;
     [Tooltip("Size of the selector, to select one cell or more")] [Min(1)] public int SelectorSize = 1;
     [Tooltip("Destroy turret after few seconds that player doesn't move it")] public bool DestroyTurretWhenNoMove = false;
+
+    [Header("Modifier - Generator")]
+    [Tooltip("Turret need generator to activate")] public bool TurretsNeedGenerator = false;
+    [Tooltip("Activate every turret on this face, or only turrets around")] public bool GeneratorActiveAllFace = true;
 
     [Header("Modifier - Limit of turrets on same face")]
     [Tooltip("Limit of turrets on same face, if exceed explode turrets (0 = no limits)")] [Min(0)] public int LimitOfTurretsOnSameFace = 0;

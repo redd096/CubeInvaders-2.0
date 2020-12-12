@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using System.Linq;
 
 [AddComponentMenu("Cube Invaders/Turret/Generator")]
 public class Generator : BuildableObject
@@ -43,10 +44,21 @@ public class Generator : BuildableObject
 
     void CheckTurretsAround(bool activate)
     {
-        //foreach cell around
-        foreach(Cell cell in GameManager.instance.world.GetCellsAround(CellOwner.coordinates))
+        //foreach cell on this face
+        if (GameManager.instance.levelManager.levelConfig.GeneratorActiveAllFace)
         {
-            ActivateDeactivate(cell, activate);
+            foreach (Cell cell in GameManager.instance.world.Cells.Values.Where(x => x.coordinates.face == CellOwner.coordinates.face))
+            {
+                ActivateDeactivate(cell, activate);
+            }
+        }
+        //else foreach cell around
+        else
+        {
+            foreach (Cell cell in GameManager.instance.world.GetCellsAround(CellOwner.coordinates))
+            {
+                ActivateDeactivate(cell, activate);
+            }
         }
     }
 

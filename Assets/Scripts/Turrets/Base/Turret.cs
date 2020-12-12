@@ -68,12 +68,25 @@ public class Turret : BuildableObject
     {
         int generatorsOnThisFace = 0;
 
-        //foreach cell around
-        foreach (Cell cell in GameManager.instance.world.GetCellsAround(CellOwner.coordinates))
+        //foreach cell on this face
+        if (GameManager.instance.levelManager.levelConfig.GeneratorActiveAllFace)
         {
-            //if there is a turret, is a generator and is active
-            if (cell.turret != null && cell.turret is Generator && cell.turret.IsActive)
-                generatorsOnThisFace++;
+            foreach (Cell cell in GameManager.instance.world.Cells.Values.Where(x => x.coordinates.face == CellOwner.coordinates.face))
+            {
+                //if there is a turret, is a generator and is active
+                if (cell.turret != null && cell.turret is Generator && cell.turret.IsActive)
+                    generatorsOnThisFace++;
+            }
+        }
+        //else foreach cell around
+        else
+        {
+            foreach (Cell cell in GameManager.instance.world.GetCellsAround(CellOwner.coordinates))
+            {
+                //if there is a turret, is a generator and is active
+                if (cell.turret != null && cell.turret is Generator && cell.turret.IsActive)
+                    generatorsOnThisFace++;
+            }
         }
 
         return generatorsOnThisFace;
