@@ -177,7 +177,8 @@ MonoBehaviour:
     face: 0
     x: 0
     y: 0
-  timerPoison: 10
+  timerPoison: 0
+  limitSpread: 1
 --- !u!1 &8976919603826603930
 GameObject:
   m_ObjectHideFlags: 0

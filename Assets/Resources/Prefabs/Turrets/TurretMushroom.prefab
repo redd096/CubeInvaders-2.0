@@ -32,7 +32,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needGenerator: 1
-  timeBeforeDestroy: 5
+  timeBeforeDestroy: 8
   shield: {fileID: 8211497285858294263}
 --- !u!1001 &4246350457235721627
 PrefabInstance:

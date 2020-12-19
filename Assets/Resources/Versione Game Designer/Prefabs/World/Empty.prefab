@@ -13,15 +13,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 714196864318112757, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.049999997
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 988307079646535075, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.049999997
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2123151899384793019, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -0.049999997
+      value: 0.2
       objectReference: {fileID: 0}
     - target: {fileID: 2483339019651692356, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -29,7 +29,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3d0f1a7e5389b2f41ac4495628059e26, type: 2}
     - target: {fileID: 2483339019651692356, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 4853819622673606673, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_LocalPosition.x
@@ -85,7 +85,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3d0f1a7e5389b2f41ac4495628059e26, type: 2}
     - target: {fileID: 7103303613786605580, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 7692706336419384217, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_Materials.Array.data[0]
@@ -93,7 +93,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3d0f1a7e5389b2f41ac4495628059e26, type: 2}
     - target: {fileID: 7692706336419384217, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: m_Enabled
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: turretToCreate
@@ -102,12 +102,17 @@ PrefabInstance:
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: toRemoveOnDead
       value: 
-      objectReference: {fileID: 8599316549598290468}
+      objectReference: {fileID: 1642134924030142644}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!4 &5998751246704088522 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 4853819622673606673, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+  m_PrefabInstance: {fileID: 1181037404455009755}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1642134924030142644 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 480172397415699823, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
   m_PrefabInstance: {fileID: 1181037404455009755}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &7211458606131863977
@@ -171,7 +176,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: aba66fe661a03c649a579bf3b04db69d, type: 3}
       propertyPath: m_IsActive
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4263557382559058715, guid: aba66fe661a03c649a579bf3b04db69d, type: 3}
       propertyPath: m_CastShadows
@@ -191,11 +196,6 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 3d0f1a7e5389b2f41ac4495628059e26, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: aba66fe661a03c649a579bf3b04db69d, type: 3}
---- !u!1 &8599316549598290468 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -7835463234464398451, guid: aba66fe661a03c649a579bf3b04db69d, type: 3}
-  m_PrefabInstance: {fileID: 7211458606131863977}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &8875743746987599007
 PrefabInstance:
   m_ObjectHideFlags: 0
