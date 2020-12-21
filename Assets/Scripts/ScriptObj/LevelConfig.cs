@@ -20,4 +20,5 @@ public class LevelConfig : ScriptableObject
     [Tooltip("Limit of turrets on same face, if exceed explode turrets (0 = no limits)")] [Min(0)] public int LimitOfTurretsOnSameFace = 0;
     [Tooltip("Timer to destroy if there are more turrets on same face")] [Min(0)] public float TimeBeforeDestroyTurretsOnSameFace = 2;
     [Tooltip("Limit of turrets on same face, only if is the same type of turret")] public bool OnlyIfSameType = true;
+    [Tooltip("When draw line feedback, close line or keep open?")] public bool CloseLineFeedback = true;
 }

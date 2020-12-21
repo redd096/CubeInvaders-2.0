@@ -126,6 +126,12 @@ public class TurretGraphics : BuildableGraphics
             foreach (Turret t in turrets)
                 positions.Add(t.GetComponent<TurretGraphics>().linePosition.position);
 
+            //add first as last one too, to close the lines
+            if (GameManager.instance.levelManager.levelConfig.CloseLineFeedback)
+            {
+                positions.Add(positions[0]);
+            }
+
             //set positions
             line[face].positionCount = positions.Count;
             line[face].SetPositions(positions.ToArray());
