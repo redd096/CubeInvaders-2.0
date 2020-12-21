@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy")]
 public class Enemy : EnemyBase
 {

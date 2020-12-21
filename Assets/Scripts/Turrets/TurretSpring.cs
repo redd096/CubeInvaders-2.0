@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Turret Spring")]
 public class TurretSpring : TurretShooter
 {

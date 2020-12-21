@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[SelectionBase]
 public class EnemyBase : MonoBehaviour
 {
     [Header("Important")]
@@ -30,6 +29,9 @@ public class EnemyBase : MonoBehaviour
         //check hit shield
         if (CheckHit<Shield>(other))
         {
+            //damage shield
+            other.GetComponentInParent<Shield>().ShieldGetDamage();
+
             //destroy this enemy
             Die(false);
 

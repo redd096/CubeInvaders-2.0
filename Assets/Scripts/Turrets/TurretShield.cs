@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/Turret/Turret Shield")]
 [SelectionBase]
+[AddComponentMenu("Cube Invaders/Turret/Turret Shield")]
 public class TurretShield : Turret
 {
     [Header("Important")]

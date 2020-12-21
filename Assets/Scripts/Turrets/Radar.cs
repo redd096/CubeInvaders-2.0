@@ -2,6 +2,7 @@
 using System.Linq;
 using redd096;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Radar")]
 public class Radar : BuildableObject
 {

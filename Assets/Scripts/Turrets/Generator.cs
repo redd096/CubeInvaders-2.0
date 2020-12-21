@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Linq;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Generator")]
 public class Generator : BuildableObject
 {

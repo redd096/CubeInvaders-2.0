@@ -1,8 +1,8 @@
 ﻿using UnityEngine;
 using System.Linq;
 
-[AddComponentMenu("Cube Invaders/Turret Component/Turret Shot")]
 [SelectionBase]
+[AddComponentMenu("Cube Invaders/Turret Component/Turret Shot")]
 public class TurretShot : MonoBehaviour
 {
     [Header("Shot")]

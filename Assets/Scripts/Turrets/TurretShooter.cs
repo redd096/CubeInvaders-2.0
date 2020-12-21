@@ -4,6 +4,7 @@ using UnityEngine;
 using redd096;
 using System.Linq;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
 public class TurretShooter : Turret
 {

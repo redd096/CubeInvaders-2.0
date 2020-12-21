@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy Poison")]
 public class EnemyPoison : Enemy
 {
@@ -14,6 +15,9 @@ public class EnemyPoison : Enemy
         //check hit shield
         if (CheckHit<Shield>(other))
         {
+            //damage shield
+            other.GetComponentInParent<Shield>().ShieldGetDamage();
+
             //destroy this enemy
             Die(false);
 

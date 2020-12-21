@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/World/Cell")]
 [SelectionBase]
+[AddComponentMenu("Cube Invaders/World/Cell")]
 public class Cell : MonoBehaviour
 {
     [Header("Modifier")]
