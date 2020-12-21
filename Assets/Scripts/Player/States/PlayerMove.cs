@@ -58,8 +58,6 @@ public class PlayerMove : PlayerState
 
     void MoveCamera(Vector2 movement)
     {        
-        Debug.Log("input: " + player.GetComponent<PlayerInput>().currentControlScheme + " and movement: " + movement);
-
         //move cinemachine
         CinemachineMovement(movement);
 
@@ -85,17 +83,22 @@ public class PlayerMove : PlayerState
             return;
 
         Vector2 movement = ctx.ReadValue<Vector2>();
-        Debug.Log("select cell: " + movement);
 
         //select cell
-        if (movement.y > 0)
-            DoSelectionCell(ERotateDirection.up);
-        else if (movement.y < 0)
-            DoSelectionCell(ERotateDirection.down);
-        else if (movement.x > 0)
-            DoSelectionCell(ERotateDirection.right);
-        else if (movement.x < 0)
-            DoSelectionCell(ERotateDirection.left);
+        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+        {
+            if (movement.y > 0)
+                DoSelectionCell(ERotateDirection.up);
+            else if (movement.y < 0)
+                DoSelectionCell(ERotateDirection.down);
+        }
+        else
+        {
+            if (movement.x > 0)
+                DoSelectionCell(ERotateDirection.right);
+            else if (movement.x < 0)
+                DoSelectionCell(ERotateDirection.left);
+        }
 
         //save coordinates and show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);

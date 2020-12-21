@@ -146,7 +146,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""id"": ""a0d94fd8-bd5e-4181-bc3f-e9415967568d"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertY=false)"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Select Cell"",
                     ""isComposite"": false,

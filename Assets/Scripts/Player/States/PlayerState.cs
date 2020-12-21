@@ -22,7 +22,6 @@ public class PlayerState : State
     {
         //normalize the vector (we need only direction)
         movement.Normalize();
-        Debug.Log("input: " + player.GetComponent<UnityEngine.InputSystem.PlayerInput>().currentControlScheme + " and normalized: " + movement);
 
         //set invert y for y axis
         movement.y = player.invertY ? -movement.y : movement.y;

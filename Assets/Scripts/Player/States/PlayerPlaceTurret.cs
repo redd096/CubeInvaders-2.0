@@ -107,14 +107,20 @@ public class PlayerPlaceTurret : PlayerState
         Coordinates previousCoordinates = coordinates;
 
         //select cell
-        if (movement.y > 0)
-            coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
-        else if (movement.y < 0)
-            coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
-        else if (movement.x > 0)
-            coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
-        else if (movement.x < 0)
-            coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
+        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+        {
+            if (movement.y > 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
+            else if (movement.y < 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
+        }
+        else
+        {
+            if (movement.x > 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
+            else if (movement.x < 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
+        }
 
         //if differents coordinates
         if (previousCoordinates != coordinates)
