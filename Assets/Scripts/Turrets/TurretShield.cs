@@ -4,6 +4,7 @@ using UnityEngine;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Turret Shield")]
+[RequireComponent(typeof(TurretGraphics))]
 public class TurretShield : Turret
 {
     [Header("Important")]

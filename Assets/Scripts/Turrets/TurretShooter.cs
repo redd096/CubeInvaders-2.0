@@ -6,6 +6,7 @@ using System.Linq;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
+[RequireComponent(typeof(TurretShooterGraphics))]
 public class TurretShooter : Turret
 {
     #region variables

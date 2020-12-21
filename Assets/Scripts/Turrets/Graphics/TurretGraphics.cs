@@ -38,7 +38,7 @@ public class TurretGraphics : BuildableGraphics
         SetNormalColor();
     }
 
-    void OnDestroy()
+    protected override void OnDestroy()
     {
         RemoveEvents();
     }

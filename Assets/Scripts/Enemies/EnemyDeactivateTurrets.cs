@@ -5,6 +5,7 @@ using System.Linq;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy Deactivate Turrets")]
+[RequireComponent(typeof(DeactivateTurretsGraphics))]
 public class EnemyDeactivateTurrets : Enemy
 {
     [Header("Deactivate Turrets")]
@@ -12,6 +13,8 @@ public class EnemyDeactivateTurrets : Enemy
     [Tooltip("Timer before reactivate turrets")] [SerializeField] float durationEffect = 1;
     [SerializeField] bool deactivateGeneratorsToo = false;
     [SerializeField] bool deactivateRadarsToo = false;
+
+    public System.Action<float> onUpdateTimer;
 
     Coroutine deactivateCoroutine;
 
@@ -31,8 +34,17 @@ public class EnemyDeactivateTurrets : Enemy
 
     IEnumerator DeactivateCoroutine()
     {
-        //wait then deactivate
-        yield return new WaitForSeconds(howOftenDeactivate);
+        //wait
+        float delta = 0;
+        while(delta < 1)
+        {
+            delta += Time.deltaTime / howOftenDeactivate;
+
+            //call event (from 0 to 1)
+            onUpdateTimer?.Invoke(delta);
+
+            yield return null;
+        }
 
         //deactivate
         Deactivate();

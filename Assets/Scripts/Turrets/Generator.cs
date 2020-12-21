@@ -3,6 +3,7 @@ using System.Linq;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Generator")]
+[RequireComponent(typeof(BuildableGraphics))]
 public class Generator : BuildableObject
 {
     #region override

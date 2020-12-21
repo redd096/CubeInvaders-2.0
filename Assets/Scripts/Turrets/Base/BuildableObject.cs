@@ -5,8 +5,6 @@ public class BuildableObject : MonoBehaviour
     public Cell CellOwner { get; private set; }
     public bool IsPreview { get; private set; } = true;     //is a preview turret
 
-    float turretDeactivatedBeforeThisTime;                  //timer setted by enemies effect, to deactivate this object
-
     bool isActive;                                          //is active (shot and spawn shield)
     public bool IsActive
     {
@@ -14,7 +12,7 @@ public class BuildableObject : MonoBehaviour
         {
             //if not preview and is active, return true - else, return false
             //added Time.time > timer enemies effect
-            return !IsPreview && isActive && Time.time > turretDeactivatedBeforeThisTime;
+            return !IsPreview && isActive && Time.time > TimerObjectDeactivated;
         }
     }
 
@@ -90,10 +88,20 @@ public class BuildableObject : MonoBehaviour
         DeactivateTurret();
     }
 
-    public void Deactivate(float timer)
+    #endregion
+
+    #region deactivate effect
+
+    public System.Action<float> onDeactivateStart;
+    public float TimerObjectDeactivated { get; private set; }    //timer setted by enemies effect, to deactivate this object
+
+    public void Deactivate(float durationEffect)
     {
         //called by enemies effect, deactive until this time
-        turretDeactivatedBeforeThisTime = Time.time + timer;
+        TimerObjectDeactivated = Time.time + durationEffect;
+
+        //call event
+        onDeactivateStart?.Invoke(durationEffect);
     }
 
     #endregion

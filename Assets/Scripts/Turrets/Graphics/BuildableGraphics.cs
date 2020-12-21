@@ -1,4 +1,6 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
 public class BuildableGraphics : MonoBehaviour
 {
@@ -6,12 +8,29 @@ public class BuildableGraphics : MonoBehaviour
     [SerializeField] Transform objectToRotate = default;
     [SerializeField] Transform baseToRotate = default;
 
+    [Header("Deactivate Turrets Effect")]
+    [SerializeField] Color effectColor = Color.cyan;
+
     protected BuildableObject buildableObject;
+    Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
 
     protected virtual void Awake()
     {
         //set logic component
         buildableObject = GetComponent<BuildableObject>();
+
+        //set normal colors
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            normalColors.Add(r, r.material.color);
+        }
+
+        buildableObject.onDeactivateStart += OnDeactivateStart;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        buildableObject.onDeactivateStart -= OnDeactivateStart;
     }
 
     protected virtual void Update()
@@ -111,6 +130,45 @@ public class BuildableGraphics : MonoBehaviour
         //set new rotation
         Quaternion forwardRotation = Quaternion.FromToRotation(transformToRotate.forward, forwardDirection) * transformToRotate.rotation;
         transformToRotate.rotation = forwardRotation;
+    }
+
+    #endregion
+
+    #region deactivated effect
+
+    Coroutine deactivateEffectCoroutine;
+
+    void OnDeactivateStart(float durationEffect)
+    {
+        if (deactivateEffectCoroutine != null)
+            StopCoroutine(deactivateEffectCoroutine);
+
+        //start coroutine
+        deactivateEffectCoroutine = StartCoroutine(DeactivateEffectCoroutine(durationEffect));
+    }
+
+    IEnumerator DeactivateEffectCoroutine(float durationEffect)
+    {
+        //while deactivated
+        while(Time.time < buildableObject.TimerObjectDeactivated)
+        {
+            //from 1 to 0
+            float delta = (buildableObject.TimerObjectDeactivated - Time.time) / durationEffect;
+
+            //foreach renderer set color
+            foreach (Renderer renderer in normalColors.Keys)
+            {
+                renderer.material.color = Color.Lerp(normalColors[renderer], effectColor, delta);
+            }
+
+            yield return null;
+        }
+
+        //on end deactivated, reset every color
+        foreach (Renderer renderer in normalColors.Keys)
+        {
+            renderer.material.color = Color.Lerp(normalColors[renderer], effectColor, 0);
+        }
     }
 
     #endregion

@@ -7,7 +7,6 @@ public class RadarGraphics : BuildableGraphics
 {
     [Header("Radar")]
     [SerializeField] Transform objectToFlick = default;
-    [SerializeField] Color normalColor = Color.white;
 
     [Header("Flick")]
     [SerializeField] Gradient flickColor = default;
@@ -15,6 +14,7 @@ public class RadarGraphics : BuildableGraphics
     [SerializeField] float maxFlick = 10;
 
     Radar radar;
+    Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
 
     protected override void Awake()
     {
@@ -22,6 +22,12 @@ public class RadarGraphics : BuildableGraphics
 
         //get logic component as radar
         radar = buildableObject as Radar;
+
+        //set normal colors
+        foreach(Renderer r in objectToFlick.GetComponentsInChildren<Renderer>())
+        {
+            normalColors.Add(r, r.material.color);
+        }
     }
 
     protected override void Update()
@@ -52,9 +58,9 @@ public class RadarGraphics : BuildableGraphics
             SetColorFlick();
         }
         //else show normal color
-        else
+        else if (buildableObject.IsActive)
         {
-            SetColor(normalColor, 0);
+            SetColor(Color.white, 0, true);
         }
     }
 
@@ -71,18 +77,19 @@ public class RadarGraphics : BuildableGraphics
         //set color based on enemy distance
         Color color = flickColor.Evaluate(distanceFrom0To1);
 
-        SetColor(color, flick);
+        SetColor(color, flick, false);
     }
 
-    void SetColor(Color color, float delta)
+    void SetColor(Color colorFlick, float delta, bool setNormalColor)
     {
-        Renderer[] renderers = objectToFlick.GetComponentsInChildren<Renderer>();
-
         //foreach renderer set color and emission
-        foreach (Renderer renderer in renderers)
+        foreach (Renderer renderer in normalColors.Keys)
         {
-            renderer.material.color = Color.Lerp(normalColor, color, delta);
-            renderer.material.SetColor("_EmissionColor", Color.Lerp(normalColor, color, delta));
+            //set color flick or stay normal color
+            Color color = setNormalColor ? normalColors[renderer] : colorFlick;
+
+            renderer.material.color = Color.Lerp(normalColors[renderer], color, delta);
+            renderer.material.SetColor("_EmissionColor", Color.Lerp(normalColors[renderer], color, delta));
         }
     }
 }
