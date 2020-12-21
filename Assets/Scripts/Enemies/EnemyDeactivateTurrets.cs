@@ -13,39 +13,60 @@ public class EnemyDeactivateTurrets : Enemy
     [SerializeField] bool deactivateGeneratorsToo = false;
     [SerializeField] bool deactivateRadarsToo = false;
 
-    float timer;
+    Coroutine deactivateCoroutine;
 
-    void Update()
+    void Start()
     {
-        timer += Time.deltaTime;
+        StartCoroutine();
+    }
 
-        //if reached time to deactivate
-        if(timer >= howOftenDeactivate)
-        {
-            timer = 0;
-            Deactivate();
-        }
+    void StartCoroutine()
+    {
+        if (deactivateCoroutine != null)
+            StopCoroutine(deactivateCoroutine);
+
+        //start coroutine
+        deactivateCoroutine = StartCoroutine(DeactivateCoroutine());
+    }
+
+    IEnumerator DeactivateCoroutine()
+    {
+        //wait then deactivate
+        yield return new WaitForSeconds(howOftenDeactivate);
+
+        //deactivate
+        Deactivate();
     }
 
     void Deactivate()
     {
+        //foreach one, deactivate
+        foreach (BuildableObject b in FindObjectsToDeactivate())
+        {
+            b.Deactivate(durationEffect);
+        }
+
+        //restart coroutine
+        StartCoroutine();
+    }
+
+    BuildableObject[] FindObjectsToDeactivate()
+    {
         //find every buildable object on this face
-        BuildableObject[] objectsToDeactivate = FindObjectsOfType<BuildableObject>().Where(x => x.CellOwner.coordinates.face == coordinatesToAttack.face).ToArray();
+        IEnumerable<BuildableObject> objectsToDeactivate = FindObjectsOfType<BuildableObject>().Where(x => x.CellOwner.coordinates.face == coordinatesToAttack.face);
 
         //remove generators
-        if(deactivateGeneratorsToo == false)
+        if (deactivateGeneratorsToo == false)
         {
-            objectsToDeactivate = objectsToDeactivate.Where(x => x is Generator == false).ToArray();
+            objectsToDeactivate = objectsToDeactivate.Where(x => x is Generator == false);
         }
 
         //remove radars
-        if(deactivateRadarsToo == false)
+        if (deactivateRadarsToo == false)
         {
-            objectsToDeactivate = objectsToDeactivate.Where(x => x is Radar == false).ToArray();
+            objectsToDeactivate = objectsToDeactivate.Where(x => x is Radar == false);
         }
 
-        //foreach one, deactivate
-        foreach (BuildableObject b in objectsToDeactivate)
-            b.Deactivate(durationEffect);
+        return objectsToDeactivate.ToArray();
     }
 }
