@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Collections;
 
+[AddComponentMenu("Cube Invaders/Turret Graphics/Buildable Graphics")]
 public class BuildableGraphics : MonoBehaviour
 {
     [Header("Important")]
