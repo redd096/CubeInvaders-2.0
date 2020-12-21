@@ -1,10 +1,11 @@
 ﻿using UnityEngine;
 
-[SelectionBase]
 public class BuildableObject : MonoBehaviour
 {
     public Cell CellOwner { get; private set; }
     public bool IsPreview { get; private set; } = true;     //is a preview turret
+
+    float turretDeactivatedBeforeThisTime;                  //timer setted by enemies effect, to deactivate this object
 
     bool isActive;                                          //is active (shot and spawn shield)
     public bool IsActive
@@ -12,7 +13,8 @@ public class BuildableObject : MonoBehaviour
         get
         {
             //if not preview and is active, return true - else, return false
-            return !IsPreview && isActive;
+            //added Time.time > timer enemies effect
+            return !IsPreview && isActive && Time.time > turretDeactivatedBeforeThisTime;
         }
     }
 
@@ -86,6 +88,12 @@ public class BuildableObject : MonoBehaviour
     public virtual void TryDeactivateTurret()
     {
         DeactivateTurret();
+    }
+
+    public void Deactivate(float timer)
+    {
+        //called by enemies effect, deactive until this time
+        turretDeactivatedBeforeThisTime = Time.time + timer;
     }
 
     #endregion
