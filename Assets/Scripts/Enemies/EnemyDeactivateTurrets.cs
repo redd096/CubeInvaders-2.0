@@ -15,7 +15,7 @@ public class EnemyDeactivateTurrets : Enemy
 
     Coroutine deactivateCoroutine;
 
-    void Start()
+    protected void Start()
     {
         StartCoroutine();
     }

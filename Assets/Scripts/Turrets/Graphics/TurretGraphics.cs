@@ -20,6 +20,8 @@ public class TurretGraphics : BuildableGraphics
 
     static Dictionary<EFace, LineRenderer> line = new Dictionary<EFace, LineRenderer>();
 
+    public Transform LinePosition => linePosition;
+
     protected override void Awake()
     {
         base.Awake();

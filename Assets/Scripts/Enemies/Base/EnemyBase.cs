@@ -73,7 +73,7 @@ public class EnemyBase : MonoBehaviour
 
     #region public API
 
-    public void GetDamage(float damage)
+    public virtual void GetDamage(float damage)
     {
         //get damage
         health -= damage;
