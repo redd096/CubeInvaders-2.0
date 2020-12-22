@@ -15,8 +15,11 @@ MonoBehaviour:
   CanRecreateCell: 0
   RandomizeWorldAtStart: 1
   NumberRotations: 1
-  TurretsNeedGenerator: 0
   SelectorSize: 1
   DestroyTurretWhenNoMove: 0
+  TurretsNeedGenerator: 0
+  GeneratorActiveAllFace: 1
   LimitOfTurretsOnSameFace: 1
-  TimeBeforeDestroyTurretsOnSameFace: 2
+  TimeBeforeDestroyTurretsOnSameFace: 8
+  OnlyIfSameType: 0
+  CloseLineFeedback: 1

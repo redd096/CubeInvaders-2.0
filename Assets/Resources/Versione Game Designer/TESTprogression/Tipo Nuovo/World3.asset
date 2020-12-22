@@ -10,14 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
-  m_Name: N 1-1
+  m_Name: World3
   m_EditorClassIdentifier: 
-  TimeBetweenSpawns: 2
-  distanceFromWorld: 20
+  TimeBetweenSpawns: 3
+  distanceFromWorld: 30
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    BiomesConfig: {fileID: 11400000, guid: eb8a1cd96e3850541a34ae93d25db57d, type: 2}
-    EnemiesPrefabs:
-    - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
-    - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
-    - {fileID: 6403321818291880933, guid: 7a5589cb1bc54964eb3a69d2db806d84, type: 3}
+    BiomesConfig: {fileID: 11400000, guid: b6268ddd33102114fab9ca7ac07d6f3f, type: 2}
+    EnemiesPrefabs: []
