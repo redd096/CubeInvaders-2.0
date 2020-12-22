@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
   m_Name: N 1-2
   m_EditorClassIdentifier: 
-  TimeBetweenSpawns: 3
-  distanceFromWorld: 30
+  TimeBetweenSpawns: 2
+  distanceFromWorld: 20
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     BiomesConfig: {fileID: 11400000, guid: eb8a1cd96e3850541a34ae93d25db57d, type: 2}
