@@ -642,7 +642,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12383667}
-  m_LocalRotation: {x: -0.018189492, y: -0.0000000018623372, z: -3.3880572e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: -0.000000001075221, z: -1.9560957e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -20683,7 +20683,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-4
+  m_Text: 2-4
 --- !u!222 &1009142194
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -22979,7 +22979,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132746740}
-  m_LocalRotation: {x: -0.03632495, y: -7.725964e-39, z: -3.28159e-40, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: -0, z: -0, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -26620,7 +26620,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "2-1:\nMAX X TOWERS\n\n\n2-2:\nMAX X TOWERS\n\n\n2-3: \nMAX X TOWERS\n\n\n2-?:"
+  m_Text: "2-1:\nMAX 2 GREEN TOWERS\nMAX ! GREEN TOWER + 2 BLUE TOWERS\n\n\n2-2:\nMAX
+    1 GREEN TOWER + 1 BLUE TOWER\n\n\n2-3: \nMAX X TOWERS\n\n\n2-?:"
 --- !u!222 &1331113473
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -28056,7 +28057,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-1
+  m_Text: 2-1
 --- !u!222 &1391361407
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -29768,7 +29769,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469161349}
-  m_LocalRotation: {x: -0.018189494, y: -0.0000000026337426, z: -4.7914367e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: -0.000000002150442, z: -3.912192e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -41964,7 +41965,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-3
+  m_Text: 2-3
 --- !u!222 &1974531684
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -44362,7 +44363,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 1-2
+  m_Text: 2-2
 --- !u!222 &2089240425
 CanvasRenderer:
   m_ObjectHideFlags: 0
