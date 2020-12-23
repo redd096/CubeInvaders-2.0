@@ -1,15 +1,15 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
 {
+    [Header("Important")]
     public WaveConfig waveConfig;
     public int currentWave = 0;
 
-    List<Enemy> enemies = new List<Enemy>();
+    List<EnemyStruct> enemies = new List<EnemyStruct>();
     Coroutine wave_coroutine;
 
     void Start()
@@ -78,7 +78,14 @@ public class WaveManager : MonoBehaviour
     void OnEnemyDeath(Enemy enemy)
     {
         //remove from the list
-        enemies.Remove(enemy);
+        foreach(EnemyStruct enemyStruct in enemies)
+        {
+            if(enemyStruct.Enemy == enemy)
+            {
+                enemies.Remove(enemyStruct);
+                break;
+            }
+        }
 
         //if there are no other enemies, end assault phase
         if(enemies.Count <= 0)
@@ -112,48 +119,77 @@ public class WaveManager : MonoBehaviour
         //current wave
         WaveStruct wave = waveConfig.Waves[this.currentWave];
 
-        //update level config and biomes config
+        //update level config (change level)
         GameManager.instance.UpdateLevel(wave.LevelConfig);
-        GameManager.instance.UpdateLevel(wave.BiomesConfig);
 
         //foreach enemy in this wave
-        foreach (Enemy enemyPrefab in wave.EnemiesPrefabs)
+        foreach (EnemyStruct enemyStruct in wave.EnemiesStructs)
         {
             //instantiate and set parent but deactivate
-            Enemy enemy = Instantiate(enemyPrefab, transform);
+            Enemy enemy = Instantiate(enemyStruct.Enemy, transform);
             enemy.gameObject.SetActive(false);
 
             //save in the list and add to the event
-            enemies.Add(enemy);
+            enemies.Add(new EnemyStruct(enemy, enemyStruct.TimeToAddBeforeSpawn));
             enemy.onEnemyDeath += OnEnemyDeath;
         }
     }
 
     IEnumerator Wave_Coroutine()
     {
-        //create a copy, so we can touch the original without affect the wave coroutine
-        Enemy[] enemiesThisWave = enemies.CreateCopy().ToArray();
+        //current wave
+        WaveStruct wave = waveConfig.Waves[currentWave];
+
+        //queue to not spawn on same face
+        Queue<EFace> facesQueue = new Queue<EFace>();
 
         //for every enemy
-        foreach(Enemy enemy in enemiesThisWave)
+        foreach (EnemyStruct enemyStruct in enemies)
         {
+            //wait for this enemy
+            yield return new WaitForSeconds(enemyStruct.TimeToAddBeforeSpawn);
+
             //randomize coordinates to attack
-            EFace face = (EFace)Random.Range(0, 6);
+            EFace face = GetRandomFace(facesQueue);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             int y = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             Coordinates coordinatesToAttack = new Coordinates(face, x, y);
 
             //set enemy position
-            float distanceFromWorld = waveConfig.distanceFromWorld;
-            enemy.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, distanceFromWorld);
+            enemyStruct.Enemy.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, wave.DistanceFromWorld);
 
             //set enemy destination and activate
-            enemy.coordinatesToAttack = coordinatesToAttack;
-            enemy.gameObject.SetActive(true);
+            enemyStruct.Enemy.coordinatesToAttack = coordinatesToAttack;
+            enemyStruct.Enemy.gameObject.SetActive(true);
 
             //wait for next enemy
-            yield return new WaitForSeconds(waveConfig.TimeBetweenSpawns);
+            yield return new WaitForSeconds(wave.TimeBetweenSpawns);
         }
+    }
+
+    EFace GetRandomFace(Queue<EFace> facesQueue)
+    {
+        //check every possible face
+        List<EFace> faces = new List<EFace>();
+        for(int i = 0; i < System.Enum.GetNames(typeof(EFace)).Length; i++)
+        {
+            //if not inside facesQueue, add to list
+            EFace tryingFace = (EFace)i;
+            if(facesQueue.Contains(tryingFace) == false)
+            {
+                faces.Add(tryingFace);
+            }
+        }
+
+        //select random face in list
+        EFace selectedFace = faces[Random.Range(0, faces.Count)];
+
+        //add to queue (clamp at max)
+        facesQueue.Enqueue(selectedFace);
+        if (facesQueue.Count > waveConfig.Waves[currentWave].IgnorePreviousFacesAtSpawn)
+            facesQueue.Dequeue();
+
+        return selectedFace;
     }
 
     #endregion
