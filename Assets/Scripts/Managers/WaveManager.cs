@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/Wave Manager")]
 public class WaveManager : MonoBehaviour
@@ -137,14 +138,15 @@ public class WaveManager : MonoBehaviour
 
     IEnumerator Wave_Coroutine()
     {
-        //current wave
+        //current wave + enemies copy (copy because when enemy is killed, it's removed from list)
         WaveStruct wave = waveConfig.Waves[currentWave];
+        List<EnemyStruct> enemiesCopy = enemies.CreateCopy();
 
         //queue to not spawn on same face
         Queue<EFace> facesQueue = new Queue<EFace>();
 
         //for every enemy
-        foreach (EnemyStruct enemyStruct in enemies)
+        foreach (EnemyStruct enemyStruct in enemiesCopy)
         {
             //wait for this enemy
             yield return new WaitForSeconds(enemyStruct.TimeToAddBeforeSpawn);
