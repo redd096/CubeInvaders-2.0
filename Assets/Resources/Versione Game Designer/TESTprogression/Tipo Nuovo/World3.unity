@@ -593,7 +593,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 34543516}
-  m_LocalRotation: {x: -0.03632495, y: 1e-45, z: -0, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: -1e-45, z: -0, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -6564,7 +6564,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 310572667}
-  m_LocalRotation: {x: -0.018189494, y: -0.000000002150442, z: -3.912192e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: 0.000000002150442, z: 3.912192e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -11915,7 +11915,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 603951737}
-  m_LocalRotation: {x: -0.018189492, y: -0.000000001075221, z: -1.9560959e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: 0.000000001075221, z: 1.9560957e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -23662,7 +23662,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1126830961}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 1e-45, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -40172,8 +40172,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: -230.9, y: 28.8}
-  m_SizeDelta: {x: 305.93787, y: 361.62662}
+  m_AnchoredPosition: {x: -204.5, y: 28.8}
+  m_SizeDelta: {x: 358.67664, y: 361.62662}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1865671212
 MonoBehaviour:
@@ -40208,7 +40208,24 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 
+  m_Text: 'TURRETS COSTS IN RESOURCES:
+
+    GREEN 1
+
+    BLUE 0.5
+
+    ORANGE 2
+
+
+    3-1:
+
+    RESOURCES
+    = 2
+
+
+    3-2:
+
+    RESOURCES = 2.5'
 --- !u!222 &1865671213
 CanvasRenderer:
   m_ObjectHideFlags: 0
