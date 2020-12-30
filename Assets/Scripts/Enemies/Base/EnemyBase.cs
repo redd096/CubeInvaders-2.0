@@ -87,7 +87,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    public virtual void Die(bool hitPlayer)
+    public virtual void Die(bool hittedWorld)
     {
         //destroy this enemy
         Destroy(gameObject);

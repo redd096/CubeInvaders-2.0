@@ -14,17 +14,17 @@ public class EnemySlime : Enemy
     List<Coordinates> coordinatesAlreadyUsed = new List<Coordinates>();
     bool instantiatedSlimes;
 
-    public override void Die(bool hitPlayer)
+    public override void Die(bool hittedWorld)
     {
-        //instantiate slimes
-        if (enemiesPrefabs != null && instantiatedSlimes == false)
+        //instantiate slimes (if no hit world and not already istantiated slimes)
+        if (enemiesPrefabs != null && hittedWorld == false && instantiatedSlimes == false)
         {
             instantiatedSlimes = true;
             InstantiateSlimes();
         }
 
         //remove this one
-        base.Die(hitPlayer);
+        base.Die(hittedWorld);
     }
 
     void InstantiateSlimes()
