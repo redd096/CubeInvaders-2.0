@@ -12,6 +12,12 @@ public class EnemyPoison : Enemy
 
     protected override void OnTriggerEnter(Collider other)
     {
+        //do once
+        if (alreadyHit)
+            return;
+
+        alreadyHit = true;
+
         //check hit shield
         if (CheckHit<Shield>(other))
         {

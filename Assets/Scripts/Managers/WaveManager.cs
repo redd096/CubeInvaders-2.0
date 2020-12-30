@@ -123,16 +123,10 @@ public class WaveManager : MonoBehaviour
         //update level config (change level)
         GameManager.instance.UpdateLevel(wave.LevelConfig);
 
-        //foreach enemy in this wave
+        //foreach enemy in this wave, instantiate but deactivate
         foreach (EnemyStruct enemyStruct in wave.EnemiesStructs)
         {
-            //instantiate and set parent but deactivate
-            Enemy enemy = Instantiate(enemyStruct.Enemy, transform);
-            enemy.gameObject.SetActive(false);
-
-            //save in the list and add to the event
-            enemies.Add(new EnemyStruct(enemy, enemyStruct.TimeToAddBeforeSpawn));
-            enemy.onEnemyDeath += OnEnemyDeath;
+            InstantiateNewEnemy(enemyStruct.Enemy, enemyStruct.TimeToAddBeforeSpawn);
         }
     }
 
@@ -192,6 +186,23 @@ public class WaveManager : MonoBehaviour
             facesQueue.Dequeue();
 
         return selectedFace;
+    }
+
+    #endregion
+
+    #region public API
+
+    public Enemy InstantiateNewEnemy(Enemy enemyPrefab, float timeToAddBeforeSpawn)
+    {
+        //instantiate and set parent but deactivate
+        Enemy enemy = Instantiate(enemyPrefab, transform);
+        enemy.gameObject.SetActive(false);
+
+        //save in the list and add to the event
+        enemies.Add(new EnemyStruct(enemy, timeToAddBeforeSpawn));
+        enemy.onEnemyDeath += OnEnemyDeath;
+
+        return enemy;
     }
 
     #endregion

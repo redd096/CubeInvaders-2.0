@@ -44,7 +44,7 @@ public class Enemy : EnemyBase
         onEnemyDeath = null;
     }
 
-    protected override void Die(bool hitPlayer)
+    public override void Die(bool hitPlayer)
     {
         base.Die(hitPlayer);
 

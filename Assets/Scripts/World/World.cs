@@ -456,7 +456,7 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
-    public Cell[] GetCellsAround(Coordinates coordinates)
+    public List<Cell> GetCellsAround(Coordinates coordinates)
     {
         List<Cell> cellsAround = new List<Cell>();
         Vector2Int[] directions = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
@@ -476,7 +476,7 @@ public class World : MonoBehaviour
             }
         }
 
-        return cellsAround.ToArray();
+        return cellsAround;
     }
 
     #endregion

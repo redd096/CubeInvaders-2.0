@@ -10,6 +10,7 @@ public class EnemyBase : MonoBehaviour
     public Coordinates coordinatesToAttack;
 
     Rigidbody rb;
+    protected bool alreadyHit;
 
     protected virtual void Awake()
     {
@@ -26,6 +27,12 @@ public class EnemyBase : MonoBehaviour
 
     protected virtual void OnTriggerEnter(Collider other)
     {
+        //do once
+        if (alreadyHit)
+            return;
+
+        alreadyHit = true;
+
         //check hit shield
         if (CheckHit<Shield>(other))
         {
@@ -63,12 +70,6 @@ public class EnemyBase : MonoBehaviour
         return false;
     }
 
-    protected virtual void Die(bool hitPlayer)
-    {
-        //destroy this enemy
-        Destroy(gameObject);
-    }
-
     #endregion
 
     #region public API
@@ -84,6 +85,12 @@ public class EnemyBase : MonoBehaviour
             Die(false);
             return;
         }
+    }
+
+    public virtual void Die(bool hitPlayer)
+    {
+        //destroy this enemy
+        Destroy(gameObject);
     }
 
     #endregion
