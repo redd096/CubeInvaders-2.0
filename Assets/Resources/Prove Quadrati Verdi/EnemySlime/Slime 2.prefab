@@ -171,13 +171,14 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44dda22cad02e94bbcc2eda1f945ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
+  health: 30
   speed: 1
   coordinatesToAttack:
     face: 0
     x: 0
     y: 0
   firstSlimeSamePosition: 1
+  checkNoHitEnemies: 1
   enemiesPrefabs:
   - {fileID: 451699539442052430, guid: b45a29e35e0d7dc478e77dc776cd3f13, type: 3}
   - {fileID: 451699539442052430, guid: b45a29e35e0d7dc478e77dc776cd3f13, type: 3}

@@ -10,10 +10,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: f6702f62fea6fbb45a422719be9be64b, type: 3}
-  m_Name: Gen
+  m_Name: Selector2X + 2Boom
   m_EditorClassIdentifier: 
   CanRecreateCell: 0
   RandomizeWorldAtStart: 1
   NumberRotations: 1
-  TurretsNeedGenerator: 1
-  SelectorSize: 1
+  SelectorSize: 2
+  DestroyTurretWhenNoMove: 0
+  TurretsNeedGenerator: 0
+  GeneratorActiveAllFace: 1
+  LimitOfTurretsOnSameFace: 1
+  TimeBeforeDestroyTurretsOnSameFace: 8
+  OnlyIfSameType: 0
+  CloseLineFeedback: 1

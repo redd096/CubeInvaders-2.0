@@ -171,13 +171,15 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a44dda22cad02e94bbcc2eda1f945ce9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 100
-  speed: 1
+  health: 20
+  speed: 1.2
   coordinatesToAttack:
     face: 0
     x: 0
     y: 0
-  slimePrefab: {fileID: 0}
+  firstSlimeSamePosition: 1
+  checkNoHitEnemies: 1
+  enemiesPrefabs: []
 --- !u!1 &8976919603826603930
 GameObject:
   m_ObjectHideFlags: 0
