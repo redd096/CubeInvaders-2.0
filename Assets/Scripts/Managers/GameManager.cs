@@ -38,6 +38,15 @@ public class GameManager : Singleton<GameManager>
         if (instance.levelManager.levelConfig != levelConfig)
         {
             instance.levelManager.levelConfig = levelConfig;
+
+            //reset turret
+            if (levelConfig.ResetTurrets)
+            {
+                foreach(Turret turret in FindObjectsOfType<Turret>())
+                {
+                    turret.RemoveTurret();
+                }
+            }
         }
     }
 
