@@ -44,9 +44,9 @@ public class Enemy : EnemyBase
         onEnemyDeath = null;
     }
 
-    public override void Die(bool hittedWorld)
+    public override void Die(System.Type hittedBy)
     {
-        base.Die(hittedWorld);
+        base.Die(hittedBy);
 
         //call event
         onEnemyDeath?.Invoke(this);

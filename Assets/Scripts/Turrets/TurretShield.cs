@@ -18,7 +18,7 @@ public class TurretShield : Turret
     bool isRotating;
 
     /*
-    V quando viene istanziata si crea lo scudo
+    V quando viene istanziata si crea lo scudo disattivato
     V e si resetta (ancora la torretta è una preview, non è attiva)
 
     V quando si attiva, si aggiunge alla coda

@@ -35,17 +35,14 @@ public class GameManager : Singleton<GameManager>
     public void UpdateLevel(LevelConfig levelConfig)
     {
         //update level config
-        if (instance.levelManager.levelConfig != levelConfig)
-        {
-            instance.levelManager.levelConfig = levelConfig;
+        instance.levelManager.levelConfig = levelConfig;
 
-            //reset turret
-            if (levelConfig.ResetTurrets)
+        //reset turret
+        if (levelConfig.ResetTurrets)
+        {
+            foreach(Turret turret in FindObjectsOfType<Turret>())
             {
-                foreach(Turret turret in FindObjectsOfType<Turret>())
-                {
-                    turret.RemoveTurret();
-                }
+                turret.RemoveTurret();
             }
         }
     }

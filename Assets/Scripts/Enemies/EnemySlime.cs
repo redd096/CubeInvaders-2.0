@@ -14,17 +14,17 @@ public class EnemySlime : Enemy
     List<Coordinates> coordinatesAlreadyUsed = new List<Coordinates>();
     bool instantiatedSlimes;
 
-    public override void Die(bool hittedWorld)
+    public override void Die(System.Type hittedBy)
     {
-        //instantiate slimes (if no hit world and not already istantiated slimes)
-        if (enemiesPrefabs != null && hittedWorld == false && instantiatedSlimes == false)
+        //instantiate slimes (if hit by shot and not already istantiated slimes)
+        if (enemiesPrefabs != null && hittedBy == typeof(TurretShot) && instantiatedSlimes == false)
         {
             instantiatedSlimes = true;
             InstantiateSlimes();
         }
 
         //remove this one
-        base.Die(hittedWorld);
+        base.Die(hittedBy);
     }
 
     void InstantiateSlimes()
@@ -59,7 +59,7 @@ public class EnemySlime : Enemy
                 //kill slime if there are no coordinates
                 else
                 {
-                    slime.Die(false);
+                    slime.Die(null);
                 }
             }
 

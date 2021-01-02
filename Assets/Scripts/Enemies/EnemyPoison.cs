@@ -25,7 +25,7 @@ public class EnemyPoison : Enemy
             other.GetComponentInParent<Shield>().ShieldGetDamage();
 
             //destroy this enemy
-            Die(false);
+            Die(typeof(Shield));
 
             return;
         }
@@ -39,7 +39,7 @@ public class EnemyPoison : Enemy
             cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
 
             //destroy this enemy
-            Die(true);
+            Die(typeof(Cell));
         }
     }
 }

@@ -40,7 +40,7 @@ public class EnemyBase : MonoBehaviour
             other.GetComponentInParent<Shield>().ShieldGetDamage();
 
             //destroy this enemy
-            Die(false);
+            Die(typeof(Shield));
 
             return;
         }
@@ -52,7 +52,7 @@ public class EnemyBase : MonoBehaviour
             other.GetComponentInParent<Cell>().KillCell();
 
             //destroy this enemy
-            Die(true);
+            Die(typeof(Cell));
         }
     }
 
@@ -82,12 +82,12 @@ public class EnemyBase : MonoBehaviour
         //check death
         if (health <= 0)
         {
-            Die(false);
+            Die(typeof(TurretShot));
             return;
         }
     }
 
-    public virtual void Die(bool hittedWorld)
+    public virtual void Die(System.Type hittedBy)
     {
         //destroy this enemy
         Destroy(gameObject);
