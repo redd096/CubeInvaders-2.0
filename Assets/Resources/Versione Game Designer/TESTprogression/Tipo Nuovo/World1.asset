@@ -39,17 +39,11 @@ MonoBehaviour:
       TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
   - LevelConfig: {fileID: 11400000, guid: 5944cbb0ab223094ab80e26a1ed5243c, type: 2}
     IgnorePreviousFacesAtSpawn: 2
     TimeBetweenSpawns: 2
     DistanceFromWorld: 20
     EnemiesStructs:
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}

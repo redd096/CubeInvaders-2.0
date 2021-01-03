@@ -417,7 +417,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 12383667}
-  m_LocalRotation: {x: -0.018189492, y: 0.000000001075221, z: 1.9560957e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: -9.954403e-10, z: -1.8109547e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -23961,7 +23961,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1132746740}
-  m_LocalRotation: {x: -0.03632495, y: 1e-45, z: -0, w: 0.99934006}
+  m_LocalRotation: {x: -0.03632495, y: 9.7e-44, z: 4e-45, w: 0.99934006}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -29875,8 +29875,8 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "TURRETS COSTS IN RESOURCES\nGREEN = 1\nBLUE = 0.5\n\n2-1:\nRESOURCES =
-    2\n\n2-2:\nRESOURCES = 1.5\n\n2-3: \nRESOURCES = 2\n\n\n2-?:"
+  m_Text: "TURRETS COSTS IN RESOURCES\nGREEN = 1\nBLUE (SLOW EFFECT) = 0.5\n\n2-1:\nRESOURCES
+    = 2\n\n2-2:\nRESOURCES = 1.5\n\n2-3: \nRESOURCES = 2\n\n2-4:\nRESOURCES = 1"
 --- !u!222 &1331113473
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -32803,7 +32803,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1469161349}
-  m_LocalRotation: {x: -0.018189494, y: 0.000000002150442, z: 3.912192e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: -0.0000000021116824, z: -3.8416787e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -37740,7 +37740,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1713678889}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: -0, y: 4.078691e-28, z: 3.3159506e-21, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
