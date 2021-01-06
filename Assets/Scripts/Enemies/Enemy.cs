@@ -44,7 +44,7 @@ public class Enemy : EnemyBase
         onEnemyDeath = null;
     }
 
-    public override void Die(System.Type hittedBy)
+    public override void Die<T>(T hittedBy)
     {
         base.Die(hittedBy);
 

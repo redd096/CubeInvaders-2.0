@@ -44,6 +44,24 @@ public class Cell : MonoBehaviour
         //be sure to reset event
         onWorldRotate = null;
     }
+    
+    void OnTriggerEnter(Collider other)
+    {
+        //if hitted by enemy
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy)
+        {
+            //only if not enemy poison
+            if (enemy.GetType() != typeof(EnemyPoison))
+            {
+                //kill cell 
+                KillCell();
+            }
+
+            //destroy enemy
+            enemy.Die(this);
+        }
+    }
 
     #region private API
 

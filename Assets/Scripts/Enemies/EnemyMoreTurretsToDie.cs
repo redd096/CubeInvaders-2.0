@@ -17,12 +17,12 @@ public class EnemyMoreTurretsToDie : Enemy
         turretsAiming = FindObjectsOfType<TurretShooter>().Where(x => x.EnemyToAttack == this).ToArray();
     }
 
-    public override void GetDamage(float damage)
+    public override void GetDamage(float damage, TurretShot whoHit)
     {
         //if reached number of enemies aiming to this enemy, get damage
         if (turretsAiming.Length >= numberOfTurretsWhoMustAim)
         {
-            base.GetDamage(damage);
+            base.GetDamage(damage, whoHit);
         }
     }
 }

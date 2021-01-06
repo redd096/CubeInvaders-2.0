@@ -122,7 +122,7 @@ public class TurretShot : MonoBehaviour
     void ApplyEffect(Enemy enemy)
     {
         //do damage and slow
-        enemy.GetDamage(damage);
+        enemy.GetDamage(damage, this);
         enemy.GetSlow(slowPercentage, slowDuration);
     }
 

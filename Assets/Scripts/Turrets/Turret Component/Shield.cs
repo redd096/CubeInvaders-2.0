@@ -25,6 +25,20 @@ public class Shield : MonoBehaviour
         distanceFromWorld = transform.localPosition.z;
     }
 
+    void OnTriggerEnter(Collider other)
+    {
+        //if hitted by enemy
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy)
+        {
+            //get damage
+            ShieldGetDamage();
+
+            //destroy enemy
+            enemy.Die(this);
+        }
+    }
+
     #region private API
 
     IEnumerator SpawnShield_Coroutine(Vector3 finalSize, bool isSpawning)
@@ -44,6 +58,17 @@ public class Shield : MonoBehaviour
 
         //final size
         transform.localScale = finalSize;
+    }
+
+    void ShieldGetDamage()
+    {
+        CurrentHealth--;
+
+        //if dead, shield destroyed
+        if (CurrentHealth <= 0)
+        {
+            onShieldDestroyed?.Invoke();
+        }
     }
 
     #endregion
@@ -97,17 +122,6 @@ public class Shield : MonoBehaviour
 
         //start despawn
         spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, false));
-    }
-
-    public void ShieldGetDamage()
-    {
-        CurrentHealth--;
-
-        //if dead, shield destroyed
-        if (CurrentHealth <= 0)
-        {
-            onShieldDestroyed?.Invoke();
-        }
     }
 
     #endregion

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy Poison")]
@@ -10,36 +8,14 @@ public class EnemyPoison : Enemy
     [SerializeField] float timerPoison = 5;
     [SerializeField] int limitSpread = 1;
 
-    protected override void OnTriggerEnter(Collider other)
+    public override void Die<T>(T hittedBy)
     {
-        //do once
-        if (alreadyHit)
-            return;
+        base.Die(hittedBy);
 
-        alreadyHit = true;
-
-        //check hit shield
-        if (CheckHit<Shield>(other))
+        //poison cell instead of kill it
+        if (hittedBy.GetType() == typeof(Cell))
         {
-            //damage shield
-            other.GetComponentInParent<Shield>().ShieldGetDamage();
-
-            //destroy this enemy
-            Die(typeof(Shield));
-
-            return;
-        }
-
-        //else check hit cell
-        if (CheckHit<Cell>(other))
-        {
-            Cell cell = other.GetComponentInParent<Cell>();
-
-            //poison cell instead of kill it
-            cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
-
-            //destroy this enemy
-            Die(typeof(Cell));
+            hittedBy.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
         }
     }
 }
