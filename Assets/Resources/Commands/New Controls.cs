@@ -506,6 +506,17 @@ public class @NewControls : IInputActionCollection, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""909ceaba-8d38-448b-835f-7b4155191f1e"",
+                    ""path"": ""<Keyboard>/enter"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Finish Strategic Phase"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""5ff6d71a-f38e-4363-b88f-a2afc3923684"",
                     ""path"": ""<Gamepad>/start"",
                     ""interactions"": """",

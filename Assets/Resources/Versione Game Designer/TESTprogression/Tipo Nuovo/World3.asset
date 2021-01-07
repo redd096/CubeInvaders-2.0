@@ -90,7 +90,7 @@ MonoBehaviour:
       TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
       TimeToAddBeforeSpawn: 0
-  - LevelConfig: {fileID: 11400000, guid: 283d5e20be6a81f4f87d6b0a27393133, type: 2}
+  - LevelConfig: {fileID: 11400000, guid: 06bbea63687ff9742b907b2452961e86, type: 2}
     IgnorePreviousFacesAtSpawn: 2
     TimeBetweenSpawns: 2
     DistanceFromWorld: 20
