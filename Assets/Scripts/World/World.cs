@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 #region enum & struct
 
@@ -102,7 +101,7 @@ public class World : MonoBehaviour
             RegenWorld();
 
 #if UNITY_EDITOR
-            Undo.RegisterFullObjectHierarchyUndo(gameObject, "Regen World");
+            UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Regen World");
 #endif
             //foreach(Transform child in transform)
             //{
@@ -157,10 +156,7 @@ public class World : MonoBehaviour
         foreach (Transform ch in transform)
         {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.delayCall += () =>
-            {
-                DestroyImmediate(ch.gameObject);
-            };
+            UnityEditor.EditorApplication.delayCall += () => DestroyImmediate(ch.gameObject);
 #else
             Destroy(ch.gameObject);
 #endif
