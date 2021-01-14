@@ -72,9 +72,6 @@ public class World : MonoBehaviour
 {
     #region variables
 
-    [Header("Regen")]
-    [SerializeField] bool regen = false;
-
     [Header("Base")]
     public WorldConfig worldConfig;
     public RandomWorldConfig randomWorldConfig;
@@ -89,30 +86,6 @@ public class World : MonoBehaviour
     WorldRotator worldRotator;
 
     #endregion
-
-    void OnValidate()
-    {
-        //click regen to regenerate the world
-        if(regen)
-        {
-            regen = false;
-
-            //start regen
-            RegenWorld();
-
-#if UNITY_EDITOR
-            UnityEditor.Undo.RegisterFullObjectHierarchyUndo(gameObject, "Regen World");
-#endif
-            //foreach(Transform child in transform)
-            //{
-            //    Undo.RecordObject(child, "Regen World");
-            //}
-
-            //set scene dirty
-            //using UnityEditor.SceneManagement;
-            //EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        }
-    }
 
     void Awake()
     {
