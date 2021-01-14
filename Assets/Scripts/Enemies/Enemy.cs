@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy")]
 public class Enemy : EnemyBase
 {
@@ -43,9 +44,9 @@ public class Enemy : EnemyBase
         onEnemyDeath = null;
     }
 
-    protected override void Die(bool hitPlayer)
+    public override void Die<T>(T hittedBy)
     {
-        base.Die(hitPlayer);
+        base.Die(hittedBy);
 
         //call event
         onEnemyDeath?.Invoke(this);

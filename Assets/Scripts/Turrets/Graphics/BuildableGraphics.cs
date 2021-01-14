@@ -1,17 +1,37 @@
 ﻿using UnityEngine;
+using System.Collections.Generic;
+using System.Collections;
 
+[AddComponentMenu("Cube Invaders/Turret Graphics/Buildable Graphics")]
 public class BuildableGraphics : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] Transform objectToRotate = default;
     [SerializeField] Transform baseToRotate = default;
 
-    protected BuildableObject buildableObject;
+    [Header("Deactivate Turrets Effect")]
+    [SerializeField] Color effectColor = Color.cyan;
 
-    protected virtual void Start()
+    protected BuildableObject buildableObject;
+    Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
+
+    protected virtual void Awake()
     {
         //set logic component
         buildableObject = GetComponent<BuildableObject>();
+
+        //set normal colors
+        foreach (Renderer r in GetComponentsInChildren<Renderer>())
+        {
+            normalColors.Add(r, r.material.color);
+        }
+
+        buildableObject.onDeactivateStart += OnDeactivateStart;
+    }
+
+    protected virtual void OnDestroy()
+    {
+        buildableObject.onDeactivateStart -= OnDeactivateStart;
     }
 
     protected virtual void Update()
@@ -35,6 +55,10 @@ public class BuildableGraphics : MonoBehaviour
 
     void LookAtEnemy()
     {
+        //do only if there is something to rotate
+        if (objectToRotate == null)
+            return;
+
         //find forward direction (from model to enemy)
         Vector3 forwardDirection;
         if (GetEnemy() && buildableObject.IsActive)
@@ -56,8 +80,8 @@ public class BuildableGraphics : MonoBehaviour
         //if active and there is an enemy, rotate towards enemy
         if (buildableObject.IsActive && GetEnemy())
         {
-            RotateOnAxis(baseToRotate, GetEnemy().transform.position, transform.forward, baseToRotate.up);
-            RotateOnAxis(objectToRotate, GetEnemy().transform.position, baseToRotate.right, objectToRotate.right);
+            RotateOnAxis(baseToRotate, transform.forward, baseToRotate.up);
+            RotateOnAxis(objectToRotate, baseToRotate.right, objectToRotate.right);
         }
         //else look normal forward
         else
@@ -71,13 +95,13 @@ public class BuildableGraphics : MonoBehaviour
 
     #region rotate transform
 
-    void RotateOnAxis(Transform transformToRotate, Vector3 forwardPosition, Vector3 planeAxis, Vector3 rotateAxis)
+    void RotateOnAxis(Transform transformToRotate, Vector3 planeAxis, Vector3 rotateAxis)
     {
         if (transformToRotate == null)
             return;
 
         //project enemy and object position on same plane, then calculate direction
-        Vector3 enemyPosition = Vector3.ProjectOnPlane(forwardPosition, planeAxis);
+        Vector3 enemyPosition = Vector3.ProjectOnPlane(GetEnemy().transform.position, planeAxis);
         Vector3 transformPosition = Vector3.ProjectOnPlane(transformToRotate.position, planeAxis);
         Vector3 direction = (enemyPosition - transformPosition).normalized;
 
@@ -107,6 +131,45 @@ public class BuildableGraphics : MonoBehaviour
         //set new rotation
         Quaternion forwardRotation = Quaternion.FromToRotation(transformToRotate.forward, forwardDirection) * transformToRotate.rotation;
         transformToRotate.rotation = forwardRotation;
+    }
+
+    #endregion
+
+    #region deactivated effect
+
+    Coroutine deactivateEffectCoroutine;
+
+    void OnDeactivateStart(float durationEffect)
+    {
+        if (deactivateEffectCoroutine != null)
+            StopCoroutine(deactivateEffectCoroutine);
+
+        //start coroutine
+        deactivateEffectCoroutine = StartCoroutine(DeactivateEffectCoroutine(durationEffect));
+    }
+
+    IEnumerator DeactivateEffectCoroutine(float durationEffect)
+    {
+        //while deactivated
+        while(Time.time < buildableObject.TimerObjectDeactivated)
+        {
+            //from 1 to 0
+            float delta = (buildableObject.TimerObjectDeactivated - Time.time) / durationEffect;
+
+            //foreach renderer set color
+            foreach (Renderer renderer in normalColors.Keys)
+            {
+                renderer.material.color = Color.Lerp(normalColors[renderer], effectColor, delta);
+            }
+
+            yield return null;
+        }
+
+        //on end deactivated, reset every color
+        foreach (Renderer renderer in normalColors.Keys)
+        {
+            renderer.material.color = Color.Lerp(normalColors[renderer], effectColor, 0);
+        }
     }
 
     #endregion

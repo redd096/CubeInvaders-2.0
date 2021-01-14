@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/Turret Component/Shield")]
 [SelectionBase]
+[AddComponentMenu("Cube Invaders/Turret Component/Shield")]
 public class Shield : MonoBehaviour
 {
     [Header("Important")]
@@ -27,26 +27,19 @@ public class Shield : MonoBehaviour
 
     void OnTriggerEnter(Collider other)
     {
-        //check hit enemy
+        //if hitted by enemy
         Enemy enemy = other.GetComponentInParent<Enemy>();
         if (enemy)
         {
+            //get damage
             ShieldGetDamage();
+
+            //destroy enemy
+            enemy.Die(this);
         }
     }
 
     #region private API
-
-    void ShieldGetDamage()
-    {
-        CurrentHealth--;
-
-        //if dead, shield destroyed
-        if(CurrentHealth <= 0)
-        {
-            onShieldDestroyed?.Invoke();
-        }
-    }
 
     IEnumerator SpawnShield_Coroutine(Vector3 finalSize, bool isSpawning)
     {
@@ -65,6 +58,17 @@ public class Shield : MonoBehaviour
 
         //final size
         transform.localScale = finalSize;
+    }
+
+    void ShieldGetDamage()
+    {
+        CurrentHealth--;
+
+        //if dead, shield destroyed
+        if (CurrentHealth <= 0)
+        {
+            onShieldDestroyed?.Invoke();
+        }
     }
 
     #endregion

@@ -5,13 +5,15 @@ using UnityEngine;
 [AddComponentMenu("Cube Invaders/Enemy Component/Poison Cell")]
 public class PoisonCell : MonoBehaviour
 {
-    [SerializeField] float timerPoison;
+    [SerializeField] float timerPoison = 10;
+    [SerializeField] int limitSpread = 1;
 
     Coroutine poison_Coroutine;
 
-    public void Init(float timerPoison)
+    public void Init(float timerPoison, int limitSpread)
     {
         this.timerPoison = timerPoison;
+        this.limitSpread = limitSpread;
     }
 
     void Start()
@@ -34,13 +36,19 @@ public class PoisonCell : MonoBehaviour
     {
         Cell currentCell = GetComponent<Cell>();
 
-        //foreach cell around
-        foreach (Cell cell in GameManager.instance.world.GetCellsAround(currentCell.coordinates))
+        if(limitSpread > 0)
         {
-            //if is alive, poison it
-            if (cell.IsAlive)
+            //remove limit spread
+            limitSpread--;
+
+            //foreach cell around
+            foreach (Cell cell in GameManager.instance.world.GetCellsAround(currentCell.coordinates))
             {
-                cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison);
+                //if is alive, poison it
+                if (cell.IsAlive)
+                {
+                    cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
+                }
             }
         }
 

@@ -4,15 +4,28 @@
 public struct WaveStruct
 {
     public LevelConfig LevelConfig;
-    public BiomesConfig BiomesConfig;
-    public Enemy[] EnemiesPrefabs;
+    public int IgnorePreviousFacesAtSpawn;
+    public float TimeBetweenSpawns;
+    public float DistanceFromWorld;
+    public EnemyStruct[] EnemiesStructs;
+}
+
+[System.Serializable]
+public struct EnemyStruct
+{
+    public Enemy Enemy;
+    public float TimeToAddBeforeSpawn;
+
+    public EnemyStruct(Enemy enemy, float timeToAddBeforeSpawn)
+    {
+        Enemy = enemy;
+        TimeToAddBeforeSpawn = timeToAddBeforeSpawn;
+    }
 }
 
 [CreateAssetMenu(menuName = "Cube Invaders/Level/Wave Config", fileName = "Wave Config")]
 public class WaveConfig : ScriptableObject
 {
     [Header("Wave")]
-    public float TimeBetweenSpawns = 3;
-    public float distanceFromWorld = 30;
     public WaveStruct[] Waves;
 }

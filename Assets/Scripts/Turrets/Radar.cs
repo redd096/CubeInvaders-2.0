@@ -2,7 +2,9 @@
 using System.Linq;
 using redd096;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Radar")]
+[RequireComponent(typeof(RadarGraphics))]
 public class Radar : BuildableObject
 {
     public Enemy EnemyToAttack { get; private set; }

@@ -1,8 +1,7 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using redd096;
 using Cinemachine;
+using UnityEngine.InputSystem;
 
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
@@ -10,28 +9,38 @@ public class Player : StateMachine
     [Header("Player")]
     public float speedX = 300;
     public float speedY = 2;
+    public bool invertY = false;
 
     [Header("Debug")]
     [SerializeField] string currentState;
 
     public CinemachineFreeLook VirtualCam { get; private set; }
+    public NewControls Controls { get; private set; }
 
     //used to come back from pause
     State previousState;
 
     void Start()
     {
-        //get references
+#if UNITY_EDITOR
+        Application.targetFrameRate = 60;
+#endif
+
+        //get virtual cam and player controls
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
+        Controls = new NewControls();
 
-        //set state
+        //set state and lock mouse
         SetState(new PlayerPause(this));
+        Utility.LockMouse(CursorLockMode.Locked);
 
+        AddInputs();
         AddEvents();
     }
 
     void OnDestroy()
     {
+        RemoveInputs();
         RemoveEvents();
     }
 
@@ -47,6 +56,68 @@ public class Player : StateMachine
         //for debug
         currentState = state?.ToString();
     }
+
+    #region inputs (pause and resume)
+
+    //used because pause and resume are called at same frame. Like this we wait when release button
+    bool alreadyPressed;
+
+    void AddInputs()
+    {
+        Controls.Enable();
+        Controls.Gameplay.PauseButton.started += PauseGame;
+        Controls.Gameplay.PauseButton.canceled += ResetAlreadyPaused;
+        Controls.Gameplay.ResumeButton.started += ResumeGame;
+        Controls.Gameplay.ResumeButton.canceled += ResetAlreadyPaused;
+    }
+
+    void RemoveInputs()
+    {
+        Controls.Disable();
+        Controls.Gameplay.PauseButton.started -= PauseGame;
+        Controls.Gameplay.PauseButton.canceled -= ResetAlreadyPaused;
+        Controls.Gameplay.ResumeButton.started -= ResumeGame;
+        Controls.Gameplay.ResumeButton.canceled -= ResetAlreadyPaused;
+    }
+
+    void PauseGame(InputAction.CallbackContext ctx)
+    {
+        //do only if not already pressed button
+        if (alreadyPressed)
+            return;
+
+        //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
+        if (state.GetType() == typeof(PlayerPlaceTurret) && Controls.Gameplay.PauseButton.activeControl.name == "escape")
+            return;
+
+        //if not ended game && game is running
+        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0)
+        {
+            SceneLoader.instance.PauseGame();
+            alreadyPressed = true;
+        }
+    }
+
+    void ResumeGame(InputAction.CallbackContext ctx)
+    {
+        //do only if not already pressed button
+        if (alreadyPressed)
+            return;
+
+        //if not ended game && game is paused
+        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0)
+        {
+            SceneLoader.instance.ResumeGame();
+            alreadyPressed = true;
+        }
+    }
+
+    void ResetAlreadyPaused(InputAction.CallbackContext ctx)
+    {
+        alreadyPressed = false;
+    }
+
+    #endregion
 
     #region events
 

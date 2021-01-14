@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[SelectionBase]
 public class BuildableObject : MonoBehaviour
 {
     public Cell CellOwner { get; private set; }
@@ -12,7 +11,8 @@ public class BuildableObject : MonoBehaviour
         get
         {
             //if not preview and is active, return true - else, return false
-            return !IsPreview && isActive;
+            //added Time.time > timer enemies effect
+            return !IsPreview && isActive && Time.time > TimerObjectDeactivated;
         }
     }
 
@@ -54,7 +54,7 @@ public class BuildableObject : MonoBehaviour
 
     #region public API
 
-    public void BuildTurret(Cell cellOwner)
+    public virtual void BuildTurret(Cell cellOwner)
     {
         IsPreview = false;
 
@@ -86,6 +86,22 @@ public class BuildableObject : MonoBehaviour
     public virtual void TryDeactivateTurret()
     {
         DeactivateTurret();
+    }
+
+    #endregion
+
+    #region deactivate effect
+
+    public System.Action<float> onDeactivateStart;
+    public float TimerObjectDeactivated { get; private set; }    //timer setted by enemies effect, to deactivate this object
+
+    public void Deactivate(float durationEffect)
+    {
+        //called by enemies effect, deactive until this time
+        TimerObjectDeactivated = Time.time + durationEffect;
+
+        //call event
+        onDeactivateStart?.Invoke(durationEffect);
     }
 
     #endregion

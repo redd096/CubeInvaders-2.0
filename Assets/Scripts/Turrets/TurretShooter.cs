@@ -4,7 +4,9 @@ using UnityEngine;
 using redd096;
 using System.Linq;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Turret/Turret Shooter")]
+[RequireComponent(typeof(TurretShooterGraphics))]
 public class TurretShooter : Turret
 {
     #region variables
@@ -107,7 +109,8 @@ public class TurretShooter : Turret
         base.OnEndRotation();
 
         //start coroutine to shoot again
-        canShootAgain_Coroutine = StartCoroutine(CanShootAgain());
+        if(IsActive)
+            canShootAgain_Coroutine = StartCoroutine(CanShootAgain());
     }
 
     IEnumerator CanShootAgain()

@@ -35,18 +35,17 @@ public class WorldRandomRotator : WorldRotator
             EFace face = (EFace)Random.Range(0, 6);
             int x = Random.Range(0, world.worldConfig.NumberCells);
             int y = Random.Range(0, world.worldConfig.NumberCells);
-            ERotateDirection randomDirection = (ERotateDirection)Random.Range(0, 5);
+            ERotateDirection randomDirection = (ERotateDirection)Random.Range(0, 4);
 
             //effective rotation
-            Rotate(face, x, y, EFace.front, randomDirection);
+            Rotate(new Coordinates(face, x, y), EFace.front, randomDirection);
 
             //wait until the end of the rotation
             OnStartRotation();
             yield return new WaitWhile(() => waitRotation);
 
             //if not last rotation, wait time between every rotation
-            if (i < world.randomWorldConfig.RandomizeTimes - 1)
-                yield return new WaitForSeconds(world.randomWorldConfig.TimeBetweenRotation);
+            yield return new WaitForSeconds(world.randomWorldConfig.TimeBetweenRotation);
 
             //repeat
             if (world.randomWorldConfig.Loop)

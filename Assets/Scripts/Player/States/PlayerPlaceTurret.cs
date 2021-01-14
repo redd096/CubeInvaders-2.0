@@ -1,4 +1,5 @@
 ﻿using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerPlaceTurret : PlayerState
 {
@@ -26,136 +27,112 @@ public class PlayerPlaceTurret : PlayerState
         GameManager.instance.world.Cells[coordinates].HidePreview();
     }
 
-#if UNITY_ANDROID
+    #region inputs
 
-    public override void Execution()
+    bool pressedPlaceTurret;
+    bool pressedStopPlaceTurret;
+    bool pressedSelectCell;
+
+    protected override void AddInputs()
     {
-        base.Execution();
+        base.AddInputs();
 
-        //on touch
-        if (Input.touchCount > 0 && Input.GetTouch(0).phase == TouchPhase.Began)
-        {
-            //try select a cell
-            Cell selectedCell = TrySelectCell();
-
-            //if not selected anything, exit from this state
-            if(selectedCell == null)
-            {
-                StopPlaceTurret();
-                return;
-            }
-            else
-            {
-                //if selected same cell, place turret
-                if(selectedCell.coordinates == coordinates)
-                {
-                    PlaceTurret();
-                }
-                //if selected another cell, change preview
-                else
-                {
-                    //hide old preview and show new one
-                    GameManager.instance.world.Cells[coordinates].HidePreview();
-                    GameManager.instance.world.Cells[selectedCell.coordinates].ShowPreview();
-
-                    //save new coordinates
-                    coordinates = selectedCell.coordinates;
-                }
-            }
-        }
-
-        //exit from preview
-        if (Input.GetKeyDown(KeyCode.Escape))
-        {
-            StopPlaceTurret();
-        }
+        controls.Gameplay.ConfirmTurret.started += PressedPlaceTurret;
+        controls.Gameplay.ConfirmTurret.canceled += PlaceTurret;
+        controls.Gameplay.DenyTurret.started += PressedStopPlaceTurret;
+        controls.Gameplay.DenyTurret.canceled += StopPlaceTurret;
+        controls.Gameplay.SelectCell.started += PressedSelectCell;
+        controls.Gameplay.SelectCell.performed += SelectCell;
     }
 
-    Cell TrySelectCell()
+    protected override void RemoveInputs()
     {
-        //check if hit world
-        Ray ray = Camera.main.ScreenPointToRay(Input.GetTouch(0).position);
-        RaycastHit hit;
-        float distance = 100;
-        int layer = redd096.CreateLayer.LayerOnly("World");
+        base.RemoveInputs();
 
-        //if hit world, select cell
-        if (Physics.Raycast(ray, out hit, distance, layer, QueryTriggerInteraction.Collide))
-        {
-            return hit.transform.GetComponentInParent<Cell>();
-        }
-        //else remove cell selected
-        else
-        {
-            return null;
-        }
+        controls.Gameplay.ConfirmTurret.started -= PressedPlaceTurret;
+        controls.Gameplay.ConfirmTurret.canceled -= PlaceTurret;
+        controls.Gameplay.DenyTurret.started -= PressedStopPlaceTurret;
+        controls.Gameplay.DenyTurret.canceled -= StopPlaceTurret;
+        controls.Gameplay.SelectCell.started -= PressedSelectCell;
+        controls.Gameplay.SelectCell.performed -= SelectCell;
     }
 
-#else
-
-    public override void Execution()
+    void PressedPlaceTurret(InputAction.CallbackContext ctx)
     {
-        base.Execution();
+        pressedPlaceTurret = true;
+    }
+
+    void PlaceTurret(InputAction.CallbackContext ctx)
+    {
+        //do only on click
+        if (CheckClick(ref pressedPlaceTurret) == false)
+            return;
+
+        //place turret
+        GameManager.instance.world.Cells[coordinates].Interact();
+
+        //back to strategic state
+        player.SetState(new PlayerStrategic(player, coordinates));
+    }
+
+    void PressedStopPlaceTurret(InputAction.CallbackContext ctx)
+    {
+        pressedStopPlaceTurret = true;
+    }
+
+    void StopPlaceTurret(InputAction.CallbackContext ctx)
+    {
+        //do only on click
+        if (CheckClick(ref pressedStopPlaceTurret) == false)
+            return;
+
+        //back to strategic state
+        player.SetState(new PlayerStrategic(player, coordinates));
+    }
+
+    void PressedSelectCell(InputAction.CallbackContext ctx)
+    {
+        pressedSelectCell = true;
+    }
+
+    void SelectCell(InputAction.CallbackContext ctx)
+    {
+        //do only on click
+        if (CheckClick(ref pressedSelectCell) == false)
+            return;
+
+        Vector2 movement = ctx.ReadValue<Vector2>();
 
         //save previous coordinates
         Coordinates previousCoordinates = coordinates;
 
-        SelectCell();
+        //select cell
+        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+        {
+            if (movement.y > 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
+            else if (movement.y < 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
+        }
+        else
+        {
+            if (movement.x > 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
+            else if (movement.x < 0)
+                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
+        }
 
-        //if differente coordinates
-        if(previousCoordinates != coordinates)
+        //if differents coordinates
+        if (previousCoordinates != coordinates)
         {
             //hide old preview and show new one
             GameManager.instance.world.Cells[previousCoordinates].HidePreview();
             GameManager.instance.world.Cells[coordinates].ShowPreview();
         }
 
-        //place turret
-        if(Input.GetKeyDown(KeyCode.Space))
-        {
-            PlaceTurret();
-        }
-
-        //exit from preview
-        if(Input.GetKeyDown(KeyCode.Return))
-        {
-            StopPlaceTurret();
-        }
-    }
-
-    void SelectCell()
-    {
-        //select cell
-        if (!Input.GetKey(KeyCode.Mouse0))
-        {
-            if (Input.GetKeyDown(KeyCode.W))
-                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.up);
-            else if (Input.GetKeyDown(KeyCode.S))
-                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.down);
-            else if (Input.GetKeyDown(KeyCode.D))
-                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.right);
-            else if (Input.GetKeyDown(KeyCode.A))
-                coordinates = WorldUtility.SelectCell(coordinates.face, coordinates.x, coordinates.y, WorldUtility.LateralFace(transform), ERotateDirection.left);
-        }
-
-        //save coordinates and  show selector
+        //show selector on new coordinates
         GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
-#endif
-
-    void PlaceTurret()
-    {
-        //place turret
-        GameManager.instance.world.Cells[coordinates].Interact();
-
-        //exit from place turret
-        StopPlaceTurret();
-    }
-
-    void StopPlaceTurret()
-    {
-        //back to strategic state
-        player.SetState(new PlayerStrategic(player, coordinates));
-    }
+    #endregion
 }

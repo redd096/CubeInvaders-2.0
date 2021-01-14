@@ -1,7 +1,6 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEditor;
 
 #region enum & struct
 
@@ -73,9 +72,6 @@ public class World : MonoBehaviour
 {
     #region variables
 
-    [Header("Regen")]
-    [SerializeField] bool regen = false;
-
     [Header("Base")]
     public WorldConfig worldConfig;
     public RandomWorldConfig randomWorldConfig;
@@ -90,30 +86,6 @@ public class World : MonoBehaviour
     WorldRotator worldRotator;
 
     #endregion
-
-    void OnValidate()
-    {
-        //click regen to regenerate the world
-        if(regen)
-        {
-            regen = false;
-
-            //start regen
-            RegenWorld();
-
-#if UNITY_EDITOR
-            Undo.RegisterFullObjectHierarchyUndo(gameObject, "Regen World");
-#endif
-            //foreach(Transform child in transform)
-            //{
-            //    Undo.RecordObject(child, "Regen World");
-            //}
-
-            //set scene dirty
-            //using UnityEditor.SceneManagement;
-            //EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
-        }
-    }
 
     void Awake()
     {
@@ -157,10 +129,7 @@ public class World : MonoBehaviour
         foreach (Transform ch in transform)
         {
 #if UNITY_EDITOR
-            UnityEditor.EditorApplication.delayCall += () =>
-            {
-                DestroyImmediate(ch.gameObject);
-            };
+            UnityEditor.EditorApplication.delayCall += () => DestroyImmediate(ch.gameObject);
 #else
             Destroy(ch.gameObject);
 #endif
@@ -381,7 +350,18 @@ public class World : MonoBehaviour
     /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
     public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
     {
-        worldRotator.Rotate(coordinates.face, coordinates.x, coordinates.y, lookingFace, rotateDirection);
+        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+    }
+
+    /// <summary>
+    /// Rotate the cube
+    /// </summary>
+    /// <param name="coordinates">coordinates to rotate</param>
+    /// <param name="lookingFace">rotation of the camera</param>
+    /// <param name="rotateDirection">row (right, left) or column (up, down)</param>
+    public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
+    {
+        worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
     }
 
     /// <summary>
@@ -445,7 +425,7 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
-    public Cell[] GetCellsAround(Coordinates coordinates)
+    public List<Cell> GetCellsAround(Coordinates coordinates)
     {
         List<Cell> cellsAround = new List<Cell>();
         Vector2Int[] directions = new Vector2Int[4] { Vector2Int.up, Vector2Int.down, Vector2Int.right, Vector2Int.left };
@@ -454,9 +434,9 @@ public class World : MonoBehaviour
         foreach (Vector2Int direction in directions)
         {
             //if there is a cell and is != null
-            if (GameManager.instance.world.Cells.ContainsKey(coordinates + direction))
+            if (Cells.ContainsKey(coordinates + direction))
             {
-                Cell cell = GameManager.instance.world.Cells[coordinates + direction];
+                Cell cell = Cells[coordinates + direction];
                 if (cell != null)
                 {
                     //add to the list
@@ -465,7 +445,7 @@ public class World : MonoBehaviour
             }
         }
 
-        return cellsAround.ToArray();
+        return cellsAround;
     }
 
     #endregion

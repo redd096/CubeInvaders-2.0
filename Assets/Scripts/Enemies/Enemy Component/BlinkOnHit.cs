@@ -9,18 +9,29 @@ public class BlinkOnHit : MonoBehaviour
     [SerializeField] Material blinkMaterial = default;
     [SerializeField] float blinkTime = 0.1f;
 
+    Enemy enemy;
+
     //for blink
     Material originalMat;
     Coroutine blink_Coroutine;
 
-    void OnTriggerEnter(Collider other)
+    void OnEnable()
     {
-        //blink if hit by shot
-        if (other.GetComponentInParent<TurretShot>())
-        {
-            if (blink_Coroutine == null)
-                blink_Coroutine = StartCoroutine(Blink_Coroutine());
-        }
+        enemy = GetComponent<Enemy>();
+        enemy.onGetDamage += OnGetDamage;
+    }
+
+    void OnDisable()
+    {
+        if(enemy)
+            enemy.onGetDamage -= OnGetDamage;
+    }
+
+    void OnGetDamage()
+    {
+        //blink on get damage
+        if (blink_Coroutine == null)
+            blink_Coroutine = StartCoroutine(Blink_Coroutine());
     }
 
     IEnumerator Blink_Coroutine()

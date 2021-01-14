@@ -1,23 +1,16 @@
 ﻿using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Turret Graphics/Turret Shooter Graphics")]
-public class TurretShooterGraphics : BuildableGraphics
+public class TurretShooterGraphics : TurretGraphics
 {
     TurretShooter turretShooter;
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         //get logic component as turret shooter
         turretShooter = buildableObject as TurretShooter;
-
-        AddEvents();
-    }
-
-    void OnDestroy()
-    {
-        RemoveEvents();
     }
 
     protected override Enemy GetEnemy()
@@ -28,13 +21,17 @@ public class TurretShooterGraphics : BuildableGraphics
 
     #region events
 
-    void AddEvents()
+    protected override void AddEvents()
     {
+        base.AddEvents();
+
         turretShooter.onShoot += OnShoot;
     }
 
-    void RemoveEvents()
+    protected override void RemoveEvents()
     {
+        base.RemoveEvents();
+
         turretShooter.onShoot -= OnShoot;
     }
 

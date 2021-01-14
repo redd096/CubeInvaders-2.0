@@ -18,24 +18,6 @@ public class GameManager : Singleton<GameManager>
         world = FindObjectOfType<World>();
         levelManager = FindObjectOfType<LevelManager>();
         waveManager = FindObjectOfType<WaveManager>();
-        
-        //if there is a player, lock mouse
-        if (player)
-        {
-            FindObjectOfType<SceneLoader>().ResumeGame();
-        }
-    }
-
-    void Update()
-    {
-        //if press escape or start, pause or resume game
-        if (Input.GetKeyDown(KeyCode.Escape) || Input.GetKeyDown(KeyCode.Joystick1Button7))
-        {
-            if (Time.timeScale <= 0)
-                SceneLoader.instance.ResumeGame();
-            else
-                SceneLoader.instance.PauseGame();
-        }
     }
 
     #region public API
@@ -53,9 +35,15 @@ public class GameManager : Singleton<GameManager>
     public void UpdateLevel(LevelConfig levelConfig)
     {
         //update level config
-        if (instance.levelManager.levelConfig != levelConfig)
+        instance.levelManager.levelConfig = levelConfig;
+
+        //reset turret
+        if (levelConfig.ResetTurrets)
         {
-            instance.levelManager.levelConfig = levelConfig;
+            foreach(Turret turret in FindObjectsOfType<Turret>())
+            {
+                turret.RemoveTurret();
+            }
         }
     }
 

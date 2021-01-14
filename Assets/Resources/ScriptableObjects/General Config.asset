@@ -14,3 +14,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   TimeToEndStrategic: 1.5
   Selector: {fileID: 193137624836173334, guid: 9b3071a52bd77174783535158824a74c, type: 3}
+  MultipleSelector: {fileID: 193137624836173334, guid: 9b3071a52bd77174783535158824a74c, type: 3}

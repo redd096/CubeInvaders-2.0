@@ -2,8 +2,9 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/Turret/Turret Shield")]
 [SelectionBase]
+[AddComponentMenu("Cube Invaders/Turret/Turret Shield")]
+[RequireComponent(typeof(TurretGraphics))]
 public class TurretShield : Turret
 {
     [Header("Important")]
@@ -17,7 +18,7 @@ public class TurretShield : Turret
     bool isRotating;
 
     /*
-    V quando viene istanziata si crea lo scudo
+    V quando viene istanziata si crea lo scudo disattivato
     V e si resetta (ancora la torretta è una preview, non è attiva)
 
     V quando si attiva, si aggiunge alla coda

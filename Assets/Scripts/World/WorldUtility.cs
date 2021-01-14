@@ -117,37 +117,31 @@ public static class WorldUtility
     /// </summary>
     public static EFace FindFaceUpToRight(EFace startFace, bool toRight)
     {
-        EFace newFace = startFace;
-
         switch (startFace)
         {
             case EFace.up:
                 if (toRight)
-                    newFace = EFace.right;
+                    return EFace.right;
                 else
-                    newFace = EFace.left;
-                break;
+                    return EFace.left;
             case EFace.right:
                 if (toRight)
-                    newFace = EFace.down;
+                    return EFace.down;
                 else
-                    newFace = EFace.up;
-                break;
+                    return EFace.up;
             case EFace.down:
                 if (toRight)
-                    newFace = EFace.left;
+                    return EFace.left;
                 else
-                    newFace = EFace.right;
-                break;
+                    return EFace.right;
             case EFace.left:
                 if (toRight)
-                    newFace = EFace.up;
+                    return EFace.up;
                 else
-                    newFace = EFace.down;
-                break;
+                    return EFace.down;
         }
 
-        return newFace;
+        return startFace;
     }
 
     /// <summary>
@@ -155,37 +149,31 @@ public static class WorldUtility
     /// </summary>
     public static EFace FindFaceFrontToUp(EFace startFace, bool toUp)
     {
-        EFace newFace = startFace;
-
         switch (startFace)
         {
             case EFace.front:
                 if (toUp)
-                    newFace = EFace.up;
+                    return EFace.up;
                 else
-                    newFace = EFace.down;
-                break;
+                    return EFace.down;
             case EFace.up:
                 if (toUp)
-                    newFace = EFace.back;
+                    return EFace.back;
                 else
-                    newFace = EFace.front;
-                break;
+                    return EFace.front;
             case EFace.back:
                 if (toUp)
-                    newFace = EFace.down;
+                    return EFace.down;
                 else
-                    newFace = EFace.up;
-                break;
+                    return EFace.up;
             case EFace.down:
                 if (toUp)
-                    newFace = EFace.front;
+                    return EFace.front;
                 else
-                    newFace = EFace.back;
-                break;
+                    return EFace.back;
         }
 
-        return newFace;
+        return startFace;
     }
 
     #endregion
@@ -226,6 +214,31 @@ public static class WorldUtility
         {
             return EFace.back;
         }
+    }
+
+    #endregion
+
+    #region rotate vector based on face
+
+    public static Vector3 RotateTowardsFace(Vector3 current, EFace face)
+    {
+        switch (face)
+        {
+            case EFace.front:
+                return current;
+            case EFace.right:
+                return new Vector3(-current.z, current.y, current.x);
+            case EFace.back:
+                return new Vector3(-current.x, current.y, -current.z);
+            case EFace.left:
+                return new Vector3(current.z, current.y, -current.x);
+            case EFace.up:
+                return new Vector3(current.x, -current.z, current.y);
+            case EFace.down:
+                return new Vector3(current.x, current.z, -current.y);
+        }
+
+        return current;
     }
 
     #endregion

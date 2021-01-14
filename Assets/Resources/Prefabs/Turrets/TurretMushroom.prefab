@@ -1,5 +1,24 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!114 &-4227589497540717750
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8495908100817976432}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7c87634f28678b9479f2464de0025c04, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToRotate: {fileID: 0}
+  baseToRotate: {fileID: 0}
+  objectToColor: {fileID: 7651475957941394624}
+  colorTimeBeforeDestroy: {r: 1, g: 0, b: 0, a: 1}
+  linePrefab: {fileID: 1408518994515950534, guid: 1ac4076fd79dde74ba1e918ba4bbeed9, type: 3}
+  colorNoTurretsOnSameFace: {r: 1, g: 0, b: 0, a: 1}
+  linePosition: {fileID: 7497105618761028091}
 --- !u!114 &7509983503003384392
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -13,6 +32,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   needGenerator: 1
+  timeBeforeDestroy: 8
   shield: {fileID: 8211497285858294263}
 --- !u!1001 &4246350457235721627
 PrefabInstance:
@@ -57,6 +77,16 @@ GameObject:
 --- !u!4 &5893727681946646261 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 4246350457235721627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7651475957941394624 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5819092610900529499, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 4246350457235721627}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &7497105618761028091 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5973181481010093152, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 4246350457235721627}
   m_PrefabAsset: {fileID: 0}
 --- !u!1001 &9197793330536769829

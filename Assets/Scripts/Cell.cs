@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-[AddComponentMenu("Cube Invaders/World/Cell")]
 [SelectionBase]
+[AddComponentMenu("Cube Invaders/World/Cell")]
 public class Cell : MonoBehaviour
 {
     [Header("Modifier")]
@@ -31,6 +31,8 @@ public class Cell : MonoBehaviour
 
     public bool IsAlive { get; private set; } = true;
 
+    public BuildableObject TurretToCreate => turretToCreate;
+
     void Awake()
     {
         //if build at start, build turret 
@@ -41,6 +43,24 @@ public class Cell : MonoBehaviour
     {
         //be sure to reset event
         onWorldRotate = null;
+    }
+    
+    void OnTriggerEnter(Collider other)
+    {
+        //if hitted by enemy
+        Enemy enemy = other.GetComponentInParent<Enemy>();
+        if (enemy)
+        {
+            //only if not enemy poison
+            if (enemy.GetType() != typeof(EnemyPoison))
+            {
+                //kill cell 
+                KillCell();
+            }
+
+            //destroy enemy
+            enemy.Die(this);
+        }
     }
 
     #region private API

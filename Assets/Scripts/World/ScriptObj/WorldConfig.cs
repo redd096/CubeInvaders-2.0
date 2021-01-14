@@ -22,14 +22,14 @@ public class WorldConfig : ScriptableObject
         }
     }
 
-    public float HalfCell => CellsSize / 2;
-
     public Vector2Int CenterCell => new Vector2Int(NumberCells / 2, NumberCells / 2);
 
     #endregion
 
     public Vector3 PivotBasedOnFace(EFace face)
     {
+        float HalfCell = CellsSize / 2;
+
         switch (face)
         {
             case EFace.front:

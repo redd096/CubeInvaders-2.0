@@ -1,6 +1,5 @@
 ﻿using UnityEngine;
 
-[SelectionBase]
 public class EnemyBase : MonoBehaviour
 {
     [Header("Important")]
@@ -11,6 +10,8 @@ public class EnemyBase : MonoBehaviour
     public Coordinates coordinatesToAttack;
 
     Rigidbody rb;
+
+    public System.Action onGetDamage;
 
     protected virtual void Awake()
     {
@@ -25,63 +26,28 @@ public class EnemyBase : MonoBehaviour
         rb.velocity = direction.normalized * speed;
     }
 
-    protected virtual void OnTriggerEnter(Collider other)
-    {
-        //check hit shield
-        if (CheckHit<Shield>(other))
-        {
-            //destroy this enemy
-            Die(false);
-
-            return;
-        }
-
-        //else check hit cell
-        if (CheckHit<Cell>(other))
-        {
-            //kill cell
-            other.GetComponentInParent<Cell>().KillCell();
-
-            //destroy this enemy
-            Die(true);
-        }
-    }
-
-    #region private API
-
-    protected bool CheckHit<T>(Collider other) where T : Component
-    {
-        //check hit
-        T obj = other.GetComponentInParent<T>();
-        if(obj)
-        {
-            return true;
-        }
-
-        return false;
-    }
-
-    protected virtual void Die(bool hitPlayer)
-    {
-        //destroy this enemy
-        Destroy(gameObject);
-    }
-
-    #endregion
-
     #region public API
 
-    public void GetDamage(float damage)
+    public virtual void GetDamage(float damage, TurretShot whoHit)
     {
+        //invoke event
+        onGetDamage?.Invoke();
+
         //get damage
         health -= damage;
 
         //check death
         if (health <= 0)
         {
-            Die(false);
+            Die(whoHit);
             return;
         }
+    }
+
+    public virtual void Die<T>(T hittedBy) where T : Component
+    {
+        //destroy this enemy
+        Destroy(gameObject);
     }
 
     #endregion

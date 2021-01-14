@@ -5,20 +5,29 @@ using UnityEngine;
 [AddComponentMenu("Cube Invaders/Turret Graphics/Radar Graphics")]
 public class RadarGraphics : BuildableGraphics
 {
-    [Header("Flick")]
+    [Header("Radar")]
     [SerializeField] Transform objectToFlick = default;
-    [SerializeField] float flickSpeed = 1;
-    [SerializeField] Color normalColor = Color.white;
-    [SerializeField] Color flickColor = Color.red;
+
+    [Header("Flick")]
+    [SerializeField] Gradient flickColor = default;
+    [SerializeField] float minFlick = 1;
+    [SerializeField] float maxFlick = 10;
 
     Radar radar;
+    Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
 
-    protected override void Start()
+    protected override void Awake()
     {
-        base.Start();
+        base.Awake();
 
         //get logic component as radar
         radar = buildableObject as Radar;
+
+        //set normal colors
+        foreach(Renderer r in objectToFlick.GetComponentsInChildren<Renderer>())
+        {
+            normalColors.Add(r, r.material.color);
+        }
     }
 
     protected override void Update()
@@ -43,30 +52,46 @@ public class RadarGraphics : BuildableGraphics
         if (objectToFlick == null) 
             return;
 
-        //sin from 0 to 1
-        float flick = Mathf.Abs(Mathf.Sin(Time.time * flickSpeed));
-
         //if enemy is attacking, flick color
         if(GetEnemy() && buildableObject.IsActive)
         {
-            SetColor(flickColor, flick);
+            SetColorFlick();
         }
         //else show normal color
-        else
+        else if (buildableObject.IsActive)
         {
-            SetColor(normalColor, flick);
+            SetColor(Color.white, 0, true);
         }
     }
 
-    void SetColor(Color color, float delta)
+    void SetColorFlick()
     {
-        Renderer[] renderers = objectToFlick.GetComponentsInChildren<Renderer>();
+        int currentWave = GameManager.instance.waveManager.currentWave;
 
+        //get flick speed based on enemy distance to its coordinates to attack
+        float enemyDistance = Vector3.Distance(GameManager.instance.world.CoordinatesToPosition(GetEnemy().coordinatesToAttack), GetEnemy().transform.position);
+        float distanceFrom0To1 = 1 - (enemyDistance / GameManager.instance.waveManager.waveConfig.Waves[currentWave].DistanceFromWorld);        //distance from 0 to 1
+        float flickSpeed = Mathf.Lerp(minFlick, maxFlick, distanceFrom0To1);                                                                    //speed from minFlick to maxFlick
+
+        //sin from 0 to 1
+        float flick = Mathf.Abs(Mathf.Sin(Time.time * flickSpeed));
+
+        //set color based on enemy distance
+        Color color = flickColor.Evaluate(distanceFrom0To1);
+
+        SetColor(color, flick, false);
+    }
+
+    void SetColor(Color colorFlick, float delta, bool setNormalColor)
+    {
         //foreach renderer set color and emission
-        foreach(Renderer renderer in renderers)
+        foreach (Renderer renderer in normalColors.Keys)
         {
-            renderer.material.color = Color.Lerp(normalColor, color, delta);
-            renderer.material.SetColor("_EmissionColor", Color.Lerp(normalColor, color, delta));
+            //set color flick or stay normal color
+            Color color = setNormalColor ? normalColors[renderer] : colorFlick;
+
+            renderer.material.color = Color.Lerp(normalColors[renderer], color, delta);
+            renderer.material.SetColor("_EmissionColor", Color.Lerp(normalColors[renderer], color, delta));
         }
     }
 }

@@ -1,34 +1,21 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
+[SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy Poison")]
 public class EnemyPoison : Enemy
 {
     [Header("Poison")]
     [SerializeField] float timerPoison = 5;
+    [SerializeField] int limitSpread = 1;
 
-    protected override void OnTriggerEnter(Collider other)
+    public override void Die<T>(T hittedBy)
     {
-        //check hit shield
-        if (CheckHit<Shield>(other))
+        base.Die(hittedBy);
+
+        //poison cell instead of kill it
+        if (hittedBy.GetType() == typeof(Cell))
         {
-            //destroy this enemy
-            Die(false);
-
-            return;
-        }
-
-        //else check hit cell
-        if (CheckHit<Cell>(other))
-        {
-            Cell cell = other.GetComponentInParent<Cell>();
-
-            //poison cell instead of kill it
-            cell.gameObject.AddComponent<PoisonCell>().Init(timerPoison);
-
-            //destroy this enemy
-            Die(true);
+            hittedBy.gameObject.AddComponent<PoisonCell>().Init(timerPoison, limitSpread);
         }
     }
 }
