@@ -24,8 +24,9 @@ public class PlayerMove : PlayerState
     {
         base.Execution();
 
+        //PROBLEMA COL MOUSE CHE DIVENTA DIPENDENTE DAL FRAME RATE
         //if moving mouse or analog, move camera
-        if(controls.Gameplay.MoveCamera.phase == InputActionPhase.Started)
+        if (controls.Gameplay.MoveCamera.phase == InputActionPhase.Started)
         {
             MoveCamera(controls.Gameplay.MoveCamera.ReadValue<Vector2>());
         }
@@ -40,6 +41,9 @@ public class PlayerMove : PlayerState
     {
         base.AddInputs();
 
+        //PROBLEMA CON L'ANALOGICO, SE TENGO INCLINATO VERSO DESTRA MI VEDE SOLO IL CAMBIO DI VALORE, MA POI NON RIMANE L'INPUT A DESTRA MA SI SETTA A 0
+        //controls.Gameplay.MoveCamera.performed += MoveCamera;
+        //controls.Gameplay.MoveCamera.canceled += MoveCamera;
         controls.Gameplay.SelectCell.started += PressedSelectCell;
         controls.Gameplay.SelectCell.performed += SelectCell;
         controls.Gameplay.RotateCube.started += PressedRotateCube;
@@ -50,6 +54,8 @@ public class PlayerMove : PlayerState
     {
         base.RemoveInputs();
 
+        //controls.Gameplay.MoveCamera.performed -= MoveCamera;
+        //controls.Gameplay.MoveCamera.canceled -= MoveCamera;
         controls.Gameplay.SelectCell.started -= PressedSelectCell;
         controls.Gameplay.SelectCell.performed -= SelectCell;
         controls.Gameplay.RotateCube.started -= PressedRotateCube;
@@ -70,6 +76,21 @@ public class PlayerMove : PlayerState
             GameManager.instance.uiManager.ShowSelector(coordinates);
         }
     }
+
+    //void MoveCamera(InputAction.CallbackContext ctx)
+    //{
+    //    //move cinemachine
+    //    CinemachineMovement(ctx.ReadValue<Vector2>());
+    //
+    //    //if change face, reselect center cell and move selector
+    //    EFace face = WorldUtility.SelectFace(transform);
+    //
+    //    if (face != coordinates.face)
+    //    {
+    //        coordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
+    //        GameManager.instance.uiManager.ShowSelector(coordinates);
+    //    }
+    //}
 
     void PressedSelectCell(InputAction.CallbackContext ctx)
     {

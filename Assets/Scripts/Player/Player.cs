@@ -22,9 +22,7 @@ public class Player : StateMachine
 
     void Start()
     {
-#if UNITY_EDITOR
         Application.targetFrameRate = 60;
-#endif
 
         //get virtual cam and player controls
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
