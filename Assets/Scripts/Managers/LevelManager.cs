@@ -32,7 +32,7 @@ public class LevelManager : MonoBehaviour
     void Start()
     {
         //check if randomize world
-        if (levelConfig.RandomizeWorldAtStart)
+        if (levelConfig && levelConfig.RandomizeWorldAtStart)
         {
             GameManager.instance.world.RandomRotate();
         }
