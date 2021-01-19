@@ -1,21 +1,25 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class EnemyBase : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] protected float health = 100;
     [SerializeField] protected float speed = 1;
+    public ParticleSystem expParticle;
 
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
     Rigidbody rb;
+    MeshRenderer mR;
 
     public System.Action onGetDamage;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
+        mR = GetComponentInChildren<MeshRenderer>();
     }
 
     protected virtual void FixedUpdate()
@@ -47,6 +51,14 @@ public class EnemyBase : MonoBehaviour
     public virtual void Die<T>(T hittedBy) where T : Component
     {
         //destroy this enemy
+        expParticle.Play();
+        mR.enabled = false;
+        StartCoroutine("Dead");
+    }
+
+    IEnumerator Dead()
+    {
+        yield return new WaitForSeconds(0.3f);
         Destroy(gameObject);
     }
 
