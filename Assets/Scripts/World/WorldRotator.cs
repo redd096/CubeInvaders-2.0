@@ -253,7 +253,7 @@ public class WorldRotator
 
     #region up and down
 
-    void RotateUpDownRow(EFace face, bool toRight)
+    void RotateUpDownRow(EFace startFace, bool toRight)
     {
         //foreach coordinate, use y to select
         foreach (Coordinates coordinates in coordinatesToRotate)
@@ -261,18 +261,19 @@ public class WorldRotator
             int y = coordinates.y;
 
             //rotate y. Down face is the inverse
-            if (face == EFace.up)
+            if (startFace == EFace.up)
             {
                 SelectUpDownRowCells(y);
             }
             else
             {
                 SelectUpDownRowCells(WorldMath.InverseN(y, world.worldConfig.NumberCells));
-
-                //in the down face is inverse
-                toRight = !toRight;
             }
         }
+
+        //in the down face is inverse
+        if (startFace == EFace.down)
+            toRight = !toRight;
 
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, !toRight));
@@ -376,7 +377,7 @@ public class WorldRotator
 
     #region front, up, back, down
 
-    void RotateFrontColumn(EFace face, bool toUp)
+    void RotateFrontColumn(EFace startFace, bool toUp)
     {
         //foreach coordinate, use x to select
         foreach (Coordinates coordinates in coordinatesToRotate)
@@ -384,18 +385,19 @@ public class WorldRotator
             int x = coordinates.x;
 
             //rotate x. Back face is the inverse
-            if (face != EFace.back)
+            if (startFace != EFace.back)
             {
                 SelectFrontColumnCells(x);
             }
             else
             {
                 SelectFrontColumnCells(WorldMath.InverseN(x, world.worldConfig.NumberCells));
-
-                //in the back face is inverse
-                toUp = !toUp;
             }
         }
+
+        //in the back face is inverse
+        if (startFace == EFace.back)
+            toUp = !toUp;
 
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.right, toUp));
@@ -492,11 +494,12 @@ public class WorldRotator
             else
             {
                 SelectRightLeftColumnCells(WorldMath.InverseN(x, world.worldConfig.NumberCells));
-
-                //in the left is inverse
-                toUp = !toUp;
             }
         }
+
+        //in the left is inverse
+        if (startFace == EFace.left)
+            toUp = !toUp;
 
         //rotate animation
         rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, toUp));
