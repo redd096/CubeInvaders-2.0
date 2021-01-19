@@ -178,9 +178,16 @@ public class PlayerMove : PlayerState
     List<Coordinates> RotateMoreCells(ERotateDirection rotateDirection)
     {
         int selectorSize = GameManager.instance.levelManager.levelConfig.SelectorSize;
+        EFace lookingFace = WorldUtility.LateralFace(transform);
 
         //check if get cells on x or y
         bool useX = rotateDirection == ERotateDirection.up || rotateDirection == ERotateDirection.down;
+
+        //if rotating up or down face, when looking from right or left, inverse useX
+        if (coordinates.face == EFace.up || coordinates.face == EFace.down)
+            if (lookingFace == EFace.right || lookingFace == EFace.left)
+                useX = !useX;
+
         int value = useX ? coordinates.x : coordinates.y;
 
         //check if there are enough cells to the right (useX) or up (!useX)
