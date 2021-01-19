@@ -75,6 +75,7 @@ public class World : MonoBehaviour
     [Header("Base")]
     public WorldConfig worldConfig;
     public RandomWorldConfig randomWorldConfig;
+    public ParticleSystem rotationParticle;
 
     [Header("Important")]
     public BiomesConfig biomesConfig;
@@ -351,6 +352,7 @@ public class World : MonoBehaviour
     public void Rotate(Coordinates coordinates, EFace lookingFace, ERotateDirection rotateDirection)
     {
         worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+        rotationParticle.Play();
     }
 
     /// <summary>
@@ -362,6 +364,7 @@ public class World : MonoBehaviour
     public void Rotate(Coordinates[] coordinates, EFace lookingFace, ERotateDirection rotateDirection)
     {
         worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
+        rotationParticle.Play();
     }
 
     /// <summary>
