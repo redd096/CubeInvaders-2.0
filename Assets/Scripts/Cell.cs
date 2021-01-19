@@ -9,6 +9,7 @@ public class Cell : MonoBehaviour
     [Header("Modifier")]
     [SerializeField] bool isInvincible = false;
     [SerializeField] bool onlyOneLife = false;
+    public ParticleSystem expCell;
 
     [Header("Important")]
     [SerializeField] GameObject toRemoveOnDead = default;
@@ -109,6 +110,7 @@ public class Cell : MonoBehaviour
 
         //remove biome
         ActiveRemoveOnDead(false);
+        expCell.Play();
     }
 
     void RecreateCell()
