@@ -187,7 +187,7 @@ public class WorldRotator
 
     #region rotate row
 
-    #region lateral
+    #region front, right, back, left
 
     void RotateLateralRow(bool toRight)
     {
@@ -374,7 +374,7 @@ public class WorldRotator
 
     #region rotate column
 
-    #region front
+    #region front, up, back, down
 
     void RotateFrontColumn(EFace face, bool toUp)
     {
