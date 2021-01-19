@@ -53,12 +53,12 @@ public class RadarGraphics : BuildableGraphics
             return;
 
         //if enemy is attacking, flick color
-        if(GetEnemy() && buildableObject.IsActive)
+        if(GetEnemy())
         {
             SetColorFlick();
         }
         //else show normal color
-        else if (buildableObject.IsActive)
+        else 
         {
             SetColor(Color.white, 0, true);
         }
