@@ -2,11 +2,14 @@
 
 public class BuildableObject : MonoBehaviour
 {
+    public ParticleSystem buildTurret;
+
     public Cell CellOwner { get; private set; }
     public bool IsPreview { get; private set; } = true;     //is a preview turret
 
     bool isActive;                                          //is active (shot and spawn shield)
     public bool IsActive
+
     {
         get
         {
@@ -57,7 +60,7 @@ public class BuildableObject : MonoBehaviour
     public virtual void BuildTurret(Cell cellOwner)
     {
         IsPreview = false;
-
+       
         //get owner and set event
         this.CellOwner = cellOwner;
         cellOwner.onWorldRotate += OnWorldRotate;

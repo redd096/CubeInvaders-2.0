@@ -39,6 +39,7 @@ public class Turret : BuildableObject
     public override void BuildTurret(Cell cellOwner)
     {
         base.BuildTurret(cellOwner);
+        buildTurret.Play();
 
         //if destroy turret when no move and time greater than 0, init timer to destroy turret
         if (GameManager.instance.levelManager.levelConfig.DestroyTurretWhenNoMove && timeBeforeDestroy > 0)
