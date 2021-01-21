@@ -63,6 +63,7 @@ public class TurretShooter : Turret
             timeToShoot = Time.time + delayShoot;
 
             Attack();
+            fireTurret.Play();
         }
     }
 

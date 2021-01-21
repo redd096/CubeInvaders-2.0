@@ -1,8 +1,10 @@
 ﻿using UnityEngine;
+using System.Collections;
 
 public class BuildableObject : MonoBehaviour
 {
     public ParticleSystem buildTurret;
+    public ParticleSystem fireTurret;
 
     public Cell CellOwner { get; private set; }
     public bool IsPreview { get; private set; } = true;     //is a preview turret
@@ -72,7 +74,7 @@ public class BuildableObject : MonoBehaviour
     public virtual void RemoveTurret()
     {
         IsPreview = true;
-
+      
         //deactive and remove event
         gameObject.SetActive(false);
         CellOwner.onWorldRotate -= OnWorldRotate;

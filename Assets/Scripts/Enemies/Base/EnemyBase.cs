@@ -7,6 +7,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField] protected float health = 100;
     [SerializeField] protected float speed = 1;
     public ParticleSystem expParticle;
+    private SoundLibrary soundLibrary;
 
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
@@ -20,6 +21,7 @@ public class EnemyBase : MonoBehaviour
     {
         rb = GetComponent<Rigidbody>();
         mR = GetComponentInChildren<MeshRenderer>();
+        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
     }
 
     protected virtual void FixedUpdate()
@@ -52,6 +54,7 @@ public class EnemyBase : MonoBehaviour
     {
         //destroy this enemy
         expParticle.Play();
+        soundLibrary.Rotation();
         mR.enabled = false;
         StartCoroutine("Dead");
     }
