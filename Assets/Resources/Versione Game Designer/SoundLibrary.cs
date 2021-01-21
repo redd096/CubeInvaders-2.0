@@ -24,7 +24,7 @@ using UnityEngine;
 
         public void CellDestruction()
         {
-
+                music.PlayOneShot(cellDestructionAudio, 1);
         }
 
         public void TurretDestruction()
