@@ -115,7 +115,6 @@ public class Cell : MonoBehaviour
         //remove biome
         ActiveRemoveOnDead(false);
         expCell.Play();
-        //soundLibrary.CellDestruction();
         cmShake.DoShake();
     }
 

@@ -76,6 +76,7 @@ public class World : MonoBehaviour
     public WorldConfig worldConfig;
     public RandomWorldConfig randomWorldConfig;
     public ParticleSystem rotationParticle;
+    private SoundLibrary soundLibrary;
 
     [Header("Important")]
     public BiomesConfig biomesConfig;
@@ -91,6 +92,7 @@ public class World : MonoBehaviour
     void Awake()
     {
         GenerateReferences();
+        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
     }
 
     void OnDestroy()
@@ -353,6 +355,7 @@ public class World : MonoBehaviour
     {
         worldRotator.Rotate(coordinates, lookingFace, rotateDirection);
         rotationParticle.Play();
+        soundLibrary.Rotation();
     }
 
     /// <summary>

@@ -54,7 +54,7 @@ public class EnemyBase : MonoBehaviour
     {
         //destroy this enemy
         expParticle.Play();
-        soundLibrary.Rotation();
+        soundLibrary.EnemyDestruction();
         mR.enabled = false;
         StartCoroutine("Dead");
     }

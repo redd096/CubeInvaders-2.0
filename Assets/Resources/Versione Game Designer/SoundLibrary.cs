@@ -5,8 +5,7 @@ using UnityEngine;
     public class SoundLibrary : MonoBehaviour
     {
         public AudioClip rotationAudio;
-        public AudioClip cellDestructionAudio;
-        public AudioClip destructionTurretAudio;
+        public AudioClip turretBuildingAudio;
         public AudioClip enemyDestructionAudio;
         public AudioClip enemySlimestateAudio;
 
@@ -19,22 +18,17 @@ using UnityEngine;
 
         public  void Rotation()
         {
-                music.PlayOneShot(rotationAudio, 1);      
+                music.PlayOneShot(rotationAudio, 0.1f);      
         }
 
-        public void CellDestruction()
+        public void TurretBuilding()
         {
-                music.PlayOneShot(cellDestructionAudio, 1);
-        }
-
-        public void TurretDestruction()
-        {
-
+                music.PlayOneShot(turretBuildingAudio, 1);
         }
 
         public void EnemyDestruction()
         {
-
+                music.PlayOneShot(enemyDestructionAudio, 1);
         }
 
         public void EnemySlime()
