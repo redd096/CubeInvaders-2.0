@@ -33,7 +33,7 @@ using UnityEngine;
 
         public void EnemySlime()
         {
-
+               music.PlayOneShot(enemySlimestateAudio, 1);
         }
     }
 
