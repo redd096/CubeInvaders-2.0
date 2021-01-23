@@ -15,3 +15,4 @@ MonoBehaviour:
   TimeToEndStrategic: 1.5
   Selector: {fileID: 193137624836173334, guid: e251ffa2e344a684d8c8c9684aa3b910, type: 3}
   MultipleSelector: {fileID: 193137624836173334, guid: e251ffa2e344a684d8c8c9684aa3b910, type: 3}
+  PortalPrefab: {fileID: 8611625995788095873, guid: 042bc6cb4922ca24f8514a84d5366a47, type: 3}
