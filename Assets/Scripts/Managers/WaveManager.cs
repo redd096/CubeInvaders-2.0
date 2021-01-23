@@ -151,8 +151,20 @@ public class WaveManager : MonoBehaviour
             int y = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             Coordinates coordinatesToAttack = new Coordinates(face, x, y);
 
-            //set enemy position
-            enemyStruct.Enemy.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, wave.DistanceFromWorld);
+            //get position and rotation
+            Vector3 position;
+            Quaternion rotation;
+            GetPositionAndRotation(coordinatesToAttack, out position, out rotation);
+
+            //set enemy position and rotation, then activate
+            enemyStruct.Enemy.transform.position = position;
+            enemyStruct.Enemy.transform.rotation = rotation;
+
+            //instantiate portal at position and rotation
+            if (GameManager.instance.levelManager.generalConfig.PortalPrefab)
+            {
+                Instantiate(GameManager.instance.levelManager.generalConfig.PortalPrefab, position, rotation);
+            }
 
             //set enemy destination and activate
             enemyStruct.Enemy.coordinatesToAttack = coordinatesToAttack;
@@ -186,6 +198,19 @@ public class WaveManager : MonoBehaviour
             facesQueue.Dequeue();
 
         return selectedFace;
+    }
+
+    void GetPositionAndRotation(Coordinates coordinatesToAttack, out Vector3 position, out Quaternion rotation)
+    {
+        //coordinate position + distance from world
+        position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, waveConfig.Waves[currentWave].DistanceFromWorld);
+
+        //find direction to attack
+        Vector3 positionCellToAttack = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack);
+        Vector3 direction = (positionCellToAttack - position).normalized;
+
+        //look in direction
+        rotation = Quaternion.LookRotation(direction);
     }
 
     #endregion
