@@ -135,7 +135,8 @@ public class WorldRotator
     protected virtual bool SkipAnimation(float delta)
     {
         //if player pressed input to skip, if some time already passed, then skip animation
-        if (Keyboard.current.anyKey.wasPressedThisFrame && delta > 0.1f)
+        if (Keyboard.current.anyKey.wasPressedThisFrame && delta > 0.1f 
+            && PlayerWaitRotation.canSkipAnimation) //check rotation state already subscribed to onEndRotation event
         {
             Debug.Log("skip animation");
             return true;

@@ -1,5 +1,7 @@
 ﻿public class PlayerWaitRotation : PlayerState
 {
+    public static bool canSkipAnimation = false;
+
     Coordinates coordinates;
     EFace lookingFace;
     ERotateDirection rotateDirection;
@@ -20,6 +22,7 @@
         //wait end rotation
         GameManager.instance.world.onEndRotation += OnEndRotation;
         nRotations = 0;
+        canSkipAnimation = true;
 
         //hide selector and stop movement
         GameManager.instance.uiManager.HideSelector();
@@ -32,6 +35,7 @@
 
         //remove event
         GameManager.instance.world.onEndRotation -= OnEndRotation;
+        canSkipAnimation = false;
     }
 
     void OnEndRotation()
