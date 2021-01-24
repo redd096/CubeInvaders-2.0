@@ -70,7 +70,7 @@ public class PlayerMove : PlayerState
     void SelectCell(Vector2 movement)
     {
         //check if pressed input or moved analog
-        if (movement.magnitude > player.deadZoneAnalogs && pressedSelectCell == false)
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedSelectCell == false)
         {
             pressedSelectCell = true;
 
@@ -103,7 +103,7 @@ public class PlayerMove : PlayerState
     void RotateCube(Vector2 movement)
     {
         //check if pressed input or moved analog
-        if (movement.magnitude > player.deadZoneAnalogs && pressedRotateCube == false)
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedRotateCube == false)
         {
             pressedRotateCube = true;
 

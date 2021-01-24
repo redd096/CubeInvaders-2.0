@@ -96,7 +96,7 @@ public class PlayerPlaceTurret : PlayerState
     void SelectCell(Vector2 movement)
     {
         //check if pressed input or moved analog
-        if (movement.magnitude > player.deadZoneAnalogs && pressedSelectCell == false)
+        if (movement.magnitude >= player.deadZoneAnalogs && pressedSelectCell == false)
         {
             pressedSelectCell = true;
 

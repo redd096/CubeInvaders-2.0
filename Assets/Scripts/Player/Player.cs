@@ -12,7 +12,7 @@ public class Player : StateMachine
     public bool invertY = false;
 
     [Header("Player")]
-    public float deadZoneAnalogs = 0.6f;
+    [Range(0.1f, 0.9f)] public float deadZoneAnalogs = 0.6f;
 
     [Header("Debug")]
     [SerializeField] string currentState;
