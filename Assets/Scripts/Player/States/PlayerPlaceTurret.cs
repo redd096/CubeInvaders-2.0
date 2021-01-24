@@ -14,8 +14,7 @@ public class PlayerPlaceTurret : PlayerState
     {
         base.Enter();
 
-        //stop camera movement and show preview
-        StopCinemachine();
+        //show preview
         GameManager.instance.world.Cells[coordinates].ShowPreview();
     }
 

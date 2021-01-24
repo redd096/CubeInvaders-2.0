@@ -22,11 +22,12 @@ public class Player : StateMachine
 
     void Start()
     {
-        Application.targetFrameRate = 60;
-
         //get virtual cam and player controls
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
         Controls = new NewControls();
+
+        //by default deactive cinemachine
+        VirtualCam.enabled = false;
 
         //set state and lock mouse
         SetState(new PlayerPause(this));

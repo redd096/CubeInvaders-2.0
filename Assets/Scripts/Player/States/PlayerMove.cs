@@ -18,18 +18,29 @@ public class PlayerMove : PlayerState
 
         //show selector
         GameManager.instance.uiManager.ShowSelector(coordinates);
+
+        //enable camera movement
+        player.VirtualCam.enabled = true;
     }
 
     public override void Execution()
     {
         base.Execution();
 
-        //PROBLEMA COL MOUSE CHE DIVENTA DIPENDENTE DAL FRAME RATE
-        //if moving mouse or analog, move camera
-        if (controls.Gameplay.MoveCamera.phase == InputActionPhase.Started)
-        {
-            MoveCamera(controls.Gameplay.MoveCamera.ReadValue<Vector2>());
-        }
+        //set cinemachine speed
+        player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
+        player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
+
+        //when move camera, check if changed face
+        CheckChangedFace();
+    }
+
+    public override void Exit()
+    {
+        base.Exit();
+
+        //stop camera movement
+        player.VirtualCam.enabled = false;
     }
 
     #region inputs
@@ -42,8 +53,6 @@ public class PlayerMove : PlayerState
         base.AddInputs();
 
         //PROBLEMA CON L'ANALOGICO, SE TENGO INCLINATO VERSO DESTRA MI VEDE SOLO IL CAMBIO DI VALORE, MA POI NON RIMANE L'INPUT A DESTRA MA SI SETTA A 0
-        //controls.Gameplay.MoveCamera.performed += MoveCamera;
-        //controls.Gameplay.MoveCamera.canceled += MoveCamera;
         controls.Gameplay.SelectCell.started += PressedSelectCell;
         controls.Gameplay.SelectCell.performed += SelectCell;
         controls.Gameplay.RotateCube.started += PressedRotateCube;
@@ -54,19 +63,14 @@ public class PlayerMove : PlayerState
     {
         base.RemoveInputs();
 
-        //controls.Gameplay.MoveCamera.performed -= MoveCamera;
-        //controls.Gameplay.MoveCamera.canceled -= MoveCamera;
         controls.Gameplay.SelectCell.started -= PressedSelectCell;
         controls.Gameplay.SelectCell.performed -= SelectCell;
         controls.Gameplay.RotateCube.started -= PressedRotateCube;
         controls.Gameplay.RotateCube.performed -= RotateCube;
     }
 
-    void MoveCamera(Vector2 movement)
+    void CheckChangedFace()
     {        
-        //move cinemachine
-        CinemachineMovement(movement);
-
         //if change face, reselect center cell and move selector
         EFace face = WorldUtility.SelectFace(transform);
 
@@ -76,21 +80,6 @@ public class PlayerMove : PlayerState
             GameManager.instance.uiManager.ShowSelector(coordinates);
         }
     }
-
-    //void MoveCamera(InputAction.CallbackContext ctx)
-    //{
-    //    //move cinemachine
-    //    CinemachineMovement(ctx.ReadValue<Vector2>());
-    //
-    //    //if change face, reselect center cell and move selector
-    //    EFace face = WorldUtility.SelectFace(transform);
-    //
-    //    if (face != coordinates.face)
-    //    {
-    //        coordinates = new Coordinates(face, GameManager.instance.world.worldConfig.CenterCell);
-    //        GameManager.instance.uiManager.ShowSelector(coordinates);
-    //    }
-    //}
 
     void PressedSelectCell(InputAction.CallbackContext ctx)
     {

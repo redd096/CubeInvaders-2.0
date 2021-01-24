@@ -24,9 +24,8 @@
         nRotations = 0;
         canSkipAnimation = true;
 
-        //hide selector and stop movement
+        //hide selector
         GameManager.instance.uiManager.HideSelector();
-        StopCinemachine();
     }
 
     public override void Exit()
