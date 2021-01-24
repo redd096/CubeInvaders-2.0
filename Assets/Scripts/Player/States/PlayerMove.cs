@@ -30,6 +30,7 @@ public class PlayerMove : PlayerState
         //set cinemachine speed
         player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
         player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
+        player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
 
         //when move camera, check if changed face
         CheckChangedFace();
