@@ -6,10 +6,13 @@ using UnityEngine.InputSystem;
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
 {
-    [Header("Player")]
+    [Header("Camera")]
     public float speedX = 300;
     public float speedY = 2;
     public bool invertY = false;
+
+    [Header("Player")]
+    public float deadZoneAnalogs = 0.6f;
 
     [Header("Debug")]
     [SerializeField] string currentState;

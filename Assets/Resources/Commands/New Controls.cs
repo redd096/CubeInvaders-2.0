@@ -366,7 +366,7 @@ public class @NewControls : IInputActionCollection, IDisposable
                     ""id"": ""317ecbed-ae54-4e88-a73b-031769a12db4"",
                     ""path"": ""<Gamepad>/leftStick"",
                     ""interactions"": """",
-                    ""processors"": ""InvertVector2(invertY=false)"",
+                    ""processors"": """",
                     ""groups"": ""Gamepad"",
                     ""action"": ""Rotate Cube"",
                     ""isComposite"": false,

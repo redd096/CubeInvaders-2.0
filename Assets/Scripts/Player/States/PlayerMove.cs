@@ -27,13 +27,19 @@ public class PlayerMove : PlayerState
     {
         base.Execution();
 
-        //set cinemachine speed
+        //set cinemachine speed and invert Y
         player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
         player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
         player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
 
         //when move camera, check if changed face
         CheckChangedFace();
+
+        //rotate cube or select cell (check if keeping pressed to rotate)
+        if(controls.Gameplay.KeepPressedToRotate.phase == InputActionPhase.Started)
+            RotateCube(controls.Gameplay.RotateCube.ReadValue<Vector2>());
+        else
+            SelectCell(controls.Gameplay.SelectCell.ReadValue<Vector2>());
     }
 
     public override void Exit()
@@ -44,31 +50,10 @@ public class PlayerMove : PlayerState
         player.VirtualCam.enabled = false;
     }
 
-    #region inputs
+    #region private API
 
     bool pressedSelectCell;
     bool pressedRotateCube;
-
-    protected override void AddInputs()
-    {
-        base.AddInputs();
-
-        //PROBLEMA CON L'ANALOGICO, SE TENGO INCLINATO VERSO DESTRA MI VEDE SOLO IL CAMBIO DI VALORE, MA POI NON RIMANE L'INPUT A DESTRA MA SI SETTA A 0
-        controls.Gameplay.SelectCell.started += PressedSelectCell;
-        controls.Gameplay.SelectCell.performed += SelectCell;
-        controls.Gameplay.RotateCube.started += PressedRotateCube;
-        controls.Gameplay.RotateCube.performed += RotateCube;
-    }
-
-    protected override void RemoveInputs()
-    {
-        base.RemoveInputs();
-
-        controls.Gameplay.SelectCell.started -= PressedSelectCell;
-        controls.Gameplay.SelectCell.performed -= SelectCell;
-        controls.Gameplay.RotateCube.started -= PressedRotateCube;
-        controls.Gameplay.RotateCube.performed -= RotateCube;
-    }
 
     void CheckChangedFace()
     {        
@@ -82,60 +67,67 @@ public class PlayerMove : PlayerState
         }
     }
 
-    void PressedSelectCell(InputAction.CallbackContext ctx)
+    void SelectCell(Vector2 movement)
     {
-        pressedSelectCell = true;
-    }
-
-    void SelectCell(InputAction.CallbackContext ctx)
-    {
-        //do nothing if keeping pressed, or if not clicked
-        if (controls.Gameplay.KeepPressedToRotate.phase == InputActionPhase.Started || CheckClick(ref pressedSelectCell) == false)
-            return;
-
-        Vector2 movement = ctx.ReadValue<Vector2>();
-
-        //select cell
-        if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+        //check if pressed input or moved analog
+        if (movement.magnitude > player.deadZoneAnalogs && pressedSelectCell == false)
         {
-            if (movement.y > 0)
-                DoSelectionCell(ERotateDirection.up);
-            else if (movement.y < 0)
-                DoSelectionCell(ERotateDirection.down);
+            pressedSelectCell = true;
+
+            //check if y or x axis
+            if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+            {
+                if (movement.y > 0)
+                    DoSelectionCell(ERotateDirection.up);
+                else if (movement.y < 0)
+                    DoSelectionCell(ERotateDirection.down);
+            }
+            else
+            {
+                if (movement.x > 0)
+                    DoSelectionCell(ERotateDirection.right);
+                else if (movement.x < 0)
+                    DoSelectionCell(ERotateDirection.left);
+            }
+
+            //save coordinates and show selector
+            GameManager.instance.uiManager.ShowSelector(coordinates);
         }
-        else
+        //reset when release input or analog
+        else if (movement.magnitude < player.deadZoneAnalogs)
         {
-            if (movement.x > 0)
-                DoSelectionCell(ERotateDirection.right);
-            else if (movement.x < 0)
-                DoSelectionCell(ERotateDirection.left);
+            pressedSelectCell = false;
         }
-
-        //save coordinates and show selector
-        GameManager.instance.uiManager.ShowSelector(coordinates);
     }
 
-    void PressedRotateCube(InputAction.CallbackContext ctx)
+    void RotateCube(Vector2 movement)
     {
-        pressedRotateCube = true;
-    }
+        //check if pressed input or moved analog
+        if (movement.magnitude > player.deadZoneAnalogs && pressedRotateCube == false)
+        {
+            pressedRotateCube = true;
 
-    void RotateCube(InputAction.CallbackContext ctx)
-    {
-        //do nothing if NOT keeping pressed, or if not clicked
-        if (controls.Gameplay.KeepPressedToRotate.phase != InputActionPhase.Started || CheckClick(ref pressedRotateCube) == false)
-            return;
-
-        Vector2 movement = ctx.ReadValue<Vector2>();
-
-        if (movement.y > 0)
-            DoRotation(ERotateDirection.up);
-        else if (movement.y < 0)
-            DoRotation(ERotateDirection.down);
-        else if (movement.x > 0)
-            DoRotation(ERotateDirection.right);
-        else if (movement.x < 0)
-            DoRotation(ERotateDirection.left);
+            //check if y or x axis
+            if (Mathf.Abs(movement.y) > Mathf.Abs(movement.x))
+            {
+                if (movement.y > 0)
+                    DoRotation(ERotateDirection.up);
+                else if (movement.y < 0)
+                    DoRotation(ERotateDirection.down);
+            }
+            else
+            {
+                if (movement.x > 0)
+                    DoRotation(ERotateDirection.right);
+                else if (movement.x < 0)
+                    DoRotation(ERotateDirection.left);
+            }
+        }
+        //reset when release input or analog
+        else if (movement.magnitude < player.deadZoneAnalogs)
+        {
+            pressedRotateCube = false;
+        }
     }
 
     #endregion
