@@ -236,6 +236,7 @@ GameObject:
   - component: {fileID: 4853819622673606673}
   - component: {fileID: 9216421955894392445}
   - component: {fileID: 2000574496729971357}
+  - component: {fileID: 2815163546250733350}
   m_Layer: 0
   m_Name: Base Cell
   m_TagString: Untagged
@@ -299,6 +300,22 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
+--- !u!114 &2815163546250733350
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317235374433741502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150faf478d520af43bce47cf4118679b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
+  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
+  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
 --- !u!1 &5792899572059305335
 GameObject:
   m_ObjectHideFlags: 0

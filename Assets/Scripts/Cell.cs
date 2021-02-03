@@ -4,13 +4,12 @@ using UnityEngine;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/World/Cell")]
+[RequireComponent(typeof(CellGraphics))]
 public class Cell : MonoBehaviour
 {
     [Header("Modifier")]
     [SerializeField] bool isInvincible = false;
     [SerializeField] bool onlyOneLife = false;
-    public ParticleSystem expCell;
-    private CameraShake cmShake;
 
     [Header("Important")]
     [SerializeField] GameObject toRemoveOnDead = default;
@@ -28,6 +27,7 @@ public class Cell : MonoBehaviour
 
     //used from turret to know when is rotating
     public System.Action<Coordinates> onWorldRotate;
+    public System.Action onDestroyCell;
 
     public BuildableObject turret { get; private set; }
 
@@ -39,7 +39,6 @@ public class Cell : MonoBehaviour
     {
         //if build at start, build turret 
         BuildAtStart();
-        cmShake = GameObject.Find("Player").GetComponent<CameraShake>();
     }
 
     void OnDestroy()
@@ -112,8 +111,8 @@ public class Cell : MonoBehaviour
 
         //remove biome
         ActiveRemoveOnDead(false);
-        expCell.Play();
-        cmShake.DoShake();
+
+        onDestroyCell?.Invoke();
     }
 
     void RecreateCell()

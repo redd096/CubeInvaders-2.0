@@ -28,6 +28,9 @@ public class WorldRotator
     List<Coordinates> cellsKeys = new List<Coordinates>();
     Coroutine rotatingWorld_Coroutine;
 
+    Pooling<ParticleSystem> poolRotationParticles = new Pooling<ParticleSystem>();
+    Pooling<AudioSource> poolRotationSound = new Pooling<AudioSource>();
+
     #endregion
 
     public WorldRotator(World world)

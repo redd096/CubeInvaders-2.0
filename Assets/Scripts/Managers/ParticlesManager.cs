@@ -8,6 +8,9 @@ public class ParticlesManager : Singleton<ParticlesManager>
     /// </summary>
     public void Play(Pooling<ParticleSystem> pool, ParticleSystem prefab, Vector3 position, Quaternion rotation)
     {
+        if (prefab == null)
+            return;
+
         ParticleSystem particles = pool.Instantiate(prefab, position, rotation);
         particles.Play();
     }

@@ -56,6 +56,9 @@
         /// </summary>
         public void Play(Pooling<AudioSource> pool, AudioClip clip, Vector3 position, float volume = 1)
         {
+            if (clip == null)
+                return;
+
             AudioSource audioSource = pool.Instantiate(audioPrefab, position, Quaternion.identity);
             Play(audioSource, clip, true, volume);
         }
