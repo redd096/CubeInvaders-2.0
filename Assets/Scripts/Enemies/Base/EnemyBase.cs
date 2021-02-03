@@ -1,15 +1,10 @@
 ﻿using UnityEngine;
-using redd096;
 
 public class EnemyBase : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] protected float health = 100;
     [SerializeField] protected float speed = 1;
-
-    [Header("VFX")]
-    [SerializeField] ParticleSystem explosionParticlePrefab = default;
-    [SerializeField] AudioClip explosionSound = default;
 
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
@@ -51,10 +46,6 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Die<T>(T hittedBy) where T : Component
     {
-        //vfx and sound
-        Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
-        SoundManager.StartMusic(explosionSound, transform.position);
-
         //destroy this enemy
         Destroy(gameObject);
     }

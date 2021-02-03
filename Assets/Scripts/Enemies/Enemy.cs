@@ -4,6 +4,7 @@ using UnityEngine;
 
 [SelectionBase]
 [AddComponentMenu("Cube Invaders/Enemy/Enemy")]
+[RequireComponent(typeof(EnemyGraphics))]
 public class Enemy : EnemyBase
 {
     struct SlowEffect

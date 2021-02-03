@@ -10,7 +10,6 @@ public class Cell : MonoBehaviour
     [SerializeField] bool isInvincible = false;
     [SerializeField] bool onlyOneLife = false;
     public ParticleSystem expCell;
-    private SoundLibrary soundLibrary;
     private CameraShake cmShake;
 
     [Header("Important")]
@@ -40,7 +39,6 @@ public class Cell : MonoBehaviour
     {
         //if build at start, build turret 
         BuildAtStart();
-        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
         cmShake = GameObject.Find("Player").GetComponent<CameraShake>();
     }
 

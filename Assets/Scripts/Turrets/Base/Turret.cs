@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq;
 
@@ -8,12 +7,7 @@ public class Turret : BuildableObject
     [Header("Turret Modifier")]
     [Tooltip("Number of generators necessary to activate (0 = no generator)")] [Min(0)] [SerializeField] int needGenerator = 1;
     [Tooltip("Timer to destroy if player doesn't move it (0 = no destroy)")] [Min(0)] [SerializeField] float timeBeforeDestroy = 5;
-    private SoundLibrary soundLibrary;
 
-    private void Start()
-    {
-        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
-    }
     public override void TryActivateTurret()
     {
         //if doesn't need generator or there are enough generators around, activate it
@@ -44,8 +38,6 @@ public class Turret : BuildableObject
     public override void BuildTurret(Cell cellOwner)
     {
         base.BuildTurret(cellOwner);
-        buildTurret.Play();
-        soundLibrary.TurretBuilding();
 
         //if destroy turret when no move and time greater than 0, init timer to destroy turret
         if (GameManager.instance.levelManager.levelConfig.DestroyTurretWhenNoMove && timeBeforeDestroy > 0)

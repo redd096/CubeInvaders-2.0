@@ -6,9 +6,9 @@ using Cinemachine;
 public class CameraShake : MonoBehaviour
 {
     [Header("Important")]
-    [SerializeField] float amplitudeGain;
-    [SerializeField] float frequemcyGain;
-    [SerializeField] float shakeDuration;
+    [SerializeField] float amplitudeGain = 1;
+    [SerializeField] float frequemcyGain = 1;
+    [SerializeField] float shakeDuration = 1;
 
     CinemachineFreeLook cmFreeCam;
     Coroutine shakeCoroutine;

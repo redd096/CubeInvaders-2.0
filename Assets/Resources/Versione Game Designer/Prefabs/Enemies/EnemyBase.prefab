@@ -159,8 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 55
   speed: 1
-  explosionParticlePrefab: {fileID: 6772490525415757152, guid: 273c45b2f4df92b468ef9d53af497436, type: 3}
-  explosionSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
   coordinatesToAttack:
     face: 0
     x: 0
@@ -179,6 +177,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
   blinkTime: 0.1
+  explosionParticlePrefab: {fileID: 6772490525415757152, guid: 273c45b2f4df92b468ef9d53af497436, type: 3}
+  explosionSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
 --- !u!1 &7541009292229085419
 GameObject:
   m_ObjectHideFlags: 0

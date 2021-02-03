@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using System.Collections.Generic;
 using System.Collections;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Turret Graphics/Buildable Graphics")]
 public class BuildableGraphics : MonoBehaviour
@@ -12,8 +13,15 @@ public class BuildableGraphics : MonoBehaviour
     [Header("Deactivate Turrets Effect")]
     [SerializeField] Color effectColor = Color.cyan;
 
+    [Header("VFX")]
+    [SerializeField] ParticleSystem buildVFX = default;
+    [SerializeField] AudioClip buildAudio = default;
+
     protected BuildableObject buildableObject;
     Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
+
+    Pooling<ParticleSystem> poolBuildVFX = new Pooling<ParticleSystem>();
+    Pooling<AudioSource> poolBuildAudio = new Pooling<AudioSource>();
 
     protected virtual void Awake()
     {
@@ -27,11 +35,13 @@ public class BuildableGraphics : MonoBehaviour
         }
 
         buildableObject.onDeactivateStart += OnDeactivateStart;
+        buildableObject.onBuildTurret += OnBuildTurret;
     }
 
     protected virtual void OnDestroy()
     {
         buildableObject.onDeactivateStart -= OnDeactivateStart;
+        buildableObject.onBuildTurret -= OnBuildTurret;
     }
 
     protected virtual void Update()
@@ -170,6 +180,17 @@ public class BuildableGraphics : MonoBehaviour
         {
             renderer.material.color = Color.Lerp(normalColors[renderer], effectColor, 0);
         }
+    }
+
+    #endregion
+
+    #region on build turret
+
+    void OnBuildTurret()
+    {
+        //vfx and sound
+        ParticlesManager.instance.Play(poolBuildVFX, buildVFX, transform.position, transform.rotation);
+        SoundManager.instance.Play(poolBuildAudio, buildAudio, transform.position);
     }
 
     #endregion

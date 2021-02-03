@@ -105,7 +105,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6956772612554929528}
   - component: {fileID: 4366938646604025171}
-  - component: {fileID: 5021739571032362431}
   - component: {fileID: 4610450171567284364}
   - component: {fileID: -2322329882968076001}
   m_Layer: 0
@@ -146,20 +145,6 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!114 &5021739571032362431
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8208654935513046718}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: a4d30862abc21c04c9fa3d5243a159d2, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
-  blinkTime: 0.1
 --- !u!114 &4610450171567284364
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -174,8 +159,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   health: 1000
   speed: 1
-  explosionParticlePrefab: {fileID: 6772490525415757152, guid: 273c45b2f4df92b468ef9d53af497436, type: 3}
-  explosionSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
   coordinatesToAttack:
     face: 0
     x: 0
@@ -196,6 +179,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6b7d060d01d10f24bbfa1d7b35b24764, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
+  blinkTime: 0.1
+  explosionParticlePrefab: {fileID: 6772490525415757152, guid: 273c45b2f4df92b468ef9d53af497436, type: 3}
+  explosionSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
   effectColor: {r: 0, g: 1, b: 1, a: 1}
 --- !u!1 &8976919603826603930
 GameObject:

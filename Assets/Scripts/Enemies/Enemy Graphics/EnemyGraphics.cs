@@ -1,13 +1,21 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
-[AddComponentMenu("Cube Invaders/Enemy Component/Blink On Hit")]
-public class BlinkOnHit : MonoBehaviour
+[AddComponentMenu("Cube Invaders/Enemy Graphics/Enemy Graphics")]
+public class EnemyGraphics : MonoBehaviour
 {
     [Header("Blink")]
     [SerializeField] Material blinkMaterial = default;
     [SerializeField] float blinkTime = 0.1f;
+
+    [Header("VFX")]
+    [SerializeField] ParticleSystem explosionParticlePrefab = default;
+    [SerializeField] AudioClip explosionSound = default;
+
+    Pooling<ParticleSystem> poolExplosionParticles = new Pooling<ParticleSystem>();
+    Pooling<AudioSource> poolExplosionSound = new Pooling<AudioSource>();
 
     Enemy enemy;
 
@@ -19,12 +27,15 @@ public class BlinkOnHit : MonoBehaviour
     {
         enemy = GetComponent<Enemy>();
         enemy.onGetDamage += OnGetDamage;
+        enemy.onEnemyDeath += OnEnemyDeath;
     }
 
     void OnDisable()
     {
-        if(enemy)
+        if (enemy)
+        {
             enemy.onGetDamage -= OnGetDamage;
+        }
     }
 
     void OnGetDamage()
@@ -53,5 +64,12 @@ public class BlinkOnHit : MonoBehaviour
         originalMat = null;
 
         blink_Coroutine = null;
+    }
+
+    void OnEnemyDeath(Enemy enemy)
+    {
+        //vfx and sound
+        ParticlesManager.instance.Play(poolExplosionParticles, explosionParticlePrefab, transform.position, transform.rotation);
+        SoundManager.instance.Play(poolExplosionSound, explosionSound, transform.position);
     }
 }
