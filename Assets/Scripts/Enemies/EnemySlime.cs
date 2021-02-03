@@ -13,19 +13,12 @@ public class EnemySlime : Enemy
 
     List<Coordinates> coordinatesAlreadyUsed = new List<Coordinates>();
     bool instantiatedSlimes;
-    private SoundLibrary soundLibrary;
-
-    private void Start()
-    {
-        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
-    }
 
     public override void Die<T>(T hittedBy)
     {
         //instantiate slimes (if hit by shot and not already istantiated slimes)
         if (enemiesPrefabs != null && hittedBy.GetType() == typeof(TurretShot) && instantiatedSlimes == false)
         {
-            soundLibrary.EnemySlime();
             instantiatedSlimes = true;
             InstantiateSlimes();
         }
