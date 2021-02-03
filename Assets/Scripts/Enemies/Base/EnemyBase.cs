@@ -1,27 +1,26 @@
 ﻿using UnityEngine;
-using System.Collections;
+using redd096;
 
 public class EnemyBase : MonoBehaviour
 {
     [Header("Important")]
     [SerializeField] protected float health = 100;
     [SerializeField] protected float speed = 1;
-    public ParticleSystem expParticle;
-    private SoundLibrary soundLibrary;
+
+    [Header("VFX")]
+    [SerializeField] ParticleSystem explosionParticlePrefab = default;
+    [SerializeField] AudioClip explosionSound = default;
 
     [Header("Debug")]
     public Coordinates coordinatesToAttack;
 
     Rigidbody rb;
-    MeshRenderer mR;
 
     public System.Action onGetDamage;
 
     protected virtual void Awake()
     {
         rb = GetComponent<Rigidbody>();
-        mR = GetComponentInChildren<MeshRenderer>();
-        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
     }
 
     protected virtual void FixedUpdate()
@@ -52,16 +51,11 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void Die<T>(T hittedBy) where T : Component
     {
-        //destroy this enemy
-        expParticle.Play();
-        soundLibrary.EnemyDestruction();
-        mR.enabled = false;
-        StartCoroutine("Dead");
-    }
+        //vfx and sound
+        Instantiate(explosionParticlePrefab, transform.position, Quaternion.identity);
+        SoundManager.StartMusic(explosionSound, transform.position);
 
-    IEnumerator Dead()
-    {
-        yield return new WaitForSeconds(0.3f);
+        //destroy this enemy
         Destroy(gameObject);
     }
 

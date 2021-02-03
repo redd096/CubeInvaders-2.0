@@ -5,37 +5,27 @@
     [AddComponentMenu("redd096/Singletons/Sound Manager")]
     public class SoundManager : Singleton<SoundManager>
     {
-        AudioSource backgroundAudioSource;
-
-        #region private API
-
-        void CreateAudioSource()
+        private AudioSource backgroundAudioSource;
+        AudioSource BackgroundAudioSource
         {
-            backgroundAudioSource = gameObject.AddComponent<AudioSource>();
+            get
+            {
+                //create audio source if null
+                if (backgroundAudioSource == null)
+                    backgroundAudioSource = gameObject.AddComponent<AudioSource>();
+
+                //return audio source
+                return backgroundAudioSource;
+            }
         }
-
-        AudioSource GetAudioSource()
-        {
-            //create audio source if null
-            if (backgroundAudioSource == null)
-                CreateAudioSource();
-
-            //return audio source
-            return backgroundAudioSource;
-        }
-
-        #endregion
 
         /// <summary>
         /// Start audio clip for background. Can set volume and loop
         /// </summary>
         public void StartBackgroundMusic(AudioClip clip, float volume = 1, bool loop = false)
         {
-            //be sure to have audio source
-            GetAudioSource();
-
             //start music from this audio source
-            StartMusic(backgroundAudioSource, clip, volume, loop);
+            StartMusic(BackgroundAudioSource, clip, volume, loop);
         }
 
         /// <summary>
@@ -56,6 +46,14 @@
 
                 audioSource.Play();
             }
+        }
+
+        /// <summary>
+        /// Start audio clip at point. Can set volume
+        /// </summary>
+        public static void StartMusic(AudioClip clip, Vector3 position, float volume = 1)
+        {
+            AudioSource.PlayClipAtPoint(clip, position, volume);
         }
     }
 }
