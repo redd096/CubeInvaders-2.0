@@ -44,7 +44,7 @@ public struct Coordinates
 
     public override string ToString()
     {
-        return "Face " + face + " (" + x + "," + y + ")";
+        return $"Face {face} ({x},{y})";
     }
 
     public static Coordinates operator +(Coordinates a, Vector2Int b) => new Coordinates(a.face, a.x + b.x, a.y + b.y);
