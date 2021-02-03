@@ -12,6 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19139017f4109e14186040c0cbdae8c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  buildTurret: {fileID: 9077197156876236203, guid: efcda9f521d4cac46a21671808dd3bf5, type: 3}
+  fireTurret: {fileID: 4622002354848804442, guid: a9b154c88b04f7f49b8d655cdf1da654, type: 3}
+  turretTransform: {fileID: 642836873012270172}
 --- !u!114 &5616667565515057088
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -26,8 +29,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 3559069404855120900, guid: 1d5463fa301cc5f45acc22b305eabf4d, type: 3}
   baseToRotate: {fileID: 6552240081938665160, guid: 1d5463fa301cc5f45acc22b305eabf4d, type: 3}
+  effectColor: {r: 0, g: 1, b: 1, a: 1}
   objectToFlick: {fileID: 2098956346654482757, guid: 1d5463fa301cc5f45acc22b305eabf4d, type: 3}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   flickColor:
     serializedVersion: 2
     key0: {r: 0, g: 1, b: 0.10895181, a: 1}
@@ -97,5 +100,10 @@ PrefabInstance:
 --- !u!1 &1667412704899167468 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 6352962091975492871}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &642836873012270172 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 5819092610900529499, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
   m_PrefabInstance: {fileID: 6352962091975492871}
   m_PrefabAsset: {fileID: 0}

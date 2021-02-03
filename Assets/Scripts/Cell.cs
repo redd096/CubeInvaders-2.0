@@ -9,6 +9,9 @@ public class Cell : MonoBehaviour
     [Header("Modifier")]
     [SerializeField] bool isInvincible = false;
     [SerializeField] bool onlyOneLife = false;
+    public ParticleSystem expCell;
+    private SoundLibrary soundLibrary;
+    private CameraShake cmShake;
 
     [Header("Important")]
     [SerializeField] GameObject toRemoveOnDead = default;
@@ -37,6 +40,8 @@ public class Cell : MonoBehaviour
     {
         //if build at start, build turret 
         BuildAtStart();
+        soundLibrary = GameObject.Find("AudioManager").GetComponent<SoundLibrary>();
+        cmShake = GameObject.Find("Player").GetComponent<CameraShake>();
     }
 
     void OnDestroy()
@@ -109,6 +114,8 @@ public class Cell : MonoBehaviour
 
         //remove biome
         ActiveRemoveOnDead(false);
+        expCell.Play();
+        cmShake.DoShake();
     }
 
     void RecreateCell()
