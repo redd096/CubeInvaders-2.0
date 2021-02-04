@@ -5,50 +5,43 @@
     [AddComponentMenu("redd096/Singletons/Sound Manager")]
     public class SoundManager : Singleton<SoundManager>
     {
-        AudioSource backgroundAudioSource;
+        [Header("Important")]
+        [SerializeField] AudioSource audioPrefab = default;
 
-        #region private API
-
-        void CreateAudioSource()
+        private AudioSource backgroundAudioSource;
+        AudioSource BackgroundAudioSource
         {
-            backgroundAudioSource = gameObject.AddComponent<AudioSource>();
+            get
+            {
+                //create audio source if null
+                if (backgroundAudioSource == null)
+                    backgroundAudioSource = gameObject.AddComponent<AudioSource>();
+
+                //return audio source
+                return backgroundAudioSource;
+            }
         }
-
-        AudioSource GetAudioSource()
-        {
-            //create audio source if null
-            if (backgroundAudioSource == null)
-                CreateAudioSource();
-
-            //return audio source
-            return backgroundAudioSource;
-        }
-
-        #endregion
 
         /// <summary>
         /// Start audio clip for background. Can set volume and loop
         /// </summary>
-        public void StartBackgroundMusic(AudioClip clip, float volume = 1, bool loop = false)
+        public void PlayBackgroundMusic(AudioClip clip, float volume = 1, bool loop = false)
         {
-            //be sure to have audio source
-            GetAudioSource();
-
             //start music from this audio source
-            StartMusic(backgroundAudioSource, clip, volume, loop);
+            Play(BackgroundAudioSource, clip, false, volume, loop);
         }
 
         /// <summary>
         /// Start audio clip. Can set volume and loop
         /// </summary>
-        public static void StartMusic(AudioSource audioSource, AudioClip clip, float volume = 1, bool loop = false)
+        public static void Play(AudioSource audioSource, AudioClip clip, bool forceReplay, float volume = 1, bool loop = false)
         {
             //be sure to have audio source
             if (audioSource == null)
                 return;
 
             //change only if different clip (so we can have same music in different scenes without stop)
-            if (audioSource.clip != clip)
+            if (forceReplay || audioSource.clip != clip)
             {
                 audioSource.clip = clip;
                 audioSource.volume = volume;
@@ -56,6 +49,18 @@
 
                 audioSource.Play();
             }
+        }
+
+        /// <summary>
+        /// Start audio clip at point. Can set volume
+        /// </summary>
+        public void Play(Pooling<AudioSource> pool, AudioClip clip, Vector3 position, float volume = 1)
+        {
+            if (clip == null)
+                return;
+
+            AudioSource audioSource = pool.Instantiate(audioPrefab, position, Quaternion.identity);
+            Play(audioSource, clip, true, volume);
         }
     }
 }

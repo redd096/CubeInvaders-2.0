@@ -1,5 +1,4 @@
 ﻿using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 using redd096;
 using System.Linq;
@@ -63,7 +62,6 @@ public class TurretShooter : Turret
             timeToShoot = Time.time + delayShoot;
 
             Attack();
-            fireTurret.Play();
         }
     }
 

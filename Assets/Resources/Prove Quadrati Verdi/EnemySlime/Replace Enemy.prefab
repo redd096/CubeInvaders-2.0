@@ -159,6 +159,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   blinkMaterial: {fileID: 2100000, guid: d521777c93e3daf49a93717513ac7c4c, type: 2}
   blinkTime: 0.1
+  explosionParticlePrefab: {fileID: 6772490525415757152, guid: 273c45b2f4df92b468ef9d53af497436, type: 3}
+  explosionSound: {fileID: 8300000, guid: 824c6c19a60d7f843a4062e2b31f0e9e, type: 3}
 --- !u!114 &451699539442052430
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -178,6 +180,7 @@ MonoBehaviour:
     x: 0
     y: 0
   firstSlimeSamePosition: 1
+  checkNoHitEnemies: 1
   enemiesPrefabs:
   - {fileID: 5897344682041585998, guid: 0d9926b6235141c49948e2a697de6906, type: 3}
 --- !u!1 &8976919603826603930

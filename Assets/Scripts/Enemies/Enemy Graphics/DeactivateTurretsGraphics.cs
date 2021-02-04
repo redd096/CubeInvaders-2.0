@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Enemy Graphics/Deactivate Turrets Graphics")]
-public class DeactivateTurretsGraphics : MonoBehaviour
+public class DeactivateTurretsGraphics : EnemyGraphics
 {
     [Header("Deactivate Turrets")]
     [SerializeField] Color effectColor = Color.cyan;

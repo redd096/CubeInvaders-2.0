@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 
 [AddComponentMenu("Cube Invaders/Enemy Graphics/More Turrets To Die Graphics")]
-public class MoreTurretsToDieGraphics : MonoBehaviour
+public class MoreTurretsToDieGraphics : EnemyGraphics
 {
     [Header("More Turrets To Die")]
     [SerializeField] LineRenderer linePrefab = default;

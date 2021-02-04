@@ -329,6 +329,7 @@ GameObject:
   - component: {fileID: 4853819622673606673}
   - component: {fileID: 9216421955894392445}
   - component: {fileID: 2057241321778686711}
+  - component: {fileID: 8707160549755384060}
   m_Layer: 0
   m_Name: Base Cell 1
   m_TagString: Untagged
@@ -348,7 +349,6 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 2286773131676814424}
-  - {fileID: 6681797473739979196}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -366,7 +366,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isInvincible: 0
   onlyOneLife: 0
-  expCell: {fileID: 6681797473739979199}
   toRemoveOnDead: {fileID: 480172397415699823}
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
@@ -394,70 +393,19 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 0
   m_CollisionDetection: 0
---- !u!1001 &2460041199372267773
-PrefabInstance:
+--- !u!114 &8707160549755384060
+MonoBehaviour:
   m_ObjectHideFlags: 0
-  serializedVersion: 2
-  m_Modification:
-    m_TransformParent: {fileID: 4853819622673606673}
-    m_Modifications:
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalPosition.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalPosition.y
-      value: 0.0000004768371
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalPosition.z
-      value: 0.5
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalRotation.x
-      value: -0.0000004768371
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalRotation.y
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalRotation.z
-      value: -0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalRotation.w
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_RootOrder
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.x
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.y
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_LocalEulerAnglesHint.z
-      value: 0
-      objectReference: {fileID: 0}
-    - target: {fileID: 9122411620624451908, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-      propertyPath: m_Name
-      value: Cell_Boom
-      objectReference: {fileID: 0}
-    m_RemovedComponents: []
-  m_SourcePrefab: {fileID: 100100000, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
---- !u!4 &6681797473739979196 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 9122411620624451905, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  m_PrefabInstance: {fileID: 2460041199372267773}
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
---- !u!198 &6681797473739979199 stripped
-ParticleSystem:
-  m_CorrespondingSourceObject: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  m_PrefabInstance: {fileID: 2460041199372267773}
-  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5317235374433741502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 150faf478d520af43bce47cf4118679b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
+  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
+  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}

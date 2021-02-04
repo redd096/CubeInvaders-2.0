@@ -1,17 +1,12 @@
 ﻿using UnityEngine;
-using System.Collections;
 
 public class BuildableObject : MonoBehaviour
 {
-    public ParticleSystem buildTurret;
-    public ParticleSystem fireTurret;
-
     public Cell CellOwner { get; private set; }
     public bool IsPreview { get; private set; } = true;     //is a preview turret
 
     bool isActive;                                          //is active (shot and spawn shield)
     public bool IsActive
-
     {
         get
         {
@@ -20,6 +15,8 @@ public class BuildableObject : MonoBehaviour
             return !IsPreview && isActive && Time.time > TimerObjectDeactivated;
         }
     }
+
+    public System.Action onBuildTurret;
 
     #region protected API
 
@@ -62,19 +59,21 @@ public class BuildableObject : MonoBehaviour
     public virtual void BuildTurret(Cell cellOwner)
     {
         IsPreview = false;
-       
+
         //get owner and set event
         this.CellOwner = cellOwner;
         cellOwner.onWorldRotate += OnWorldRotate;
 
         //try activate it
         TryActivateTurret();
+
+        onBuildTurret?.Invoke();
     }
 
     public virtual void RemoveTurret()
     {
         IsPreview = true;
-      
+
         //deactive and remove event
         gameObject.SetActive(false);
         CellOwner.onWorldRotate -= OnWorldRotate;
