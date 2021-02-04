@@ -7,6 +7,7 @@ public class WorldConfig : ScriptableObject
     [Tooltip("Size of every cell in meters")] public float CellsSize = 1;
     [Tooltip("Sun prefab (center of the world)")] public GameObject SunPrefab;
     [Tooltip("Time to rotate (animation)")] public float RotationTime = 0.2f;
+    [Tooltip("To set speed in animation. From 0 to 1 time and value, where value is rotation posizione in time")] public AnimationCurve RotationAnimationCurve = new AnimationCurve(new Keyframe[2] { new Keyframe(0, 0), new Keyframe(1, 1) });
 
     #region readonly vars
 

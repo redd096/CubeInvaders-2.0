@@ -78,6 +78,12 @@ public class WorldRandomRotator : WorldRotator
         return world.randomWorldConfig.RotationTime;
     }
 
+    protected override float GetAnimationCurveValue(float delta)
+    {
+        //use random rotation animation curve
+        return world.randomWorldConfig.RotationAnimationCurve.Evaluate(delta);
+    }
+
     protected override bool SkipAnimation(float delta)
     {
         //can't skip random rotation

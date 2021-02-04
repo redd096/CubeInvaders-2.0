@@ -132,6 +132,11 @@ public class WorldRotator
         return world.worldConfig.RotationTime;
     }
 
+    protected virtual float GetAnimationCurveValue(float delta)
+    {
+        return world.worldConfig.RotationAnimationCurve.Evaluate(delta);
+    }
+
     protected virtual bool SkipAnimation(float delta)
     {
         //if player pressed input to skip, if some time already passed, then skip animation
@@ -162,7 +167,7 @@ public class WorldRotator
         {
             delta += Time.deltaTime / GetRotationTime();
 
-            float rotated = Mathf.Lerp(0, rotationToReach, delta);
+            float rotated = Mathf.Lerp(0, rotationToReach, GetAnimationCurveValue(delta));
             RotatorParent.eulerAngles = rotateAxis * rotated;
 
             //skip animation

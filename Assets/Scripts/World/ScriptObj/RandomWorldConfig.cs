@@ -11,6 +11,8 @@ public class RandomWorldConfig : ScriptableObject
     public float TimeBeforeRandomize = 1;
     [Tooltip("Time for the animation")]
     public float RotationTime = 0.1f;
+    [Tooltip("To set speed in animation. From 0 to 1 time and value, where value is rotation posizione in time")] 
+    public AnimationCurve RotationAnimationCurve = new AnimationCurve(new Keyframe[2] { new Keyframe(0, 0), new Keyframe(1, 1) });
     [Tooltip("Time between every rotation")]
     public float TimeBetweenRotation = 0f;
 }
