@@ -21,7 +21,7 @@ public class EnemyBase : MonoBehaviour
     protected virtual void FixedUpdate()
     {
         //move to the cell
-        Vector3 direction = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack) - transform.position;
+        Vector3 direction = coordinatesToAttack.position - transform.position;
 
         rb.velocity = direction.normalized * speed;
     }
@@ -48,6 +48,13 @@ public class EnemyBase : MonoBehaviour
     {
         //destroy this enemy
         Destroy(gameObject);
+    }
+
+    public virtual void Init(Coordinates coordinatesToAttack)
+    {
+        //set coordinates to attack and enable
+        this.coordinatesToAttack = coordinatesToAttack;
+        gameObject.SetActive(true);
     }
 
     #endregion

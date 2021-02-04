@@ -146,7 +146,7 @@ public class WaveManager : MonoBehaviour
             yield return new WaitForSeconds(enemyStruct.TimeToAddBeforeSpawn);
 
             //randomize coordinates to attack
-            EFace face = GetRandomFace(facesQueue);
+            EFace face = WorldUtility.GetRandomFace(facesQueue, waveConfig.Waves[currentWave].IgnorePreviousFacesAtSpawn);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             int y = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
             Coordinates coordinatesToAttack = new Coordinates(face, x, y);
@@ -154,7 +154,7 @@ public class WaveManager : MonoBehaviour
             //get position and rotation
             Vector3 position;
             Quaternion rotation;
-            GetPositionAndRotation(coordinatesToAttack, out position, out rotation);
+            WorldUtility.GetPositionAndRotation(coordinatesToAttack, waveConfig.Waves[currentWave].DistanceFromWorld, out position, out rotation);
 
             //set enemy position and rotation, then activate
             enemyStruct.Enemy.transform.position = position;
@@ -167,50 +167,11 @@ public class WaveManager : MonoBehaviour
             }
 
             //set enemy destination and activate
-            enemyStruct.Enemy.coordinatesToAttack = coordinatesToAttack;
-            enemyStruct.Enemy.gameObject.SetActive(true);
+            enemyStruct.Enemy.Init(coordinatesToAttack);
 
             //wait for next enemy
             yield return new WaitForSeconds(wave.TimeBetweenSpawns);
         }
-    }
-
-    EFace GetRandomFace(Queue<EFace> facesQueue)
-    {
-        //check every possible face
-        List<EFace> faces = new List<EFace>();
-        for(int i = 0; i < System.Enum.GetNames(typeof(EFace)).Length; i++)
-        {
-            //if not inside facesQueue, add to list
-            EFace tryingFace = (EFace)i;
-            if(facesQueue.Contains(tryingFace) == false)
-            {
-                faces.Add(tryingFace);
-            }
-        }
-
-        //select random face in list
-        EFace selectedFace = faces[Random.Range(0, faces.Count)];
-
-        //add to queue (clamp at max)
-        facesQueue.Enqueue(selectedFace);
-        if (facesQueue.Count > waveConfig.Waves[currentWave].IgnorePreviousFacesAtSpawn)
-            facesQueue.Dequeue();
-
-        return selectedFace;
-    }
-
-    void GetPositionAndRotation(Coordinates coordinatesToAttack, out Vector3 position, out Quaternion rotation)
-    {
-        //coordinate position + distance from world
-        position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, waveConfig.Waves[currentWave].DistanceFromWorld);
-
-        //find direction to attack
-        Vector3 positionCellToAttack = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack);
-        Vector3 direction = (positionCellToAttack - position).normalized;
-
-        //look in direction
-        rotation = Quaternion.LookRotation(direction);
     }
 
     #endregion

@@ -28,6 +28,8 @@ public struct Coordinates
     public int x;
     public int y;
 
+    public Vector3 position => GameManager.instance.world.CoordinatesToPosition(this, 0);
+
     public Coordinates(EFace face, int x, int y)
     {
         this.face = face;
@@ -243,7 +245,7 @@ public class World : MonoBehaviour
     {
         //create and set position and rotation
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
-        cell.transform.position = CoordinatesToPosition(coordinates);
+        cell.transform.position = coordinates.position;
         cell.transform.eulerAngles = eulerRotation;
         cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
 
@@ -381,7 +383,7 @@ public class World : MonoBehaviour
     /// Returns the position in the world of the cell at these coordinates
     /// <param name="distanceFromWorld">distance from the cell position</param>
     /// </summary>
-    public Vector3 CoordinatesToPosition(Coordinates coordinates, float distanceFromWorld = 0)
+    public Vector3 CoordinatesToPosition(Coordinates coordinates, float distanceFromWorld)
     {
         //position is index * size (then one axis is -distanceFromWorld or FaceSize + distanceFromWorld)
         Vector3 v = Vector3.zero;

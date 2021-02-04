@@ -115,7 +115,7 @@ public class UIManager : MonoBehaviour
         selector.transform.localScale = new Vector3(size, size, size);
 
         //position of our cell
-        selector.transform.position = GameManager.instance.world.CoordinatesToPosition(coordinates);
+        selector.transform.position = coordinates.position;
 
         //active selector
         selector.SetActive(true);
@@ -132,7 +132,7 @@ public class UIManager : MonoBehaviour
         multipleSelector.transform.localScale = new Vector3(size, size, size);
 
         //position of our cell + move to select other cells
-        Vector3 position = GameManager.instance.world.CoordinatesToPosition(coordinates);
+        Vector3 position = coordinates.position;
         position += MoveSelector(true, coordinates);
         position += MoveSelector(false, coordinates);
 

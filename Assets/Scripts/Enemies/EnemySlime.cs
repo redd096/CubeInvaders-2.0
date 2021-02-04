@@ -37,6 +37,7 @@ public class EnemySlime : Enemy
             if(i <= 0 && firstSlimeSamePosition)
             {
                 slime.transform.position = transform.position;      //same position
+                slime.transform.rotation = transform.rotation;      //same rotation
                 slime.coordinatesToAttack = coordinatesToAttack;    //attacking same face
 
                 //add coordinates to list
@@ -48,9 +49,17 @@ public class EnemySlime : Enemy
                 Coordinates adjacentCoordinates = GetAdjacentCoordinates();
                 if (adjacentCoordinates != null)
                 {
-                    float distance = Vector3.Distance(transform.position, GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, 0));
-                    slime.transform.position = GameManager.instance.world.CoordinatesToPosition(adjacentCoordinates, distance);   //adjacent coordinates, but same distance
-                    slime.coordinatesToAttack = adjacentCoordinates;                                                              //attack this new coordinates
+                    //save distance
+                    float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
+
+                    //get new position and rotation
+                    Vector3 position;
+                    Quaternion rotation;
+                    WorldUtility.GetPositionAndRotation(adjacentCoordinates, distance, out position, out rotation);
+
+                    slime.transform.position = position;                //adjacent coordinates, but same distance
+                    slime.transform.rotation = rotation;                //new rotation looking at cube
+                    slime.coordinatesToAttack = adjacentCoordinates;    //attack this new coordinates
 
                     //add coordinates to list
                     coordinatesAlreadyUsed.Add(coordinatesToAttack);
@@ -85,7 +94,7 @@ public class EnemySlime : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            float distance = Vector3.Distance(transform.position, GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, 0));
+            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
             foreach (Cell cell in cellsAround.CreateCopy())
             {
                 Vector3 position = GameManager.instance.world.CoordinatesToPosition(cell.coordinates, distance);   //adjacent coordinates, but same distance

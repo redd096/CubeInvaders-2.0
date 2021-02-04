@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 
 public static class WorldUtility
 {
@@ -174,6 +175,51 @@ public static class WorldUtility
         }
 
         return startFace;
+    }
+
+    /// <summary>
+    /// Get random face, but ignoring previous in queue
+    /// </summary>
+    public static EFace GetRandomFace(Queue<EFace> facesQueue, int numberOfPreviousFacesToIgnore)
+    {
+        //check every possible face
+        List<EFace> faces = new List<EFace>();
+        for (int i = 0; i < System.Enum.GetNames(typeof(EFace)).Length; i++)
+        {
+            //if not inside facesQueue, add to list
+            EFace tryingFace = (EFace)i;
+            if (facesQueue.Contains(tryingFace) == false)
+            {
+                faces.Add(tryingFace);
+            }
+        }
+
+        //select random face in list
+        EFace selectedFace = faces[Random.Range(0, faces.Count)];
+
+        //add to queue
+        facesQueue.Enqueue(selectedFace);
+
+        //clamp list of faces to ignore
+        if (facesQueue.Count > numberOfPreviousFacesToIgnore)
+            facesQueue.Dequeue();
+
+        return selectedFace;
+    }
+
+    /// <summary>
+    /// Return position and rotation at new coordinates
+    /// </summary>
+    public static void GetPositionAndRotation(Coordinates coordinatesToAttack, float distance, out Vector3 position, out Quaternion rotation)
+    {
+        //coordinate position + distance from world
+        position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, distance);
+
+        //find direction to attack
+        Vector3 direction = (coordinatesToAttack.position - position).normalized;
+
+        //look in direction
+        rotation = Quaternion.LookRotation(direction);
     }
 
     #endregion

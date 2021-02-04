@@ -39,7 +39,7 @@ public class Enemy : EnemyBase
         base.FixedUpdate();
     }
 
-    void OnDestroy()
+    protected virtual void OnDestroy()
     {
         //be sure to remove event
         onEnemyDeath = null;
