@@ -17,6 +17,9 @@ public class CameraShake : MonoBehaviour
     {
         //get cinemachine
         cmFreeCam = FindObjectOfType<CinemachineFreeLook>();
+
+        //by default set noise to 0
+        Noise(0, 0);
     }
 
     public void DoShake()
