@@ -43,11 +43,11 @@ public class TurretShooterGraphics : TurretGraphics
         turretShooter.onShoot -= OnShoot;
     }
 
-    void OnShoot()
+    void OnShoot(Transform shotSpawn)
     {
         //vfx on shoot
-        ParticlesManager.instance.Play(poolFireVFX, fireVFX, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolFireAudio, fireAudio, transform.position);
+        ParticlesManager.instance.Play(poolFireVFX, fireVFX, shotSpawn.position, shotSpawn.rotation);
+        SoundManager.instance.Play(poolFireAudio, fireAudio, shotSpawn.position);
     }
 
     #endregion

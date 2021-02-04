@@ -2,6 +2,7 @@
 using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/Game Manager")]
+[DefaultExecutionOrder(-100)]
 public class GameManager : Singleton<GameManager>
 {
     public UIManager uiManager { get; private set; }

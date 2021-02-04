@@ -26,8 +26,10 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToRotate: {fileID: 3559069404855120900}
   baseToRotate: {fileID: 6552240081938665160}
+  effectColor: {r: 0, g: 1, b: 1, a: 1}
+  buildVFX: {fileID: 9077197156876236203, guid: efcda9f521d4cac46a21671808dd3bf5, type: 3}
+  buildAudio: {fileID: 8300000, guid: e34147ac2ccffc346bd1f64225e6f22c, type: 3}
   objectToFlick: {fileID: 2098956346654482757}
-  normalColor: {r: 1, g: 1, b: 1, a: 1}
   flickColor:
     serializedVersion: 2
     key0: {r: 1, g: 0.08614111, b: 0, a: 1}

@@ -1,12 +1,15 @@
 ﻿namespace redd096
 {
     using UnityEngine;
+    using System.Collections;
 
     [AddComponentMenu("redd096/Singletons/Sound Manager")]
+    [DefaultExecutionOrder(-2)]
     public class SoundManager : Singleton<SoundManager>
     {
-        [Header("Important")]
+        [Header("Instantiate sound at point")]
         [SerializeField] AudioSource audioPrefab = default;
+        [SerializeField] float timeBeforeDeactive = 2;
 
         private AudioSource backgroundAudioSource;
         AudioSource BackgroundAudioSource
@@ -22,14 +25,19 @@
             }
         }
 
-        /// <summary>
-        /// Start audio clip for background. Can set volume and loop
-        /// </summary>
-        public void PlayBackgroundMusic(AudioClip clip, float volume = 1, bool loop = false)
+        Transform soundsParent;
+        Transform SoundsParent
         {
-            //start music from this audio source
-            Play(BackgroundAudioSource, clip, false, volume, loop);
+            get
+            {
+                if (soundsParent == null)
+                    soundsParent = new GameObject("Sounds Parent").transform;
+
+                return soundsParent;
+            }
         }
+
+        #region static Play
 
         /// <summary>
         /// Start audio clip. Can set volume and loop
@@ -51,6 +59,17 @@
             }
         }
 
+        #endregion
+
+        /// <summary>
+        /// Start audio clip for background. Can set volume and loop
+        /// </summary>
+        public void PlayBackgroundMusic(AudioClip clip, float volume = 1, bool loop = false)
+        {
+            //start music from this audio source
+            Play(BackgroundAudioSource, clip, false, volume, loop);
+        }
+
         /// <summary>
         /// Start audio clip at point. Can set volume
         /// </summary>
@@ -59,8 +78,22 @@
             if (clip == null)
                 return;
 
+            //instantiate at position, set parent
             AudioSource audioSource = pool.Instantiate(audioPrefab, position, Quaternion.identity);
+            audioSource.transform.SetParent(SoundsParent);
+
+            //play and start coroutine to deactivate
             Play(audioSource, clip, true, volume);
+            StartCoroutine(DeactiveSoundAtPointCoroutine(audioSource));
+        }
+
+        IEnumerator DeactiveSoundAtPointCoroutine(AudioSource audioToDeactivate)
+        {
+            //wait
+            yield return new WaitForSeconds(timeBeforeDeactive);
+
+            //and deactive
+            audioToDeactivate.gameObject.SetActive(false);
         }
     }
 }

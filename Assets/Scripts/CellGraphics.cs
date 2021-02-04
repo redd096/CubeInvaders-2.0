@@ -46,5 +46,8 @@ public class CellGraphics : MonoBehaviour
     {
         ParticlesManager.instance.Play(poolExplosionCell, explosionCellPrefab, transform.position, transform.rotation);
         SoundManager.instance.Play(poolExplosionSound, explosionCellSound, transform.position);
+
+        //do camera shake
+        camShake.DoShake();
     }
 }

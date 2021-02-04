@@ -27,6 +27,8 @@ MonoBehaviour:
   objectToRotate: {fileID: 0}
   baseToRotate: {fileID: 0}
   effectColor: {r: 0, g: 1, b: 1, a: 1}
+  buildVFX: {fileID: 9077197156876236203, guid: efcda9f521d4cac46a21671808dd3bf5, type: 3}
+  buildAudio: {fileID: 8300000, guid: e34147ac2ccffc346bd1f64225e6f22c, type: 3}
 --- !u!1 &8103247755350811459
 GameObject:
   m_ObjectHideFlags: 0
