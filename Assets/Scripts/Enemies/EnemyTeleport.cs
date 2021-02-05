@@ -10,7 +10,7 @@ public class EnemyTeleport : Enemy
 {
     [Header("Teleport at percentage life")]
     [Tooltip("Check there are no enemies where teleport")] [SerializeField] bool checkNoHitEnemies = true;
-    [Tooltip("Ignore previous faces when teleport")] [SerializeField] int numberOfPreviousFacesToIgnore = 1;
+    [Tooltip("Ignore previous faces when teleport")] [Min(1)] [SerializeField] int numberOfPreviousFacesToIgnore = 1;
     [Tooltip("When reach one of this percentages of life, do teleport")] [SerializeField] [Range(0, 100)] int[] percentagesLife = default;
 
     public System.Action<Vector3, Quaternion, Vector3, Quaternion> onTeleport;
