@@ -42,26 +42,11 @@ public class EnemyTeleport : Enemy
     {
         base.GetDamage(damage, whoHit);
 
-        //get current percentage
-        int currentPercentage = Mathf.FloorToInt(health / maxHealth);
-
-        int percentageToCheck = 0;
-        foreach (int percentage in percentagesLife)
-        {
-            //check if our life is lower then percentage
-            if (currentPercentage <= percentage)
-            {
-                //get only greatest one (nearest to our current percentage)
-                if (percentage > percentageToCheck)
-                    percentageToCheck = percentage;
-            }
-        }
-
-        //if got again previous percentage, do not teleport again
-        if (percentageToCheck >= previousPercentage)
+        //check if teleport
+        if (CheckTeleport() == false)
             return;
 
-        //else, get new random face to teleport and save previous position
+        //get new random face to teleport and save previous position
         EFace randomFace = WorldUtility.GetRandomFace(facesQueue, numberOfPreviousFacesToIgnore);
 
         //find coordinates where teleport
@@ -91,6 +76,33 @@ public class EnemyTeleport : Enemy
         }
     }
 
+    bool CheckTeleport()
+    {
+        //get current percentage
+        int currentPercentage = Mathf.FloorToInt(health / maxHealth * 100);
+
+        int percentageToCheck = 0;
+        foreach (int percentage in percentagesLife)
+        {
+            //check if our life is lower then percentage
+            if (currentPercentage <= percentage)
+            {
+                //get only greatest one (nearest to our current percentage)
+                if (percentage > percentageToCheck)
+                    percentageToCheck = percentage;
+            }
+        }
+
+        //if got nothing, or again previous percentage, do not teleport again
+        if (percentageToCheck <= 0 || percentageToCheck >= previousPercentage)
+            return false;
+
+        //save previous
+        previousPercentage = percentageToCheck;
+
+        return true;
+    }
+
     Coordinates GetNewCoordinates(EFace newFace)
     {
         //get cells in new face
@@ -107,6 +119,7 @@ public class EnemyTeleport : Enemy
             float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
             foreach (Cell cell in possibleCells.CreateCopy())
             {
+                //check collision
                 Vector3 position = GameManager.instance.world.CoordinatesToPosition(cell.coordinates, distance);   //new coordinates, but same distance
                 if (Physics.OverlapBox(position, Vector3.one * 0.2f, Quaternion.identity, CreateLayer.LayerAllExcept(""), QueryTriggerInteraction.Collide).Length > 0)
                     possibleCells.Remove(cell);
