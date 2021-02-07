@@ -28,7 +28,7 @@ public struct Coordinates
     public int x;
     public int y;
 
-    public Vector3 position => GameManager.instance.world.CoordinatesToPosition(this, 0);
+    public Vector3 position => Object.FindObjectOfType<World>().CoordinatesToPosition(this, 0);
 
     public Coordinates(EFace face, int x, int y)
     {
