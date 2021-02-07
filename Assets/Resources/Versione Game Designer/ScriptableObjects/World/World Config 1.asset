@@ -16,3 +16,36 @@ MonoBehaviour:
   CellsSize: 1
   SunPrefab: {fileID: 6093936735711567481, guid: 0bb13c578b82d74409233cf59e231a65, type: 3}
   RotationTime: 0.2
+  RotationAnimationCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 0.4737286
+      outSlope: 0.4737286
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 0.72779727
+      value: 0.3447784
+      inSlope: 1.4404187
+      outSlope: 1.4404187
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0.33333334
+    - serializedVersion: 3
+      time: 1
+      value: 1
+      inSlope: 2.4071088
+      outSlope: 2.4071088
+      tangentMode: 34
+      weightedMode: 0
+      inWeight: 0.33333334
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
