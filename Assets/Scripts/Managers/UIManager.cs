@@ -12,7 +12,7 @@ public class UIManager : MonoBehaviour
     [Header("Resources")]
     [SerializeField] Text resourcesText = default;
     [SerializeField] string stringBeforeResources = "Resources: ";
-    [SerializeField] int decimalsResourcesText = 0;
+    [SerializeField] [Min(0)] int decimalsResourcesText = 0;
 
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
