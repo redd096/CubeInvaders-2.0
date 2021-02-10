@@ -9,6 +9,11 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject endMenu = default;
     [SerializeField] Text endText = default;
 
+    [Header("Resources")]
+    [SerializeField] Text resourcesText = default;
+    [SerializeField] string stringBeforeResources = "Resources: ";
+    [SerializeField] int decimalsResourcesText = 0;
+
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
     [SerializeField] Slider readySlider = default;
@@ -93,6 +98,19 @@ public class UIManager : MonoBehaviour
 
         //set text
         endText.text = text;
+    }
+
+    #endregion
+
+    #region resources
+
+    public void SetResourcesText(float resources)
+    {
+        //set resources text
+        if (resourcesText)
+        {
+            resourcesText.text = stringBeforeResources + resources.ToString($"F{decimalsResourcesText}");
+        }
     }
 
     #endregion

@@ -4,6 +4,7 @@
 public struct WaveStruct
 {
     public LevelConfig LevelConfig;
+    public float resourcesMax;
     public int IgnorePreviousFacesAtSpawn;
     public float TimeBetweenSpawns;
     public float DistanceFromWorld;

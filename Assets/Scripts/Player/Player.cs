@@ -20,6 +20,20 @@ public class Player : StateMachine
     public CinemachineFreeLook VirtualCam { get; private set; }
     public NewControls Controls { get; private set; }
 
+    float currentResources;
+    public float CurrentResources
+    {
+        get
+        {
+            return currentResources;
+        }
+        set
+        {
+            currentResources = value;
+            GameManager.instance.uiManager.SetResourcesText(currentResources);  //update UI
+        }
+    }
+
     //used to come back from pause
     State previousState;
 

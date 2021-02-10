@@ -17,6 +17,11 @@ public class Cell : MonoBehaviour
     [SerializeField] bool buildTurretAtStart = false;
     [SerializeField] bool canRemoveTurret = true;
 
+    [Header("Resources")]
+    [SerializeField] float resourcesToRecreateCell = 100;
+    [SerializeField] float resourcesToCreateTurret = 10;
+    [SerializeField] float resourcesOnSellTurret = 10;
+
     [Header("Cell Models")]
     [SerializeField] GameObject center = default;
     [SerializeField] GameObject side = default;
@@ -87,18 +92,13 @@ public class Cell : MonoBehaviour
         }
     }
 
-    void RemoveBuildOnCell(bool sell)
+    void RemoveBuildOnCell()
     {
         //do only if there is a turret and is not a preview
         if (turret && turret.IsPreview == false)
         {
             //remove it
             turret.RemoveTurret();
-
-            if (sell)
-            {
-                //get resources
-            }
         }
     }
 
@@ -107,7 +107,7 @@ public class Cell : MonoBehaviour
         IsAlive = false;
 
         //remove turret
-        RemoveBuildOnCell(false);
+        RemoveBuildOnCell();
 
         //remove biome
         ActiveRemoveOnDead(false);
@@ -236,32 +236,47 @@ public class Cell : MonoBehaviour
     /// <summary>
     /// Player interact with the cell
     /// </summary>
-    public void Interact()
+    public bool Interact()
     {
         //if dead, try recreate cell
         if(IsAlive == false)
         {
-            if (GameManager.instance.levelManager.levelConfig.CanRecreateCell)
+            if (GameManager.instance.levelManager.levelConfig.CanRecreateCell && GameManager.instance.player.CurrentResources >= resourcesToRecreateCell)
+            {
                 RecreateCell();
+                GameManager.instance.player.CurrentResources -= resourcesToRecreateCell;    //remove resources to recreate cell
+                return true;
+            }
 
-            return;
+            return false;
         }
 
         //else check if there is a turret to create
         if (turretToCreate == null)
-            return;
+            return false;
 
         //if there is already a turret, try remove it
         if (turret != null && turret.IsPreview == false)
         {
-            if(canRemoveTurret)
-                RemoveBuildOnCell(true);
+            if (canRemoveTurret)
+            {
+                RemoveBuildOnCell();
+                GameManager.instance.player.CurrentResources += resourcesOnSellTurret;      //give resources from sell turret
+                return true;
+            }
 
-            return;
+            return false;
         }
 
         //else build
-        BuildOnCell();
+        if (GameManager.instance.player.CurrentResources >= resourcesToCreateTurret)
+        {
+            BuildOnCell();
+            GameManager.instance.player.CurrentResources -= resourcesToCreateTurret;        //remove resources to create turret
+            return true;
+        }
+
+        return false;
     }
 
     /// <summary>

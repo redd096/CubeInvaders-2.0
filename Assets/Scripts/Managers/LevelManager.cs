@@ -107,5 +107,20 @@ public class LevelManager : MonoBehaviour
         onEndGame?.Invoke(win);
     }
 
+    public void UpdateLevel(LevelConfig levelConfig)
+    {
+        //update level config
+        this.levelConfig = levelConfig;
+
+        //reset turret
+        if (levelConfig.ResetTurrets)
+        {
+            foreach (Turret turret in FindObjectsOfType<Turret>())
+            {
+                turret.RemoveTurret();
+            }
+        }
+    }
+
     #endregion
 }

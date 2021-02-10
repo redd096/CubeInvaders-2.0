@@ -121,8 +121,9 @@ public class WaveManager : MonoBehaviour
         //current wave
         WaveStruct wave = waveConfig.Waves[this.currentWave];
 
-        //update level config (change level)
+        //update level config (change level) and update resources for player
         GameManager.instance.UpdateLevel(wave.LevelConfig);
+        GameManager.instance.player.CurrentResources = wave.resourcesMax;
 
         //foreach enemy in this wave, instantiate but deactivate
         foreach (EnemyStruct enemyStruct in wave.EnemiesStructs)

@@ -23,29 +23,10 @@ public class GameManager : Singleton<GameManager>
 
     #region public API
 
-    public void UpdateLevel(BiomesConfig biomesConfig)
-    { 
-        //update biomes config and regen world
-        if (instance.world.biomesConfig != biomesConfig)
-        {
-            instance.world.biomesConfig = biomesConfig;
-            instance.world.RegenWorld();
-        }
-    }
-
     public void UpdateLevel(LevelConfig levelConfig)
     {
         //update level config
-        instance.levelManager.levelConfig = levelConfig;
-
-        //reset turret
-        if (levelConfig.ResetTurrets)
-        {
-            foreach(Turret turret in FindObjectsOfType<Turret>())
-            {
-                turret.RemoveTurret();
-            }
-        }
+        instance.levelManager.UpdateLevel(levelConfig);
     }
 
     public void SetWave(int wave)
