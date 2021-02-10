@@ -5,15 +5,15 @@ using redd096;
 public class EnemySoulbindGraphics : MonoBehaviour
 {
     [Header("VFX")]
-    [SerializeField] ParticleSystem particlesFirstSoulbind = default;
-    [SerializeField] AudioClip soundFirstSoulbind = default;
-    [SerializeField] ParticleSystem particlesSecondSoulbind = default;
-    [SerializeField] AudioClip soundSecondSoulbind = default;
+    [SerializeField] ParticleSystem particlesSpawnFirstSoulbind = default;
+    [SerializeField] AudioClip soundSpawnFirstSoulbind = default;
+    [SerializeField] ParticleSystem particlesSpawnSecondSoulbind = default;
+    [SerializeField] AudioClip soundSpawnSecondSoulbind = default;
 
-    Pooling<ParticleSystem> poolParticlesFirstSoulbind = new Pooling<ParticleSystem>();
-    Pooling<AudioSource> poolSoundFirstSoulbind = new Pooling<AudioSource>();
-    Pooling<ParticleSystem> poolParticlesSecondSoulbind = new Pooling<ParticleSystem>();
-    Pooling<AudioSource> poolSoundSecondSoulbind = new Pooling<AudioSource>();
+    Pooling<ParticleSystem> poolParticlesSpawnFirstSoulbind = new Pooling<ParticleSystem>();
+    Pooling<AudioSource> poolSoundSpawnFirstSoulbind = new Pooling<AudioSource>();
+    Pooling<ParticleSystem> poolParticlesSpawnSecondSoulbind = new Pooling<ParticleSystem>();
+    Pooling<AudioSource> poolSoundSpawnSecondSoulbind = new Pooling<AudioSource>();
 
     EnemySoulbind enemy;
 
@@ -34,11 +34,11 @@ public class EnemySoulbindGraphics : MonoBehaviour
     void OnSpawnSoulbind(Vector3 firstPosition, Quaternion firstRotation, Vector3 secondPosition, Quaternion secondRotation)
     {
         //previous
-        ParticlesManager.instance.Play(poolParticlesFirstSoulbind, particlesFirstSoulbind, firstPosition, firstRotation);
-        SoundManager.instance.Play(poolSoundFirstSoulbind, soundFirstSoulbind, firstPosition);
+        ParticlesManager.instance.Play(poolParticlesSpawnFirstSoulbind, particlesSpawnFirstSoulbind, firstPosition, firstRotation);
+        SoundManager.instance.Play(poolSoundSpawnFirstSoulbind, soundSpawnFirstSoulbind, firstPosition);
 
         //new
-        ParticlesManager.instance.Play(poolParticlesSecondSoulbind, particlesSecondSoulbind, secondPosition, secondRotation);
-        SoundManager.instance.Play(poolSoundSecondSoulbind, soundSecondSoulbind, secondPosition);
+        ParticlesManager.instance.Play(poolParticlesSpawnSecondSoulbind, particlesSpawnSecondSoulbind, secondPosition, secondRotation);
+        SoundManager.instance.Play(poolSoundSpawnSecondSoulbind, soundSpawnSecondSoulbind, secondPosition);
     }
 }

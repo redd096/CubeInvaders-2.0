@@ -11,6 +11,8 @@ public class EnemySoulbind : Enemy
 {
     [Header("Soulbind")]
     [Tooltip("Share health, or different health but die together?")] [SerializeField] bool shareHealth = true;
+    [CanShow("shareHealth", NOT = true)]
+    [Tooltip("On death, kill also soulbind or keep alive?")] [SerializeField] bool killSoulbindOnDeath = true;
     [Tooltip("Use opposite face or adjacent face?")] [SerializeField] bool useOppositeFace = true;
     [Tooltip("Instantiate at same coordinates or random?")] [SerializeField] bool sameCell = false;
     [CanShow("sameCell", NOT = true)]
@@ -48,12 +50,14 @@ public class EnemySoulbind : Enemy
             GameManager.instance.world.GetPositionAndRotation(newCoordinates, distance, out position, out rotation);
 
             //instantiate soulbind
-            soulBind = Instantiate(this, position, rotation);
-            soulBind.coordinatesToAttack = newCoordinates;  //set new coordinates to attack
-            soulBind.soulBind = this;                       //set this one as its soulbind
-            soulBind.shareHealth = shareHealth;             //set other soulbind if health is shared
+            soulBind = GameManager.instance.waveManager.InstantiateNewEnemy(this, 0) as EnemySoulbind;
+            soulBind.transform.position = position;             //set position
+            soulBind.transform.rotation = rotation;             //set rotation
+            soulBind.coordinatesToAttack = newCoordinates;      //set new coordinates to attack
+            soulBind.soulBind = this;                           //set this one as its soulbind
 
-            //call event
+            //active soulbind and call event
+            soulBind.gameObject.SetActive(true);
             onSpawnSoulbind?.Invoke(transform.position, transform.rotation, position, rotation);
 
         }
@@ -75,12 +79,12 @@ public class EnemySoulbind : Enemy
     public override void GetDamage(float damage, TurretShot whoHit)
     {
         //if aiming at this one and its soulbind, get damage
-        if (turretsAiming.Length > 0 && soulBind.turretsAiming.Length > 0)
+        if (turretsAiming.Length > 0 && (soulBind == null || soulBind.turretsAiming.Length > 0))
         {
             base.GetDamage(damage, whoHit);
 
             //if share health, damage also soulbind (only if damageSoulBind is true)
-            if(shareHealth && damageSoulBind)
+            if(soulBind && shareHealth && damageSoulBind)
             {
                 soulBind.damageSoulBind = false;
                 soulBind.GetDamage(damage, whoHit);
@@ -93,12 +97,16 @@ public class EnemySoulbind : Enemy
     {
         base.Die(hittedBy);
 
-        //if health is not shared, kill also soulbind - if shared, is already dead (only if damageSoulBind is true)
-        if (shareHealth == false && damageSoulBind)
+        //if kill also soulbind (only if damageSoulBind is true)
+        if (soulBind && killSoulbindOnDeath && damageSoulBind)
         {
-            soulBind.damageSoulBind = false;
-            soulBind.Die(hittedBy);
-            soulBind.damageSoulBind = true;
+            //be sure shareHealth is false, otherwise is already killed by get damage
+            if (shareHealth == false)
+            {
+                soulBind.damageSoulBind = false;
+                soulBind.Die(hittedBy);
+                soulBind.damageSoulBind = true;
+            }
         }
     }
 

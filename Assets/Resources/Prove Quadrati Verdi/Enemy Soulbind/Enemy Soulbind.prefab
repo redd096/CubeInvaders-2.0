@@ -19,10 +19,10 @@ MonoBehaviour:
     x: 0
     y: 0
   shareHealth: 1
+  killSoulbindOnDeath: 1
   useOppositeFace: 1
   sameCell: 1
   checkNoHitEnemies: 1
-  isFirst: 1
 --- !u!114 &5108049396857094920
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35,10 +35,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 55a17d58ab74b1944ac3660c92802cd1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  particlesFirstSoulbind: {fileID: 0}
-  soundFirstSoulbind: {fileID: 0}
-  particlesSecondSoulbind: {fileID: 0}
-  soundSecondSoulbind: {fileID: 0}
+  particlesSpawnFirstSoulbind: {fileID: 0}
+  soundSpawnFirstSoulbind: {fileID: 0}
+  particlesSpawnSecondSoulbind: {fileID: 0}
+  soundSpawnSecondSoulbind: {fileID: 0}
 --- !u!1001 &5815022865668079179
 PrefabInstance:
   m_ObjectHideFlags: 0
