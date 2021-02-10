@@ -29,7 +29,8 @@ public class EnemyDeactivateTurrets : Enemy
             StopCoroutine(deactivateCoroutine);
 
         //start coroutine
-        deactivateCoroutine = StartCoroutine(DeactivateCoroutine());
+        if(gameObject.activeInHierarchy)
+            deactivateCoroutine = StartCoroutine(DeactivateCoroutine());
     }
 
     IEnumerator DeactivateCoroutine()

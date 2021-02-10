@@ -25,7 +25,7 @@ public class DestroyTurretsOnSameFace
         StopTimer();
 
         //start timer
-        if (turret)
+        if (turret && turret.gameObject.activeInHierarchy)
         {
             timerBeforeDestroy_coroutine = turret.StartCoroutine(TimerBeforeDestroy_Coroutine());
         }

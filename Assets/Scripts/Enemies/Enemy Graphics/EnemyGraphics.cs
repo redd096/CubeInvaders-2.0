@@ -41,7 +41,7 @@ public class EnemyGraphics : MonoBehaviour
     void OnGetDamage()
     {
         //blink on get damage
-        if (blink_Coroutine == null)
+        if (blink_Coroutine == null && gameObject.activeInHierarchy)
             blink_Coroutine = StartCoroutine(Blink_Coroutine());
     }
 

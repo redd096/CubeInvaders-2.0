@@ -66,7 +66,8 @@ public class Enemy : EnemyBase
         effectsOnEnemy.Add(slowEffect);
 
         //remove effect timer
-        StartCoroutine(RemoveEffectTimer(new SlowEffect(slowPercentage), slowDuration));
+        if(gameObject.activeInHierarchy)
+            StartCoroutine(RemoveEffectTimer(new SlowEffect(slowPercentage), slowDuration));
     }
 
     IEnumerator RemoveEffectTimer(SlowEffect slowEffect, float slowDuration)

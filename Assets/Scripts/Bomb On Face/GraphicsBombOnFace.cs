@@ -49,7 +49,8 @@ public class GraphicsBombOnFace : MonoBehaviour
         if (changeColorOverTime != null)
             StopCoroutine(changeColorOverTime);
 
-        changeColorOverTime = StartCoroutine(ChangeColorOverTime());
+        if(gameObject.activeInHierarchy)
+            changeColorOverTime = StartCoroutine(ChangeColorOverTime());
     }
 
     #endregion

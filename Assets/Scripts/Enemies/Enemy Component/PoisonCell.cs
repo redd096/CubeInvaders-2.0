@@ -19,7 +19,7 @@ public class PoisonCell : MonoBehaviour
     void Start()
     {
         //start poison timer
-        if (poison_Coroutine == null)
+        if (poison_Coroutine == null && gameObject.activeInHierarchy)
             poison_Coroutine = StartCoroutine(Poison_Coroutine());
     }
 

@@ -63,7 +63,8 @@ public class WaveManager : MonoBehaviour
         if (wave_coroutine != null)
             StopCoroutine(wave_coroutine);
 
-        wave_coroutine = StartCoroutine(Wave_Coroutine());
+        if(gameObject.activeInHierarchy)
+            wave_coroutine = StartCoroutine(Wave_Coroutine());
     }
 
     void OnEndAssaultPhase()

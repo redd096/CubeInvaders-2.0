@@ -84,7 +84,8 @@ public class BombOnFace : MonoBehaviour
         //start timer
         if (timer_Coroutine == null && canStartTimer)
         {
-            timer_Coroutine = StartCoroutine(Timer_Coroutine());
+            if(gameObject.activeInHierarchy)
+                timer_Coroutine = StartCoroutine(Timer_Coroutine());
         }
         //else if is exploded, do explosion
         else if(isExploded)

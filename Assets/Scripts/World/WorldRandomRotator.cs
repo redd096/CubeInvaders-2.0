@@ -20,7 +20,8 @@ public class WorldRandomRotator : WorldRotator
         if (randomizeWorld_Coroutine != null)
             world.StopCoroutine(randomizeWorld_Coroutine);
 
-        randomizeWorld_Coroutine = world.StartCoroutine(RandomizeWorld());
+        if(world.gameObject.activeInHierarchy)
+            randomizeWorld_Coroutine = world.StartCoroutine(RandomizeWorld());
     }
 
     IEnumerator RandomizeWorld()

@@ -155,7 +155,8 @@ public class BuildableGraphics : MonoBehaviour
             StopCoroutine(deactivateEffectCoroutine);
 
         //start coroutine
-        deactivateEffectCoroutine = StartCoroutine(DeactivateEffectCoroutine(durationEffect));
+        if(gameObject.activeInHierarchy)
+            deactivateEffectCoroutine = StartCoroutine(DeactivateEffectCoroutine(durationEffect));
     }
 
     IEnumerator DeactivateEffectCoroutine(float durationEffect)

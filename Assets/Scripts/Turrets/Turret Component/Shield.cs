@@ -109,7 +109,8 @@ public class Shield : MonoBehaviour
         Vector3 finalScale = new Vector3(faceSize, faceSize, cellSize);
 
         //start spawn
-        spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, true));
+        if(gameObject.activeInHierarchy)
+            spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, true));
     }
 
     public void DeactivateShield()
@@ -121,7 +122,8 @@ public class Shield : MonoBehaviour
         Vector3 finalScale = Vector3.zero;
 
         //start despawn
-        spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, false));
+        if(gameObject.activeInHierarchy)
+            spawnShield_Coroutine = StartCoroutine(SpawnShield_Coroutine(finalScale, false));
     }
 
     #endregion

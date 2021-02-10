@@ -207,7 +207,8 @@ public class WorldRotator
         }
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.up, !toRight));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.up, !toRight));
 
         //update dictionary
         UpdateDictionaryLateralRow(toRight);
@@ -282,7 +283,8 @@ public class WorldRotator
             toRight = !toRight;
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, !toRight));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, !toRight));
 
         //update dictionary
         UpdateDictionaryUpDownRow(toRight);
@@ -406,7 +408,8 @@ public class WorldRotator
             toUp = !toUp;
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.right, toUp));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.right, toUp));
 
         //update dictionary
         UpdateDictionaryFrontColumn(toUp);
@@ -508,7 +511,8 @@ public class WorldRotator
             toUp = !toUp;
 
         //rotate animation
-        rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, toUp));
+        if(world.gameObject.activeInHierarchy)
+            rotatingWorld_Coroutine = world.StartCoroutine(AnimationRotate(Vector3.forward, toUp));
 
         //update dictionary
         UpdateDictionaryRightLeftColumn(toUp);

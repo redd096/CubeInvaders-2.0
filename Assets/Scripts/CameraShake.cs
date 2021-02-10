@@ -28,7 +28,8 @@ public class CameraShake : MonoBehaviour
         if (shakeCoroutine != null)
             StopCoroutine(shakeCoroutine);
 
-        shakeCoroutine = StartCoroutine(ShakeCoroutine());
+        if(gameObject.activeInHierarchy)
+            shakeCoroutine = StartCoroutine(ShakeCoroutine());
     }
 
     public IEnumerator ShakeCoroutine()
