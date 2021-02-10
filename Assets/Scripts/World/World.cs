@@ -28,7 +28,7 @@ public struct Coordinates
     public int x;
     public int y;
 
-    public Vector3 position => Object.FindObjectOfType<World>().CoordinatesToPosition(this, 0);
+    public Vector3 position => GameManager.instance.world.CoordinatesToPosition(this, 0);
 
     public Coordinates(EFace face, int x, int y)
     {
@@ -245,7 +245,7 @@ public class World : MonoBehaviour
     {
         //create and set position and rotation
         Cell cell = InstantiateCellBasedOnFace(coordinates.face);
-        cell.transform.position = coordinates.position;
+        cell.transform.position = CoordinatesToPosition(coordinates, 0);
         cell.transform.eulerAngles = eulerRotation;
         cell.transform.Rotate(RotateAngleOrSide(coordinates), Space.Self);
 
@@ -432,6 +432,9 @@ public class World : MonoBehaviour
         return cubeStartPosition + v + worldConfig.PivotBasedOnFace(coordinates.face);
     }
 
+    /// <summary>
+    /// Get cells around (up, down, left, right) these coordinates
+    /// </summary>
     public List<Cell> GetCellsAround(Coordinates coordinates)
     {
         List<Cell> cellsAround = new List<Cell>();
@@ -453,6 +456,37 @@ public class World : MonoBehaviour
         }
 
         return cellsAround;
+    }
+
+    /// <summary>
+    /// Get every cell in this face
+    /// </summary>
+    public List<Cell> GetEveryCellInFace(EFace face)
+    {
+        //get cells in new face
+        List<Cell> possibleCells = new List<Cell>();
+        foreach (Coordinates coordinates in Cells.Keys)
+        {
+            if (coordinates.face == face)
+                possibleCells.Add(GameManager.instance.world.Cells[coordinates]);
+        }
+
+        return possibleCells;
+    }
+
+    /// <summary>
+    /// Return position and rotation at new coordinates
+    /// </summary>
+    public void GetPositionAndRotation(Coordinates coordinatesToAttack, float distance, out Vector3 position, out Quaternion rotation)
+    {
+        //coordinate position + distance from world
+        position = CoordinatesToPosition(coordinatesToAttack, distance);
+
+        //find direction to attack
+        Vector3 direction = (coordinatesToAttack.position - position).normalized;
+
+        //look in direction
+        rotation = Quaternion.LookRotation(direction);
     }
 
     #endregion

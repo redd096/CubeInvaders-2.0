@@ -55,7 +55,7 @@ public class EnemySlime : Enemy
                     //get new position and rotation
                     Vector3 position;
                     Quaternion rotation;
-                    WorldUtility.GetPositionAndRotation(adjacentCoordinates, distance, out position, out rotation);
+                    GameManager.instance.world.GetPositionAndRotation(adjacentCoordinates, distance, out position, out rotation);
 
                     slime.transform.position = position;                //adjacent coordinates, but same distance
                     slime.transform.rotation = rotation;                //new rotation looking at cube
@@ -94,13 +94,7 @@ public class EnemySlime : Enemy
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
-            foreach (Cell cell in cellsAround.CreateCopy())
-            {
-                Vector3 position = GameManager.instance.world.CoordinatesToPosition(cell.coordinates, distance);   //adjacent coordinates, but same distance
-                if (Physics.OverlapBox(position, Vector3.one * 0.2f, Quaternion.identity, CreateLayer.LayerAllExcept(""), QueryTriggerInteraction.Collide).Length > 0)
-                    cellsAround.Remove(cell);
-            }
+            WorldUtility.CheckOverlap(transform.position, coordinatesToAttack.position, cellsAround);
         }
 
         //return random

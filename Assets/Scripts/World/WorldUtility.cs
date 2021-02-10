@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using UnityEngine;
+using redd096;
 
 public static class WorldUtility
 {
@@ -29,6 +30,9 @@ public static class WorldUtility
         return index;
     }
 
+    /// <summary>
+    /// Select new cell
+    /// </summary>
     public static Coordinates SelectCell(EFace startFace, int x, int y, EFace lookingFace, ERotateDirection rotateDirection)
     {
         Coordinates selectedCell = new Coordinates(startFace, x, y);
@@ -208,18 +212,48 @@ public static class WorldUtility
     }
 
     /// <summary>
-    /// Return position and rotation at new coordinates
+    /// Get opposite face
     /// </summary>
-    public static void GetPositionAndRotation(Coordinates coordinatesToAttack, float distance, out Vector3 position, out Quaternion rotation)
+    public static EFace GetOppositeFace(EFace currentFace)
     {
-        //coordinate position + distance from world
-        position = GameManager.instance.world.CoordinatesToPosition(coordinatesToAttack, distance);
+        switch (currentFace)
+        {
+            case EFace.front:
+                return EFace.back;
+            case EFace.right:
+                return EFace.left;
+            case EFace.back:
+                return EFace.front;
+            case EFace.left:
+                return EFace.right;
+            case EFace.up:
+                return EFace.down;
+            case EFace.down:
+                return EFace.up;
+            default:
+                return EFace.front;
+        }
+    }
 
-        //find direction to attack
-        Vector3 direction = (coordinatesToAttack.position - position).normalized;
+    /// <summary>
+    /// In possible cells, remove everyone where overlap
+    /// </summary>
+    /// <param name="position">current position, used to calculate distance</param>
+    /// <param name="coordinatesToAttackPosition">coordinates to attack, used to calculate distance</param>
+    /// <param name="possibleCells">possible cells to teleport</param>
+    public static void CheckOverlap(Vector3 position, Vector3 coordinatesToAttackPosition, List<Cell> possibleCells)
+    {
+        //get distance
+        float distance = Vector3.Distance(position, coordinatesToAttackPosition);
 
-        //look in direction
-        rotation = Quaternion.LookRotation(direction);
+        //foreach possible cell
+        foreach (Cell cell in possibleCells.CreateCopy())
+        {
+            //if overlap in new position, remove from list
+            Vector3 newPosition = GameManager.instance.world.CoordinatesToPosition(cell.coordinates, distance);   //adjacent coordinates, but same distance
+            if (Physics.OverlapBox(newPosition, Vector3.one * 0.2f, Quaternion.identity, CreateLayer.LayerAllExcept(""), QueryTriggerInteraction.Collide).Length > 0)
+                possibleCells.Remove(cell);
+        }
     }
 
     #endregion
@@ -266,6 +300,9 @@ public static class WorldUtility
 
     #region rotate vector based on face
 
+    /// <summary>
+    /// Rotate vector based on face
+    /// </summary>
     public static Vector3 RotateTowardsFace(Vector3 current, EFace face)
     {
         switch (face)

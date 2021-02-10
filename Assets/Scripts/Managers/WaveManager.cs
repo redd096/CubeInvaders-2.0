@@ -154,7 +154,7 @@ public class WaveManager : MonoBehaviour
             //get position and rotation
             Vector3 position;
             Quaternion rotation;
-            WorldUtility.GetPositionAndRotation(coordinatesToAttack, waveConfig.Waves[currentWave].DistanceFromWorld, out position, out rotation);
+            GameManager.instance.world.GetPositionAndRotation(coordinatesToAttack, waveConfig.Waves[currentWave].DistanceFromWorld, out position, out rotation);
 
             //set enemy position and rotation, then activate
             enemyStruct.Enemy.transform.position = position;

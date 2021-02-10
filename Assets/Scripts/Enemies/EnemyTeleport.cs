@@ -59,7 +59,7 @@ public class EnemyTeleport : Enemy
             //get new position and rotation
             Vector3 position;
             Quaternion rotation;
-            WorldUtility.GetPositionAndRotation(newCoordinates, distance, out position, out rotation);
+            GameManager.instance.world.GetPositionAndRotation(newCoordinates, distance, out position, out rotation);
 
             //call event
             onTeleport?.Invoke(transform.position, transform.rotation, position, rotation);
@@ -106,24 +106,12 @@ public class EnemyTeleport : Enemy
     Coordinates GetNewCoordinates(EFace newFace)
     {
         //get cells in new face
-        List<Cell> possibleCells = new List<Cell>();
-        foreach(Coordinates coordinates in GameManager.instance.world.Cells.Keys)
-        {
-            if (coordinates.face == newFace)
-                possibleCells.Add(GameManager.instance.world.Cells[coordinates]);
-        }
+        List<Cell> possibleCells = GameManager.instance.world.GetEveryCellInFace(newFace);
 
         //removes coordinates where there are already enemies
         if (checkNoHitEnemies)
         {
-            float distance = Vector3.Distance(transform.position, coordinatesToAttack.position);
-            foreach (Cell cell in possibleCells.CreateCopy())
-            {
-                //check collision
-                Vector3 position = GameManager.instance.world.CoordinatesToPosition(cell.coordinates, distance);   //new coordinates, but same distance
-                if (Physics.OverlapBox(position, Vector3.one * 0.2f, Quaternion.identity, CreateLayer.LayerAllExcept(""), QueryTriggerInteraction.Collide).Length > 0)
-                    possibleCells.Remove(cell);
-            }
+            WorldUtility.CheckOverlap(transform.position, coordinatesToAttack.position, possibleCells);
         }
 
         //return random
