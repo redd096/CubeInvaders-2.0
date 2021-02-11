@@ -196,6 +196,10 @@ PrefabInstance:
       propertyPath: toRemoveOnDead
       value: 
       objectReference: {fileID: 4667952346457895268}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: onlyOneLife
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!4 &374419546074516506 stripped

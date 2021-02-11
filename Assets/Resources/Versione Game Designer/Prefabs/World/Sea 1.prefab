@@ -262,6 +262,22 @@ PrefabInstance:
       propertyPath: toRemoveOnDead
       value: 
       objectReference: {fileID: 5154872716364680707}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: onlyOneLife
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: buildTurretAtStart
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: canRemoveTurret
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: resourcesToCreateTurret
+      value: 2
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!4 &179044568877757309 stripped

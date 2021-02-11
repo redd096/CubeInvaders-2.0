@@ -385,6 +385,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 85335433}
   side: {fileID: 1880619818}
   angle: {fileID: 1767006818}
@@ -478,6 +481,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1392547943}
   side: {fileID: 1368356341}
   angle: {fileID: 249086986}
@@ -745,6 +751,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 578584721}
   side: {fileID: 553719773}
   angle: {fileID: 1780403145}
@@ -1095,6 +1104,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 2002476679}
   side: {fileID: 1795356579}
   angle: {fileID: 336029027}
@@ -1397,11 +1409,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 1456867266}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 327551873}
   side: {fileID: 568403760}
   angle: {fileID: 2104923550}
@@ -1523,11 +1538,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 350511350}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 543520778}
   side: {fileID: 24590550}
   angle: {fileID: 1369077598}
@@ -3668,6 +3686,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1775639115}
   side: {fileID: 327262082}
   angle: {fileID: 1500243552}
@@ -4843,6 +4864,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 2036321515}
   side: {fileID: 1831834587}
   angle: {fileID: 83739835}
@@ -5291,6 +5315,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 272629991}
   side: {fileID: 1699717631}
   angle: {fileID: 996439027}
@@ -5769,11 +5796,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 908399452}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 1717133986}
   side: {fileID: 1753965910}
   angle: {fileID: 1155986833}
@@ -5867,6 +5897,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 510377402}
   side: {fileID: 2109799546}
   angle: {fileID: 1582246797}
@@ -7211,6 +7244,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1963150938}
   side: {fileID: 1940889562}
   angle: {fileID: 758927006}
@@ -7304,6 +7340,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 795952555}
   side: {fileID: 92466365}
   angle: {fileID: 1247150400}
@@ -7764,11 +7803,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 692638187}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 2020824999}
   side: {fileID: 803541267}
   angle: {fileID: 390429487}
@@ -7941,6 +7983,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 967002375}
   side: {fileID: 485088303}
   angle: {fileID: 1590261685}
@@ -8147,6 +8192,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1999209177}
   side: {fileID: 1211647900}
   angle: {fileID: 1404737120}
@@ -8335,6 +8383,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1369526259}
   side: {fileID: 1303893818}
   angle: {fileID: 802453626}
@@ -8590,6 +8641,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 375724039}
   side: {fileID: 1133619995}
   angle: {fileID: 1455732775}
@@ -10443,6 +10497,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 920663532}
   side: {fileID: 1436307782}
   angle: {fileID: 862914564}
@@ -10743,6 +10800,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1828009829}
   side: {fileID: 330805669}
   angle: {fileID: 1475126232}
@@ -11175,6 +11235,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 589904924}
   side: {fileID: 458727395}
   angle: {fileID: 441919892}
@@ -12041,11 +12104,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 1111809324}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 1751671471}
   side: {fileID: 2007421712}
   angle: {fileID: 931785407}
@@ -12424,6 +12490,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 2079231463}
   side: {fileID: 1580613093}
   angle: {fileID: 76577213}
@@ -13980,6 +14049,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 118577149}
   side: {fileID: 568637809}
   angle: {fileID: 314666689}
@@ -14486,6 +14558,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 2032301440}
   side: {fileID: 1116133075}
   angle: {fileID: 1379143825}
@@ -18802,6 +18877,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 2039785460}
   side: {fileID: 1472248718}
   angle: {fileID: 862241649}
@@ -19185,6 +19263,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 388297673}
   side: {fileID: 1730184664}
   angle: {fileID: 407711893}
@@ -19278,6 +19359,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1955099552}
   side: {fileID: 1038783774}
   angle: {fileID: 1537223952}
@@ -19865,6 +19949,9 @@ MonoBehaviour:
   pauseMenu: {fileID: 1992101929}
   endMenu: {fileID: 1634961975}
   endText: {fileID: 1069114282}
+  resourcesText: {fileID: 1382359977}
+  stringBeforeResources: 'Resources: '
+  decimalsResourcesText: 0
   strategicCanvas: {fileID: 1036839158}
   readySlider: {fileID: 505126436}
 --- !u!4 &818957898
@@ -19993,11 +20080,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 215193541}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 1633299414}
   side: {fileID: 1150659707}
   angle: {fileID: 481540264}
@@ -20393,6 +20483,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 964394240}
   side: {fileID: 1712689924}
   angle: {fileID: 605996857}
@@ -21000,6 +21093,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1977323110}
   side: {fileID: 1246843487}
   angle: {fileID: 1954543557}
@@ -21505,6 +21601,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1020415085}
   side: {fileID: 716717582}
   angle: {fileID: 882093597}
@@ -22196,11 +22295,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 612174297}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 220282771}
   side: {fileID: 1567159432}
   angle: {fileID: 610648470}
@@ -22581,6 +22683,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1568917260}
   side: {fileID: 1173092931}
   angle: {fileID: 609765709}
@@ -22674,6 +22779,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1824298834}
   side: {fileID: 329292678}
   angle: {fileID: 94394174}
@@ -22835,9 +22943,7 @@ MonoBehaviour:
   m_Text: "CONTROLS:\nMouse: rotate the camera\nWASD: move the selector \nMouse Hold
     Left Click + WASD: rotate the cube\n\nSPACE: enter Build Mode\n\t|-SPACE: build
     turrets on the colored cells\nESC: to exit Build Mode\n\n***Test them a little***\n\nHOLD
-    E: start Assault Phase\n\nTURRETS COSTIN RESOURCES:\nGREEN (GATLING) = 1\n\n1-1:\nRESOURCES
-    = 1\n\n1-2:\nRESOURCES = 2\n\n1:3:\nDESTROY ALL TURRETS THEN REBUILD\nRESOURCES
-    = 3"
+    E: start Assault Phase\n\nTURRETS COSTINg RESOURCES:\nGREEN (GATLING) = 3"
 --- !u!222 &942070297
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -24669,6 +24775,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 751438167}
   side: {fileID: 1820978276}
   angle: {fileID: 1744120853}
@@ -24976,6 +25085,7 @@ RectTransform:
   m_Children:
   - {fileID: 505126435}
   - {fileID: 942070295}
+  - {fileID: 1382359976}
   m_Father: {fileID: 0}
   m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -26027,6 +26137,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 994695051}
   side: {fileID: 1329202666}
   angle: {fileID: 1749048855}
@@ -27054,6 +27167,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1952930023}
   side: {fileID: 700914468}
   angle: {fileID: 1058800775}
@@ -30585,6 +30701,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1390234224}
   side: {fileID: 593343881}
   angle: {fileID: 1574997099}
@@ -31226,6 +31345,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 645481703}
   side: {fileID: 723054925}
   angle: {fileID: 1965974907}
@@ -31495,6 +31617,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1294384574}
   side: {fileID: 1275268730}
   angle: {fileID: 1330446190}
@@ -33181,6 +33306,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1240558144}
   side: {fileID: 220817025}
   angle: {fileID: 374733390}
@@ -33396,6 +33524,85 @@ Transform:
   m_Father: {fileID: 796169582}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 90, y: 0, z: 0}
+--- !u!1 &1382359975
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1382359976}
+  - component: {fileID: 1382359978}
+  - component: {fileID: 1382359977}
+  m_Layer: 5
+  m_Name: Resources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1382359976
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382359975}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 1036839162}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 1, y: 1}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: -12, y: -12}
+  m_SizeDelta: {x: 120, y: 30}
+  m_Pivot: {x: 1, y: 1}
+--- !u!114 &1382359977
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382359975}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 14
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 5
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 0
+    m_VerticalOverflow: 0
+    m_LineSpacing: 1
+  m_Text: 
+--- !u!222 &1382359978
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1382359975}
+  m_CullTransparentMesh: 0
 --- !u!1 &1386187464
 GameObject:
   m_ObjectHideFlags: 0
@@ -33993,6 +34200,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1394528142}
   side: {fileID: 1101102245}
   angle: {fileID: 200663711}
@@ -34552,6 +34762,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 569188133}
   side: {fileID: 31855107}
   angle: {fileID: 1971332167}
@@ -35656,7 +35869,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1479392223}
-  m_LocalRotation: {x: -0.018189492, y: -0.000000001075221, z: -1.9560957e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: -0.0000000010739515, z: -1.9537863e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -36777,7 +36990,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1552988024}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalRotation: {x: 6.3108872e-30, y: -5.04871e-29, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -37350,6 +37563,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 96581484}
   side: {fileID: 238002603}
   angle: {fileID: 1272995655}
@@ -38215,6 +38431,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 723762355}
   side: {fileID: 150423074}
   angle: {fileID: 760979177}
@@ -39041,11 +39260,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 1258996187}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 1096372}
   side: {fileID: 615370248}
   angle: {fileID: 491917165}
@@ -40880,7 +41102,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1753745290}
-  m_LocalRotation: {x: -0.018189494, y: -0.000000002150442, z: -3.912192e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: -0.0000000021498074, z: -3.9110375e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -43841,6 +44063,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 663404808}
   side: {fileID: 1819797428}
   angle: {fileID: 659714984}
@@ -44593,6 +44818,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 1684362089}
   side: {fileID: 1323683885}
   angle: {fileID: 334496168}
@@ -46061,6 +46289,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 154982545}
   side: {fileID: 1313784407}
   angle: {fileID: 1041099413}
@@ -46552,6 +46783,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 881306340}
   side: {fileID: 1294222536}
   angle: {fileID: 257551264}
@@ -46645,6 +46879,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 170107216}
   side: {fileID: 397948237}
   angle: {fileID: 1500546094}
@@ -47156,11 +47393,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isInvincible: 0
-  onlyOneLife: 0
+  onlyOneLife: 1
   toRemoveOnDead: {fileID: 1251903100}
   turretToCreate: {fileID: 5466674039673467320, guid: 92a20a0f12bf0f14d817515ff28c983b, type: 3}
   buildTurretAtStart: 0
-  canRemoveTurret: 1
+  canRemoveTurret: 0
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 3
+  resourcesOnSellTurret: 10
   center: {fileID: 1408944670}
   side: {fileID: 834472804}
   angle: {fileID: 1907942873}
@@ -49383,6 +49623,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 2074908513}
   side: {fileID: 1206580340}
   angle: {fileID: 484220471}
