@@ -81,14 +81,14 @@ public class EnemyTeleport : Enemy
         //get current percentage
         int currentPercentage = Mathf.FloorToInt(health / maxHealth * 100);
 
-        int percentageToCheck = 0;
+        int percentageToCheck = 100;
         foreach (int percentage in percentagesLife)
         {
             //check if our life is lower then percentage
             if (currentPercentage <= percentage)
             {
-                //get only greatest one (nearest to our current percentage)
-                if (percentage > percentageToCheck)
+                //get only lower one (nearest to our current percentage)
+                if (percentage < percentageToCheck)
                     percentageToCheck = percentage;
             }
         }
