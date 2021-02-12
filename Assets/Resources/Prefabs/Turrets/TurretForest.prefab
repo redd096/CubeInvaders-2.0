@@ -27,13 +27,21 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
-    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-      propertyPath: baseToRotate
+    - target: {fileID: 2748320628734667416, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
       value: 
-      objectReference: {fileID: 793293231129885956}
+      objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
+    - target: {fileID: 3249464301479242942, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
       value: TurretForest
+      objectReference: {fileID: 0}
+    - target: {fileID: 5819092610900529499, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_RootOrder
@@ -51,10 +59,9 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9051637051322554265, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
---- !u!4 &793293231129885956 stripped
-Transform:
-  m_CorrespondingSourceObject: {fileID: 4974996485060731970, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
-  m_PrefabInstance: {fileID: 5623002573002463558}
-  m_PrefabAsset: {fileID: 0}
