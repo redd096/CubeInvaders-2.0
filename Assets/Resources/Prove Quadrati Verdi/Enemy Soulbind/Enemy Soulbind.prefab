@@ -18,7 +18,7 @@ MonoBehaviour:
     face: 0
     x: 0
     y: 0
-  shareHealth: 1
+  shareHealth: 0
   killSoulbindOnDeath: 1
   useOppositeFace: 1
   sameCell: 1

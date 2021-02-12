@@ -14,118 +14,38 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Waves:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
-    IgnorePreviousFacesAtSpawn: 2
-    TimeBetweenSpawns: 2
+    resourcesMax: 3
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
     DistanceFromWorld: 20
     EnemiesStructs:
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - Enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 6479201281881518148, guid: 5d518d81f97c7404281de6b9bc5d1298, type: 3}
-      TimeToAddBeforeSpawn: 1
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    resourcesMax: 6
     IgnorePreviousFacesAtSpawn: 2
-    TimeBetweenSpawns: 2
-    DistanceFromWorld: 20
-    EnemiesStructs:
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-  - LevelConfig: {fileID: 11400000, guid: 7b1af3a5334d4d24a922001b589fe9b4, type: 2}
-    IgnorePreviousFacesAtSpawn: 2
-    TimeBetweenSpawns: 2
-    DistanceFromWorld: 20
-    EnemiesStructs:
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
-  - LevelConfig: {fileID: 11400000, guid: 06bbea63687ff9742b907b2452961e86, type: 2}
-    IgnorePreviousFacesAtSpawn: 2
-    TimeBetweenSpawns: 2
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
-      TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 6479201281881518148, guid: 5d518d81f97c7404281de6b9bc5d1298, type: 3}
-      TimeToAddBeforeSpawn: 1
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 6479201281881518148, guid: 5d518d81f97c7404281de6b9bc5d1298, type: 3}
+    - Enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
       TimeToAddBeforeSpawn: 1
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    resourcesMax: 9
+    IgnorePreviousFacesAtSpawn: 2
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    EnemiesStructs:
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 6
-    - Enemy: {fileID: 6479201281881518148, guid: 5d518d81f97c7404281de6b9bc5d1298, type: 3}
+      TimeToAddBeforeSpawn: 0
+    - Enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
       TimeToAddBeforeSpawn: 1
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
@@ -133,13 +53,27 @@ MonoBehaviour:
       TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 1820881525086871467, guid: 19d8349901b884f42808a7caae9901f1, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
+    resourcesMax: 9
+    IgnorePreviousFacesAtSpawn: 2
+    TimeBetweenSpawns: 6
+    DistanceFromWorld: 20
+    EnemiesStructs:
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0
-    - Enemy: {fileID: 6479201281881518148, guid: 5d518d81f97c7404281de6b9bc5d1298, type: 3}
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 1
+    - Enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+      TimeToAddBeforeSpawn: 0
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      TimeToAddBeforeSpawn: 0
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      TimeToAddBeforeSpawn: 0
+    - Enemy: {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
+      TimeToAddBeforeSpawn: 0
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
       TimeToAddBeforeSpawn: 0

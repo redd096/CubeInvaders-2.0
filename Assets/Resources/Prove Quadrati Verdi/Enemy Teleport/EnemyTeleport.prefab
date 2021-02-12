@@ -158,8 +158,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 698ef17bf9ddd6347a0c790b64f4ed97, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  health: 253
-  speed: 1
+  health: 90
+  speed: 0.85
   coordinatesToAttack:
     face: 0
     x: 0
