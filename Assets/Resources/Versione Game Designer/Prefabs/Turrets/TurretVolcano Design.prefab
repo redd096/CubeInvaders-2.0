@@ -121,6 +121,14 @@ PrefabInstance:
       propertyPath: shotPrefab
       value: 
       objectReference: {fileID: 7698348057516290628, guid: 1478c8ec8124d05499561ff10341a586, type: 3}
+    - target: {fileID: 154868810570998539, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 679450839360698801, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_RootOrder
+      value: 2
+      objectReference: {fileID: 0}
     - target: {fileID: 2899001431421326156, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
       value: 0
@@ -175,7 +183,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9026065299652409340, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}

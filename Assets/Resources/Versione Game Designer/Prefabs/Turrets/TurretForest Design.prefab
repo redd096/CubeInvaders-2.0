@@ -8,6 +8,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: shotSpawns.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: shotPrefab
       value: 
       objectReference: {fileID: 8880211004750479159, guid: b86fb867a57c0474e922f9c63d053e57, type: 3}
@@ -19,6 +23,14 @@ PrefabInstance:
       propertyPath: delayShoot
       value: 0.1
       objectReference: {fileID: 0}
+    - target: {fileID: -8803011015764776706, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: shotSpawns.Array.data[2]
+      value: 
+      objectReference: {fileID: 2830213938489731141}
+    - target: {fileID: 154868810570998539, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 804803118712387519, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -27,6 +39,14 @@ PrefabInstance:
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: objectToRotate
+      value: 
+      objectReference: {fileID: 2830213938489731141}
+    - target: {fileID: 1974922048270898899, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: baseToRotate
+      value: 
+      objectReference: {fileID: 5533958515167875721}
     - target: {fileID: 2748320628734667416, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
@@ -37,7 +57,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
     - target: {fileID: 5695248515647943147, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Name
-      value: TurretForest 1
+      value: TurretForest Design
       objectReference: {fileID: 0}
     - target: {fileID: 7720483847729232750, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_LocalPosition.x
@@ -83,9 +103,23 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9026065299652409340, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 9051637051322554265, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
       propertyPath: m_Materials.Array.data[0]
       value: 
       objectReference: {fileID: 2100000, guid: 7c32e3a5f3e03e641b2cc031da402b25, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+--- !u!4 &5533958515167875721 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 199419520702417871, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 5623002573002463558}
+  m_PrefabAsset: {fileID: 0}
+--- !u!4 &2830213938489731141 stripped
+Transform:
+  m_CorrespondingSourceObject: {fileID: 7588032764715299075, guid: b7b12911a53a2ec44b4cfa95681fed65, type: 3}
+  m_PrefabInstance: {fileID: 5623002573002463558}
+  m_PrefabAsset: {fileID: 0}
