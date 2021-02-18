@@ -13,6 +13,10 @@ public class UIManager : MonoBehaviour
     [SerializeField] Text resourcesText = default;
     [SerializeField] string stringBeforeResources = "Resources: ";
     [SerializeField] [Min(0)] int decimalsResourcesText = 0;
+    [SerializeField] Text costText = default;
+    [SerializeField] string stringBeforeCost = "Cost: ";
+    [SerializeField] string stringBeforeSell = "Sell: ";
+    [SerializeField] [Min(0)] int decimalsCostText = 0;
 
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
@@ -28,9 +32,10 @@ public class UIManager : MonoBehaviour
         multipleSelector = Instantiate(GameManager.instance.levelManager.generalConfig.MultipleSelector);
         HideSelector();
 
-        //hide menus and strategic canvas
+        //hide menus, cost text and strategic canvas
         PauseMenu(false);
         EndMenu(false);
+        SetCostText(false);
         strategicCanvas.SetActive(false);
 
         //add events
@@ -110,6 +115,18 @@ public class UIManager : MonoBehaviour
         if (resourcesText)
         {
             resourcesText.text = stringBeforeResources + resources.ToString($"F{decimalsResourcesText}");
+        }
+    }
+
+    public void SetCostText(bool active, bool isBuying = false, float cost = 0)
+    {
+        //set cost text + active or deactive
+        if(costText)
+        {
+            string stringBefore = isBuying ? stringBeforeCost : stringBeforeSell;
+
+            costText.text = stringBefore + cost.ToString($"F{decimalsCostText}");
+            costText.gameObject.SetActive(active);
         }
     }
 

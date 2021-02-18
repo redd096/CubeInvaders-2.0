@@ -207,11 +207,34 @@ public class Cell : MonoBehaviour
     /// </summary>
     public void ShowPreview()
     {
-        //do only if there is a turret to create, and there isn't already a turret builded on it
-        if (turretToCreate == null || (turret != null && turret.IsPreview == false))
+        //show preview only if is alive
+        if (IsAlive == false)
+        {
+            //but if can recreate cell, show cost
+            if(GameManager.instance.levelManager.levelConfig.CanRecreateCell)
+                GameManager.instance.uiManager.SetCostText(true, true, resourcesToRecreateCell);
+
+            return;
+        }
+
+        //do only if there is a turret to create
+        if (turretToCreate == null)
             return;
 
-        //instantiate (with parent) or build it
+
+        //do only if there isn't already a turret builded on it
+        if ((turret != null && turret.IsPreview == false))
+        {
+            //but if can remove turret, show resources on sell
+            if(canRemoveTurret)
+                GameManager.instance.uiManager.SetCostText(true, false, resourcesOnSellTurret);
+
+            return;
+        }
+
+        //else show preview
+
+        //instantiate (with parent) or active it
         if (turret == null)
             turret = Instantiate(turretToCreate, transform);
         else
@@ -221,6 +244,9 @@ public class Cell : MonoBehaviour
         turret.transform.localPosition = Vector3.zero;
         turret.transform.localRotation = Quaternion.identity;
         turret.transform.localScale = Vector3.one;
+
+        //show cost to create turret
+        GameManager.instance.uiManager.SetCostText(true, true, resourcesToCreateTurret);
     }
 
     /// <summary>
@@ -231,6 +257,9 @@ public class Cell : MonoBehaviour
         //check if there is a turret and is only a preview
         if (turret != null && turret.IsPreview)
             turret.gameObject.SetActive(false);
+
+        //hide cost
+        GameManager.instance.uiManager.SetCostText(false);
     }
 
     /// <summary>
