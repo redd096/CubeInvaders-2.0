@@ -6,9 +6,9 @@ public class EnemySoulbindGraphics : MonoBehaviour
 {
     [Header("VFX")]
     [SerializeField] ParticleSystem particlesSpawnFirstSoulbind = default;
-    [SerializeField] AudioClip soundSpawnFirstSoulbind = default;
+    [SerializeField] AudioStruct soundSpawnFirstSoulbind = default;
     [SerializeField] ParticleSystem particlesSpawnSecondSoulbind = default;
-    [SerializeField] AudioClip soundSpawnSecondSoulbind = default;
+    [SerializeField] AudioStruct soundSpawnSecondSoulbind = default;
 
     Pooling<ParticleSystem> poolParticlesSpawnFirstSoulbind = new Pooling<ParticleSystem>();
     Pooling<AudioSource> poolSoundSpawnFirstSoulbind = new Pooling<AudioSource>();
@@ -35,10 +35,10 @@ public class EnemySoulbindGraphics : MonoBehaviour
     {
         //previous
         ParticlesManager.instance.Play(poolParticlesSpawnFirstSoulbind, particlesSpawnFirstSoulbind, firstPosition, firstRotation);
-        SoundManager.instance.Play(poolSoundSpawnFirstSoulbind, soundSpawnFirstSoulbind, firstPosition);
+        SoundManager.instance.Play(poolSoundSpawnFirstSoulbind, soundSpawnFirstSoulbind.audioClip, firstPosition, soundSpawnFirstSoulbind.volume);
 
         //new
         ParticlesManager.instance.Play(poolParticlesSpawnSecondSoulbind, particlesSpawnSecondSoulbind, secondPosition, secondRotation);
-        SoundManager.instance.Play(poolSoundSpawnSecondSoulbind, soundSpawnSecondSoulbind, secondPosition);
+        SoundManager.instance.Play(poolSoundSpawnSecondSoulbind, soundSpawnSecondSoulbind.audioClip, secondPosition, soundSpawnSecondSoulbind.volume);
     }
 }

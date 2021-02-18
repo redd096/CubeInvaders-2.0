@@ -6,9 +6,9 @@ public class EnemyTeleportGraphics : MonoBehaviour
 {
     [Header("VFX")]
     [SerializeField] ParticleSystem teleportPreviousPositionParticlePrefab = default;
-    [SerializeField] AudioClip teleportPreviousPositionSound = default;
+    [SerializeField] AudioStruct teleportPreviousPositionSound = default;
     [SerializeField] ParticleSystem teleportNewPositionParticlePrefab = default;
-    [SerializeField] AudioClip teleportNewPositionSound = default;
+    [SerializeField] AudioStruct teleportNewPositionSound = default;
     
     Pooling<ParticleSystem> poolTeleportPreviousPositionParticles = new Pooling<ParticleSystem>();
     Pooling<AudioSource> poolTeleportPreviousPositionSound = new Pooling<AudioSource>();
@@ -35,10 +35,10 @@ public class EnemyTeleportGraphics : MonoBehaviour
     {
         //previous
         ParticlesManager.instance.Play(poolTeleportPreviousPositionParticles, teleportPreviousPositionParticlePrefab, previousPosition, previousRotation);
-        SoundManager.instance.Play(poolTeleportPreviousPositionSound, teleportPreviousPositionSound, previousPosition);
+        SoundManager.instance.Play(poolTeleportPreviousPositionSound, teleportPreviousPositionSound.audioClip, previousPosition, teleportPreviousPositionSound.volume);
 
         //new
         ParticlesManager.instance.Play(poolTeleportNewPositionParticles, teleportNewPositionParticlePrefab, newPosition, newRotation);
-        SoundManager.instance.Play(poolTeleportNewPositionSound, teleportNewPositionSound, newPosition);
+        SoundManager.instance.Play(poolTeleportNewPositionSound, teleportNewPositionSound.audioClip, newPosition, teleportNewPositionSound.volume);
     }
 }

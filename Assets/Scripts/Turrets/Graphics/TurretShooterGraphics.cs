@@ -6,7 +6,7 @@ public class TurretShooterGraphics : TurretGraphics
 {
     [Header("Shooter")]
     [SerializeField] ParticleSystem fireVFX = default;
-    [SerializeField] AudioClip fireAudio = default;
+    [SerializeField] AudioStruct fireAudio = default;
 
     TurretShooter turretShooter;
 
@@ -47,7 +47,7 @@ public class TurretShooterGraphics : TurretGraphics
     {
         //vfx on shoot
         ParticlesManager.instance.Play(poolFireVFX, fireVFX, shotSpawn.position, shotSpawn.rotation);
-        SoundManager.instance.Play(poolFireAudio, fireAudio, shotSpawn.position);
+        SoundManager.instance.Play(poolFireAudio, fireAudio.audioClip, shotSpawn.position, fireAudio.volume);
     }
 
     #endregion

@@ -3,6 +3,13 @@
     using UnityEngine;
     using System.Collections;
 
+    [System.Serializable]
+    public struct AudioStruct
+    {
+        public AudioClip audioClip;
+        [Range(0f, 1f)] public float volume;
+    }
+
     [AddComponentMenu("redd096/Singletons/Sound Manager")]
     [DefaultExecutionOrder(-2)]
     public class SoundManager : Singleton<SoundManager>

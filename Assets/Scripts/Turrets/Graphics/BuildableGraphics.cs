@@ -15,7 +15,7 @@ public class BuildableGraphics : MonoBehaviour
 
     [Header("VFX")]
     [SerializeField] ParticleSystem buildVFX = default;
-    [SerializeField] AudioClip buildAudio = default;
+    [SerializeField] AudioStruct buildAudio = default;
 
     protected BuildableObject buildableObject;
     Dictionary<Renderer, Color> normalColors = new Dictionary<Renderer, Color>();
@@ -191,7 +191,7 @@ public class BuildableGraphics : MonoBehaviour
     {
         //vfx and sound
         ParticlesManager.instance.Play(poolBuildVFX, buildVFX, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolBuildAudio, buildAudio, transform.position);
+        SoundManager.instance.Play(poolBuildAudio, buildAudio.audioClip, transform.position, buildAudio.volume);
     }
 
     #endregion

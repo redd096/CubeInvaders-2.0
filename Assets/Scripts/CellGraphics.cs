@@ -6,9 +6,9 @@ public class CellGraphics : MonoBehaviour
 {
     [Header("VFX")]
     [SerializeField] ParticleSystem rotationParticlePrefab = default;
-    [SerializeField] AudioClip rotationSound = default;
+    [SerializeField] AudioStruct rotationSound = default;
     [SerializeField] ParticleSystem explosionCellPrefab = default;
-    [SerializeField] AudioClip explosionCellSound = default;
+    [SerializeField] AudioStruct explosionCellSound = default;
 
     Pooling<ParticleSystem> poolRotationParticles = new Pooling<ParticleSystem>();
     Pooling<AudioSource> poolRotationSound = new Pooling<AudioSource>();
@@ -39,13 +39,13 @@ public class CellGraphics : MonoBehaviour
     void OnWorldRotate(Coordinates coordinates)
     {
         ParticlesManager.instance.Play(poolRotationParticles, rotationParticlePrefab, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolRotationSound, rotationSound, transform.position);
+        SoundManager.instance.Play(poolRotationSound, rotationSound.audioClip, transform.position, rotationSound.volume);
     }
 
     void OnDestroyCell()
     {
         ParticlesManager.instance.Play(poolExplosionCell, explosionCellPrefab, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolExplosionSound, explosionCellSound, transform.position);
+        SoundManager.instance.Play(poolExplosionSound, explosionCellSound.audioClip, transform.position, explosionCellSound.volume);
 
         //do camera shake
         camShake.DoShake();

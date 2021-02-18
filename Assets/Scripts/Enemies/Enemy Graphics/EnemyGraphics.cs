@@ -12,7 +12,7 @@ public class EnemyGraphics : MonoBehaviour
 
     [Header("VFX")]
     [SerializeField] ParticleSystem explosionParticlePrefab = default;
-    [SerializeField] AudioClip explosionSound = default;
+    [SerializeField] AudioStruct explosionSound = default;
 
     Pooling<ParticleSystem> poolExplosionParticles = new Pooling<ParticleSystem>();
     Pooling<AudioSource> poolExplosionSound = new Pooling<AudioSource>();
@@ -70,6 +70,6 @@ public class EnemyGraphics : MonoBehaviour
     {
         //vfx and sound
         ParticlesManager.instance.Play(poolExplosionParticles, explosionParticlePrefab, transform.position, transform.rotation);
-        SoundManager.instance.Play(poolExplosionSound, explosionSound, transform.position);
+        SoundManager.instance.Play(poolExplosionSound, explosionSound.audioClip, transform.position, explosionSound.volume);
     }
 }
