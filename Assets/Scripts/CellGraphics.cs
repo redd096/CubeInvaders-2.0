@@ -10,8 +10,8 @@ public class CellGraphics : MonoBehaviour
     [SerializeField] ParticleSystem explosionCellPrefab = default;
     [SerializeField] AudioStruct explosionCellSound = default;
 
-    Pooling<ParticleSystem> poolRotationParticles = new Pooling<ParticleSystem>();
-    Pooling<AudioSource> poolRotationSound = new Pooling<AudioSource>();
+    Pooling<ParticleSystem> poolRotationParticles = new Pooling<ParticleSystem>(1);
+    Pooling<AudioSource> poolRotationSound = new Pooling<AudioSource>(1);
     Pooling<ParticleSystem> poolExplosionCell = new Pooling<ParticleSystem>();
     Pooling<AudioSource> poolExplosionSound = new Pooling<AudioSource>();
 

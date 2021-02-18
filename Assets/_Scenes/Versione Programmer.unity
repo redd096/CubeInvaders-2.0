@@ -2516,9 +2516,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &114749997
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -3469,9 +3473,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &165515364
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4034,9 +4042,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &174994143
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4130,9 +4142,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &187615890
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -4340,9 +4356,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &196833515
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5108,9 +5128,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &229670090
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -5544,9 +5568,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &247562704
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6609,9 +6637,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &301870519
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -6787,9 +6819,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &309696802
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -8018,9 +8054,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &345242944
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -10469,9 +10509,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &466995449
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -11940,9 +11984,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &548136952
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -12151,9 +12199,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &569469690
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -13909,9 +13961,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &652138872
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15306,9 +15362,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &743641743
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -15632,9 +15692,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &754877995
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -17061,7 +17125,7 @@ RectTransform:
   m_Children:
   - {fileID: 1372398219}
   - {fileID: 85082665}
-  - {fileID: 2117617451}
+  - {fileID: 2107292080}
   m_Father: {fileID: 0}
   m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -18444,9 +18508,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &925322445
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -18816,9 +18884,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &933383623
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -20984,6 +21056,85 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &1053475076
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1053475077}
+  - component: {fileID: 1053475079}
+  - component: {fileID: 1053475078}
+  m_Layer: 5
+  m_Name: CostText
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &1053475077
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053475076}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 2107292080}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 1}
+  m_AnchorMax: {x: 0, y: 1}
+  m_AnchoredPosition: {x: 10, y: -35}
+  m_SizeDelta: {x: 160, y: 30}
+  m_Pivot: {x: 0, y: 1}
+--- !u!114 &1053475078
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053475076}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5f7201a12d95ffc409449d95f23cf332, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Material: {fileID: 0}
+  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_RaycastTarget: 1
+  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
+  m_Maskable: 1
+  m_OnCullStateChanged:
+    m_PersistentCalls:
+      m_Calls: []
+  m_FontData:
+    m_Font: {fileID: 10102, guid: 0000000000000000e000000000000000, type: 0}
+    m_FontSize: 20
+    m_FontStyle: 0
+    m_BestFit: 0
+    m_MinSize: 10
+    m_MaxSize: 40
+    m_Alignment: 0
+    m_AlignByGeometry: 0
+    m_RichText: 1
+    m_HorizontalOverflow: 1
+    m_VerticalOverflow: 1
+    m_LineSpacing: 1
+  m_Text: 'Cost: 0'
+--- !u!222 &1053475079
+CanvasRenderer:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1053475076}
+  m_CullTransparentMesh: 0
 --- !u!1 &1057769107
 GameObject:
   m_ObjectHideFlags: 0
@@ -21067,9 +21218,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1065433921
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -21469,9 +21624,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1075359465
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22212,9 +22371,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1094488319
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -22786,9 +22949,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1112534282
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24321,9 +24488,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1181728590
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24675,9 +24846,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1192593934
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -24884,7 +25059,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1195831256}
-  m_LocalRotation: {x: -0.018189494, y: -0.000000002150442, z: -3.912192e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189494, y: 0.000000002150442, z: 3.912192e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: -12}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -25456,9 +25631,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1227359474
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -25715,9 +25894,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1232229332
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27740,9 +27923,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1309044308
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -27918,9 +28105,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1324697402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -28437,9 +28628,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1366753134
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -30308,9 +30503,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1477846920
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31252,9 +31451,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1510803343
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31348,9 +31551,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1511334568
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31558,9 +31765,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1520919678
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31817,9 +32028,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1543996080
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -31995,9 +32210,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1549668176
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32123,9 +32342,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1563203924
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -32523,9 +32746,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1591311402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -33102,7 +33329,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1605757470}
-  m_LocalRotation: {x: -0.018189492, y: -0.000000001075221, z: -1.9560957e-11, w: 0.9998346}
+  m_LocalRotation: {x: -0.018189492, y: 0.000000001075221, z: 1.9560957e-11, w: 0.9998346}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -33159,9 +33386,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1609508039
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34249,9 +34480,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1641567402
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -34716,9 +34951,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1674757648
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35003,9 +35242,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1684205328
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35776,9 +36019,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1717987197
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -35987,9 +36234,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1729382355
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36274,9 +36525,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1733392299
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36626,9 +36881,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1748703074
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -36723,9 +36982,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1750176404
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37366,9 +37629,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1802163098
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -37878,9 +38145,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1820389304
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38611,9 +38882,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1867799547
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -38967,9 +39242,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1896614763
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -40887,9 +41166,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &1995190141
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41017,9 +41300,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &2005116566
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41195,9 +41482,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &2010321679
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -41696,9 +41987,13 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 0}
+    volume: 0
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
 --- !u!54 &2027249318
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -42314,6 +42609,10 @@ MonoBehaviour:
   resourcesText: {fileID: 2117617452}
   stringBeforeResources: 'Resources: '
   decimalsResourcesText: 0
+  costText: {fileID: 1053475078}
+  stringBeforeCost: 'Cost: '
+  stringBeforeSell: 'Sell: '
+  decimalsCostText: 0
   strategicCanvas: {fileID: 875274431}
   readySlider: {fileID: 320534584}
 --- !u!4 &2051759726
@@ -43390,6 +43689,43 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2102057127}
   m_Mesh: {fileID: 2194686921425976661, guid: 4f133b1491e5f1d4992b7e8232b8bfcd, type: 3}
+--- !u!1 &2107292079
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2107292080}
+  m_Layer: 5
+  m_Name: Resources
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!224 &2107292080
+RectTransform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2107292079}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children:
+  - {fileID: 2117617451}
+  - {fileID: 1053475077}
+  m_Father: {fileID: 846498301}
+  m_RootOrder: 2
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMax: {x: 1, y: 1}
+  m_AnchoredPosition: {x: 0, y: 0}
+  m_SizeDelta: {x: 0, y: 0}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &2116834995
 GameObject:
   m_ObjectHideFlags: 0
@@ -43510,12 +43846,12 @@ RectTransform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2117617450}
-  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 846498301}
-  m_RootOrder: 2
+  m_Father: {fileID: 2107292080}
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}

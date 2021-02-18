@@ -28,6 +28,9 @@
 
             //instantiate at position and rotation, set parent
             ParticleSystem particles = pool.Instantiate(prefab, position, rotation);
+            if (particles == null && pool.PooledObjects.Count > 0)
+                particles = pool.PooledObjects[0];
+
             particles.transform.SetParent(ParticlesParent);
 
             //play

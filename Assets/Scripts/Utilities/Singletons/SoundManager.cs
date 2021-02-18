@@ -87,6 +87,9 @@
 
             //instantiate at position, set parent
             AudioSource audioSource = pool.Instantiate(audioPrefab, position, Quaternion.identity);
+            if (audioSource == null && pool.PooledObjects.Count > 0)
+                audioSource = pool.PooledObjects[0];
+
             audioSource.transform.SetParent(SoundsParent);
 
             //play and start coroutine to deactivate
