@@ -437,8 +437,7 @@ MonoBehaviour:
   shotPrefab: {fileID: 0}
   delayShoot: 0.5
   shotSpawns:
-  - {fileID: 0}
-  - {fileID: 0}
+  - {fileID: 5973181481010093152}
 --- !u!114 &1974922048270898899
 MonoBehaviour:
   m_ObjectHideFlags: 0

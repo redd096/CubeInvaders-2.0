@@ -11,11 +11,9 @@ public class EnemySoulbind : Enemy
 {
     [Header("Soulbind")]
     [Tooltip("Share health, or different health but die together?")] [SerializeField] bool shareHealth = true;
-    [CanShow("shareHealth", NOT = true)]
     [Tooltip("On death, kill also soulbind or keep alive?")] [SerializeField] bool killSoulbindOnDeath = true;
     [Tooltip("Use opposite face or adjacent face?")] [SerializeField] bool useOppositeFace = true;
     [Tooltip("Instantiate at same coordinates or random?")] [SerializeField] bool sameCell = false;
-    [CanShow("sameCell", NOT = true)]
     [Tooltip("Check there are no enemies where spawn")] [SerializeField] bool checkNoHitEnemies = true;
 
     public System.Action<Vector3, Quaternion, Vector3, Quaternion> onSpawnSoulbind;
