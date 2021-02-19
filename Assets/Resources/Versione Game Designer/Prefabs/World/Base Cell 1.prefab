@@ -370,6 +370,9 @@ MonoBehaviour:
   turretToCreate: {fileID: 0}
   buildTurretAtStart: 0
   canRemoveTurret: 1
+  resourcesToRecreateCell: 100
+  resourcesToCreateTurret: 10
+  resourcesOnSellTurret: 10
   center: {fileID: 5059648704907266853}
   side: {fileID: 4640798383401689328}
   angle: {fileID: 3768848445224598782}
@@ -406,6 +409,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationParticlePrefab: {fileID: 4985485575218758622, guid: 9f88beb6fea4ed346bdfb72801682e17, type: 3}
-  rotationSound: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+  rotationSound:
+    audioClip: {fileID: 8300000, guid: 601e9958c92cd5e43a4dbc047092bf39, type: 3}
+    volume: 0.1
   explosionCellPrefab: {fileID: 9122411620624451906, guid: 33deb54eae0f07b4da726ca5340477fc, type: 3}
-  explosionCellSound: {fileID: 8300000, guid: 086ad0759c1d3fc48bcb58af91cde1f9, type: 3}
+  explosionCellSound:
+    audioClip: {fileID: 0}
+    volume: 0
