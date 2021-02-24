@@ -98,7 +98,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     resourcesMax: 3
     IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -124,7 +124,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     resourcesMax: 6
     IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -160,7 +160,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     resourcesMax: 6
     IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -186,7 +186,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     resourcesMax: 6
     IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -212,7 +212,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     resourcesMax: 9
     IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -242,7 +242,7 @@ MonoBehaviour:
   - LevelConfig: {fileID: 11400000, guid: 686c57f955b36b44294852f856f704b1, type: 2}
     resourcesMax: 9
     IgnorePreviousFacesAtSpawn: 3
-    TimeBetweenSpawns: 4
+    TimeBetweenSpawns: 5
     DistanceFromWorld: 20
     EnemiesStructs:
     - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
