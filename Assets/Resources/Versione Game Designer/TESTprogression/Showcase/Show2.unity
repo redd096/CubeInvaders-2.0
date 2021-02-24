@@ -43632,7 +43632,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c4db514e870e2444c81db6b6f232a38b, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waveConfig: {fileID: 11400000, guid: f3cdc33036767c442a4131b5d31ecf00, type: 2}
+  waveConfig: {fileID: 11400000, guid: e104f1a70e4b4244093c299dd966b9b5, type: 2}
   currentWave: 0
 --- !u!4 &1862781195
 Transform:
