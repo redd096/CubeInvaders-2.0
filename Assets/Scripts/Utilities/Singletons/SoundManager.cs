@@ -16,7 +16,6 @@
     {
         [Header("Instantiate sound at point")]
         [SerializeField] AudioSource audioPrefab = default;
-        [SerializeField] float timeBeforeDeactive = 2;
 
         private AudioSource backgroundAudioSource;
         AudioSource BackgroundAudioSource
@@ -32,7 +31,7 @@
             }
         }
 
-        Transform soundsParent;
+        private Transform soundsParent;
         Transform SoundsParent
         {
             get
@@ -85,11 +84,17 @@
             if (clip == null)
                 return;
 
-            //instantiate at position, set parent
-            AudioSource audioSource = pool.Instantiate(audioPrefab, position, Quaternion.identity);
+            //instantiate (if didn't find deactivated, take first one in the pool)
+            AudioSource audioSource = pool.Instantiate(audioPrefab);
             if (audioSource == null && pool.PooledObjects.Count > 0)
                 audioSource = pool.PooledObjects[0];
 
+            //if still null, return
+            if (audioSource == null)
+                return;
+
+            //set position, rotation and parent
+            audioSource.transform.position = position;
             audioSource.transform.SetParent(SoundsParent);
 
             //play and start coroutine to deactivate
@@ -99,8 +104,8 @@
 
         IEnumerator DeactiveSoundAtPointCoroutine(AudioSource audioToDeactivate)
         {
-            //wait
-            yield return new WaitForSeconds(timeBeforeDeactive);
+            //wait to end the clip
+            yield return new WaitForSeconds(audioToDeactivate.clip.length);
 
             //and deactive
             audioToDeactivate.gameObject.SetActive(false);
