@@ -106,8 +106,8 @@ public class Player : StateMachine
         if (state.GetType() == typeof(PlayerPlaceTurret) && Controls.Gameplay.PauseButton.activeControl.name == "escape")
             return;
 
-        //if not ended game && game is running
-        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0)
+        //if not ended game && game is running && is not end assault phase (showing panel to end level)
+        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale > 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
         {
             SceneLoader.instance.PauseGame();
             alreadyPressed = true;
@@ -120,8 +120,8 @@ public class Player : StateMachine
         if (alreadyPressed)
             return;
 
-        //if not ended game && game is paused
-        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0)
+        //if not ended game && game is paused && is not end assault phase (showing panel to end level)
+        if (GameManager.instance.levelManager.GameEnded == false && Time.timeScale <= 0 && GameManager.instance.levelManager.CurrentPhase != EPhase.endAssault)
         {
             SceneLoader.instance.ResumeGame();
             alreadyPressed = true;
@@ -139,6 +139,7 @@ public class Player : StateMachine
 
     void AddEvents()
     {
+        GameManager.instance.levelManager.onStartGame += OnStartGame;
         GameManager.instance.levelManager.onStartStrategicPhase += OnStartStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase += OnStartAssaultPhase;
         GameManager.instance.levelManager.onEndGame += OnEndGame;
@@ -146,9 +147,21 @@ public class Player : StateMachine
 
     void RemoveEvents()
     {
+        GameManager.instance.levelManager.onStartGame -= OnStartGame;
         GameManager.instance.levelManager.onStartStrategicPhase -= OnStartStrategicPhase;
         GameManager.instance.levelManager.onStartAssaultPhase -= OnStartAssaultPhase;
         GameManager.instance.levelManager.onEndGame -= OnEndGame;
+    }
+
+    void OnStartGame()
+    {
+        //do only if game is not ended
+        if (GameManager.instance.levelManager.GameEnded)
+            return;
+
+        //start in strategic phase
+        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+        SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
     }
 
     void OnStartStrategicPhase()
@@ -157,9 +170,18 @@ public class Player : StateMachine
         if (GameManager.instance.levelManager.GameEnded)
             return;
 
-        //go to player move, starting from center cell
-        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
-        SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
+        //if in pause, set as previous state strategic phase
+        if (state is PlayerPause)
+        {
+            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+            previousState = new PlayerStrategic(this, new Coordinates(EFace.front, centerCell));
+        }
+        //else go to player move, starting from center cell
+        else
+        {
+            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+            SetState(new PlayerStrategic(this, new Coordinates(EFace.front, centerCell)));
+        }
     }
 
     void OnStartAssaultPhase()
@@ -168,13 +190,25 @@ public class Player : StateMachine
         if (GameManager.instance.levelManager.GameEnded)
             return;
 
-        //go to player move, starting from center cell
-        Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
-        SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell)));
+        //if in pause, set as previous state assault phase
+        if (state is PlayerPause)
+        {
+            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+            previousState = new PlayerAssault(this, new Coordinates(EFace.front, centerCell));
+        }
+        //else go to player move, starting from center cell
+        else
+        {
+            Vector2Int centerCell = GameManager.instance.world.worldConfig.CenterCell;
+            SetState(new PlayerAssault(this, new Coordinates(EFace.front, centerCell)));
+        }
     }
 
     void OnEndGame(bool win)
     {
+        //stop control pause menu
+        Controls.Disable();
+
         //set pause state and show mouse
         SetState(new PlayerPause(this));
         Utility.LockMouse(CursorLockMode.None);

@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
+using redd096;
 
 [AddComponentMenu("Cube Invaders/Manager/UI Manager")]
 public class UIManager : MonoBehaviour
@@ -8,6 +9,8 @@ public class UIManager : MonoBehaviour
     [SerializeField] GameObject pauseMenu = default;
     [SerializeField] GameObject endMenu = default;
     [SerializeField] Text endText = default;
+    [SerializeField] string winString = "YOU WON!!";
+    [SerializeField] string loseString = "YOU LOST...";
 
     [Header("Resources")]
     [SerializeField] Text resourcesText = default;
@@ -18,9 +21,16 @@ public class UIManager : MonoBehaviour
     [SerializeField] string stringBeforeSell = "Sell: ";
     [SerializeField] [Min(0)] int decimalsCostText = 0;
 
+    [Header("Current Level")]
+    [SerializeField] Text currentLevelText = default;
+    [SerializeField] string currentLevelString = "Level: ";
+
     [Header("Strategic")]
     [SerializeField] GameObject strategicCanvas = default;
     [SerializeField] Slider readySlider = default;
+
+    [Header("End Wave")]
+    [SerializeField] GameObject endWaveCanvas = default;
 
     GameObject selector;
     GameObject multipleSelector;
@@ -32,11 +42,12 @@ public class UIManager : MonoBehaviour
         multipleSelector = Instantiate(GameManager.instance.levelManager.generalConfig.MultipleSelector);
         HideSelector();
 
-        //hide menus, cost text and strategic canvas
+        //hide all
         PauseMenu(false);
         EndMenu(false);
         SetCostText(false);
         strategicCanvas.SetActive(false);
+        endWaveCanvas.SetActive(false);
 
         //add events
         AddEvents();
@@ -65,8 +76,9 @@ public class UIManager : MonoBehaviour
 
     void OnStartStrategicPhase()
     {
-        //show strategic canvas
+        //show strategic canvas and remove end wave canvas
         strategicCanvas.SetActive(true);
+        endWaveCanvas.SetActive(false);
     }
 
     void OnEndStrategicPhase()
@@ -78,7 +90,7 @@ public class UIManager : MonoBehaviour
     void OnEndGame(bool win)
     {
         //show end menu
-        string text = win ? GameManager.instance.levelManager.WinText : GameManager.instance.levelManager.LoseText;
+        string text = win ? winString : loseString;
         EndMenu(true, text);
     }
 
@@ -132,11 +144,38 @@ public class UIManager : MonoBehaviour
 
     #endregion
 
+    #region current level
+
+    public void UpdateCurrentLevelText(int currentWave)
+    {
+        if (currentLevelText)
+        {
+            //set text (current wave +1, so player doesn't see wave 0)
+            currentLevelText.text = currentLevelString + (currentWave + 1);
+        }
+    }
+
+    #endregion
+
     #region strategic
 
     public void UpdateReadySlider(float value)
     {
         readySlider.value = value;
+    }
+
+    #endregion
+
+    #region end wave
+
+    public void OnEndWave()
+    {
+        //same as pause (lock player and show mouse) but without lock time and without show pause menu
+        GameManager.instance.player.PausePlayer(true);
+        Utility.LockMouse(CursorLockMode.None);
+
+        //active end wave canvas
+        endWaveCanvas.SetActive(true);
     }
 
     #endregion

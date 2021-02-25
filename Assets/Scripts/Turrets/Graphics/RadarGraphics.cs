@@ -66,7 +66,7 @@ public class RadarGraphics : BuildableGraphics
 
     void SetColorFlick()
     {
-        int currentWave = GameManager.instance.waveManager.currentWave;
+        int currentWave = GameManager.instance.waveManager.CurrentWave;
 
         //get flick speed based on enemy distance to its coordinates to attack
         float enemyDistance = Vector3.Distance(GetEnemy().coordinatesToAttack.position, GetEnemy().transform.position);

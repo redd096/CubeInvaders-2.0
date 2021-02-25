@@ -4,7 +4,7 @@ using UnityEngine;
 
 public enum EPhase
 {
-    strategic, assault, waiting
+    strategic, assault, endStrategic, endAssault
 }
 
 [AddComponentMenu("Cube Invaders/Manager/Level Manager")]
@@ -14,10 +14,7 @@ public class LevelManager : MonoBehaviour
     public LevelConfig levelConfig;
     public GeneralConfig generalConfig;
 
-    [Header("EndGame")]
-    public string WinText = "YOU WON!!";
-    public string LoseText = "YOU LOST...";
-
+    public System.Action onStartGame;
     public System.Action onStartStrategicPhase;
     public System.Action onEndStrategicPhase;
     public System.Action onStartAssaultPhase;
@@ -56,7 +53,7 @@ public class LevelManager : MonoBehaviour
     {
         if (CurrentPhase == EPhase.strategic)
         {
-            CurrentPhase = EPhase.waiting;
+            CurrentPhase = EPhase.endStrategic;
 
             onEndStrategicPhase?.Invoke();
 
@@ -75,11 +72,9 @@ public class LevelManager : MonoBehaviour
     {
         if (CurrentPhase == EPhase.assault)
         {
-            CurrentPhase = EPhase.waiting;
+            CurrentPhase = EPhase.endAssault;
 
             onEndAssaultPhase?.Invoke();
-
-            Invoke("StartStrategicPhase", 1);
         }
     }
 
@@ -93,6 +88,9 @@ public class LevelManager : MonoBehaviour
 
         //start in strategic
         StartStrategicPhase();
+
+        //call event
+        onStartGame?.Invoke();
     }
 
     public void EndGame(bool win)

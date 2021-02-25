@@ -31,14 +31,29 @@ public class GameManager : Singleton<GameManager>
 
     public void SetWave(int wave)
     {
-        //end wave or start immediatly strategic phase
-        if (instance.levelManager.CurrentPhase == EPhase.assault)
-            instance.levelManager.EndAssaultPhase();
-        else
-            instance.levelManager.StartStrategicPhase();
-
         //set wave
-        instance.waveManager.currentWave = wave;
+        instance.waveManager.CurrentWave = wave;
+
+        //end wave and start strategic phase after few seconds
+        if (instance.levelManager.CurrentPhase == EPhase.assault)
+        {
+            instance.levelManager.EndAssaultPhase();
+            instance.levelManager.Invoke("StartStrategicPhase", 1);
+        }
+        //or start immediatly strategic phase
+        else
+        {
+            instance.levelManager.StartStrategicPhase();
+        }
+
+        //resume game
+        SceneLoader.instance.ResumeGame();
+    }
+
+    public void NextWave()
+    {
+        //increase wave +1, than set wave
+        SetWave(instance.waveManager.CurrentWave + 1);
     }
 
     #endregion
