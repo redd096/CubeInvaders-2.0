@@ -209,6 +209,10 @@ PrefabInstance:
       propertyPath: resourcesToCreateTurret
       value: 3
       objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: resourcesOnSellTurret
+      value: 3
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
 --- !u!4 &69429736765576654 stripped
