@@ -25,6 +25,37 @@ public class WaveManager : MonoBehaviour
         RemoveEvents();
     }
 
+    void StartNewLevel()
+    {
+        //current wave
+        WaveStruct wave = waveConfig.Waves[this.currentWave];
+
+        //update level config (change level) and update resources for player
+        GameManager.instance.levelManager.UpdateLevel(wave.LevelConfig);
+        GameManager.instance.player.CurrentResources = wave.resourcesMax;
+    }
+
+    void StartWave()
+    {
+        //start coroutine
+        if (gameObject.activeInHierarchy)
+        {
+            if (wave_coroutine != null)
+                StopCoroutine(wave_coroutine);
+
+            wave_coroutine = StartCoroutine(Wave_Coroutine());
+        }
+    }
+
+    void EndWave()
+    {
+        //wave +1
+        currentWave++;
+
+        //end assault phase
+        GameManager.instance.levelManager.EndAssaultPhase();
+    }
+
     #region events
 
     void AddEvents()
@@ -47,31 +78,23 @@ public class WaveManager : MonoBehaviour
         ClearEnemies();
 
         //if there aren't other waves
-        if(waveConfig.Waves == null || currentWave >= waveConfig.Waves.Length)
+        if(waveConfig.Waves == null || currentWave >= waveConfig.Waves.Length || currentWave < 0)
         {
             //win
             GameManager.instance.levelManager.EndGame(true);
-            return;
         }
 
-        CreateWave();
+        StartNewLevel();
     }
 
     void OnStartAssaultPhase()
     {
         //start wave
-        if (wave_coroutine != null)
-            StopCoroutine(wave_coroutine);
-
-        if(gameObject.activeInHierarchy)
-            wave_coroutine = StartCoroutine(Wave_Coroutine());
+        StartWave();
     }
 
     void OnEndAssaultPhase()
     {
-        //wave +1
-        currentWave++;
-
         //stop coroutine if still running
         if (wave_coroutine != null)
             StopCoroutine(wave_coroutine);
@@ -89,10 +112,10 @@ public class WaveManager : MonoBehaviour
             }
         }
 
-        //if there are no other enemies, end assault phase
+        //if there are no other enemies, end wave
         if(enemies.Count <= 0)
         {
-            GameManager.instance.levelManager.EndAssaultPhase();
+            EndWave();
         }
     }
 
@@ -112,30 +135,19 @@ public class WaveManager : MonoBehaviour
         enemies.Clear();
     }
 
-    void CreateWave()
+    IEnumerator Wave_Coroutine()
     {
-        //do only if there are waves
-        if (this.currentWave < 0 || this.currentWave >= waveConfig.Waves.Length)
-            return;
-
         //current wave
-        WaveStruct wave = waveConfig.Waves[this.currentWave];
-
-        //update level config (change level) and update resources for player
-        GameManager.instance.UpdateLevel(wave.LevelConfig);
-        GameManager.instance.player.CurrentResources = wave.resourcesMax;
+        WaveStruct wave = waveConfig.Waves[currentWave];
 
         //foreach enemy in this wave, instantiate but deactivate
         foreach (EnemyStruct enemyStruct in wave.EnemiesStructs)
         {
             InstantiateNewEnemy(enemyStruct.Enemy, enemyStruct.TimeToAddBeforeSpawn);
+            yield return null;
         }
-    }
 
-    IEnumerator Wave_Coroutine()
-    {
-        //current wave + enemies copy (copy because when enemy is killed, it's removed from list)
-        WaveStruct wave = waveConfig.Waves[currentWave];
+        //enemies copy(copy because when enemy is killed, it's removed from list)
         List<EnemyStruct> enemiesCopy = enemies.CreateCopy();
 
         //queue to not spawn on same face

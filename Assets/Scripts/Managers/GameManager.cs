@@ -31,8 +31,11 @@ public class GameManager : Singleton<GameManager>
 
     public void SetWave(int wave)
     {
-        //end wave
-        instance.levelManager.EndAssaultPhase(true);
+        //end wave or start immediatly strategic phase
+        if (instance.levelManager.CurrentPhase == EPhase.assault)
+            instance.levelManager.EndAssaultPhase();
+        else
+            instance.levelManager.StartStrategicPhase();
 
         //set wave
         instance.waveManager.currentWave = wave;

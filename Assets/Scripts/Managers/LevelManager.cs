@@ -52,9 +52,9 @@ public class LevelManager : MonoBehaviour
         CurrentPhase = EPhase.strategic;
     }
 
-    public void EndStrategicPhase(bool force = false)
+    public void EndStrategicPhase()
     {
-        if (force || CurrentPhase == EPhase.strategic)
+        if (CurrentPhase == EPhase.strategic)
         {
             CurrentPhase = EPhase.waiting;
 
@@ -71,9 +71,9 @@ public class LevelManager : MonoBehaviour
         CurrentPhase = EPhase.assault;
     }
 
-    public void EndAssaultPhase(bool force = false)
+    public void EndAssaultPhase()
     {
-        if (force || CurrentPhase == EPhase.assault)
+        if (CurrentPhase == EPhase.assault)
         {
             CurrentPhase = EPhase.waiting;
 
@@ -112,7 +112,7 @@ public class LevelManager : MonoBehaviour
         //update level config
         this.levelConfig = levelConfig;
 
-        //reset turret
+        //reset turrets
         if (levelConfig.ResetTurrets)
         {
             foreach (Turret turret in FindObjectsOfType<Turret>())
