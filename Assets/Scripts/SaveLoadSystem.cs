@@ -70,13 +70,17 @@
                 return null;
             }
 
-            ClassToSave value = new ClassToSave();
-
             //load file as json, than return as value
             string jsonValue = File.ReadAllText(GetPathFile(key));
-            JsonUtility.FromJsonOverwrite(jsonValue, value);
+            return JsonUtility.FromJson<ClassToSave>(jsonValue);
 
-            return value;
+            //ClassToSave value = new ClassToSave();
+            //
+            ////load file as json, than return as value
+            //string jsonValue = File.ReadAllText(GetPathFile(key));
+            //JsonUtility.FromJsonOverwrite(jsonValue, value);
+            //
+            //return value;
         }
 
         /// <summary>
