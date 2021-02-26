@@ -30,6 +30,6 @@ EditorBuildSettings:
     path: Assets/Resources/Versione Game Designer/TESTprogression/Showcase/Show2.unity
     guid: c069fa0856614eb4f8601eef0a23b68c
   - enabled: 1
-    path: Assets/Resources/Versione Game Designer/TESTprogression/Showcase/Show3.unity
-    guid: 578fc4bfee4f68c4ba77fc66f1a153aa
+    path: Assets/Resources/Versione Concept Artists/TrueConceptScene.unity
+    guid: a8b63c48ba590894a919e22c6cd2d47d
   m_configObjects: {}
