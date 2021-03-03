@@ -103,11 +103,8 @@ public class LevelManager : MonoBehaviour
 
         GameEnded = true;
 
-        //if win, save using scene name
-        if (win)
-        {
-            MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name);
-        }
+        //save using scene name
+        MenuSystem.Save(UnityEngine.SceneManagement.SceneManager.GetActiveScene().name, win);
 
         //call event
         onEndGame?.Invoke(win);

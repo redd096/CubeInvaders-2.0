@@ -9,6 +9,7 @@ struct MenuStruct
     public string necessaryKey;
 }
 
+[AddComponentMenu("Cube Invaders/Menu System")]
 public class MenuSystem : MonoBehaviour
 {
     [Header("Disabled Buttons")]
@@ -49,9 +50,9 @@ public class MenuSystem : MonoBehaviour
     /// <summary>
     /// Save data
     /// </summary>
-    public static void Save(string key)
+    public static void Save(string key, bool win)
     {
-        PlayerPrefs.SetInt(key, 1);
+        PlayerPrefs.SetInt(key, win ? 1 : 0);
     }
 
     /// <summary>
