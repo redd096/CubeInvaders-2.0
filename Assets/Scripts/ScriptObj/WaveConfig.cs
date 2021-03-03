@@ -8,20 +8,7 @@ public struct WaveStruct
     public int IgnorePreviousFacesAtSpawn;
     public float TimeBetweenSpawns;
     public float DistanceFromWorld;
-    public EnemyStruct[] EnemiesStructs;
-}
-
-[System.Serializable]
-public struct EnemyStruct
-{
-    public Enemy Enemy;
-    public float TimeToAddBeforeSpawn;
-
-    public EnemyStruct(Enemy enemy, float timeToAddBeforeSpawn)
-    {
-        Enemy = enemy;
-        TimeToAddBeforeSpawn = timeToAddBeforeSpawn;
-    }
+    public Enemy[] Enemies;
 }
 
 [CreateAssetMenu(menuName = "Cube Invaders/Level/Wave Config", fileName = "Wave Config")]

@@ -48,7 +48,7 @@ public class EnemySoulbind : Enemy
             GameManager.instance.world.GetPositionAndRotation(newCoordinates, distance, out position, out rotation);
 
             //instantiate soulbind
-            soulBind = GameManager.instance.waveManager.InstantiateNewEnemy(this, 0) as EnemySoulbind;
+            soulBind = GameManager.instance.waveManager.InstantiateNewEnemy(this) as EnemySoulbind;
             soulBind.transform.position = position;             //set position
             soulBind.transform.rotation = rotation;             //set rotation
             soulBind.coordinatesToAttack = newCoordinates;      //set new coordinates to attack

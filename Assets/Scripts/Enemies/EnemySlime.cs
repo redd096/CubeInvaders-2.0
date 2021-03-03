@@ -31,7 +31,7 @@ public class EnemySlime : Enemy
         //foreach prefab
         for(int i = 0; i < enemiesPrefabs.Length; i++)
         {
-            Enemy slime = GameManager.instance.waveManager.InstantiateNewEnemy(enemiesPrefabs[i], 0);
+            Enemy slime = GameManager.instance.waveManager.InstantiateNewEnemy(enemiesPrefabs[i]);
 
             //if is first slime, replace this enemy
             if(i <= 0 && firstSlimeSamePosition)
@@ -68,6 +68,7 @@ public class EnemySlime : Enemy
                 else
                 {
                     slime.Die(this);
+                    continue;
                 }
             }
 

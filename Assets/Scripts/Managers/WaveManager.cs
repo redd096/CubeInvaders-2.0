@@ -23,7 +23,7 @@ public class WaveManager : MonoBehaviour
         }
     }
 
-    List<EnemyStruct> enemies = new List<EnemyStruct>();
+    List<Enemy> enemies = new List<Enemy>();
     Coroutine wave_coroutine;
 
     void Start()
@@ -117,14 +117,8 @@ public class WaveManager : MonoBehaviour
     void OnEnemyDeath(Enemy enemy)
     {
         //remove from the list
-        foreach(EnemyStruct enemyStruct in enemies)
-        {
-            if(enemyStruct.Enemy == enemy)
-            {
-                enemies.Remove(enemyStruct);
-                break;
-            }
-        }
+        if (enemies.Contains(enemy))
+            enemies.Remove(enemy);
 
         //if there are no other enemies, end wave
         if(enemies.Count <= 0)
@@ -155,24 +149,21 @@ public class WaveManager : MonoBehaviour
         WaveStruct wave = waveConfig.Waves[CurrentWave];
 
         //foreach enemy in this wave, instantiate but deactivate
-        foreach (EnemyStruct enemyStruct in wave.EnemiesStructs)
+        foreach (Enemy enemy in wave.Enemies)
         {
-            InstantiateNewEnemy(enemyStruct.Enemy, enemyStruct.TimeToAddBeforeSpawn);
+            InstantiateNewEnemy(enemy);
             yield return null;
         }
 
         //enemies copy(copy because when enemy is killed, it's removed from list)
-        List<EnemyStruct> enemiesCopy = enemies.CreateCopy();
+        List<Enemy> enemiesCopy = enemies.CreateCopy();
 
         //queue to not spawn on same face
         Queue<EFace> facesQueue = new Queue<EFace>();
 
         //for every enemy
-        foreach (EnemyStruct enemyStruct in enemiesCopy)
+        foreach (Enemy enemy in enemiesCopy)
         {
-            //wait for this enemy
-            yield return new WaitForSeconds(enemyStruct.TimeToAddBeforeSpawn);
-
             //randomize coordinates to attack
             EFace face = WorldUtility.GetRandomFace(facesQueue, waveConfig.Waves[CurrentWave].IgnorePreviousFacesAtSpawn);
             int x = Random.Range(0, GameManager.instance.world.worldConfig.NumberCells);
@@ -185,8 +176,8 @@ public class WaveManager : MonoBehaviour
             GameManager.instance.world.GetPositionAndRotation(coordinatesToAttack, waveConfig.Waves[CurrentWave].DistanceFromWorld, out position, out rotation);
 
             //set enemy position and rotation, then activate
-            enemyStruct.Enemy.transform.position = position;
-            enemyStruct.Enemy.transform.rotation = rotation;
+            enemy.transform.position = position;
+            enemy.transform.rotation = rotation;
 
             //instantiate portal at position and rotation
             if (GameManager.instance.levelManager.generalConfig.PortalPrefab)
@@ -195,7 +186,7 @@ public class WaveManager : MonoBehaviour
             }
 
             //set enemy destination and activate
-            enemyStruct.Enemy.Init(coordinatesToAttack);
+            enemy.Init(coordinatesToAttack);
 
             //wait for next enemy
             yield return new WaitForSeconds(wave.TimeBetweenSpawns);
@@ -206,14 +197,14 @@ public class WaveManager : MonoBehaviour
 
     #region public API
 
-    public Enemy InstantiateNewEnemy(Enemy enemyPrefab, float timeToAddBeforeSpawn)
+    public Enemy InstantiateNewEnemy(Enemy enemyPrefab)
     {
         //instantiate and set parent but deactivate
         Enemy enemy = Instantiate(enemyPrefab, transform);
         enemy.gameObject.SetActive(false);
 
         //save in the list and add to the event
-        enemies.Add(new EnemyStruct(enemy, timeToAddBeforeSpawn));
+        enemies.Add(enemy);
         enemy.onEnemyDeath += OnEnemyDeath;
 
         return enemy;
