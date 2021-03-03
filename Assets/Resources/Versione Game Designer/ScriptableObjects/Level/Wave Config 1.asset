@@ -18,14 +18,12 @@ MonoBehaviour:
     IgnorePreviousFacesAtSpawn: 0
     TimeBetweenSpawns: 3
     DistanceFromWorld: 10
-    EnemiesStructs:
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
+    Enemies:
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
   - LevelConfig: {fileID: 11400000, guid: 488890f3b4d2e964188ec978cc48c521, type: 2}
     resourcesMax: 50
     IgnorePreviousFacesAtSpawn: 0
-    TimeBetweenSpawns: 0
-    DistanceFromWorld: 0
-    EnemiesStructs:
-    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-      TimeToAddBeforeSpawn: 0
+    TimeBetweenSpawns: 3
+    DistanceFromWorld: 10
+    Enemies:
+    - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
