@@ -29,18 +29,8 @@ public class PlayerMove : PlayerState
 
         //set invert Y and speed controls
         player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
-        if (player.playerInput.currentControlScheme == player.Controls.KeyboardAndMouseScheme.name)
-        {
-            //mouse
-            player.VirtualCam.m_XAxis.m_MaxSpeed = player.mouseSpeedX;
-            player.VirtualCam.m_YAxis.m_MaxSpeed = player.mouseSpeedY;
-        }
-        else
-        {
-            //pad
-            player.VirtualCam.m_XAxis.m_MaxSpeed = player.gamepadSpeedX;
-            player.VirtualCam.m_YAxis.m_MaxSpeed = player.gamepadSpeedY;
-        }
+        player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
+        player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
 
         //when move camera, check if changed face
         CheckChangedFace();

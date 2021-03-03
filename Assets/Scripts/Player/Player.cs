@@ -22,11 +22,13 @@ public class Player : StateMachine
     #endregion
 
     [Header("Camera")]
-    public float mouseSpeedX = 300;
-    public float mouseSpeedY = 2;
-    public float gamepadSpeedX = 150;
-    public float gamepadSpeedY = 1;
+    [SerializeField] float mouseSpeedX = 300;
+    [SerializeField] float mouseSpeedY = 2;
+    [SerializeField] float gamepadSpeedX = 150;
+    [SerializeField] float gamepadSpeedY = 1;
     public bool invertY = false;
+    public float speedX => playerInput.currentControlScheme == Controls.KeyboardAndMouseScheme.name ? mouseSpeedX : gamepadSpeedX;
+    public float speedY => playerInput.currentControlScheme == Controls.KeyboardAndMouseScheme.name ? mouseSpeedY : gamepadSpeedY;
 
     [Header("Player")]
     [Range(0.1f, 0.9f)] public float deadZoneAnalogs = 0.6f;
