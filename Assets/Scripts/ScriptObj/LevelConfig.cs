@@ -6,7 +6,6 @@ public class LevelConfig : ScriptableObject
     [Header("Important")]
     [Tooltip("The player can recreate a destroyed cell")] public bool CanRecreateCell = false;
     [Tooltip("Randomize world at start")] public bool RandomizeWorldAtStart = true;
-    [Tooltip("Reset turrets at level start (start strategic phase)")] public bool ResetTurrets = false;
 
     [Header("Modifier")]
     [Tooltip("How many rotations at time")] [Min(1)] public int NumberRotations = 1;
