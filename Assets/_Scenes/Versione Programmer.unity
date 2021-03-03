@@ -3197,14 +3197,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2164506135691092331, guid: 483f321a21ee33a44b2c0d5f552bc756, type: 3}
         m_TargetAssemblyTypeName: redd096.SceneLoader, Assembly-CSharp
-        m_MethodName: ExitGame
-        m_Mode: 1
+        m_MethodName: LoadNewScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Selezione Livelli Test Programmer
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &149420002
@@ -3616,7 +3616,7 @@ GameObject:
   - component: {fileID: 166754774}
   - component: {fileID: 166754773}
   m_Layer: 5
-  m_Name: Level1
+  m_Name: Wave1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -9516,7 +9516,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LEVEL 1
+  m_Text: WAVE 1
 --- !u!222 &414852405
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -17819,7 +17819,7 @@ GameObject:
   - component: {fileID: 880932790}
   - component: {fileID: 880932789}
   m_Layer: 5
-  m_Name: Level2
+  m_Name: Wave2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -22011,14 +22011,14 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 2164506135691092331, guid: 483f321a21ee33a44b2c0d5f552bc756, type: 3}
         m_TargetAssemblyTypeName: redd096.SceneLoader, Assembly-CSharp
-        m_MethodName: ExitGame
-        m_Mode: 1
+        m_MethodName: LoadNewScene
+        m_Mode: 5
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
           m_IntArgument: 0
           m_FloatArgument: 0
-          m_StringArgument: 
+          m_StringArgument: Selezione Livelli Test Programmer
           m_BoolArgument: 0
         m_CallState: 2
 --- !u!114 &1086748613
@@ -27021,7 +27021,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: LEVEL 2
+  m_Text: WAVE 2
 --- !u!222 &1269774822
 CanvasRenderer:
   m_ObjectHideFlags: 0
