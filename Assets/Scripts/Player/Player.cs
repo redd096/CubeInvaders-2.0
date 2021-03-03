@@ -6,9 +6,26 @@ using UnityEngine.InputSystem;
 [AddComponentMenu("Cube Invaders/Player")]
 public class Player : StateMachine
 {
+    #region lock 60 fps
+
+    [Header("Lock 60 FPS")]
+    [SerializeField] bool lock60FPS;
+
+    private void OnValidate()
+    {
+        if (lock60FPS)
+            Application.targetFrameRate = 60;
+        else
+            Application.targetFrameRate = -1;
+    }
+
+    #endregion
+
     [Header("Camera")]
-    public float speedX = 300;
-    public float speedY = 2;
+    public float mouseSpeedX = 300;
+    public float mouseSpeedY = 2;
+    public float gamepadSpeedX = 150;
+    public float gamepadSpeedY = 1;
     public bool invertY = false;
 
     [Header("Player")]
@@ -19,6 +36,7 @@ public class Player : StateMachine
 
     public CinemachineFreeLook VirtualCam { get; private set; }
     public NewControls Controls { get; private set; }
+    public PlayerInput playerInput { get; private set; }
 
     float currentResources;
     public float CurrentResources
@@ -42,6 +60,7 @@ public class Player : StateMachine
         //get virtual cam and player controls
         VirtualCam = FindObjectOfType<CinemachineFreeLook>();
         Controls = new NewControls();
+        playerInput = GetComponent<PlayerInput>();
 
         //by default deactive cinemachine
         VirtualCam.enabled = false;
@@ -103,7 +122,7 @@ public class Player : StateMachine
             return;
 
         //if state is place turret && press escape, doesn't pause (we use it to exit from this state)
-        if (state.GetType() == typeof(PlayerPlaceTurret) && Controls.Gameplay.PauseButton.activeControl.name == "escape")
+        if (state.GetType() == typeof(PlayerPlaceTurret) && Controls.Gameplay.PauseButton.activeControl.name == Controls.Gameplay.DenyTurret.activeControl.name)
             return;
 
         //if not ended game && game is running && is not end assault phase (showing panel to end level)

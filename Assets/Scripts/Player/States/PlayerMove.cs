@@ -27,10 +27,20 @@ public class PlayerMove : PlayerState
     {
         base.Execution();
 
-        //set cinemachine speed and invert Y
-        player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
-        player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
+        //set invert Y and speed controls
         player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
+        if (player.playerInput.currentControlScheme == player.Controls.KeyboardAndMouseScheme.name)
+        {
+            //mouse
+            player.VirtualCam.m_XAxis.m_MaxSpeed = player.mouseSpeedX;
+            player.VirtualCam.m_YAxis.m_MaxSpeed = player.mouseSpeedY;
+        }
+        else
+        {
+            //pad
+            player.VirtualCam.m_XAxis.m_MaxSpeed = player.gamepadSpeedX;
+            player.VirtualCam.m_YAxis.m_MaxSpeed = player.gamepadSpeedY;
+        }
 
         //when move camera, check if changed face
         CheckChangedFace();
