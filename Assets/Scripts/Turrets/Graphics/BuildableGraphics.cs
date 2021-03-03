@@ -23,6 +23,8 @@ public class BuildableGraphics : MonoBehaviour
     Pooling<ParticleSystem> poolBuildVFX = new Pooling<ParticleSystem>();
     Pooling<AudioSource> poolBuildAudio = new Pooling<AudioSource>();
 
+    Dictionary<Transform, Quaternion> defaultRotations = new Dictionary<Transform, Quaternion>();
+
     protected virtual void Awake()
     {
         //set logic component
@@ -36,6 +38,10 @@ public class BuildableGraphics : MonoBehaviour
 
         buildableObject.onDeactivateStart += OnDeactivateStart;
         buildableObject.onBuildTurret += OnBuildTurret;
+
+        //save default rotations
+        SaveDefaultRotation(objectToRotate);
+        SaveDefaultRotation(baseToRotate);
     }
 
     protected virtual void OnDestroy()
@@ -96,8 +102,8 @@ public class BuildableGraphics : MonoBehaviour
         //else look normal forward
         else
         {
-            SetRotation(baseToRotate, -transform.up);
-            SetRotation(objectToRotate, transform.forward);
+            SetRotationToDefault(baseToRotate);
+            SetRotationToDefault(objectToRotate);
         }
     }
 
@@ -141,6 +147,25 @@ public class BuildableGraphics : MonoBehaviour
         //set new rotation
         Quaternion forwardRotation = Quaternion.FromToRotation(transformToRotate.forward, forwardDirection) * transformToRotate.rotation;
         transformToRotate.rotation = forwardRotation;
+    }
+
+    void SetRotationToDefault(Transform transformToRotate)
+    {
+        if (transformToRotate == null)
+            return;
+
+        //set default rotation
+        transformToRotate.localRotation = defaultRotations[transformToRotate];
+    }
+
+    void SaveDefaultRotation(Transform transformToRotate)
+    {
+        //be sure is not already in dictionary
+        if (transformToRotate == null || defaultRotations.ContainsKey(transformToRotate))
+            return;
+
+        //save default rotation
+        defaultRotations.Add(transformToRotate, transformToRotate.localRotation);
     }
 
     #endregion

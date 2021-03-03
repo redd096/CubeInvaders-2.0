@@ -26,4 +26,6 @@ MonoBehaviour:
     IgnorePreviousFacesAtSpawn: 0
     TimeBetweenSpawns: 0
     DistanceFromWorld: 0
-    EnemiesStructs: []
+    EnemiesStructs:
+    - Enemy: {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+      TimeToAddBeforeSpawn: 0

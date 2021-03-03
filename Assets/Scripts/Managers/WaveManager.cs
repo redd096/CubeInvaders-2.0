@@ -38,7 +38,7 @@ public class WaveManager : MonoBehaviour
         RemoveEvents();
     }
 
-    void StartNewLevel()
+    void SetNewWave()
     {
         //current wave
         WaveStruct wave = waveConfig.Waves[CurrentWave];
@@ -73,8 +73,8 @@ public class WaveManager : MonoBehaviour
             return;
         }
 
-        //else show end wave panel
-        GameManager.instance.uiManager.OnEndWave();
+        //else go to next wave
+        CurrentWave++;
     }
 
     #region events
@@ -98,7 +98,7 @@ public class WaveManager : MonoBehaviour
         //remove all enemies
         ClearEnemies();
 
-        StartNewLevel();
+        SetNewWave();
     }
 
     void OnStartAssaultPhase()

@@ -75,6 +75,8 @@ public class LevelManager : MonoBehaviour
             CurrentPhase = EPhase.endAssault;
 
             onEndAssaultPhase?.Invoke();
+
+            Invoke("StartStrategicPhase", 1);
         }
     }
 

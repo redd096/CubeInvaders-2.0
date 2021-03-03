@@ -38,7 +38,6 @@ public class GameManager : Singleton<GameManager>
         if (instance.levelManager.CurrentPhase == EPhase.assault)
         {
             instance.levelManager.EndAssaultPhase();
-            instance.levelManager.Invoke("StartStrategicPhase", 1);
         }
         //or start immediatly strategic phase
         else
