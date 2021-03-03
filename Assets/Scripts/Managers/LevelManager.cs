@@ -111,15 +111,6 @@ public class LevelManager : MonoBehaviour
     {
         //update level config
         this.levelConfig = levelConfig;
-
-        //reset turrets
-        if (levelConfig.ResetTurrets)
-        {
-            foreach (Turret turret in FindObjectsOfType<Turret>())
-            {
-                turret.RemoveTurret();
-            }
-        }
     }
 
     #endregion
