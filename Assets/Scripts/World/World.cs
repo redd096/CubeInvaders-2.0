@@ -164,7 +164,11 @@ public class World : MonoBehaviour
     void InstantiateSun()
     {
         //create sun and set name, and position
+#if UNITY_EDITOR
+        Transform sun = (UnityEditor.PrefabUtility.InstantiatePrefab(worldConfig.SunPrefab) as GameObject).transform;
+#else
         Transform sun = Instantiate(worldConfig.SunPrefab).transform;
+#endif
         sun.name = "Sun";
         sun.position = transform.position;
 
@@ -264,6 +268,20 @@ public class World : MonoBehaviour
         //create biome based on face
         switch (face)
         {
+#if UNITY_EDITOR
+            case EFace.front:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Front) as Cell;
+            case EFace.right:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Right) as Cell;
+            case EFace.back:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Back) as Cell;
+            case EFace.left:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Left) as Cell;
+            case EFace.up:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Up) as Cell;
+            case EFace.down:
+                return UnityEditor.PrefabUtility.InstantiatePrefab(biomesConfig.Down) as Cell;
+#else
             case EFace.front:
                 return Instantiate(biomesConfig.Front);
             case EFace.right:
@@ -276,6 +294,7 @@ public class World : MonoBehaviour
                 return Instantiate(biomesConfig.Up);
             case EFace.down:
                 return Instantiate(biomesConfig.Down);
+#endif
         }
 
         return null;
