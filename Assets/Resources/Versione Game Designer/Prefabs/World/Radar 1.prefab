@@ -186,7 +186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: buildTurretAtStart
-      value: 1
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: turretToCreate
@@ -199,6 +199,14 @@ PrefabInstance:
     - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
       propertyPath: onlyOneLife
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: resourcesToCreateTurret
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 9216421955894392445, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
+      propertyPath: resourcesOnSellTurret
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: eb63960641dbe244b843dfc1ec0b2131, type: 3}
