@@ -27,10 +27,29 @@ public class PlayerMove : PlayerState
     {
         base.Execution();
 
-        //set invert Y and speed controls
+        //set invert Y
         player.VirtualCam.m_YAxis.m_InvertInput = player.invertY;
-        player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
-        player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
+
+        //set max speed
+        if (player.Controls.Gameplay.MoveCamera.activeControl != null)
+        {
+            //if delta (so mouse movement) don't use deltaTime
+            if (player.Controls.Gameplay.MoveCamera.activeControl.name == "delta")
+            {
+                player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX * Time.deltaTime;
+                player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY * Time.deltaTime;
+            }
+            //normally, use deltaTime
+            else
+            {
+                player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX * Time.deltaTime;
+                player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY * Time.deltaTime;
+            }
+        }
+
+        //move camera
+        player.VirtualCam.m_XAxis.m_InputAxisValue = player.Controls.Gameplay.MoveCamera.ReadValue<Vector2>().x;
+        player.VirtualCam.m_YAxis.m_InputAxisValue = player.Controls.Gameplay.MoveCamera.ReadValue<Vector2>().y;
 
         //when move camera, check if changed face
         CheckChangedFace();

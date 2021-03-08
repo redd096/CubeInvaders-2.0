@@ -4153,7 +4153,7 @@ MonoBehaviour:
   m_LegacyBlendHint: 0
   m_YAxis:
     Value: 0.5
-    m_SpeedMode: 0
+    m_SpeedMode: 1
     m_MaxSpeed: 2
     m_AccelTime: 0.2
     m_DecelTime: 0.1
@@ -4177,8 +4177,8 @@ MonoBehaviour:
     m_LegacyVelocityFilterStrength: -1
   m_XAxis:
     Value: 0
-    m_SpeedMode: 0
-    m_MaxSpeed: 300
+    m_SpeedMode: 1
+    m_MaxSpeed: 1
     m_AccelTime: 0.1
     m_DecelTime: 0.1
     m_InputAxisName: 
@@ -4241,7 +4241,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 922154520}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: fb7194dc27b9df64c8beca7482ee8e0d, type: 3}
   m_Name: 
@@ -5299,10 +5299,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   lock60FPS: 0
-  mouseSpeedX: 300
-  mouseSpeedY: 2
-  gamepadSpeedX: 150
-  gamepadSpeedY: 1
+  mouseSpeedX: 0.5
+  mouseSpeedY: 0.005
+  gamepadSpeedX: 500
+  gamepadSpeedY: 2
   invertY: 0
   deadZoneAnalogs: 0.6
   currentState: 

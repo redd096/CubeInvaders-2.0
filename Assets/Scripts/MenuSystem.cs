@@ -3,7 +3,7 @@ using UnityEngine.UI;
 using redd096;
 
 [System.Serializable]
-struct MenuStruct
+public struct MenuStruct
 {
     public Button button;
     public string necessaryKey;
