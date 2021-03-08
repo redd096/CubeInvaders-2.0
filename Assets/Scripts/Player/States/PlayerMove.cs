@@ -36,8 +36,8 @@ public class PlayerMove : PlayerState
             //if delta (so mouse movement) don't use deltaTime
             if (player.Controls.Gameplay.MoveCamera.activeControl.name == "delta")
             {
-                player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX * Time.deltaTime;
-                player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY * Time.deltaTime;
+                player.VirtualCam.m_XAxis.m_MaxSpeed = player.speedX;
+                player.VirtualCam.m_YAxis.m_MaxSpeed = player.speedY;
             }
             //normally, use deltaTime
             else
