@@ -45,6 +45,9 @@ public class UIManager : MonoBehaviour
         SetCostText(false);
         strategicCanvas.SetActive(false);
 
+        //show default wave
+        UpdateCurrentLevelText(GameManager.instance.waveManager.CurrentWave);
+
         //add events
         AddEvents();
     }
