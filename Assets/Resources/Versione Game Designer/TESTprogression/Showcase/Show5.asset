@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Show5
   m_EditorClassIdentifier: 
   Waves:
-  - LevelConfig: {fileID: 11400000, guid: 24e0f132ceeb2c14c903c62c9ca1cd17, type: 2}
+  - LevelConfig: {fileID: 11400000, guid: b91c1985d6db06443867d3feac77d586, type: 2}
     resourcesMax: 3
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 4
@@ -27,14 +27,14 @@ MonoBehaviour:
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
-  - LevelConfig: {fileID: 11400000, guid: 24e0f132ceeb2c14c903c62c9ca1cd17, type: 2}
+  - LevelConfig: {fileID: 11400000, guid: b91c1985d6db06443867d3feac77d586, type: 2}
     resourcesMax: 2
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 4
     DistanceFromWorld: 20
     Enemies:
     - {fileID: 7769918288890517042, guid: 59cd1f3b4fceff14d8396ec2e680966f, type: 3}
-  - LevelConfig: {fileID: 11400000, guid: 24e0f132ceeb2c14c903c62c9ca1cd17, type: 2}
+  - LevelConfig: {fileID: 11400000, guid: b91c1985d6db06443867d3feac77d586, type: 2}
     resourcesMax: 8
     IgnorePreviousFacesAtSpawn: 3
     TimeBetweenSpawns: 4

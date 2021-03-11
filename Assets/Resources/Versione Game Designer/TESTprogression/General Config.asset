@@ -10,7 +10,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 878a7bee40c6f7e459a287db5ed6a7be, type: 3}
-  m_Name: General Config 1
+  m_Name: General Config
   m_EditorClassIdentifier: 
   TimeToEndStrategic: 1.5
   Selector: {fileID: 193137624836173334, guid: e251ffa2e344a684d8c8c9684aa3b910, type: 3}

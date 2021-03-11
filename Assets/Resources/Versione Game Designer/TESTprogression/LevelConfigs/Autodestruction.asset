@@ -14,13 +14,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   CanRecreateCell: 0
   RandomizeWorldAtStart: 1
-  ResetTurrets: 1
   NumberRotations: 1
   SelectorSize: 1
   DestroyTurretWhenNoMove: 1
   TurretsNeedGenerator: 0
   GeneratorActiveAllFace: 1
   LimitOfTurretsOnSameFace: 0
-  TimeBeforeDestroyTurretsOnSameFace: 2
+  TimeBeforeDestroyTurretsOnSameFace: 8
   OnlyIfSameType: 1
   CloseLineFeedback: 1

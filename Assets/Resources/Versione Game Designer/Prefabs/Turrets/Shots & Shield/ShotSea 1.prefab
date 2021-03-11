@@ -148,7 +148,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
       propertyPath: slowPercentage
-      value: 100
+      value: 50
       objectReference: {fileID: 0}
     - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
       propertyPath: damage
@@ -165,6 +165,10 @@ PrefabInstance:
     - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
       propertyPath: shotSpeed
       value: 8.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6942024394601423785, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
+      propertyPath: areaEffectAlsoOnAutodestruction
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 7794059173458503746, guid: 2c1fe2d9ac453cd4fad662f721cdb109, type: 3}
       propertyPath: m_Name

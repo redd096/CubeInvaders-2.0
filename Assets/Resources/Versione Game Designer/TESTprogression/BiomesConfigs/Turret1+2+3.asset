@@ -13,8 +13,8 @@ MonoBehaviour:
   m_Name: Turret1+2+3
   m_EditorClassIdentifier: 
   Front: {fileID: 4345371316559743906, guid: 752e05119be44a6459b9611292d81972, type: 3}
-  Right: {fileID: 4523705146514746641, guid: cd3ba82684757894791abf2c130d0b1a, type: 3}
-  Back: {fileID: 2591874897708383846, guid: fca8d9cb96e021846aed388b015b66f4, type: 3}
+  Right: {fileID: 4145916800343331446, guid: 45a692558b490694fa628cb415ad62cd, type: 3}
+  Back: {fileID: 4523705146514746641, guid: cd3ba82684757894791abf2c130d0b1a, type: 3}
   Left: {fileID: 8035738620047346598, guid: 94be41aabed38de4bbb384e5389b4307, type: 3}
   Up: {fileID: 8035738620047346598, guid: 94be41aabed38de4bbb384e5389b4307, type: 3}
   Down: {fileID: 8035738620047346598, guid: 94be41aabed38de4bbb384e5389b4307, type: 3}

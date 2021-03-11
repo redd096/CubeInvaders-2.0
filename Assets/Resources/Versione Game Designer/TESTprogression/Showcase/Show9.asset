@@ -9,15 +9,16 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f6702f62fea6fbb45a422719be9be64b, type: 3}
-  m_Name: Level Config
+  m_Script: {fileID: 11500000, guid: b4334ec798e7787438925ec807cfec7f, type: 3}
+  m_Name: Show9
   m_EditorClassIdentifier: 
-  CanRecreateCell: 0
-  RandomizeWorldAtStart: 1
-  TimeBetweenSpawns: 3
-  distanceFromWorld: 30
   Waves:
-  - EnemiesPrefabs:
+  - LevelConfig: {fileID: 11400000, guid: 5944cbb0ab223094ab80e26a1ed5243c, type: 2}
+    resourcesMax: 3
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    Enemies:
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
@@ -26,15 +27,31 @@ MonoBehaviour:
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 5944cbb0ab223094ab80e26a1ed5243c, type: 2}
+    resourcesMax: 3
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    Enemies:
+    - {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
+  - LevelConfig: {fileID: 11400000, guid: 5944cbb0ab223094ab80e26a1ed5243c, type: 2}
+    resourcesMax: 2
+    IgnorePreviousFacesAtSpawn: 3
+    TimeBetweenSpawns: 4
+    DistanceFromWorld: 20
+    Enemies:
+    - {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
     - {fileID: 8846794630235902539, guid: dbe41ca5b27a171459a1a75bd2d04899, type: 3}
+    - {fileID: 451699539442052430, guid: cf990507e06619343a6fb89750beefb8, type: 3}
